@@ -34,8 +34,8 @@ class LoginSignUp extends StatelessWidget {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
-                Color.fromRGBO(227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
-                Color.fromRGBO(196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
+                Color.fromRGBO(227, 127, 236, 0.96),
+                Color.fromRGBO(196, 32, 210, 0.96),
                 Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
               ],
             ),

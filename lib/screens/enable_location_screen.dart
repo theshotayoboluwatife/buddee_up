@@ -54,7 +54,9 @@ class EnableLocation extends StatelessWidget {
             Spacer(),
             CustomButton(
               text: "ALLOW LOCATION",
-              onpress: () {},
+              onpress: () {
+                Navigator.pushNamed(context, "/keep_me_posted_screen");
+              },
               textColor: Colors.black,
             ),
             SizedBox(

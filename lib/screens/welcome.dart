@@ -1,22 +1,34 @@
+import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/welcome_screen_provider.dart';
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
+
+  final String outlineText =
+  '''
+  # Welcome to BUDDEEUP
+  Please follow these House Rules
+  ## 1.Ensure Authenticity
+  Your picture, age and bio should displayed should be truthful
+   ## 2.Stay Protected
+  Your picture, age and bio should displayed should be truthful
+   ## 3.Be Respectful
+  Your picture, age and bio should displayed should be truthful
+   ## 4.Take  initiative
+  Your picture, age and bio should displayed should be truthful
+''';
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final welcome_text = Provider.of<WelcomeText>(context).outlineText;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(20),
         width: double.infinity,
-        height: 500,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SafeArea(
               child: Row(
@@ -29,22 +41,21 @@ class WelcomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                height: 500,
-                child: ListView(
-                  children: [
-                    Markdown(
-                      data: welcome_text,
-                      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
-                    )
-                  ],
-                ),
-              ),
+            SizedBox(height: 20,),
+            MarkdownBody(
+              data: outlineText,
+              styleSheet: MarkdownStyleSheet(
+                h1: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.w800),
+                h2: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w800),
+                p: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.w300),
             ),
+            ),
+            Spacer(),
+            CustomButton(text: "I AGREE", textColor: Colors.black, onpress: (){ Navigator.pushNamed(context, "/profile_screen");}),
+            SizedBox(height: 20,),
           ],
-        ),
+        )
+        ,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,

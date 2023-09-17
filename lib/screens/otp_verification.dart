@@ -1,11 +1,10 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PhoneVerification extends StatelessWidget {
-  const PhoneVerification({Key? key}) : super(key: key);
+class OTPVerification extends StatelessWidget {
+  const OTPVerification({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,6 @@ class PhoneVerification extends StatelessWidget {
           children: [
             SafeArea(
               child: Row(
-
                 children: [
                   IconButton(
                     onPressed: () {},
@@ -27,46 +25,64 @@ class PhoneVerification extends StatelessWidget {
                     width: 10,
                   ),
                   CustomText(
-                    text: "Phone verification",
+                    text: "Enter OTP Code",
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   )
                 ],
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
-
-            ClipRRect(
-              child: IntlPhoneField(
-                  decoration: InputDecoration(
-                        hintText: "Enter your mobile number",
-                        counterText: '',
-                        border:  InputBorder.none,
-                        filled: true,
-                        fillColor: Colors.white, // Background color
-                      ),
-                      initialCountryCode: 'US',
-                      onChanged: (PhoneNumber phoneNumber) {
-
-                      },
-              ),
-               borderRadius: BorderRadius.all(Radius.circular(10)),
+            Spacer(),
+            CustomText(
+              text: "Code has been sent to +49 1089 3645 **",
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
             ),
             SizedBox(
               height: 30,
             ),
+            Container(
+              child: PinCodeTextField(
+                appContext: context,
+                length: 4,
+                enableActiveFill: true,
+                keyboardType: TextInputType.phone,
+                pinTheme: PinTheme(
+                  inactiveFillColor: Colors.black54,
+                  inactiveColor: Colors.black54,
+                  activeFillColor: Colors.white,
+                  activeColor: Colors.white,
+                  selectedFillColor: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  fieldWidth: 75,
+                  fieldHeight: 60,
+                  shape: PinCodeFieldShape.box,
+                ),
+                cursorColor: Colors.white,
+                onChanged: (value) {},
+                onCompleted: (value) {},
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
             CustomText(
-              text:
-                  "When you tap Continue, BUDDEEUP will send a verification code. Message and data rates may apply. The verified phone number can be used to login. Learn what happens when your number changes",
+              text: "Resend code in",
               fontWeight: FontWeight.w400,
               fontSize: 15,
             ),
-            SizedBox(height: 50,),
-            CustomButton(text: "CONTINUE", onpress: (){
-              Navigator.pushNamed(context, '/otp_verification');
-            }, buttonColor: Colors.white, textColor: Colors.black,),
+            Spacer(),
+            CustomButton(
+              text: "CONTINUE",
+              onpress: () {
+                Navigator.pushNamed(context, "/welcome");
+              },
+              buttonColor: Colors.white,
+              textColor: Colors.black,
+            ),
+            SizedBox(
+              height: 40,
+            ),
           ],
         ),
         decoration: BoxDecoration(
