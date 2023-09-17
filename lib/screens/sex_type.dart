@@ -23,7 +23,10 @@ class SexType extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_outlined),
                   color: Colors.white,
                 ),
-                CustomText(text: "Sex", fontSize: 40, fontWeight: FontWeight.w600,)
+                    Padding(
+                      padding: const EdgeInsets.only(top:24.0, left: 8),
+                      child: CustomText(text: "Sex", fontSize: 36, fontWeight: FontWeight.w600,),
+                    ),
               ]),
             ),
             Spacer(),
@@ -39,7 +42,7 @@ class SexType extends StatelessWidget {
                 CustomText(text: "Show my gender on my profile", fontWeight: FontWeight.w400)
               ],
             ),
-            CustomButton(text: "CONTINUE", onpress: (){},textColor: Colors.black,),
+            CustomButton(text: "CONTINUE", onpress: ()=>Navigator.pushNamed(context, '/tribe_screen'),textColor: Colors.black,),
             SizedBox(height: 20)
           ],
         ),

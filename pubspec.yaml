@@ -25,6 +25,7 @@ dependencies:
   email_validator: ^2.1.17
   flutter_markdown: ^0.6.17+3
   flutter_svg: ^2.0.7
+  pin_code_fields: ^8.0.1
 
 
 dev_dependencies:
@@ -69,6 +70,10 @@ flutter:
     - "assets/images/instagram1.png"
     - "assets/images/User1.png"
     - "assets/images/User2.png"
+    - "assets/images/ri_compass-discover-fill.png"
+    - "assets/images/mi_filter.png"
+    - "assets/images/photo.png"
+    - "assets/images/green status.png"
 
 
 
