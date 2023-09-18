@@ -106,18 +106,20 @@ class StatusCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-             Positioned(child: Image.asset("assets/images/green status.png")),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Positioned(
-                    child: Image(image: image),
+          Expanded(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+               Positioned(child: Image.asset("assets/images/green status.png")),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Positioned(
+                      child: Image(image: image),
 
-                ),
-              )
-            ],
+                  ),
+                )
+              ],
+            ),
           ),
           CustomText(text: name, fontSize: 12, fontWeight: FontWeight.w700,)
         ],

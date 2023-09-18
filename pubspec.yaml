@@ -35,16 +35,16 @@ dev_dependencies:
 
 
 flutter_native_splash:
-  color: "#ffffff"
-  color_dark: "#000000"
-  image: assets/images/buddee_up_logo.png
-  image_dark: assets/images/buddee_up_logo.png
+  color: "#DA3EE8"
+  color_dark: "#DA3EE8"
+  image: "assets/images/buddeeup_splash.png"
+  image_dark: "assets/images/buddeeup_splash.png"
 
   android_12:
-    image: assets/images/buddee_up_logo.png
-    icon_background_color: "#ffffff"
-    image_dark: assets/images/buddee_up_logo.png
-    icon_background_color_dark: "#000000"
+    image: "assets/images/buddeeup_splash.png"
+    icon_background_color: "#DA3EE8"
+    image_dark: "assets/images/buddeeup_splash.png"
+    icon_background_color_dark: "#DA3EE8"
   flutter_lints: ^2.0.0
 
   android: true
@@ -53,10 +53,7 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
-  #fonts:
-   # - family: NotoColorEmoji
-     # fonts:
-       # - asset: assets/fonts/NotoColorEmoji-Regular.ttf
+
   assets:
     - "assets/images/buddee_up_logo.png"
     - "assets/images/Ellipse3.png"
@@ -73,6 +70,13 @@ flutter:
     - "assets/images/ri_compass-discover-fill.png"
     - "assets/images/mi_filter.png"
     - "assets/images/photo.png"
+    - "assets/images/photo.png"
+    - "assets/images/photo1.png"
+    - "assets/images/photo2.png"
+    - "assets/images/photo3.png"
+    - "assets/images/photo4.png"
+    - "assets/images/buddee_up_splash_logo.png"
+    - "assets/images/buddeeup_splash.png"
     - "assets/images/green status.png"
 
 
