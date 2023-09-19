@@ -76,6 +76,36 @@ class DiscoverPage extends StatelessWidget {
                       },
                       scrollDirection: Axis.horizontal),
                     ),
+
+                    //Remember to Remove these 2 widgets, for prototype sake only
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/report_user_screen");
+                        },
+                        child: CustomText(
+                          text: "next",
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero, // No border curves
+                          ),
+                          backgroundColor: Color(0xFF141416),
+
+                          // Text color
+                        ),
+                      ),
+
+                    )
                   ],
                 ),
               ),

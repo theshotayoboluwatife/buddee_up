@@ -20,7 +20,7 @@ class ActivitiesScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.cancel_outlined),
+                      icon: Icon(Icons.clear),
                       color: Colors.white,
                     ),
                     Padding(
