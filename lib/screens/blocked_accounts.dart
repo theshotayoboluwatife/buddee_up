@@ -64,7 +64,7 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
           ),
         ),
         body: TabBarView(
-          controller: null,
+          controller: _tabController,
           children: [
             Container(
               child: Column(

@@ -33,6 +33,7 @@ import 'package:BuddeeUp/screens/show_me_screen.dart';
 import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:BuddeeUp/screens/signup_screen.dart';
 import 'package:BuddeeUp/screens/tribe.dart';
+import 'package:BuddeeUp/screens/unsubscribe_mail.dart';
 import 'package:BuddeeUp/screens/username_settings.dart';
 import 'package:BuddeeUp/screens/welcome.dart';
 import 'package:BuddeeUp/themes/theme.dart';
@@ -94,6 +95,7 @@ class App extends StatelessWidget {
           "/username_settings": (context) =>UsernameSettings(),
           "/push_notification_settings": (context) =>PushNotificationSettings(),
           "/edit_info": (context) => EditInfo(),
+          "/email_unsubscribe": (context) => EmailUnsubscribe(),
         },
         initialRoute: '/',
       ),

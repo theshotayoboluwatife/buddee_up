@@ -160,8 +160,10 @@ class _EditInfoState extends State<EditInfo>
                     ),
                     Expanded(
                       child: Container(
+                        padding: EdgeInsets.all(4),
                         width: double.infinity,
                         child: TextField(
+                          maxLines: null,
                           decoration: InputDecoration(
                             hintText: ' ',
                             hintStyle: TextStyle(
@@ -169,6 +171,7 @@ class _EditInfoState extends State<EditInfo>
                                 fontWeight: FontWeight.w400),
                             border: InputBorder.none,
                           ),
+                          style: TextStyle(color: Colors.white),
                         ),
                         decoration: BoxDecoration(
                             color: Color(0xFF141416),
@@ -265,11 +268,10 @@ class _EditInfoState extends State<EditInfo>
     );
   }
 
-  Expanded generateSwitchContainer(String title, bool switchValue) {
-    return Expanded(
-                    child: Container(
+  Container generateSwitchContainer(String title, bool switchValue) {
+    return Container(
                       width: double.infinity,
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.only(left:16, right: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -298,8 +300,8 @@ class _EditInfoState extends State<EditInfo>
                               top: BorderSide(width: 1, color: Colors.white),
                               bottom:
                                   BorderSide(width: 1, color: Colors.white))),
-                    ),
-                  );
+                    );
+
   }
 }
 
@@ -343,8 +345,7 @@ class SimpleRowContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return Container(
         width: double.infinity,
         padding: EdgeInsets.only(top:10,bottom: 10,right: 10, left: 24),
         child: Row(
@@ -365,8 +366,7 @@ class SimpleRowContainer extends StatelessWidget {
             border: Border(
                 top: BorderSide(width: 1, color: Colors.white),
                 bottom: BorderSide(width: 1, color: Colors.white))),
-      ),
-    );
+      );
   }
 }
 
@@ -380,8 +380,7 @@ class RowContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return  Container(
         width: double.infinity,
         padding: EdgeInsets.all(10),
         child: Row(
@@ -414,7 +413,6 @@ class RowContainer extends StatelessWidget {
                 top: BorderSide(width: 1, color: Colors.white),
                 bottom:
                     BorderSide(width: 1, color: Colors.white))),
-      ),
-    );
+      );
   }
 }

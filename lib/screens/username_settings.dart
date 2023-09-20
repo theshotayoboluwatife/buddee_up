@@ -73,7 +73,7 @@ class UsernameSettings extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "/push_notification_settings");
+                  Navigator.pushNamed(context, "/email_unsubscribe");
                 },
                 child: CustomText(
                   text: "Delete",
