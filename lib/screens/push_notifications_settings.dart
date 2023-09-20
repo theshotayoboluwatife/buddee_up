@@ -34,6 +34,7 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
         ),
       ),
       body: Container(
+        width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,169 +42,12 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
               height: 30,
             ),
 
-            Center(
-              child: Expanded(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text: "Messages",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                          CustomText(
-                            text: "Someone sent you a message",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                          ),
-                        ],
-                      ),
-                      Switch(
-                        value: switchValue,
-                        onChanged: (newValue) {
-                          setState(() {
-                            switchValue = newValue;
-                          });
-                        },
-                        activeTrackColor: Colors.purpleAccent,
-                        activeColor: Colors.white,
-                        inactiveTrackColor: Colors.black,
-                        inactiveThumbColor: Colors.white,
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xFF141416),
-                      border: Border(
-                          top: BorderSide(width: 1, color: Colors.white),
-                          bottom: BorderSide(width: 1, color: Colors.white))),
-                ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text: "Messages likes",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                          CustomText(
-                            text: "Someone liked your message",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                          ),
-                        ],
-                      ),
-                      Switch(
-                        value: switchValue2,
-                        onChanged: (newValue) {
-                          setState(() {
-                            switchValue2 = newValue;
-                          });
-                        },
-                        activeTrackColor: Colors.purpleAccent,
-                        activeColor: Colors.white,
-                        inactiveTrackColor: Colors.black,
-                        inactiveThumbColor: Colors.white,
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xFF141416),
-                      border: Border(
-                          top: BorderSide(width: 1, color: Colors.white),
-                          bottom: BorderSide(width: 1, color: Colors.white))),
-                ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                            text: "In-app vibrations",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                      Switch(
-                        value: switchValue3,
-                        onChanged: (newValue) {
-                          setState(() {
-                            switchValue3 = newValue;
-                          });
-                        },
-                        activeTrackColor: Colors.purpleAccent,
-                        activeColor: Colors.white,
-                        inactiveTrackColor: Colors.black,
-                        inactiveThumbColor: Colors.white,
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xFF141416),
-                      border: Border(
-                          top: BorderSide(width: 1, color: Colors.white),
-                          bottom: BorderSide(width: 1, color: Colors.white))),
-                ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: "In-app sounds",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                      ),
-                      Switch(
-                        value: switchValue4,
-                        onChanged: (newValue) {
-                          setState(() {
-                            switchValue4 = newValue;
-                          });
-                        },
-                        activeTrackColor: Colors.purpleAccent,
-                        activeColor: Colors.white,
-                        inactiveTrackColor: Colors.black,
-                        inactiveThumbColor: Colors.white,
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xFF141416),
-                      border: Border(
-                          top: BorderSide(width: 1, color: Colors.white),
-                          bottom: BorderSide(width: 1, color: Colors.white))),
-                ),
-              ),
-            ),
-
+            generateNotifContainer('Messages', 'Someone sent you a message'),
+            generateNotifContainer('Message likes', 'Someone liked your message'),
+            generateNotifContainer('In-app vibrations', ''),
+            generateNotifContainer('In-app sounds', ''),
             //Remember to Remove these 2 widgets, for prototype sake only
-            /*SizedBox(
+            SizedBox(
               height: 30,
             ),
             Container(
@@ -211,7 +55,7 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "/email_verification_settings");
+                  Navigator.pushNamed(context, "/edit_info");
                 },
                 child: CustomText(
                   text: "next",
@@ -230,10 +74,54 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
                 ),
               ),
 
-            )*/
+            )
           ],
         ),
       ),
     );
+  }
+
+  Container generateNotifContainer(String title, String subtitle) {
+    return Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          text: title,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                        ),
+                        CustomText(
+                          text: subtitle,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        ),
+                      ],
+                    ),
+                    Switch(
+                      value: switchValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          switchValue = newValue;
+                        });
+                      },
+                      activeTrackColor: Colors.purpleAccent,
+                      activeColor: Colors.white,
+                      inactiveTrackColor: Colors.black,
+                      inactiveThumbColor: Colors.white,
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    color: Color(0xFF141416),
+                    border: Border(
+                        top: BorderSide(width: 1, color: Colors.white),
+                        bottom: BorderSide(width: 1, color: Colors.white))),
+              );
   }
 }

@@ -26,6 +26,7 @@ dependencies:
   flutter_markdown: ^0.6.17+3
   flutter_svg: ^2.0.7
   pin_code_fields: ^8.0.1
+  dotted_border: ^2.0.0+3
 
 
 dev_dependencies:
@@ -78,6 +79,15 @@ flutter:
     - "assets/images/buddee_up_splash_logo.png"
     - "assets/images/buddeeup_splash.png"
     - "assets/images/green status.png"
+    - "assets/images/person1.jpeg"
+    - "assets/images/person2.jpeg"
+    - "assets/images/person3.jpeg"
+    - "assets/images/person4.jpeg"
+    - "assets/images/person5.jpeg"
+    - "assets/images/cancel.png"
+    - "assets/images/ps_tribe.jpg"
+    - "assets/images/carbon_friendship.jpg"
+    - "assets/images/annabelle.png"
 
 
 

@@ -45,9 +45,7 @@ class _ConnectedAccountScreenState extends State<ConnectedAccountScreen> {
                 fontSize: 12,
               ),
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -78,11 +76,7 @@ class _ConnectedAccountScreenState extends State<ConnectedAccountScreen> {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -113,9 +107,6 @@ class _ConnectedAccountScreenState extends State<ConnectedAccountScreen> {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
-
             //Remember to Remove these 2 widgets, for prototype sake only
             SizedBox(
               height: 30,

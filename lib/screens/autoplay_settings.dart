@@ -41,7 +41,9 @@ class AutoplaySettings extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 30,
+                  ),
                   CustomText(
                     text: "AUTOPLAY OPTIONS",
                     fontWeight: FontWeight.w400,
@@ -50,10 +52,7 @@ class AutoplaySettings extends StatelessWidget {
                 ],
               ),
             ),
-
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -73,11 +72,7 @@ class AutoplaySettings extends StatelessWidget {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -97,11 +92,7 @@ class AutoplaySettings extends StatelessWidget {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -121,10 +112,6 @@ class AutoplaySettings extends StatelessWidget {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
-
-
             SizedBox(
               height: 30,
             ),

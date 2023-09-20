@@ -39,9 +39,7 @@ class LocationSettings extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -59,11 +57,7 @@ class LocationSettings extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   padding: EdgeInsets.all(20),
                   width: double.infinity,
                   child: ElevatedButton(
@@ -95,8 +89,6 @@ class LocationSettings extends StatelessWidget {
                   ),
 
                 ),
-              ),
-            )
           ],
         ),
       ),

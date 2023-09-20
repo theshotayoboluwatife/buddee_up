@@ -44,9 +44,7 @@ class AddContactsScreen extends StatelessWidget {
               ),
             ),
 
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   color: Color(0XFF141416),
                   padding: EdgeInsets.only(left:16.0),
@@ -58,8 +56,6 @@ class AddContactsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            ),
             SizedBox(
               height: 50,
             ),
@@ -70,13 +66,12 @@ class AddContactsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(text: "CONTACT INFO", fontWeight: FontWeight.bold,fontSize: 15,),
+                  SizedBox(height: 10,),
                   CustomText(text: "Add a phone number or email", fontWeight: FontWeight.w400,fontSize: 15,),
                   SizedBox(height: 10,)
               ],),
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.only(left: 16),
                   child: TextField(
@@ -94,14 +89,10 @@ class AddContactsScreen extends StatelessWidget {
                           right: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
             SizedBox(
               height: 30,
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.only(left: 16),
                   child: TextField(
@@ -119,8 +110,6 @@ class AddContactsScreen extends StatelessWidget {
                           right: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
             SizedBox(height: 50,),
             Container(
               padding: EdgeInsets.all(20),

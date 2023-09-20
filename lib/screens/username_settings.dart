@@ -23,6 +23,12 @@ class UsernameSettings extends StatelessWidget {
           color: Colors.white,
           fontSize: 18,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 24.0),
+            child: CustomText(text: "Confirm", fontWeight: FontWeight.w400,fontSize: 18,),
+          )
+        ],
       ),
       body: Container(
         child: Column(
@@ -39,9 +45,7 @@ class UsernameSettings extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -61,8 +65,6 @@ class UsernameSettings extends StatelessWidget {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
             SizedBox(
               height: 30,
             ),

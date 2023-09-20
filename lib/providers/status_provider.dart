@@ -14,5 +14,16 @@ class Status with ChangeNotifier {
   List <StatusData> get statusData {
     return  [..._statusData];
   }
+  final List<String> _profilePicturesData = [
+    "assets/images/person1.jpeg",
+    "assets/images/person2.jpeg",
+    "assets/images/person3.jpeg",
+    "assets/images/person4.jpeg",
+    "assets/images/person5.jpeg"
+  ];
+
+  List <String> get profilePicturesData {
+    return [..._profilePicturesData];
+  }
 
 }

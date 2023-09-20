@@ -37,9 +37,7 @@ class _OnlineNowScreenState extends State<OnlineNowScreen> {
             SizedBox(
               height: 30,
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -70,8 +68,6 @@ class _OnlineNowScreenState extends State<OnlineNowScreen> {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
             Padding(padding: EdgeInsets.all(20.0),
               child:
               CustomText(

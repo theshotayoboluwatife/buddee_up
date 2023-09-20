@@ -38,9 +38,7 @@ class PhoneNumberSettings extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            Center(
-              child: Expanded(
-                child: Container(
+            Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   child: Row(
@@ -60,8 +58,6 @@ class PhoneNumberSettings extends StatelessWidget {
                           top: BorderSide(width: 1, color: Colors.white),
                           bottom: BorderSide(width: 1, color: Colors.white))),
                 ),
-              ),
-            ),
             SizedBox(
               height: 30,
             ),

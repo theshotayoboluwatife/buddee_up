@@ -35,7 +35,7 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
                 ),
                 child: ClipOval(
                   child: Image.asset(
-                    'assets/images/photo4.png',
+                    'assets/images/annabelle.png',
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,

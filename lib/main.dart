@@ -7,6 +7,7 @@ import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/body_type.dart';
 import 'package:BuddeeUp/screens/connected_account_screen.dart';
 import 'package:BuddeeUp/screens/discover.dart';
+import 'package:BuddeeUp/screens/edit_info.dart';
 import 'package:BuddeeUp/screens/email_verification_settings.dart';
 import 'package:BuddeeUp/screens/enable_location_screen.dart';
 import 'package:BuddeeUp/screens/ethnicity.dart';
@@ -92,6 +93,7 @@ class App extends StatelessWidget {
           "/recently_active_status": (context) =>RecentlyActiveStatus(),
           "/username_settings": (context) =>UsernameSettings(),
           "/push_notification_settings": (context) =>PushNotificationSettings(),
+          "/edit_info": (context) => EditInfo(),
         },
         initialRoute: '/',
       ),
