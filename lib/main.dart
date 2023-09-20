@@ -5,6 +5,7 @@ import 'package:BuddeeUp/screens/add_contacts_screen.dart';
 import 'package:BuddeeUp/screens/autoplay_settings.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/body_type.dart';
+import 'package:BuddeeUp/screens/cafe_talks_one.dart';
 import 'package:BuddeeUp/screens/connected_account_screen.dart';
 import 'package:BuddeeUp/screens/discover.dart';
 import 'package:BuddeeUp/screens/edit_info.dart';
@@ -96,6 +97,7 @@ class App extends StatelessWidget {
           "/push_notification_settings": (context) =>PushNotificationSettings(),
           "/edit_info": (context) => EditInfo(),
           "/email_unsubscribe": (context) => EmailUnsubscribe(),
+          "/cafe_talks_one": (context) => CafeTalksOne(),
         },
         initialRoute: '/',
       ),

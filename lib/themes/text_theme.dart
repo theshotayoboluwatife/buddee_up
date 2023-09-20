@@ -7,7 +7,6 @@ class CustomTextTheme {
     displayMedium: GoogleFonts.poppins(
       color: Colors.black,
       fontSize: 24,
-
     ),
     displaySmall:  GoogleFonts.poppins(
       color: Colors.black,
