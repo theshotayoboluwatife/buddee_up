@@ -1,157 +1,171 @@
+import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
 import '../providers/status_provider.dart';
 
-class DiscoverPage extends StatelessWidget {
+class DiscoverPage extends StatefulWidget {
   DiscoverPage({Key? key}) : super(key: key);
+
+  @override
+  State<DiscoverPage> createState() => _DiscoverPageState();
+}
+
+class _DiscoverPageState extends State<DiscoverPage> {
+  @override
+  void initState() {
+    super.initState();
+    // getUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
     final statusData = Provider.of<Status>(context).statusData;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SafeArea(
-              child:
-
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Container(
-                padding: EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start
-                  ,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
                       text: "Discover",
-                      color: Color(0xFFDA3EE8),
+                      color: Color(0XFFC420D2),
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //travel pass text
                         Container(
-                          padding: EdgeInsets.all(6),
-                          child: Row(children: [
-                            Image.asset("assets/images/ri_compass-discover-fill.png"),
-                            SizedBox(width: 5,),
-                            CustomText(text: "Travel Pass", fontWeight: FontWeight.w700, fontSize: 14,)
-                          ],),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                  "assets/images/ri_compass-discover-fill.png"),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              CustomText(
+                                text: "Travel Pass",
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                                fontSize: 14,
+                              )
+                            ],
+                          ),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color(0XFF1753F5)
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0XFF4E1753).withOpacity(.94),
                           ),
                         ),
 
                         Container(
                           child: Row(
                             children: [
-                              Image.asset("assets/images/photo.png",),
-                              SizedBox(width: 4,),
-                              Image.asset("assets/images/mi_filter.png",),
-
-
+                              Image.asset(
+                                "assets/images/photo.png",
+                                cacheWidth: 30,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Image.asset(
+                                "assets/images/mi_filter.png",
+                              ),
                             ],
                           ),
                         ),
                       ],
-
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       width: double.infinity,
-                      height: 120,
+                      height: 90,
                       child: ListView.builder(
                         itemCount: statusData.length,
-                        itemBuilder: (BuildContext context, int index){
-                        return StatusCard(name: statusData[index].name, image: AssetImage(statusData[index].imageUrl),
-                          
-                        );
-                      },
-                      scrollDirection: Axis.horizontal),
+                        itemBuilder: (BuildContext context, int index) {
+                          return StatusCard(
+                            name: statusData[index].name,
+                            image: statusData[index].imageUrl,
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                      ),
                     ),
 
                     //Remember to Remove these 2 widgets, for prototype sake only
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/report_user_screen");
-                        },
-                        child: CustomText(
-                          text: "next",
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero, // No border curves
-                          ),
-                          backgroundColor: Color(0xFF141416),
-
-                          // Text color
-                        ),
-                      ),
-
-                    )
                   ],
                 ),
               ),
-
-            )
-          ],
+              AppGridView()
+            ],
+          ),
         ),
       ),
-
     );
-
   }
 }
 
 class StatusCard extends StatelessWidget {
   const StatusCard({
-    super.key, required this.name, required this.image,
+    super.key,
+    required this.name,
+    required this.image,
   });
 
   final String name;
-  final ImageProvider image;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.black,
+    return Container(
+      margin: EdgeInsets.only(right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Expanded(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-               Positioned(child: Image.asset("assets/images/green status.png")),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Positioned(
-                      child: Image(image: image),
-
+          CircleAvatar(
+            radius: 30,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0XFFC420D2),
+                    Color(0XFF0A84FF),
+                  ],
+                ),
+              ),
+              child: Center(
+                child: Container(
+                  margin: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
-          CustomText(text: name, fontSize: 12, fontWeight: FontWeight.w700,)
+          SizedBox(height: 5),
+          CustomText(
+            text: name,
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          )
         ],
       ),
     );
