@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
                   CustomButton(
                     text: "Sign in",
                     onpress: () {
-                      Navigator.pushNamed(context, '/phone_verification');
+                      Navigator.pushNamed(context, '/discover_screen');
                     },
                     hasBorder: true,
                     buttonColor: Colors.black,
@@ -142,7 +142,9 @@ class _SignInState extends State<SignIn> {
                     width: double.infinity,
                     height: 60,
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/discover_screen");
+                      },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
@@ -169,7 +171,9 @@ class _SignInState extends State<SignIn> {
                     width: double.infinity,
                     height: 60,
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/discover_screen");
+                      },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child:
@@ -190,31 +194,36 @@ class _SignInState extends State<SignIn> {
                   ),
 
                   const SizedBox(height: 30,),
-                  const Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Dont have an account?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                          TextSpan(
-                              text: ' Sign Up',
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                        ]
+                  GestureDetector(
+                    child: const Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                          children: [
+                            TextSpan(
+                                text: 'Dont have an account?',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                )
+                            ),
+                            TextSpan(
+                                text: ' Sign Up',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                )
+                            ),
+                          ]
+
+                      ),
+
 
                     ),
-
-
+                    onTap: (){
+                      Navigator.pushNamed(context, "/signup");
+                    },
                   )
                 ],
               ),

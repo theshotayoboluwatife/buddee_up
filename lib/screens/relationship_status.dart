@@ -35,7 +35,9 @@ class _RelationshipStatusState extends State<RelationshipStatus> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ),
@@ -104,7 +106,7 @@ class _RelationshipStatusState extends State<RelationshipStatus> {
               ) ,),
 
             const Spacer(),
-            CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context, "/health_status_screen");}, width: double.infinity,buttonColor: Colors.white,),
+            CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context,"/activities_screen");}, width: double.infinity,buttonColor: Colors.white,),
             const SizedBox(height: 20,)
           ],
         ),

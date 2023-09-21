@@ -9,9 +9,11 @@ import 'package:BuddeeUp/screens/cafe_talks_one.dart';
 import 'package:BuddeeUp/screens/connected_account_screen.dart';
 import 'package:BuddeeUp/screens/discover.dart';
 import 'package:BuddeeUp/screens/edit_info.dart';
+import 'package:BuddeeUp/screens/edit_profile.dart';
 import 'package:BuddeeUp/screens/email_verification_settings.dart';
 import 'package:BuddeeUp/screens/enable_location_screen.dart';
 import 'package:BuddeeUp/screens/ethnicity.dart';
+import 'package:BuddeeUp/screens/go_buddee_pro.dart';
 import 'package:BuddeeUp/screens/google_signin.dart';
 import 'package:BuddeeUp/screens/health_status.dart';
 import 'package:BuddeeUp/screens/keep_me_posted_screen.dart';
@@ -24,11 +26,13 @@ import 'package:BuddeeUp/screens/phone_call.dart';
 import 'package:BuddeeUp/screens/phone_number_settings.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:BuddeeUp/screens/profile_screen.dart';
+import 'package:BuddeeUp/screens/proposition_screen.dart';
 import 'package:BuddeeUp/screens/push_notifications_settings.dart';
 import 'package:BuddeeUp/screens/read_receipts.dart';
 import 'package:BuddeeUp/screens/recently_active_status.dart';
 import 'package:BuddeeUp/screens/relationship_status.dart';
 import 'package:BuddeeUp/screens/report_user_settings_screen.dart';
+import 'package:BuddeeUp/screens/settings.dart';
 import 'package:BuddeeUp/screens/sex_type.dart';
 import 'package:BuddeeUp/screens/sexual_preferences.dart';
 import 'package:BuddeeUp/screens/show_me_screen.dart';
@@ -106,8 +110,10 @@ class App extends StatelessWidget {
           "/view_image": (context) => ViewImage(),
           "/video_call_screen": (context) => VideoCallScreen(),
           "/voice_call_screen": (context) => PhoneCallScreen(),
-          "/user_profile": (context) => UserProfileInfo(),
-          "/go_pro_screen": (context) => UserProfileInfo(),
+          "/user_profile": (context) => EditProfile(),
+          "/go_pro_screen": (context) => GoPro(),
+          "/settings": (context) => Settings(),
+          "/proposition_screen": (context) => PropositionScreen(),
 
         },
         initialRoute: '/',

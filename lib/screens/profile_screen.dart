@@ -1,16 +1,20 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
+import '../custom_widgets/dotted_image_card.dart';
+import '../providers/status_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final profilePictureData = Provider.of<Status>(context).profilePicturesData;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
@@ -32,7 +36,9 @@ class ProfileScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ),
@@ -68,8 +74,62 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10,),
-                    Container(),
-                    const SizedBox(height: 10,),
+                    Container(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child:  Column(
+                        children: [
+                          Row(
+                            children: [
+                              DottedImageCard(
+                                image: profilePictureData[0],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[1],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[2],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[3],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[4],
+                                isAddedMedia: false,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              DottedImageCard(
+                                image: profilePictureData[0],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[1],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[2],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[3],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[4],
+                                isAddedMedia: true,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 1,),
                     const ProfileContainer(heading: "Height", hint: "5' ft 0\" in" ),
                     const ProfileContainer(heading: "Weight", hint: "130 lbs" ),
                     const SizedBox(height: 20),

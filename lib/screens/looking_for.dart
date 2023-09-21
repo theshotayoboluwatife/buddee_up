@@ -35,7 +35,9 @@ class _LookingForState extends State<LookingFor> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ),

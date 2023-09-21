@@ -30,7 +30,9 @@ class SexType extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(Icons.arrow_back_outlined),
                   color: Colors.white,
                 ),
@@ -41,11 +43,17 @@ class SexType extends StatelessWidget {
               ]),
             ),
             const Spacer(),
-            CustomButton(text: "Male", onpress: (){}, textColor: Colors.black,),
+            CustomButton(text: "Male", onpress: (){
+              Navigator.pushNamed(context, "/tribe_screen");
+            }, textColor: Colors.black,),
             const SizedBox(height: 20),
-            CustomButton(text: "Trans Female", onpress: (){}, textColor: Colors.black,),
+            CustomButton(text: "Trans Female", onpress: (){
+              Navigator.pushNamed(context, "/tribe_screen");
+            }, textColor: Colors.black,),
             const SizedBox(height: 20),
-            CustomButton(text: "Trans Male", onpress: (){}, textColor: Colors.black,),
+            CustomButton(text: "Trans Male", onpress: (){
+              Navigator.pushNamed(context, "/tribe_screen");
+            }, textColor: Colors.black,),
             const Spacer(),
             const Row(
               children: [

@@ -56,17 +56,26 @@ class GoogleSignIn extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  AccountTile(
-                      name: "Lara Mueller",
-                      email: "laramueller@gmail.com",
-                      image: Image.asset("assets/images/User1.png")),
+                  GestureDetector(
+                    child: AccountTile(
+                        name: "Lara Mueller",
+                        email: "laramueller@gmail.com",
+                        image: Image.asset("assets/images/User1.png")),
+                    onTap: (){
+                      Navigator.pushNamed(context, "/phone_verification");
+                    },
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
-                  AccountTile(
-                      name: "Cameron Williamson",
-                      email: "cameronwilliamson@gmail.com",
-                      image: Image.asset("assets/images/User2.png")),
+                  GestureDetector(
+                    child: AccountTile(
+                        name: "Cameron Williamson",
+                        email: "cameronwilliamson@gmail.com",
+                        image: Image.asset("assets/images/User2.png")),
+                    onTap: (){        Navigator.pushNamed(context, "/phone_verification");
+                    },
+                  ),
                   const Spacer(),
                   const Text.rich(
                     textAlign: TextAlign.start,

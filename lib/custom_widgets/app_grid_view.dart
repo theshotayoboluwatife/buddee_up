@@ -42,71 +42,76 @@ class AppGridView extends StatelessWidget {
                 ),
               );
             }
-            return GridTile(
-              header: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 60),
-                  Text(
-                    "${snapShot.data!.age.toString()[1]}mi",
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    "${snapShot.data!.name}, ${snapShot.data!.age}",
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              footer: ClipRect(
-                clipBehavior: Clip.hardEdge,
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.2),
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
+            return GestureDetector(
+              child: GridTile(
+                header: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 60),
+                    Text(
+                      "${snapShot.data!.age.toString()[1]}mi",
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                     ),
-                    height: 30,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const FaIcon(
-                          FontAwesomeIcons.x,
-                          size: 12,
-                          color: Colors.white,
+                    Text(
+                      "${snapShot.data!.name}, ${snapShot.data!.age}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                footer: ClipRect(
+                  clipBehavior: Clip.hardEdge,
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(.2),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
                         ),
-                        Container(
-                          height: 30,
-                          width: 2,
-                          color: Colors.white,
-                        ),
-                        const FaIcon(
-                          FontAwesomeIcons.solidHeart,
-                          color: Colors.white,
-                          size: 12,
-                        ),
-                      ],
+                      ),
+                      height: 30,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const FaIcon(
+                            FontAwesomeIcons.x,
+                            size: 12,
+                            color: Colors.white,
+                          ),
+                          Container(
+                            height: 30,
+                            width: 2,
+                            color: Colors.white,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.solidHeart,
+                            color: Colors.white,
+                            size: 12,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: NetworkImage(snapShot.data!.imageUrl),
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                    image: NetworkImage(snapShot.data!.imageUrl),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+              onTap: (){
+                Navigator.pushNamed(context, "/user_profile_info");
+              },
             );
           },
         ),

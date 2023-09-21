@@ -247,21 +247,76 @@ class UserProfileInfo extends StatelessWidget {
                       SizedBox(height: 30,),
                       CustomText(text: 'PRIVATE PHOTOS', fontSize: 15, fontWeight: FontWeight.w300,),
                       SizedBox(height: 16,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
+                      
+                      GestureDetector(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  width: 80,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/prof1.png'
+                                          ),
+                                          fit: BoxFit.cover
+                                      )
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: ClipRRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2), // Adjust the sigma values for blur intensity
+                                      child: Container(
+                                        width: 50,
+                                        height: 50,
+                                        color: Colors.transparent, // Make the blurred container transparent
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: Center(
+                                    child: Icon(Icons.lock, color: Colors.purple, size: 35,),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(width: 20,),
+                            Stack(children: [
                               Container(
                                 width: 80,
                                 height: 80,
                                 decoration: BoxDecoration(
+                                    color: Colors.green,
                                     image: DecorationImage(
                                         image: AssetImage(
                                             'assets/images/prof1.png'
                                         ),
                                         fit: BoxFit.cover
                                     )
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: BackdropFilter(
+                                    filter:ImageFilter.blur(sigmaX: 10, sigmaY: 35),
+                                    child: Container(
+                                        color: Colors.transparent,
+                                        child: Image.asset("assets/images/prof3.png",
+                                          fit: BoxFit.cover,)
+                                    ),
+                                  ),
                                 ),
                               ),
                               Positioned(
@@ -289,115 +344,66 @@ class UserProfileInfo extends StatelessWidget {
                                   child: Icon(Icons.lock, color: Colors.purple, size: 35,),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(width: 20,),
-                          Stack(children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/prof1.png'
-                                      ),
-                                      fit: BoxFit.cover
-                                  )
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: BackdropFilter(
-                                  filter:ImageFilter.blur(sigmaX: 10, sigmaY: 35),
-                                  child: Container(
-                                      color: Colors.transparent,
-                                      child: Image.asset("assets/images/prof3.png",
-                                        fit: BoxFit.cover,)
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: ClipRRect(
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2), // Adjust the sigma values for blur intensity
-                                  child: Container(
-                                    width: 50,
-                                    height: 50,
-                                    color: Colors.transparent, // Make the blurred container transparent
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Center(
-                                child: Icon(Icons.lock, color: Colors.purple, size: 35,),
-                              ),
-                            ),
 
-                          ],),
-                          SizedBox(width: 20,),
-                          Stack(children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/prof3.png'
-                                      ),
-                                      fit: BoxFit.cover
-                                  )
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: BackdropFilter(
-                                  filter:ImageFilter.blur(sigmaX: 10, sigmaY: 35),
-                                  child: Container(
-                                      color: Colors.transparent,
-                                      child: Image.asset("assets/images/prof2.png",
-                                        fit: BoxFit.cover,)
+                            ],),
+                            SizedBox(width: 20,),
+                            Stack(children: [
+                              Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/prof3.png'
+                                        ),
+                                        fit: BoxFit.cover
+                                    )
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: BackdropFilter(
+                                    filter:ImageFilter.blur(sigmaX: 10, sigmaY: 35),
+                                    child: Container(
+                                        color: Colors.transparent,
+                                        child: Image.asset("assets/images/prof2.png",
+                                          fit: BoxFit.cover,)
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: ClipRRect(
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2), // Adjust the sigma values for blur intensity
-                                  child: Container(
-                                    width: 50,
-                                    height: 50,
-                                    color: Colors.transparent, // Make the blurred container transparent
+                              Positioned(
+                                top: 0,
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: ClipRRect(
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2), // Adjust the sigma values for blur intensity
+                                    child: Container(
+                                      width: 50,
+                                      height: 50,
+                                      color: Colors.transparent, // Make the blurred container transparent
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Center(
-                                child: Icon(Icons.lock, color: Colors.purple, size: 35,),
+                              Positioned(
+                                top: 0,
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Center(
+                                  child: Icon(Icons.lock, color: Colors.purple, size: 35,),
+                                ),
                               ),
-                            ),
-                          ],),
-                        ],
+                            ],),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, "/view_image");
+                        },
                       ),
-                      SizedBox(height: 32,),
+                      const SizedBox(height: 32,),
                       Center(
                         child: Column(
                           children: [
@@ -410,7 +416,9 @@ class UserProfileInfo extends StatelessWidget {
                             CustomText(text: "REPORT ROMA", fontWeight: FontWeight.w300,
                               fontSize: 12,),
                             SizedBox(height: 30,),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.cancel_rounded, color: Colors.white,size: 50,)),
+                            IconButton(onPressed: (){
+                              Navigator.pop(context);
+                            }, icon: Icon(Icons.cancel_rounded, color: Colors.white,size: 50,)),
                             SizedBox(height: 30,),
                           ],
                         ),

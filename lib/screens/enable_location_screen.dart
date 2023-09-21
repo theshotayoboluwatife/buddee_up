@@ -29,7 +29,9 @@ class EnableLocation extends StatelessWidget {
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       iconSize: 40,
                       icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,

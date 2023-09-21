@@ -45,7 +45,9 @@ class WelcomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.close), color: Colors.white, ),
+                  IconButton(onPressed: (){
+                    Navigator.pushNamed(context, "/profile_screen");
+                  }, icon: const Icon(Icons.close), color: Colors.white, ),
                   SizedBox(width: (size.width/4) ,),
                   const Image(image: AssetImage("assets/images/buddee_up_logo.png"), width:87, height: 87)
                 ],

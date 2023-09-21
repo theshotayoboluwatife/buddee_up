@@ -15,7 +15,7 @@ class EditProfile extends StatelessWidget {
           Container(
             width: double.infinity,
             height: size.height * 0.65,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.purpleAccent,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(100),
@@ -135,7 +135,9 @@ class EditProfile extends StatelessWidget {
                           ),
                           child:IconButton(
                             icon: Icon(Icons.settings, size: 40,color: Colors.black,),
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pushNamed(context, "/settings");
+                            },
                           ),
                         ),
                         SizedBox(height: 5,),
@@ -161,7 +163,9 @@ class EditProfile extends StatelessWidget {
                           ),
                           child:IconButton(
                             icon: Icon(Icons.verified, size: 40, color: Colors.black,),
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pushNamed(context, "/go_pro_screen");
+                            },
                           ),
                         ),
                         SizedBox(height: 5,),
@@ -187,7 +191,9 @@ class EditProfile extends StatelessWidget {
                           ),
                           child:IconButton(
                             icon: Icon(Icons.edit, size: 40, color: Colors.black,),
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pushNamed(context, "/edit_info");
+                            },
                           ),
                         ),
                         SizedBox(height: 5,),
@@ -204,7 +210,7 @@ class EditProfile extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Expanded(
             child: Container(
               padding: EdgeInsets.all(16),
@@ -212,32 +218,37 @@ class EditProfile extends StatelessWidget {
               color: Colors.black,
               child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.purpleAccent,
-                      border: Border.all(color: Colors.white, width: 1),
-                      borderRadius: BorderRadius.circular(10),
+                  GestureDetector(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.purpleAccent,
+                        border: Border.all(color: Colors.white, width: 1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.all(8),
+                      width: double.infinity,
+                      child: const Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add_circle,color: Colors.white, size: 35,),
+                          SizedBox(width: 5,),
+                          CustomText(text: "Make Your Buddeeup Proposition", fontWeight: FontWeight.w400,)
+                        ],
+                      ),
                     ),
-                    padding: EdgeInsets.all(8),
-                    width: double.infinity,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add_circle,color: Colors.white, size: 35,),
-                        SizedBox(width: 5,),
-                        CustomText(text: "Make Your Buddeeup Proposition", fontWeight: FontWeight.w400,)
-                      ],
-                    ),
+                    onTap: (){
+                      Navigator.pushNamed(context, "/proposition_screen");
+                    },
                   ),
                   SizedBox(height: 20,),
-                  CustomText(text: "BUDDEEUP PRO", color: Colors.purpleAccent, fontWeight: FontWeight.bold,fontSize: 24,),
+                  const CustomText(text: "BUDDEEUP PRO", color: Colors.purpleAccent, fontWeight: FontWeight.bold,fontSize: 24,),
                   SizedBox(height: 8,),
                   CustomText(text: "Get free video calls duration", fontSize: 16, fontWeight: FontWeight.w400,),
                   SizedBox(height: 16,),
                   //replace with actual page indicator
                   Container(
                     padding: EdgeInsets.only(left: 100, right: 100),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(Icons.circle, color: Colors.purpleAccent, size: 16,),
@@ -250,7 +261,9 @@ class EditProfile extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16,),
-                  CustomButton(text: "LEARN MORE", onpress: (){}, buttonColor: Colors.purpleAccent, width: size.height*0.3),
+                  CustomButton(text: "LEARN MORE", onpress: (){
+                    Navigator.pushNamed(context, "/go_pro_screen");
+                  }, buttonColor: Colors.purpleAccent, width: size.height*0.3),
                   SizedBox(height: 16,),
                 ],
               ),

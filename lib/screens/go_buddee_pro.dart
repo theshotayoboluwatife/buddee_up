@@ -14,7 +14,7 @@ class GoPro extends StatelessWidget {
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SafeArea(
+          const SafeArea(
               child:
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -29,15 +29,15 @@ class GoPro extends StatelessWidget {
               Icon(Icons.verified, size: 35, color: Colors.purpleAccent,)
             ],
           )),
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           Container(),
-          CustomText(text: "Calls Duration", fontSize: 24, fontWeight: FontWeight.bold,),
-          CustomText(text: "Get free video calls duration every day", fontSize: 16, fontWeight: FontWeight.w400,),
-          SizedBox(height: 16,),
+          const CustomText(text: "Calls Duration", fontSize: 24, fontWeight: FontWeight.bold,),
+          const CustomText(text: "Get free video calls duration every day", fontSize: 16, fontWeight: FontWeight.w400,),
+          const SizedBox(height: 16,),
           //replace with actual page indicator
           Container(
-            padding: EdgeInsets.only(left: 100, right: 100),
-            child: Row(
+            padding: const EdgeInsets.only(left: 100, right: 100),
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(Icons.circle, color: Colors.purpleAccent, size: 16,),

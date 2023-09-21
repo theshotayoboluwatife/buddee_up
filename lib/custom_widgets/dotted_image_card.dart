@@ -15,7 +15,7 @@ class DottedImageCard extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       child: Stack(children: [
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(4),
           child: DottedBorder(
             color: Colors.white,
             strokeWidth: 1,
@@ -29,10 +29,12 @@ class DottedImageCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: isAddedMedia
-                  ? Center(
-                      child: Container(
-                          color: const Color(0xFF141416),
-                          child: const CustomText(text: "Private\nPhotos")))
+                  ? Container(
+                decoration: BoxDecoration(
+                    color: const Color(0xFF141416),
+                    borderRadius:
+                BorderRadius.circular(10)),
+                          child: Center(child: const CustomText(text: "Private\nPhotos")))
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(

@@ -32,7 +32,9 @@ final  TextEditingController _textController = TextEditingController();
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       iconSize: 40,
                       icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
@@ -58,7 +60,9 @@ final  TextEditingController _textController = TextEditingController();
             const Spacer(),
             CustomButton(
               text: "CONTINUE",
-              onpress: () {},
+              onpress: () {
+                Navigator.pushNamed(context, "/signin");
+              },
               textColor: Colors.black,
             ),
 

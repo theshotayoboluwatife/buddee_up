@@ -14,7 +14,9 @@ class ViewImage extends StatelessWidget {
         backgroundColor: Colors.white,
         toolbarHeight: 80,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: Icon(
               Icons.navigate_before,
               size: 45,

@@ -33,7 +33,9 @@ class PhoneVerification extends StatelessWidget {
 
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: const Icon(Icons.keyboard_backspace_outlined, size: 30),
                     color: Colors.white,
                   ),
