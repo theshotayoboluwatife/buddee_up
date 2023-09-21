@@ -1,5 +1,7 @@
 import 'package:BuddeeUp/screens/chat.dart';
 import 'package:BuddeeUp/screens/discover.dart';
+import 'package:BuddeeUp/screens/edit_profile.dart';
+import 'package:BuddeeUp/screens/go_buddeeup.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,19 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.black,
       body: PageView(controller: pageController, children: const [
         Chat(),
-        Text(
-          'chat',
-          style: TextStyle(color: Colors.blue),
-        ),
+        GoBuddeeUp(),
         DiscoveryPage(),
         Text(
           'chat',
           style: TextStyle(color: Colors.blue),
         ),
-        Text(
-          'chat',
-          style: TextStyle(color: Colors.blue),
-        ),
+        EditProfile(),
       ]),
       // body: DiscoveryPage(),
       bottomSheet: Container(
