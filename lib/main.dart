@@ -7,7 +7,6 @@ import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/body_type.dart';
 import 'package:BuddeeUp/screens/cafe_talks_one.dart';
 import 'package:BuddeeUp/screens/connected_account_screen.dart';
-import 'package:BuddeeUp/screens/discover.dart';
 import 'package:BuddeeUp/screens/edit_info.dart';
 import 'package:BuddeeUp/screens/edit_profile.dart';
 import 'package:BuddeeUp/screens/email_verification_settings.dart';
@@ -16,6 +15,7 @@ import 'package:BuddeeUp/screens/ethnicity.dart';
 import 'package:BuddeeUp/screens/go_buddee_pro.dart';
 import 'package:BuddeeUp/screens/google_signin.dart';
 import 'package:BuddeeUp/screens/health_status.dart';
+import 'package:BuddeeUp/screens/home_screen.dart';
 import 'package:BuddeeUp/screens/keep_me_posted_screen.dart';
 import 'package:BuddeeUp/screens/location_settings_screen.dart';
 import 'package:BuddeeUp/screens/login_signup.dart';
@@ -72,7 +72,7 @@ class App extends StatelessWidget {
           '/welcome': (context) => const WelcomeScreen(),
           '/signin': (context) => const SignIn(),
           '/signup': (context) => const SignUp(),
-          '/discover_screen': (context) => const DiscoverPage(),
+          '/home_screen': (context) => const HomeScreen(),
           '/account_recovery': (context) => AccountRecovery(),
           '/google_signin': (context) => GoogleSignIn(),
           '/phone_verification': (context) => PhoneVerification(),

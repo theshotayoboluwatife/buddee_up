@@ -1,5 +1,6 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -12,7 +13,8 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _cPasswordTextController = TextEditingController();
+  final TextEditingController _cPasswordTextController =
+      TextEditingController();
   bool _isPasswordVisible = false;
 
   @override
@@ -25,9 +27,12 @@ class _SignUpState extends State<SignUp> {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              Color.fromRGBO(227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
-              Color.fromRGBO(196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+              Color.fromRGBO(
+                  227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
+              Color.fromRGBO(
+                  196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
+              Color.fromRGBO(
+                  163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
         ),
@@ -84,7 +89,8 @@ class _SignUpState extends State<SignUp> {
                   //password textfield
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                    padding:
+                        const EdgeInsets.only(left: 60, top: 10, bottom: 10),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(40))),
@@ -119,7 +125,8 @@ class _SignUpState extends State<SignUp> {
                   //confirm password textfield
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                    padding:
+                        const EdgeInsets.only(left: 60, top: 10, bottom: 10),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(40))),
@@ -154,9 +161,11 @@ class _SignUpState extends State<SignUp> {
                   //create account button
                   CustomButton(
                     text: "Create account",
-                    onpress: () {
-                      Navigator.pushNamed(context, "/phone_verification");
-                    },
+                    onpress: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const PhoneVerification(),
+                      ),
+                    ),
                     hasBorder: true,
                     buttonColor: Colors.black,
                     fontSize: 12,
@@ -182,7 +191,8 @@ class _SignUpState extends State<SignUp> {
                     width: double.infinity,
                     height: 60,
                     child: ElevatedButton.icon(
-                      onPressed: ()=> Navigator.pushNamed(context, "/google_signin"),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, "/google_signin"),
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
@@ -216,8 +226,7 @@ class _SignUpState extends State<SignUp> {
                       },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child:
-                            Image.asset("assets/images/logos_facebook.png"),
+                        child: Image.asset("assets/images/logos_facebook.png"),
                       ),
                       label: const CustomText(
                         text: "Sign Up with Facebook",
@@ -267,77 +276,59 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const Text.rich(
                     textAlign: TextAlign.center,
-                    TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'By creating an account, you agree to our ',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                          TextSpan(
-                              text: 'Terms of service ',
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                          TextSpan(
-                              text: 'and',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                          TextSpan(
-                              text: 'Privacy Policy',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                        ]
-
-                    ),
-
-
-                  ),
-                  const SizedBox(height: 30,),
-                  GestureDetector(
-                    child: const Text.rich(
-                      textAlign: TextAlign.center,
+                    TextSpan(children: [
                       TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Dont have an account?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                          TextSpan(
-                              text: ' Log in',
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              )
-                          ),
-                        ]
-
-                      ),
-
-
-                    ),
-                    onTap:   () {
-                      Navigator.pushNamed(context, "/signin");
-                      },)
+                          text: 'By creating an account, you agree to our ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          )),
+                      TextSpan(
+                          text: 'Terms of service ',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          )),
+                      TextSpan(
+                          text: 'and',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          )),
+                      TextSpan(
+                          text: 'Privacy Policy',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ]),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Text.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(children: [
+                      TextSpan(
+                          text: 'Dont have an account?',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          )),
+                      TextSpan(
+                          text: ' Log in',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ]),
+                  )
                 ],
               ),
             ),

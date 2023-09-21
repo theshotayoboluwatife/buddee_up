@@ -28,6 +28,7 @@ dependencies:
   pin_code_fields: ^8.0.1
   dotted_border: ^2.0.0+3
   http: ^1.1.0
+  chatview: ^1.3.1
 
 
 dev_dependencies:
@@ -58,48 +59,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - "assets/images/buddee_up_logo.png"
-    - "assets/images/Ellipse3.png"
-    - "assets/images/Frame3.png"
-    - "assets/images/Frame4.png"
-    - "assets/images/Ellipse4.png"
-    - "assets/images/Ellipse3.svg"
-    - "assets/images/Frame3.svg"
-    - "assets/images/flat-color-icons_google.png"
-    - "assets/images/logos_facebook.png"
-    - "assets/images/instagram1.png"
-    - "assets/images/User1.png"
-    - "assets/images/User2.png"
-    - "assets/images/ri_compass-discover-fill.png"
-    - "assets/images/mi_filter.png"
-    - "assets/images/photo.png"
-    - "assets/images/photo.png"
-    - "assets/images/photo1.png"
-    - "assets/images/photo2.png"
-    - "assets/images/photo3.png"
-    - "assets/images/photo4.png"
-    - "assets/images/buddee_up_splash_logo.png"
-    - "assets/images/buddeeup_splash.png"
-    - "assets/images/green status.png"
-    - "assets/images/person1.jpeg"
-    - "assets/images/person2.jpeg"
-    - "assets/images/person3.jpeg"
-    - "assets/images/person4.jpeg"
-    - "assets/images/person5.jpeg"
-    - "assets/images/cancel.png"
-    - "assets/images/ps_tribe.jpg"
-    - "assets/images/carbon_friendship.jpg"
-    - "assets/images/annabelle.png"
-    - "assets/images/cafetalksImage.png"
-    - "assets/images/profile_info1.png"
-    - "assets/images/multilang.png"
-    - "assets/images/fa-solid_mask.png"
-    - "assets/images/material-symbols_ecg-heart.png"
-    - "assets/images/ion_speedometer.png"
-    - "assets/images/prof1.png"
-    - "assets/images/prof2.png"
-    - "assets/images/prof3.png"
-    - "assets/images/videocall_picture.jpeg"
+    - "assets/images/"
+    - "assets/dps/"
 
 
 

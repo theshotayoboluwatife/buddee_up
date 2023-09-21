@@ -24,9 +24,12 @@ class _SignInState extends State<SignIn> {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              Color.fromRGBO(227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
-              Color.fromRGBO(196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+              Color.fromRGBO(
+                  227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
+              Color.fromRGBO(
+                  196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
+              Color.fromRGBO(
+                  163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
         ),
@@ -35,23 +38,25 @@ class _SignInState extends State<SignIn> {
           children: [
             SafeArea(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/buddee_up_logo.png",
-                      height: 50,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const CustomText(
-                      text: "BUDDEEUP",
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                    )
-                  ],
-                )),
-            const SizedBox(height: 30,),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/buddee_up_logo.png",
+                  height: 50,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                const CustomText(
+                  text: "BUDDEEUP",
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
+                )
+              ],
+            )),
+            const SizedBox(
+              height: 30,
+            ),
             Expanded(
               child: ListView(
                 children: [
@@ -79,10 +84,10 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 20,
                   ),
-
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                    padding:
+                        const EdgeInsets.only(left: 60, top: 10, bottom: 10),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(40))),
@@ -110,14 +115,13 @@ class _SignInState extends State<SignIn> {
                               fontWeight: FontWeight.w500),
                         )),
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
                   CustomButton(
                     text: "Sign in",
                     onpress: () {
-                      Navigator.pushNamed(context, '/discover_screen');
+                      Navigator.pushNamed(context, '/home_screen');
                     },
                     hasBorder: true,
                     buttonColor: Colors.black,
@@ -176,8 +180,7 @@ class _SignInState extends State<SignIn> {
                       },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child:
-                        Image.asset("assets/images/logos_facebook.png"),
+                        child: Image.asset("assets/images/logos_facebook.png"),
                       ),
                       label: const CustomText(
                         text: "Sign In with Facebook",
@@ -192,36 +195,30 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                   ),
-
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   GestureDetector(
                     child: const Text.rich(
                       textAlign: TextAlign.center,
-                      TextSpan(
-                          children: [
-                            TextSpan(
-                                text: 'Dont have an account?',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                )
-                            ),
-                            TextSpan(
-                                text: ' Sign Up',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                )
-                            ),
-                          ]
-
-                      ),
-
-
+                      TextSpan(children: [
+                        TextSpan(
+                            text: 'Dont have an account?',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            )),
+                        TextSpan(
+                            text: ' Sign Up',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ]),
                     ),
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, "/signup");
                     },
                   )

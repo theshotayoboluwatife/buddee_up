@@ -34,6 +34,9 @@ class AppGridView extends StatelessWidget {
         itemBuilder: (_, i) => FutureBuilder(
           future: getUsers(),
           builder: (_, snapShot) {
+            if (snapShot.data == null) {
+              return Container();
+            }
             if (snapShot.connectionState == ConnectionState.waiting) {
               return const Padding(
                 padding: EdgeInsets.all(45.0),
