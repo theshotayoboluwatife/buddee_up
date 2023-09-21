@@ -7,54 +7,15 @@ import '../custom_widgets/custom_text.dart';
 class AccountRecovery extends StatelessWidget {
   AccountRecovery({Key? key}) : super(key: key);
 
-  TextEditingController _textController = TextEditingController();
+final  TextEditingController _textController = TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SafeArea(
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () {},
-                      iconSize: 40,
-                      icon: Icon(Icons.arrow_back_outlined),
-                      color: Colors.white,
-                    ))),
-            CustomText(
-              text: "Account recovery",
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-            ),
-            Spacer(),
-            CustomTextField(fieldName: "Your email address" , myController: _textController),
-            SizedBox(
-              height: 20,
-            ),
-            CustomText(
-              text:
-              "we’ll email you with a link that will instantly recover your account",
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              textAlign: TextAlign.center,
-            ),
-            Spacer(),
-            CustomButton(
-              text: "CONTINUE",
-              onpress: () {},
-              textColor: Colors.black,
-            ),
-
-            //Spacer()
-          ],
-        ),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -64,6 +25,45 @@ class AccountRecovery extends StatelessWidget {
               Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
+        ),
+        child: Column(
+          children: [
+            SafeArea(
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      onPressed: () {},
+                      iconSize: 40,
+                      icon: const Icon(Icons.arrow_back_outlined),
+                      color: Colors.white,
+                    ))),
+            const CustomText(
+              text: "Account recovery",
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
+            ),
+            const Spacer(),
+            CustomTextField(fieldName: "Your email address" , myController: _textController),
+            const SizedBox(
+              height: 20,
+            ),
+            const CustomText(
+              text:
+              "we’ll email you with a link that will instantly recover your account",
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              textAlign: TextAlign.center,
+            ),
+            const Spacer(),
+            CustomButton(
+              text: "CONTINUE",
+              onpress: () {},
+              textColor: Colors.black,
+            ),
+
+            //Spacer()
+          ],
         ),
       ),
     );

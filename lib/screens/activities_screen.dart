@@ -9,7 +9,18 @@ class ActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromRGBO(227, 127, 236, 0.96),
+              Color.fromRGBO(196, 32, 210, 0.96),
+              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+            ],
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -20,31 +31,20 @@ class ActivitiesScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.clear),
+                      icon: const Icon(Icons.clear),
                       color: Colors.white,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:24.0, left: 8),
+                    const Padding(
+                      padding: EdgeInsets.only(top:24.0, left: 8),
                       child: CustomText(text: "Activities", fontSize: 36, fontWeight: FontWeight.w600,),
                     ),
                   ]),
             ),
 
-            Spacer(),
+            const Spacer(),
             CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context, "/sexual_preference_screen");}, width: double.infinity,buttonColor: Colors.white,),
-            SizedBox(height: 20,)
+            const SizedBox(height: 20,)
           ],
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              Color.fromRGBO(227, 127, 236, 0.96),
-              Color.fromRGBO(196, 32, 210, 0.96),
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
-            ],
-          ),
         ),
       ),
     );

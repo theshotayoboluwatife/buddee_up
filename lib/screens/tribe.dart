@@ -14,7 +14,18 @@ class _TribeState extends State<Tribe> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+      gradient: LinearGradient(
+      begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          Color.fromRGBO(227, 127, 236, 0.96),
+          Color.fromRGBO(196, 32, 210, 0.96),
+          Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+        ],
+      ),
+    ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,76 +36,76 @@ class _TribeState extends State<Tribe> {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.arrow_back_outlined),
+                      icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:24.0, left: 8),
+                    const Padding(
+                      padding: EdgeInsets.only(top:24.0, left: 8),
                       child: CustomText(text: "Tribe", fontSize: 36, fontWeight: FontWeight.w600,),
                     ),
                   ]),
             ),
-            SizedBox(height: 60,),
+            const SizedBox(height: 60,),
             Padding(
-              padding: EdgeInsets.only(left:12),
+              padding: const EdgeInsets.only(left:12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(text: "Select Tribe", fontSize: 16, fontWeight: FontWeight.w400,),
-                  SizedBox(height: 10,),
+                  const CustomText(text: "Select Tribe", fontSize: 16, fontWeight: FontWeight.w400,),
+                  const SizedBox(height: 10,),
                   DecoratedBox(
                       decoration: BoxDecoration(
                           color:Colors.white,
                           borderRadius: BorderRadius.circular(30),
                       ),
                       child:Padding(
-                          padding: EdgeInsets.only(left:30, right:30),
+                          padding: const EdgeInsets.only(left:30, right:30),
                           child:
                           DropdownButton(
                             value: "Clean cut",
-                            items: [
+                            items: const [
                               DropdownMenuItem(
-                                child: Text("Scruffy"),
                                 value: "Scruffy",
+                                child: Text("Scruffy"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Clean cut"),
                                 value: "Clean cut",
+                                child: Text("Clean cut"),
                               ),
                               DropdownMenuItem(
-                                  child: Text("Metro"),
-                                  value: "Metro"
+                                  value: "Metro",
+                                  child: Text("Metro")
                               ),
                               DropdownMenuItem(
-                                child: Text("Casual"),
                                 value: "Casual",
+                                child: Text("Casual"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Grunge"),
                                 value: "Grunge",
+                                child: Text("Grunge"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Cowboy"),
                                 value: "Cowboy",
+                                child: Text("Cowboy"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Geek"),
                                 value: "Geek",
+                                child: Text("Geek"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Gamer"),
                                 value: "Gamer",
+                                child: Text("Gamer"),
                               ),
 
                             ],
                             onChanged: (value){
                             },
-                            icon: Padding(
+                            icon: const Padding(
                                 padding: EdgeInsets.only(left:20),
                                 child:Icon(Icons.keyboard_arrow_down_outlined,)
                             ),
                             iconEnabledColor: Colors.black,
-                            style: TextStyle(  //te
+                            style: const TextStyle(  //te
                                 color: Colors.black,
                                 fontSize: 20
                             ),
@@ -109,22 +120,11 @@ class _TribeState extends State<Tribe> {
                 ],
               ) ,),
 
-            Spacer(),
+            const Spacer(),
             CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context, "/body_type_screen");}, width: double.infinity,buttonColor: Colors.white,),
-            SizedBox(height: 20,)
+            const SizedBox(height: 20,)
           ],
         ),
-        decoration: BoxDecoration(
-      gradient: LinearGradient(
-      begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-        colors: [
-          Color.fromRGBO(227, 127, 236, 0.96),
-          Color.fromRGBO(196, 32, 210, 0.96),
-          Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
-        ],
-      ),
-    ),
       ),
     );
   }

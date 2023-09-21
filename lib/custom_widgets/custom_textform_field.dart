@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Container(
         width: 500,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
          // shape:BoxShape.circle
         ),
         alignment: Alignment.bottomRight,
@@ -35,6 +35,7 @@ class CustomTextFormField extends StatelessWidget {
               } else {
                 null;
               }
+              return null;
             },
             controller: myController,
             decoration: InputDecoration(

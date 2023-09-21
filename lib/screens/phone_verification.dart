@@ -11,65 +11,8 @@ class PhoneVerification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SafeArea(
-              child: Row(
-
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.keyboard_backspace_outlined, size: 30),
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CustomText(
-                    text: "Phone verification",
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-
-            ClipRRect(
-              child: IntlPhoneField(
-                  decoration: InputDecoration(
-                        hintText: "Enter your mobile number",
-                        counterText: '',
-                        border:  InputBorder.none,
-                        filled: true,
-                        fillColor: Colors.white, // Background color
-                      ),
-                      initialCountryCode: 'US',
-                      onChanged: (PhoneNumber phoneNumber) {
-
-                      },
-              ),
-               borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            CustomText(
-              text:
-                  "When you tap Continue, BUDDEEUP will send a verification code. Message and data rates may apply. The verified phone number can be used to login. Learn what happens when your number changes",
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
-            ),
-            SizedBox(height: 50,),
-            CustomButton(text: "CONTINUE", onpress: (){
-              Navigator.pushNamed(context, '/otp_verification');
-            }, buttonColor: Colors.white, textColor: Colors.black,),
-          ],
-        ),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -82,6 +25,63 @@ class PhoneVerification extends StatelessWidget {
               // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
+        ),
+        child: Column(
+          children: [
+            SafeArea(
+              child: Row(
+
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.keyboard_backspace_outlined, size: 30),
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const CustomText(
+                    text: "Phone verification",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: IntlPhoneField(
+                  decoration: const InputDecoration(
+                        hintText: "Enter your mobile number",
+                        counterText: '',
+                        border:  InputBorder.none,
+                        filled: true,
+                        fillColor: Colors.white, // Background color
+                      ),
+                      initialCountryCode: 'US',
+                      onChanged: (PhoneNumber phoneNumber) {
+
+                      },
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const CustomText(
+              text:
+                  "When you tap Continue, BUDDEEUP will send a verification code. Message and data rates may apply. The verified phone number can be used to login. Learn what happens when your number changes",
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+            ),
+            const SizedBox(height: 50,),
+            CustomButton(text: "CONTINUE", onpress: (){
+              Navigator.pushNamed(context, '/otp_verification');
+            }, buttonColor: Colors.white, textColor: Colors.black,),
+          ],
         ),
       ),
     );

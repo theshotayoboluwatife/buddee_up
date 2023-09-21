@@ -1,7 +1,6 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -25,38 +24,9 @@ class WelcomeScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SafeArea(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButton(onPressed: (){}, icon: Icon(Icons.close), color: Colors.white, ),
-                  SizedBox(width: (size.width/4) ,),
-                  Image(image: AssetImage("assets/images/buddee_up_logo.png"), width:87, height: 87)
-                ],
-              ),
-            ),
-            SizedBox(height: 20,),
-            MarkdownBody(
-              data: outlineText,
-              styleSheet: MarkdownStyleSheet(
-                h1: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.w800),
-                h2: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w800),
-                p: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.w300),
-            ),
-            ),
-            Spacer(),
-            CustomButton(text: "I AGREE", textColor: Colors.black, onpress: (){ Navigator.pushNamed(context, "/profile_screen");}),
-            SizedBox(height: 20,),
-          ],
-        )
-        ,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -67,6 +37,35 @@ class WelcomeScreen extends StatelessWidget {
             ],
           ),
         ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SafeArea(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.close), color: Colors.white, ),
+                  SizedBox(width: (size.width/4) ,),
+                  const Image(image: AssetImage("assets/images/buddee_up_logo.png"), width:87, height: 87)
+                ],
+              ),
+            ),
+            const SizedBox(height: 20,),
+            MarkdownBody(
+              data: outlineText,
+              styleSheet: MarkdownStyleSheet(
+                h1: const TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.w800),
+                h2: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w800),
+                p: const TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.w300),
+            ),
+            ),
+            const Spacer(),
+            CustomButton(text: "I AGREE", textColor: Colors.black, onpress: (){ Navigator.pushNamed(context, "/profile_screen");}),
+            const SizedBox(height: 20,),
+          ],
+        )
+        ,
       ),
     );
   }

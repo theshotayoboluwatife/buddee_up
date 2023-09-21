@@ -20,146 +20,150 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
         backgroundColor: Colors.black,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_sharp),
+          icon: const Icon(Icons.arrow_back_ios_new_sharp),
           color: Colors.purpleAccent,
           onPressed: () {},
         ),
-        title: CustomText(
+        title: const CustomText(
           text: "Email",
           fontWeight: FontWeight.w500,
           color: Colors.white,
           fontSize: 18,
         ),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 30,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0, bottom: 8),
+            child: CustomText(
+              text: "Email",
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, bottom: 8),
-              child: CustomText(
-                text: "Email",
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left:16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'johnsmith@gmail.com',
-                        hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
-                        border: InputBorder.none,
-                      ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(left:16, right: 16),
+
+            decoration: const BoxDecoration(
+                color: Color(0xFF141416),
+                border: Border(
+                    top: BorderSide(width: 1, color: Colors.white),
+                    bottom: BorderSide(width: 1, color: Colors.white))),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'johnsmith@gmail.com',
+                      hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                      border: InputBorder.none,
                     ),
                   ),
-                  Icon(Icons.check, color: Colors.blue,)
-                ],
-              ),
-
-              decoration: BoxDecoration(
+                ),
+                Icon(Icons.check, color: Colors.blue,)
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0, bottom: 24, top: 4),
+            child: CustomText(
+              text: "Your email is verified",
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: Colors.blue,
+            ),
+          ),
+          const SizedBox(height: 20,),
+          Container(
+            width: double.infinity,
+              decoration: const BoxDecoration(
                   color: Color(0xFF141416),
                   border: Border(
                       top: BorderSide(width: 1, color: Colors.white),
                       bottom: BorderSide(width: 1, color: Colors.white))),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, bottom: 24, top: 4),
-              child: CustomText(
-                text: "Your email is verified",
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: Colors.blue,
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/location_settings_screen");
-                },
-                child: CustomText(
-                  text: "Send email Verification",
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/location_settings_screen");
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // No border curves
                 ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // No border curves
-                  ),
 
-                  backgroundColor: Color(0xFF141416),
+                backgroundColor: const Color(0xFF141416),
 
-                  // Text color
-                ),
+                // Text color
               ),
-                decoration: BoxDecoration(
-                    color: Color(0xFF141416),
-                    border: Border(
-                        top: BorderSide(width: 1, color: Colors.white),
-                        bottom: BorderSide(width: 1, color: Colors.white)))
-
-            ),
-            Spacer(),
-            generateSwitchContainer('New messages', switchValue),
-            generateSwitchContainer('Promotions\nI want to receive news, updates and offers from BUDDEEUP', switchValue2),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, bottom: 8,top:8, right: 20),
-              child: CustomText(
-                text: "Control the emails you want to get - all of them, just the important stuff or the bare minimum. You can always unsubscribe at the bottom of any email",
+              child: const CustomText(
+                text: "Send email Verification",
+                color: Colors.white,
                 fontWeight: FontWeight.w500,
-                fontSize: 14,
+                fontSize: 15,
+              ),
+            )
+
+          ),
+          const Spacer(),
+          generateSwitchContainer('New messages', switchValue),
+          generateSwitchContainer('Promotions\nI want to receive news, updates and offers from BUDDEEUP', switchValue2),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0, bottom: 8,top:8, right: 20),
+            child: CustomText(
+              text: "Control the emails you want to get - all of them, just the important stuff or the bare minimum. You can always unsubscribe at the bottom of any email",
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+            ),
+          ),
+
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/push_notification_settings");
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // No border curves
+                ),
+                backgroundColor: const Color(0xFF141416),
+
+                // Text color
+              ),
+              child: const CustomText(
+                text: "Unsubscribe from all",
+                color: Colors.purpleAccent,
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
               ),
             ),
 
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              padding: EdgeInsets.all(20),
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/push_notification_settings");
-                },
-                child: CustomText(
-                  text: "Unsubscribe from all",
-                  color: Colors.purpleAccent,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // No border curves
-                  ),
-                  backgroundColor: Color(0xFF141416),
-
-                  // Text color
-                ),
-              ),
-
-            ),
-            Spacer(),
-          ],
-        ),
+          ),
+          const Spacer(),
+        ],
       ),
     );
   }
   Container generateSwitchContainer(String title, bool switchValue) {
     return Container(
         width: double.infinity,
-        padding: EdgeInsets.only(left:16, right: 16, top: 4,bottom: 4),
+        padding: const EdgeInsets.only(left:16, right: 16, top: 4,bottom: 4),
+        decoration: const BoxDecoration(
+            color: Color(0xFF141416),
+            border: Border(
+                top: BorderSide(width: 1, color: Colors.white),
+                bottom:
+                BorderSide(width: 1, color: Colors.white))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -184,12 +188,6 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
             ),
           ],
         ),
-        decoration: BoxDecoration(
-            color: Color(0xFF141416),
-            border: Border(
-                top: BorderSide(width: 1, color: Colors.white),
-                bottom:
-                BorderSide(width: 1, color: Colors.white))),
       );
   }
 

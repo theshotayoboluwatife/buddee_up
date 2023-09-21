@@ -12,9 +12,6 @@ Future<User> getUsers() async {
   var name = json.decode(response.body)['results'][0]['name']['first'];
   var imageUrl = json.decode(response.body)['results'][0]['picture']['medium'];
   var age = json.decode(response.body)['results'][0]['dob']['age'];
-  print("name:" + name);
-  print("image:" + imageUrl);
-  print("age:" + age.toString());
   User user = User(name, imageUrl, age);
   return user;
 }
@@ -28,80 +25,90 @@ class AppGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        itemCount: 12,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        itemCount: 15,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 150 / 180,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16),
         itemBuilder: (_, i) => FutureBuilder(
           future: getUsers(),
-          builder: (_, snapShot) => GridTile(
-            header: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 60),
-                Text(
-                  snapShot.data!.age.toString()[1] + "mi",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+          builder: (_, snapShot) {
+            if (snapShot.connectionState == ConnectionState.waiting) {
+              return const Padding(
+                padding: EdgeInsets.all(45.0),
+                child: CircularProgressIndicator(
+                  color: Colors.purple,
                 ),
-                Text(
-                  snapShot.data!.name + ", " + snapShot.data!.age.toString(),
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            footer: ClipRect(
-              clipBehavior: Clip.hardEdge,
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(.2),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
+              );
+            }
+            return GridTile(
+              header: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 60),
+                  Text(
+                    "${snapShot.data!.age.toString()[1]}mi",
+                    style: const TextStyle(
+                      color: Colors.white,
                     ),
                   ),
-                  height: 30,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      FaIcon(
-                        FontAwesomeIcons.x,
-                        size: 12,
-                        color: Colors.white,
+                  Text(
+                    "${snapShot.data!.name}, ${snapShot.data!.age}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              footer: ClipRect(
+                clipBehavior: Clip.hardEdge,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(.2),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
                       ),
-                      Container(
-                        height: 30,
-                        width: 2,
-                        color: Colors.white,
-                      ),
-                      FaIcon(
-                        FontAwesomeIcons.solidHeart,
-                        color: Colors.white,
-                        size: 12,
-                      ),
-                    ],
+                    ),
+                    height: 30,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.x,
+                          size: 12,
+                          color: Colors.white,
+                        ),
+                        Container(
+                          height: 30,
+                          width: 2,
+                          color: Colors.white,
+                        ),
+                        const FaIcon(
+                          FontAwesomeIcons.solidHeart,
+                          color: Colors.white,
+                          size: 12,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: NetworkImage(snapShot.data!.imageUrl),
-                  fit: BoxFit.contain,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    image: NetworkImage(snapShot.data!.imageUrl),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

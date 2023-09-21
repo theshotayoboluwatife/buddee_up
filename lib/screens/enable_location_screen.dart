@@ -11,74 +11,8 @@ class EnableLocation extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SafeArea(
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () {},
-                      iconSize: 40,
-                      icon: Icon(Icons.arrow_back_outlined),
-                      color: Colors.white,
-                    ))),
-            SizedBox(height: 30,),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Positioned(child: Image.asset("assets/images/Ellipse3.png")),
-                Positioned(
-                  child: Image.asset("assets/images/Frame3.png"),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomText(
-              text: "Enable Location",
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomText(
-              text:
-                  "You'll need to enable your location in order ti use BUDDEEUP",
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              textAlign: TextAlign.center,
-            ),
-            Spacer(),
-            CustomButton(
-              text: "ALLOW LOCATION",
-              onpress: () {
-                Navigator.pushNamed(context, "/keep_me_posted_screen");
-              },
-              textColor: Colors.black,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  text: "TELL ME MORE",
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down_outlined), color: Colors.white,
-                iconSize: 30,)
-              ],
-            ),
-            //Spacer()
-          ],
-        ),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -88,6 +22,72 @@ class EnableLocation extends StatelessWidget {
               Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
+        ),
+        child: Column(
+          children: [
+            SafeArea(
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      onPressed: () {},
+                      iconSize: 40,
+                      icon: const Icon(Icons.arrow_back_outlined),
+                      color: Colors.white,
+                    ))),
+            const SizedBox(height: 30,),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(child: Image.asset("assets/images/Ellipse3.png")),
+                Positioned(
+                  child: Image.asset("assets/images/Frame3.png"),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const CustomText(
+              text: "Enable Location",
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const CustomText(
+              text:
+                  "You'll need to enable your location in order ti use BUDDEEUP",
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              textAlign: TextAlign.center,
+            ),
+            const Spacer(),
+            CustomButton(
+              text: "ALLOW LOCATION",
+              onpress: () {
+                Navigator.pushNamed(context, "/keep_me_posted_screen");
+              },
+              textColor: Colors.black,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CustomText(
+                  text: "TELL ME MORE",
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+                IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_drop_down_outlined), color: Colors.white,
+                iconSize: 30,)
+              ],
+            ),
+            //Spacer()
+          ],
         ),
       ),
     );

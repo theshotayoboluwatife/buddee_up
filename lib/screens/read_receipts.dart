@@ -19,94 +19,92 @@ class _ReadReceiptsSettingsState extends State<ReadReceiptsSettings> {
         backgroundColor: Colors.black,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_sharp),
+          icon: const Icon(Icons.arrow_back_ios_new_sharp),
           color: Colors.purpleAccent,
           onPressed: () {},
         ),
-        title: CustomText(
+        title: const CustomText(
           text: "Manage Read Receipts",
           fontWeight: FontWeight.w500,
           color: Colors.white,
           fontSize: 18,
         ),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: "Send Read Receipts",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                      ),
-                      Switch(
-                        value: switchValue,
-                        onChanged: (newValue) {
-                          setState(() {
-                            switchValue = newValue;
-                          });
-                        },
-                        activeTrackColor: Colors.purpleAccent,
-                        activeColor: Colors.white,
-                        inactiveTrackColor: Colors.black,
-                        inactiveThumbColor: Colors.white,
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xFF141416),
-                      border: Border(
-                          top: BorderSide(width: 1, color: Colors.white),
-                          bottom: BorderSide(width: 1, color: Colors.white))),
-                ),
-            Padding(padding: EdgeInsets.all(20.0),
-            child:
-              CustomText(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                text: "Turning this off will prevent any matches from activating Read Receipts in your conversation from this moment forward",
-              ),),
-
-            //Remember to Remove these 2 widgets. For prototype sake only
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              padding: EdgeInsets.all(20),
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/autoplay_videos_settings");
-                },
-                child: CustomText(
-                  text: "next",
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // No border curves
-                  ),
-                  backgroundColor: Color(0xFF141416),
-
-                  // Text color
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(
+                    color: Color(0xFF141416),
+                    border: Border(
+                        top: BorderSide(width: 1, color: Colors.white),
+                        bottom: BorderSide(width: 1, color: Colors.white))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const CustomText(
+                      text: "Send Read Receipts",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
+                    Switch(
+                      value: switchValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          switchValue = newValue;
+                        });
+                      },
+                      activeTrackColor: Colors.purpleAccent,
+                      activeColor: Colors.white,
+                      inactiveTrackColor: Colors.black,
+                      inactiveThumbColor: Colors.white,
+                    ),
+                  ],
                 ),
               ),
+          const Padding(padding: EdgeInsets.all(20.0),
+          child:
+            CustomText(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              text: "Turning this off will prevent any matches from activating Read Receipts in your conversation from this moment forward",
+            ),),
 
-            )
-          ],
-        ),
+          //Remember to Remove these 2 widgets. For prototype sake only
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/autoplay_videos_settings");
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // No border curves
+                ),
+                backgroundColor: const Color(0xFF141416),
+
+                // Text color
+              ),
+              child: const CustomText(
+                text: "next",
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+              ),
+            ),
+
+          )
+        ],
       ),
     );
   }

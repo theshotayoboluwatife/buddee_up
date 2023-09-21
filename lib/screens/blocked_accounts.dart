@@ -29,11 +29,11 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
           backgroundColor: Colors.black,
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.clear),
+            icon: const Icon(Icons.clear),
             color: Colors.white,
             onPressed: () {},
           ),
-          title: CustomText(
+          title: const CustomText(
             text: "Block Contacts",
             fontWeight: FontWeight.w500,
             color: Colors.white,
@@ -41,19 +41,19 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
           ),
           actions: [
             Container(
-                margin: EdgeInsets.only(left: 8, right: 8),
+                margin: const EdgeInsets.only(left: 8, right: 8),
                 child: IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   color: Colors.white,
                   onPressed: () {},
                 )),
             IconButton(
-              icon: Icon(Icons.more_horiz),
+              icon: const Icon(Icons.more_horiz),
               color: Colors.white,
               onPressed: () {},
             ),
           ],
-          bottom: TabBar(
+          bottom: const TabBar(
             labelColor: Colors.white,
             indicatorColor: Colors.white,
             unselectedLabelColor: Colors.white,
@@ -66,113 +66,109 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
         body: TabBarView(
           controller: _tabController,
           children: [
-            Container(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(16.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search_rounded,
-                          color: Colors.white,
+            Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(16.0),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search_rounded,
+                        color: Colors.white,
+                      ),
+                      hintText: 'Search for a name or number',
+                      hintStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
                         ),
-                        hintText: 'Search for a name or number',
-                        hintStyle: TextStyle(color: Colors.white),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0),
-                          ),
-                          borderSide: BorderSide(color: Colors.white, width: 4),
+                        borderSide: BorderSide(color: Colors.white, width: 4),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0),
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.purpleAccent,
-                            // Change this color to your desired color
-                            width:
-                                2.0, // Change this value to set the border width
-                          ),
+                        borderSide: BorderSide(
+                          color: Colors.purpleAccent,
+                          // Change this color to your desired color
+                          width:
+                              2.0, // Change this value to set the border width
                         ),
                       ),
                     ),
                   ),
-                  Spacer(),
-                  CustomText(
-                    text: "NO contacts found",
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                ),
+                const Spacer(),
+                const CustomText(
+                  text: "NO contacts found",
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16),
+                  child: CustomButton(
+                    text: 'IMPORT CONTACTS',
+                    onpress: () {
+                      Navigator.pushNamed(context, "/add_contacts_screen");
+                    },
+                    buttonColor: Colors.purpleAccent,
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16),
-                    child: CustomButton(
-                      text: 'IMPORT CONTACTS',
-                      onpress: () {
-                        Navigator.pushNamed(context, "/add_contacts_screen");
-                      },
-                      buttonColor: Colors.purpleAccent,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomText(
-                    text: "ADD MANUAL CONTACT",
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  Spacer()
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const CustomText(
+                  text: "ADD MANUAL CONTACT",
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                const Spacer()
+              ],
             ),
-            Container(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(16.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search_rounded,
-                          color: Colors.white,
+            Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(16.0),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search_rounded,
+                        color: Colors.white,
+                      ),
+                      hintText: 'Search for a name or number',
+                      hintStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
                         ),
-                        hintText: 'Search for a name or number',
-                        hintStyle: TextStyle(color: Colors.white),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0),
-                          ),
-                          borderSide: BorderSide(color: Colors.white, width: 4),
+                        borderSide: BorderSide(color: Colors.white, width: 4),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0),
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.purpleAccent,
-                            // Change this color to your desired color
-                            width:
-                                2.0, // Change this value to set the border width
-                          ),
+                        borderSide: BorderSide(
+                          color: Colors.purpleAccent,
+                          // Change this color to your desired color
+                          width:
+                              2.0, // Change this value to set the border width
                         ),
                       ),
                     ),
                   ),
-                  Spacer(),
-                  CustomText(
-                    text:
-                        "Users signed into BUDDEEUP with the\ncontact information you add here will be\nblocked",
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  Spacer()
-                ],
-              ),
+                ),
+                const Spacer(),
+                const CustomText(
+                  text:
+                      "Users signed into BUDDEEUP with the\ncontact information you add here will be\nblocked",
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                const Spacer()
+              ],
             ),
           ],
         ),
