@@ -82,7 +82,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                     iconSize: 35,
                   )),
               Positioned(
-                bottom: 35,
+                bottom: size.height * 0.06,
                 left: 20,
                 child: Container(
                   padding: EdgeInsets.all(10),

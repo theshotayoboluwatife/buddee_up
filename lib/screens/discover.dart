@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
+import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -109,7 +110,10 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   ],
                 ),
               ),
-              AppGridView()
+              AppGridView(),
+              Center(
+                child: CustomButton(text: 'Next screen',textColor: Colors.red, onpress: (){Navigator.pushNamed(context, "/cafe_talks_one");},),
+              )
             ],
           ),
         ),

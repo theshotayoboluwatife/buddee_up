@@ -12,6 +12,7 @@ import 'package:BuddeeUp/screens/edit_info.dart';
 import 'package:BuddeeUp/screens/email_verification_settings.dart';
 import 'package:BuddeeUp/screens/enable_location_screen.dart';
 import 'package:BuddeeUp/screens/ethnicity.dart';
+import 'package:BuddeeUp/screens/go_buddee_pro.dart';
 import 'package:BuddeeUp/screens/google_signin.dart';
 import 'package:BuddeeUp/screens/health_status.dart';
 import 'package:BuddeeUp/screens/keep_me_posted_screen.dart';
@@ -20,6 +21,7 @@ import 'package:BuddeeUp/screens/login_signup.dart';
 import 'package:BuddeeUp/screens/looking_for.dart';
 import 'package:BuddeeUp/screens/online_now_screen.dart';
 import 'package:BuddeeUp/screens/otp_verification.dart';
+import 'package:BuddeeUp/screens/phone_call.dart';
 import 'package:BuddeeUp/screens/phone_number_settings.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:BuddeeUp/screens/profile_screen.dart';
@@ -35,7 +37,10 @@ import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:BuddeeUp/screens/signup_screen.dart';
 import 'package:BuddeeUp/screens/tribe.dart';
 import 'package:BuddeeUp/screens/unsubscribe_mail.dart';
+import 'package:BuddeeUp/screens/user_profile_info.dart';
 import 'package:BuddeeUp/screens/username_settings.dart';
+import 'package:BuddeeUp/screens/video_call.dart';
+import 'package:BuddeeUp/screens/view_images.dart';
 import 'package:BuddeeUp/screens/welcome.dart';
 import 'package:BuddeeUp/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +103,12 @@ class App extends StatelessWidget {
           "/edit_info": (context) => EditInfo(),
           "/email_unsubscribe": (context) => EmailUnsubscribe(),
           "/cafe_talks_one": (context) => CafeTalksOne(),
+          "/user_profile_info": (context) => UserProfileInfo(),
+          "/view_image": (context) => ViewImage(),
+          "/video_call_screen": (context) => VideoCallScreen(),
+          "/voice_call_screen": (context) => PhoneCallScreen(),
+          "/user_profile": (context) => UserProfileInfo(),
+          "/go_pro_screen": (context) => UserProfileInfo(),
         },
         initialRoute: '/',
       ),
