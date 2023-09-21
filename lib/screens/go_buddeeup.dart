@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/screens/cafe_talks.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -55,6 +56,7 @@ class GoBuddeeUp extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                const SizedBox(width: 10),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -132,32 +134,120 @@ class GoBuddeeUp extends StatelessWidget {
                   image: AssetImage('assets/images/cafe.png'),
                 ),
               ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Text(
+                      "Cafe \n Talks ",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                    const Spacer(),
+                    Row(
+                      children: [
+                        const Text(
+                          "Take me to your favourite cafe \n3pm-6pm",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => const CafeTalks()),
+                          ),
+                          child: Container(
+                            height: 30,
+                            width: 75,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: const Center(
+                              child: Text('Join now'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Text(
+              'For you',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            const Text(
+              'Recommendation',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    "Fetishes / \n Groups",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                  Container(
+                    width: size.width / 2.3,
+                    height: 180,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/football.png'),
+                      ),
+                    ),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0XFFC420D2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Text(
+                          'Sports',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  Spacer(),
-                  Text(
-                    "Down for something spontaneous \n7pm-12pm",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                  const Spacer(),
+                  Container(
+                    width: size.width / 2.3,
+                    height: 180,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/meals.png'),
+                      ),
+                    ),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0XFFC420D2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Text(
+                          'Meals',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

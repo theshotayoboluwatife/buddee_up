@@ -1,6 +1,7 @@
 import 'package:BuddeeUp/screens/chat.dart';
 import 'package:BuddeeUp/screens/discover.dart';
 import 'package:BuddeeUp/screens/edit_profile.dart';
+import 'package:BuddeeUp/screens/go_buddee_pro.dart';
 import 'package:BuddeeUp/screens/go_buddeeup.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,10 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Chat(),
         GoBuddeeUp(),
         DiscoveryPage(),
-        Text(
-          'chat',
-          style: TextStyle(color: Colors.blue),
-        ),
+        GoPro(),
         EditProfile(),
       ]),
       // body: DiscoveryPage(),
