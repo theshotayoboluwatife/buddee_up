@@ -12,7 +12,6 @@ import 'package:BuddeeUp/screens/edit_info.dart';
 import 'package:BuddeeUp/screens/email_verification_settings.dart';
 import 'package:BuddeeUp/screens/enable_location_screen.dart';
 import 'package:BuddeeUp/screens/ethnicity.dart';
-import 'package:BuddeeUp/screens/go_buddee_pro.dart';
 import 'package:BuddeeUp/screens/google_signin.dart';
 import 'package:BuddeeUp/screens/health_status.dart';
 import 'package:BuddeeUp/screens/keep_me_posted_screen.dart';
@@ -65,11 +64,11 @@ class App extends StatelessWidget {
         title: "BuddeeUp",
         theme: CustomAppTheme.lightTheme,
         routes: {
-          '/': (context) => LoginSignUp(),
-          '/welcome': (context) => WelcomeScreen(),
-          '/signin': (context) => SignIn(),
-          '/signup': (context) => SignUp(),
-          '/discover_screen': (context) => DiscoverPage(),
+          '/': (context) => const LoginSignUp(),
+          '/welcome': (context) => const WelcomeScreen(),
+          '/signin': (context) => const SignIn(),
+          '/signup': (context) => const SignUp(),
+          '/discover_screen': (context) => const DiscoverPage(),
           '/account_recovery': (context) => AccountRecovery(),
           '/google_signin': (context) => GoogleSignIn(),
           '/phone_verification': (context) => PhoneVerification(),
@@ -109,6 +108,7 @@ class App extends StatelessWidget {
           "/voice_call_screen": (context) => PhoneCallScreen(),
           "/user_profile": (context) => UserProfileInfo(),
           "/go_pro_screen": (context) => UserProfileInfo(),
+
         },
         initialRoute: '/',
       ),

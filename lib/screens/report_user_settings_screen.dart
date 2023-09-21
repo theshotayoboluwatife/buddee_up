@@ -20,17 +20,17 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
       backgroundColor: Colors.black,
       body:
       Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
             Center(
               child: Container(
                 width: 150,
                 height: 150,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
                 child: ClipOval(
@@ -43,8 +43,8 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 5,),
-            Row(
+            const SizedBox(height: 5,),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomText(text: "Anabelle", fontWeight: FontWeight.w500, fontSize: 15, ),
@@ -52,11 +52,11 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
                 Icon(Icons.verified, color: Colors.purpleAccent ,)
               ],
             ),
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: "Unlock Private Album For Her", fontWeight: FontWeight.w500, fontSize: 15, ),
+                const CustomText(text: "Unlock Private Album For Her", fontWeight: FontWeight.w500, fontSize: 15, ),
                 Switch(
                   value: switchValue2,
                   onChanged: (newValue) {
@@ -71,11 +71,11 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: "Pin Chat", fontWeight: FontWeight.w500, fontSize: 15, ),
+                const CustomText(text: "Pin Chat", fontWeight: FontWeight.w500, fontSize: 15, ),
                 Switch(
                   value: switchValue3,
                   onChanged: (newValue) {
@@ -89,11 +89,11 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
                   inactiveThumbColor: Colors.white,
                 ),   ],
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: "Mute", fontWeight: FontWeight.w500, fontSize: 15, ),
+                const CustomText(text: "Mute", fontWeight: FontWeight.w500, fontSize: 15, ),
                 Switch(
                   value: switchValue2,
                   onChanged: (newValue) {
@@ -107,13 +107,13 @@ class _ReportUserScreenState extends State<ReportUserScreen> {
                   inactiveThumbColor: Colors.white,
                 ),   ],
             ),
-            SizedBox(height: 10,),
-            CustomText(text: "Clear Chat History", fontWeight: FontWeight.w500, fontSize: 15, ),
-            SizedBox(height: 10,),
-            CustomText(text: "Block", fontWeight: FontWeight.w500, fontSize: 15, ),
-            SizedBox(height: 20,),
-            CustomButton(text: "Report", onpress: (){Navigator.pushNamed(context, "/phone_number_settings");}, buttonColor: Color(0xFF141416), hasBorder: true,),
-            Spacer()
+            const SizedBox(height: 10,),
+            const CustomText(text: "Clear Chat History", fontWeight: FontWeight.w500, fontSize: 15, ),
+            const SizedBox(height: 10,),
+            const CustomText(text: "Block", fontWeight: FontWeight.w500, fontSize: 15, ),
+            const SizedBox(height: 20,),
+            CustomButton(text: "Report", onpress: (){Navigator.pushNamed(context, "/phone_number_settings");}, buttonColor: const Color(0xFF141416), hasBorder: true,),
+            const Spacer()
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'text_theme.dart';
 
 class CustomAppTheme {
@@ -11,8 +10,8 @@ class CustomAppTheme {
 
       brightness: Brightness.light,
       textTheme: CustomTextTheme.customTextTheme,
-      appBarTheme: AppBarTheme(),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(),
+      appBarTheme: const AppBarTheme(),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(),
       elevatedButtonTheme:
       ElevatedButtonThemeData(style: ElevatedButton.styleFrom()),
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
@@ -37,8 +36,8 @@ class CustomAppTheme {
   ThemeData(
     //  primarySwatch:Colors.green,
       textTheme: CustomTextTheme.customTextTheme,
-      appBarTheme: AppBarTheme(),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(),
+      appBarTheme: const AppBarTheme(),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(),
       elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom()),
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       useMaterial3: true,
@@ -61,8 +60,8 @@ class CustomAppTheme {
     //primarySwatch: Colors.green,
       brightness: Brightness.light,
       textTheme: CustomTextTheme.customTextTheme,
-      appBarTheme: AppBarTheme(),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(),
+      appBarTheme: const AppBarTheme(),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(),
       elevatedButtonTheme:
       ElevatedButtonThemeData(style: ElevatedButton.styleFrom()),
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),

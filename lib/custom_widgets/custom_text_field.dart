@@ -17,24 +17,24 @@ class CustomTextField extends StatelessWidget {
       alignment: Alignment.center,
       child: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
 
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: TextField(
-            style: TextStyle(color: Colors.white
+            style: const TextStyle(color: Colors.white
             ),
             controller: myController,
             decoration: InputDecoration(
               hintText: fieldName,
-              hintStyle: TextStyle(color: Colors.white54),
-              enabledBorder: UnderlineInputBorder(
+              hintStyle: const TextStyle(color: Colors.white54),
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.white,
                 ),
               ),
-              focusedBorder: UnderlineInputBorder(
+              focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.white,
                 ),

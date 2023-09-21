@@ -10,43 +10,8 @@ class SexType extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SafeArea(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_back_outlined),
-                  color: Colors.white,
-                ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:24.0, left: 8),
-                      child: CustomText(text: "Sex", fontSize: 36, fontWeight: FontWeight.w600,),
-                    ),
-              ]),
-            ),
-            Spacer(),
-            CustomButton(text: "Male", onpress: (){}, textColor: Colors.black,),
-            SizedBox(height: 20),
-            CustomButton(text: "Trans Female", onpress: (){}, textColor: Colors.black,),
-            SizedBox(height: 20),
-            CustomButton(text: "Trans Male", onpress: (){}, textColor: Colors.black,),
-            Spacer(),
-            Row(
-              children: [
-                Checkbox(value: true, onChanged: null),
-                CustomText(text: "Show my gender on my profile", fontWeight: FontWeight.w400)
-              ],
-            ),
-            CustomButton(text: "CONTINUE", onpress: ()=>Navigator.pushNamed(context, '/tribe_screen'),textColor: Colors.black,),
-            SizedBox(height: 20)
-          ],
-        ),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -56,6 +21,41 @@ class SexType extends StatelessWidget {
               Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
+        ),
+        child: Column(
+          children: [
+            SafeArea(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_back_outlined),
+                  color: Colors.white,
+                ),
+                    const Padding(
+                      padding: EdgeInsets.only(top:24.0, left: 8),
+                      child: CustomText(text: "Sex", fontSize: 36, fontWeight: FontWeight.w600,),
+                    ),
+              ]),
+            ),
+            const Spacer(),
+            CustomButton(text: "Male", onpress: (){}, textColor: Colors.black,),
+            const SizedBox(height: 20),
+            CustomButton(text: "Trans Female", onpress: (){}, textColor: Colors.black,),
+            const SizedBox(height: 20),
+            CustomButton(text: "Trans Male", onpress: (){}, textColor: Colors.black,),
+            const Spacer(),
+            const Row(
+              children: [
+                Checkbox(value: true, onChanged: null),
+                CustomText(text: "Show my gender on my profile", fontWeight: FontWeight.w400)
+              ],
+            ),
+            CustomButton(text: "CONTINUE", onpress: ()=>Navigator.pushNamed(context, '/tribe_screen'),textColor: Colors.black,),
+            const SizedBox(height: 20)
+          ],
         ),
       ),
 

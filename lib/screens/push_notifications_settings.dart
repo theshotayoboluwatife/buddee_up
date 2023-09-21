@@ -22,23 +22,23 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
         backgroundColor: Colors.black,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_sharp),
+          icon: const Icon(Icons.arrow_back_ios_new_sharp),
           color: Colors.purpleAccent,
           onPressed: () {},
         ),
-        title: CustomText(
+        title: const CustomText(
           text: "Push notifications",
           fontWeight: FontWeight.w500,
           color: Colors.white,
           fontSize: 18,
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
 
@@ -47,30 +47,30 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
             generateNotifContainer('In-app vibrations', ''),
             generateNotifContainer('In-app sounds', ''),
             //Remember to Remove these 2 widgets, for prototype sake only
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, "/edit_info");
                 },
-                child: CustomText(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero, // No border curves
+                  ),
+                  backgroundColor: const Color(0xFF141416),
+
+                  // Text color
+                ),
+                child: const CustomText(
                   text: "next",
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // No border curves
-                  ),
-                  backgroundColor: Color(0xFF141416),
-
-                  // Text color
                 ),
               ),
 
@@ -84,7 +84,12 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
   Container generateNotifContainer(String title, String subtitle) {
     return Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(
+                    color: Color(0xFF141416),
+                    border: Border(
+                        top: BorderSide(width: 1, color: Colors.white),
+                        bottom: BorderSide(width: 1, color: Colors.white))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -117,11 +122,6 @@ class _PushNotificationSettingsState extends State<PushNotificationSettings> {
                     ),
                   ],
                 ),
-                decoration: BoxDecoration(
-                    color: Color(0xFF141416),
-                    border: Border(
-                        top: BorderSide(width: 1, color: Colors.white),
-                        bottom: BorderSide(width: 1, color: Colors.white))),
               );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/dotted_image_card.dart';
-import 'package:BuddeeUp/screens/ethnicity.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
@@ -46,19 +44,19 @@ class _EditInfoState extends State<EditInfo>
           backgroundColor: Colors.black,
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.clear),
+            icon: const Icon(Icons.clear),
             color: Colors.white,
             onPressed: () {},
           ),
-          title: CustomText(
+          title: const CustomText(
             text: "Edit Info",
             fontWeight: FontWeight.w500,
             color: Colors.white,
             fontSize: 18,
           ),
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.only(right: 24.0),
+              padding: EdgeInsets.only(right: 24.0),
               child: CustomText(
                 text: "Done",
                 fontWeight: FontWeight.w500,
@@ -67,7 +65,7 @@ class _EditInfoState extends State<EditInfo>
               ),
             ),
           ],
-          bottom: TabBar(
+          bottom: const TabBar(
             labelColor: Colors.purpleAccent,
             indicator: null,
             indicatorColor: Colors.transparent,
@@ -84,7 +82,7 @@ class _EditInfoState extends State<EditInfo>
             //first tab{Edit} content
             Container(
                 width: double.infinity,
-                padding: EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom: 8),
                 child: ListView(
                   children: [
                     Padding(
@@ -142,27 +140,36 @@ class _EditInfoState extends State<EditInfo>
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    CustomText(
+                    const CustomText(
                       text:
                           "Add a pic to get 4% closer to completing your profile and you may even get more Likes",
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ), 
-                    BulletHeading(title: "ABOUT ME"),
-                    SizedBox(
+                    const BulletHeading(title: "ABOUT ME"),
+                    const SizedBox(
                       height: 5,
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(4),
+                        padding: const EdgeInsets.all(4),
                         width: double.infinity,
-                        child: TextField(
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF141416),
+                            border: Border(
+                                top: BorderSide(width: 1, color: Colors.white),
+                                left: BorderSide(width: 1, color: Colors.white),
+                                right:
+                                    BorderSide(width: 1, color: Colors.white),
+                                bottom:
+                                    BorderSide(width: 1, color: Colors.white))),
+                        child: const TextField(
                           maxLines: null,
                           decoration: InputDecoration(
                             hintText: ' ',
@@ -173,27 +180,18 @@ class _EditInfoState extends State<EditInfo>
                           ),
                           style: TextStyle(color: Colors.white),
                         ),
-                        decoration: BoxDecoration(
-                            color: Color(0xFF141416),
-                            border: Border(
-                                top: BorderSide(width: 1, color: Colors.white),
-                                left: BorderSide(width: 1, color: Colors.white),
-                                right:
-                                    BorderSide(width: 1, color: Colors.white),
-                                bottom:
-                                    BorderSide(width: 1, color: Colors.white))),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    BulletHeading(title: "INTERESTS"),
-                    SizedBox(
+                    const BulletHeading(title: "INTERESTS"),
+                    const SizedBox(
                       height: 5,
                     ),
-                    SimpleRowContainer(title:  "Coffee Talks/Drinks/Happy Hours, Festival/Concerts, Fetishes/Groups, Buddeeup", icon: Icons.navigate_next),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
+                    const SimpleRowContainer(title:  "Coffee Talks/Drinks/Happy Hours, Festival/Concerts, Fetishes/Groups, Buddeeup", icon: Icons.navigate_next),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
                       child: CustomText(
                         text:
                             "Share your interests and keep your personal info private",
@@ -201,48 +199,48 @@ class _EditInfoState extends State<EditInfo>
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                    BulletHeading(title: "BUDDEEUP Proposition",),
-                    SizedBox(height: 5,),
-                    SimpleRowContainer(title: 'Propose BuddeeUp Proposition', icon:  Icons.navigate_next,),
-                    SizedBox(height: 30,),
-                    BulletHeading(title: "LIFESTYLE",),
-                    SizedBox(height: 5,),
-                    RowContainer(title: 'Relationship Status', option: 'Married', icon: Icons.people_alt,),
-                    RowContainer(title: 'Tribe', option: 'Clean Cut', icon: Icons.family_restroom,),
-                    RowContainer(title: 'Sexual Preferences', option: 'Bottom', icon: Icons.transgender,),
-                    RowContainer(title: 'Smoking', option: 'No', icon: Icons.smoking_rooms,),
-                    SizedBox(height:30),
-                    BulletHeading(title: "SEX",),
-                    SizedBox(height: 5,),
-                    SimpleRowContainer(title: 'Male', icon:  Icons.navigate_next,),
-                    SizedBox(height: 20,),
-                    BulletHeading(title: "BODY TYPE",),
-                    SizedBox(height: 5,),
-                    SimpleRowContainer(title: "Avg", icon: Icons.navigate_next),
-                    SizedBox(height: 20,),
-                    BulletHeading(title: "Ethnicity",),
-                    SizedBox(height: 5,),
-                    SimpleRowContainer(title: 'African-American', icon:  Icons.navigate_next,),
-                    SizedBox(height: 20,),
-                    BulletHeading(title: 'Height'),
-                    SizedBox(height: 5,),
-                    SimpleRowContainer(title: "5\'ft 0\"in", icon: Icons.keyboard_arrow_up),
-                    SizedBox(height: 20,),
-                    BulletHeading(title: 'Weight'),
-                    SimpleRowContainer(title: "130 lbs", icon: Icons.keyboard_arrow_up),
-                    SizedBox(height: 20,),
-                    BulletHeading(title: "GENDER",),
-                    SizedBox(height: 5,),
-                    SimpleRowContainer(title: "Man", icon: Icons.navigate_next),
-                    SizedBox(height: 20,),
-                    Row(
+                    const BulletHeading(title: "BUDDEEUP Proposition",),
+                    const SizedBox(height: 5,),
+                    const SimpleRowContainer(title: 'Propose BuddeeUp Proposition', icon:  Icons.navigate_next,),
+                    const SizedBox(height: 30,),
+                    const BulletHeading(title: "LIFESTYLE",),
+                    const SizedBox(height: 5,),
+                    const RowContainer(title: 'Relationship Status', option: 'Married', icon: Icons.people_alt,),
+                    const RowContainer(title: 'Tribe', option: 'Clean Cut', icon: Icons.family_restroom,),
+                    const RowContainer(title: 'Sexual Preferences', option: 'Bottom', icon: Icons.transgender,),
+                    const RowContainer(title: 'Smoking', option: 'No', icon: Icons.smoking_rooms,),
+                    const SizedBox(height:30),
+                    const BulletHeading(title: "SEX",),
+                    const SizedBox(height: 5,),
+                    const SimpleRowContainer(title: 'Male', icon:  Icons.navigate_next,),
+                    const SizedBox(height: 20,),
+                    const BulletHeading(title: "BODY TYPE",),
+                    const SizedBox(height: 5,),
+                    const SimpleRowContainer(title: "Avg", icon: Icons.navigate_next),
+                    const SizedBox(height: 20,),
+                    const BulletHeading(title: "Ethnicity",),
+                    const SizedBox(height: 5,),
+                    const SimpleRowContainer(title: 'African-American', icon:  Icons.navigate_next,),
+                    const SizedBox(height: 20,),
+                    const BulletHeading(title: 'Height'),
+                    const SizedBox(height: 5,),
+                    const SimpleRowContainer(title: "5'ft 0\"in", icon: Icons.keyboard_arrow_up),
+                    const SizedBox(height: 20,),
+                    const BulletHeading(title: 'Weight'),
+                    const SimpleRowContainer(title: "130 lbs", icon: Icons.keyboard_arrow_up),
+                    const SizedBox(height: 20,),
+                    const BulletHeading(title: "GENDER",),
+                    const SizedBox(height: 5,),
+                    const SimpleRowContainer(title: "Man", icon: Icons.navigate_next),
+                    const SizedBox(height: 20,),
+                    const Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 24.0),
+                          padding: EdgeInsets.only(left: 24.0),
                           child: CustomText(text: "MANAGE YOUR PROFILE", fontWeight: FontWeight.w500,fontSize: 15,),
                         ),
                         SizedBox(width: 5,),
@@ -252,10 +250,10 @@ class _EditInfoState extends State<EditInfo>
                         )
                       ],
                     ),
-                    SizedBox(height: 5,),
-                    generateSwitchContainer("Dont\'t show my age", switchValue),
-                    generateSwitchContainer("Dont\'t show my distance", switchValue2),
-                    generateSwitchContainer("Dont\'t show my religion", switchValue3),
+                    const SizedBox(height: 5,),
+                    generateSwitchContainer("Dont't show my age", switchValue),
+                    generateSwitchContainer("Dont't show my distance", switchValue2),
+                    generateSwitchContainer("Dont't show my religion", switchValue3),
                   ],
                 ),
             ),
@@ -271,7 +269,13 @@ class _EditInfoState extends State<EditInfo>
   Container generateSwitchContainer(String title, bool switchValue) {
     return Container(
                       width: double.infinity,
-                      padding: EdgeInsets.only(left:16, right: 16),
+                      padding: const EdgeInsets.only(left:16, right: 16),
+                      decoration: const BoxDecoration(
+                          color: Color(0xFF141416),
+                          border: Border(
+                              top: BorderSide(width: 1, color: Colors.white),
+                              bottom:
+                                  BorderSide(width: 1, color: Colors.white))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -294,12 +298,6 @@ class _EditInfoState extends State<EditInfo>
                           ),
                         ],
                       ),
-                      decoration: BoxDecoration(
-                          color: Color(0xFF141416),
-                          border: Border(
-                              top: BorderSide(width: 1, color: Colors.white),
-                              bottom:
-                                  BorderSide(width: 1, color: Colors.white))),
                     );
 
   }
@@ -315,15 +313,15 @@ class BulletHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
           child: Icon(
             Icons.circle,
             color: Colors.purpleAccent,
             size: 10,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
         CustomText(
@@ -347,7 +345,12 @@ class SimpleRowContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        padding: EdgeInsets.only(top:10,bottom: 10,right: 10, left: 24),
+        padding: const EdgeInsets.only(top:10,bottom: 10,right: 10, left: 24),
+        decoration: const BoxDecoration(
+            color: Color(0xFF141416),
+            border: Border(
+                top: BorderSide(width: 1, color: Colors.white),
+                bottom: BorderSide(width: 1, color: Colors.white))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -358,14 +361,9 @@ class SimpleRowContainer extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            Icon(icon, color: Color(0x99A3B0E0),)
+            Icon(icon, color: const Color(0x99A3B0E0),)
           ],
         ),
-        decoration: BoxDecoration(
-            color: Color(0xFF141416),
-            border: Border(
-                top: BorderSide(width: 1, color: Colors.white),
-                bottom: BorderSide(width: 1, color: Colors.white))),
       );
   }
 }
@@ -374,7 +372,7 @@ class RowContainer extends StatelessWidget {
   final String title;
   final String option;
   final IconData icon;
-   RowContainer({
+   const RowContainer({
     super.key, required this.title, required this.option, required this.icon,
   });
 
@@ -382,7 +380,13 @@ class RowContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
         width: double.infinity,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+            color: Color(0xFF141416),
+            border: Border(
+                top: BorderSide(width: 1, color: Colors.white),
+                bottom:
+                    BorderSide(width: 1, color: Colors.white))),
         child: Row(
           children: [
             Padding(
@@ -394,11 +398,11 @@ class RowContainer extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontSize: 12,
             ),
-            Spacer(),
+            const Spacer(),
             Row(
                   children: [
                     CustomText(text: option, fontSize: 12, fontWeight: FontWeight.w400,),
-                    Icon(
+                    const Icon(
                       Icons.navigate_next,
                       color: Color(0x99A3B0E0),
                     )
@@ -407,12 +411,6 @@ class RowContainer extends StatelessWidget {
 
           ],
         ),
-        decoration: BoxDecoration(
-            color: Color(0xFF141416),
-            border: Border(
-                top: BorderSide(width: 1, color: Colors.white),
-                bottom:
-                    BorderSide(width: 1, color: Colors.white))),
       );
   }
 }

@@ -9,7 +9,18 @@ class SexualPreferences  extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromRGBO(227, 127, 236, 0.96),
+              Color.fromRGBO(196, 32, 210, 0.96),
+              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+            ],
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -20,71 +31,71 @@ class SexualPreferences  extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.arrow_back_outlined),
+                      icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:24.0, left: 8),
+                    const Padding(
+                      padding: EdgeInsets.only(top:24.0, left: 8),
                       child: CustomText(text: "Sexual\nPreferences", fontSize: 36, fontWeight: FontWeight.w600,),
                     ),
                   ]),
             ),
-            SizedBox(height: 60,),
+            const SizedBox(height: 60,),
             Padding(
-              padding: EdgeInsets.only(left:12),
+              padding: const EdgeInsets.only(left:12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(text: "Select your sexual preference", fontSize: 16, fontWeight: FontWeight.w400,),
-                  SizedBox(height: 10,),
+                  const CustomText(text: "Select your sexual preference", fontSize: 16, fontWeight: FontWeight.w400,),
+                  const SizedBox(height: 10,),
                   DecoratedBox(
                       decoration: BoxDecoration(
                         color:Colors.white,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child:Padding(
-                          padding: EdgeInsets.only(left:30, right:30),
+                          padding: const EdgeInsets.only(left:30, right:30),
                           child:
                           DropdownButton(
                             value: "Top",
-                            items: [
+                            items: const [
                               DropdownMenuItem(
-                                child: Text("Top"),
                                 value: "Top",
+                                child: Text("Top"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Bottom"),
                                 value: "Bottom",
+                                child: Text("Bottom"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Verse"),
                                 value: "Verse",
+                                child: Text("Verse"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Top/Verse"),
                                 value: "Top/Verse",
+                                child: Text("Top/Verse"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Bottom/Verse"),
                                 value: "Bottom/Verse",
+                                child: Text("Bottom/Verse"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Asexual"),
                                 value: "Asexual",
+                                child: Text("Asexual"),
                               ),
                               DropdownMenuItem(
-                                child: Text("Bi"),
                                 value: "Bi",
+                                child: Text("Bi"),
                               ),
                             ],
                             onChanged: (value){
                             },
-                            icon: Padding(
+                            icon: const Padding(
                                 padding: EdgeInsets.only(left:20),
                                 child:Icon(Icons.keyboard_arrow_down_outlined,)
                             ),
                             iconEnabledColor: Colors.black,
-                            style: TextStyle(  //te
+                            style: const TextStyle(  //te
                                 color: Colors.black,
                                 fontSize: 20
                             ),
@@ -99,21 +110,10 @@ class SexualPreferences  extends StatelessWidget {
                 ],
               ) ,),
 
-            Spacer(),
+            const Spacer(),
             CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context, "/enable_location_screen");}, width: double.infinity,buttonColor: Colors.white,),
-            SizedBox(height: 20,)
+            const SizedBox(height: 20,)
           ],
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              Color.fromRGBO(227, 127, 236, 0.96),
-              Color.fromRGBO(196, 32, 210, 0.96),
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
-            ],
-          ),
         ),
       ),
     );

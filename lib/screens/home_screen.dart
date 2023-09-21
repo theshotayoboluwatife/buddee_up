@@ -16,10 +16,10 @@ class _HomeScreenState extends State<HomeScreen> {
   late int _currentIndex = 0;
 
   List pages=[
-    MessagePage(),
-    Friends(),
-    ForwardTab(),
-    AccountPage()
+    const MessagePage(),
+    const Friends(),
+    const ForwardTab(),
+    const AccountPage()
   ];
 
   void _onTap(int index){
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTap,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.message_sharp),
             label: 'Messages',
@@ -66,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
-        selectedIconTheme: IconThemeData(color: Colors.green),
-        unselectedIconTheme: IconThemeData(color: Colors.white),
+        selectedIconTheme: const IconThemeData(color: Colors.green),
+        unselectedIconTheme: const IconThemeData(color: Colors.white),
         unselectedItemColor: Colors.white,
         showUnselectedLabels: false,
         showSelectedLabels: false,

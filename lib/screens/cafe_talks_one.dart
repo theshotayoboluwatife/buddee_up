@@ -16,13 +16,13 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
     bool isBlurred = false;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Container(
+      body: SizedBox(
           height: double.infinity,
           child: Stack(
             children: [
               Container(
                   height: size.height * 0.4,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.purpleAccent,
                     borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(40),
@@ -34,7 +34,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                 child: IconButton(
                     onPressed: () {},
                     iconSize: 35,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.clear,
                       color: Colors.white,
                     )),
@@ -46,8 +46,8 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                     decoration: BoxDecoration(
                         color: Colors.purpleAccent[100],
                         borderRadius: BorderRadius.circular(10)),
-                    padding: EdgeInsets.all(16),
-                    child: CustomText(
+                    padding: const EdgeInsets.all(16),
+                    child: const CustomText(
                       text: "Cafe Talks",
                       color: Colors.black,
                       fontSize: 15,
@@ -57,7 +57,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
               Positioned(
                   top: 150,
                   left: 30,
-                  child: Container(
+                  child: SizedBox(
                       width: size.width * 0.85,
                       height: size.height * 0.75,
                       child: ClipRRect(
@@ -73,7 +73,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                   top: 160,
                   left: 40,
                   child: IconButton(
-                    icon: Icon(Icons.more_horiz, color: Colors.white),
+                    icon: const Icon(Icons.more_horiz, color: Colors.white),
                     onPressed: () {
                       setState(() {
                         isBlurred = !isBlurred;
@@ -85,7 +85,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                 bottom: size.height * 0.06,
                 left: 20,
                 child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   width: size.width * 0.9,
                   decoration: BoxDecoration(
                       color: Colors.black,
@@ -94,7 +94,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(children: [
+                      const Row(children: [
                         CustomText(
                           text: "Rohini   22",
                           fontWeight: FontWeight.bold,
@@ -111,26 +111,24 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomText(
+                          const CustomText(
                             text: "10 miles away",
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
                           ),
-                          Container(
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: CustomText(
-                                text: "Join now",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.purple),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.purple),
+                            child: const CustomText(
+                              text: "Join now",
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
                             ),
                           )
                         ],
                       ),
-                      Row(
+                      const Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(Icons.circle, color: Colors.green, size: 10),
@@ -156,30 +154,30 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                 ),
                 AnimatedOpacity(
                   opacity: isBlurred ? 1.0 : 0.0,
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(height: size.height*0.45,),
-                        Container(
+                        SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () { },
-                              child: CustomText(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.white,padding: const EdgeInsets.all(22),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  )
+                              ),
+                              child: const CustomText(
                                 text: "REPORT RACHEAL",
                                 fontWeight: FontWeight.w400,
                                 color: Colors.purpleAccent,
 
                               ),
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.white,padding: EdgeInsets.all(22),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
-                              ),
                             )),
-                        SizedBox(height: 10,),
-                        Container(
+                        const SizedBox(height: 10,),
+                        SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
@@ -187,16 +185,16 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                                   isBlurred = !isBlurred;
                                 });
                               },
-                              child: CustomText(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.white,padding: const EdgeInsets.all(22),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  )
+                              ),
+                              child: const CustomText(
                                 text: "CANCEL",
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
 
-                              ),
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.white,padding: EdgeInsets.all(22),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
                               ),
                             )),
                       ],
