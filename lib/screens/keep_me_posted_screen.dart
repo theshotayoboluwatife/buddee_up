@@ -66,7 +66,7 @@ class KeepMePosted extends StatelessWidget {
             CustomButton(
               text: "I WANT TO BE NOTIFIED",
               onpress: () {
-                Navigator.pushNamed(context, "/discover_screen");
+                Navigator.pushNamed(context, "/home_screen");
               },
               textColor: Colors.black,
             ),

@@ -1,9 +1,7 @@
+import 'package:BuddeeUp/screens/chat.dart';
+import 'package:BuddeeUp/screens/discover.dart';
 import 'package:flutter/material.dart';
-
-import 'account_page.dart';
-import 'forward.dart';
-import 'friends.dart';
-import 'message_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,69 +11,109 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late int _currentIndex = 0;
-
-  List pages=[
-    const MessagePage(),
-    const Friends(),
-    const ForwardTab(),
-    const AccountPage()
-  ];
-
-  void _onTap(int index){
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
+  PageController pageController = PageController(initialPage: 2);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: null,
-
-      body: pages[_currentIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTap,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_sharp),
-            label: 'Messages',
+      backgroundColor: Colors.black,
+      body: PageView(controller: pageController, children: const [
+        Chat(),
+        Text(
+          'chat',
+          style: TextStyle(color: Colors.blue),
+        ),
+        DiscoveryPage(),
+        Text(
+          'chat',
+          style: TextStyle(color: Colors.blue),
+        ),
+        Text(
+          'chat',
+          style: TextStyle(color: Colors.blue),
+        ),
+      ]),
+      // body: DiscoveryPage(),
+      bottomSheet: Container(
+        height: 85,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border.all(color: Colors.white, width: 1),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Friends',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail_outlined),
-            label: 'Home',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.forward),
-            label: 'Share',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Share',
-          ),
-        ],
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.white,
-        selectedIconTheme: const IconThemeData(color: Colors.green),
-        unselectedIconTheme: const IconThemeData(color: Colors.white),
-        unselectedItemColor: Colors.white,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  pageController.jumpToPage(0);
+                });
+              },
+              child: const Icon(
+                Icons.message_rounded,
+                size: 28,
+                color: Color(0XFF99A3B0),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  pageController.jumpToPage(1);
+                });
+              },
+              child: const Icon(
+                Icons.group,
+                size: 28,
+                color: Color(0XFF99A3B0),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  pageController.jumpToPage(2);
+                });
+              },
+              child: Container(
+                height: 58,
+                width: 58,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/navLogo.png'),
+                  ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  pageController.jumpToPage(3);
+                });
+              },
+              child: const FaIcon(
+                Icons.upload,
+                size: 28,
+                color: Color(0XFF99A3B0),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  pageController.jumpToPage(4);
+                });
+              },
+              child: const Icon(
+                Icons.person,
+                size: 28,
+                color: Color(0XFF99A3B0),
+              ),
+            ),
+          ],
+        ),
       ),
     );
-
-
   }
 }
-

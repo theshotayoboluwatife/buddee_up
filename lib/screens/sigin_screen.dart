@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
                   CustomButton(
                     text: "Sign in",
                     onpress: () {
-                      Navigator.pushNamed(context, '/phone_verification');
+                      Navigator.pushNamed(context, '/home_screen');
                     },
                     hasBorder: true,
                     buttonColor: Colors.black,
