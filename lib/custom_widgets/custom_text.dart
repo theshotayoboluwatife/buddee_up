@@ -9,6 +9,7 @@ class CustomText extends StatelessWidget {
     this.fontWeight = FontWeight.w100,
     this.textAlign = TextAlign.start,
   });
+
   final String text;
   final Color? color;
   final double fontSize;
@@ -17,15 +18,21 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      softWrap: true,
-      textAlign: textAlign,
-      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-          color: color,
-          fontWeight: fontWeight,
-          fontSize: fontSize,
-          height: 1),
+    return Container(
+        child: Text(
+          text,
+          softWrap: true,
+          textAlign: textAlign,
+          style: Theme
+              .of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(
+            color: color,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+          ),
+        )
     );
   }
 }

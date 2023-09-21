@@ -20,6 +20,7 @@ import 'package:BuddeeUp/screens/login_signup.dart';
 import 'package:BuddeeUp/screens/looking_for.dart';
 import 'package:BuddeeUp/screens/online_now_screen.dart';
 import 'package:BuddeeUp/screens/otp_verification.dart';
+import 'package:BuddeeUp/screens/phone_call.dart';
 import 'package:BuddeeUp/screens/phone_number_settings.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:BuddeeUp/screens/profile_screen.dart';
@@ -35,7 +36,10 @@ import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:BuddeeUp/screens/signup_screen.dart';
 import 'package:BuddeeUp/screens/tribe.dart';
 import 'package:BuddeeUp/screens/unsubscribe_mail.dart';
+import 'package:BuddeeUp/screens/user_profile_info.dart';
 import 'package:BuddeeUp/screens/username_settings.dart';
+import 'package:BuddeeUp/screens/video_call.dart';
+import 'package:BuddeeUp/screens/view_images.dart';
 import 'package:BuddeeUp/screens/welcome.dart';
 import 'package:BuddeeUp/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -66,38 +70,45 @@ class App extends StatelessWidget {
           '/signup': (context) => const SignUp(),
           '/home_screen': (context) => const HomeScreen(),
           '/account_recovery': (context) => AccountRecovery(),
-          '/google_signin': (context) => const GoogleSignIn(),
-          '/phone_verification': (context) => const PhoneVerification(),
-          '/otp_verification': (context) => const OTPVerification(),
-          '/profile_screen': (context) => const ProfileScreen(),
-          '/sex_type_screen': (context) => const SexType(),
-          '/tribe_screen': (context) => const Tribe(),
-          '/body_type_screen': (context) => const BodyType(),
-          '/ethnicity_screen': (context) => const Ethnicity(),
-          '/looking_for_screen': (context) => const LookingFor(),
-          "/relationship_status_screen": (context) => const RelationshipStatus(),
-          "/health_status_screen": (context) => const HealthStatus(),
-          "/activities_screen": (context) => const ActivitiesScreen(),
-          "/sexual_preference_screen": (context) => const SexualPreferences(),
-          "/enable_location_screen": (context) => const EnableLocation(),
-          "/keep_me_posted_screen": (context) => const KeepMePosted(),
-          "/report_user_screen": (context) => const ReportUserScreen(),
-          "/phone_number_settings": (context) => const PhoneNumberSettings(),
-          "/connected_accounts": (context) => const ConnectedAccountScreen(),
-          "/email_verification_settings": (context) => const EmailVerificationSettings(),
-          "/location_settings_screen": (context) => const LocationSettings(),
-          "/show_me_screen": (context) =>const ShowMeScreen(),
-          "/blocked_contacts_screen": (context) =>const BlockedContactsScreen(),
-          "/add_contacts_screen": (context) =>const AddContactsScreen(),
-          "/read_receipts_settings": (context) =>const ReadReceiptsSettings(),
-          "/autoplay_videos_settings": (context) =>const AutoplaySettings(),
-          "/online_now_screen": (context) =>const OnlineNowScreen(),
-          "/recently_active_status": (context) =>const RecentlyActiveStatus(),
-          "/username_settings": (context) =>const UsernameSettings(),
-          "/push_notification_settings": (context) =>const PushNotificationSettings(),
-          "/edit_info": (context) => const EditInfo(),
-          "/email_unsubscribe": (context) => const EmailUnsubscribe(),
-          "/cafe_talks_one": (context) => const CafeTalksOne(),
+          '/google_signin': (context) => GoogleSignIn(),
+          '/phone_verification': (context) => PhoneVerification(),
+          '/otp_verification': (context) => OTPVerification(),
+          '/profile_screen': (context) => ProfileScreen(),
+          '/sex_type_screen': (context) => SexType(),
+          '/tribe_screen': (context) => Tribe(),
+          '/body_type_screen': (context) => BodyType(),
+          '/ethnicity_screen': (context) => Ethnicity(),
+          '/looking_for_screen': (context) => LookingFor(),
+          "/relationship_status_screen": (context) => RelationshipStatus(),
+          "/health_status_screen": (context) => HealthStatus(),
+          "/activities_screen": (context) => ActivitiesScreen(),
+          "/sexual_preference_screen": (context) => SexualPreferences(),
+          "/enable_location_screen": (context) => EnableLocation(),
+          "/keep_me_posted_screen": (context) => KeepMePosted(),
+          "/report_user_screen": (context) => ReportUserScreen(),
+          "/phone_number_settings": (context) => PhoneNumberSettings(),
+          "/connected_accounts": (context) => ConnectedAccountScreen(),
+          "/email_verification_settings": (context) => EmailVerificationSettings(),
+          "/location_settings_screen": (context) => LocationSettings(),
+          "/show_me_screen": (context) =>ShowMeScreen(),
+          "/blocked_contacts_screen": (context) =>BlockedContactsScreen(),
+          "/add_contacts_screen": (context) =>AddContactsScreen(),
+          "/read_receipts_settings": (context) =>ReadReceiptsSettings(),
+          "/autoplay_videos_settings": (context) =>AutoplaySettings(),
+          "/online_now_screen": (context) =>OnlineNowScreen(),
+          "/recently_active_status": (context) =>RecentlyActiveStatus(),
+          "/username_settings": (context) =>UsernameSettings(),
+          "/push_notification_settings": (context) =>PushNotificationSettings(),
+          "/edit_info": (context) => EditInfo(),
+          "/email_unsubscribe": (context) => EmailUnsubscribe(),
+          "/cafe_talks_one": (context) => CafeTalksOne(),
+          "/user_profile_info": (context) => UserProfileInfo(),
+          "/view_image": (context) => ViewImage(),
+          "/video_call_screen": (context) => VideoCallScreen(),
+          "/voice_call_screen": (context) => PhoneCallScreen(),
+          "/user_profile": (context) => UserProfileInfo(),
+          "/go_pro_screen": (context) => UserProfileInfo(),
+
         },
         initialRoute: '/',
       ),
