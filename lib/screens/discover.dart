@@ -17,7 +17,7 @@ class DiscoveryPage extends StatelessWidget {
     final statusData = Provider.of<Status>(context).statusData;
 
     return SafeArea(
-      key: ValueKey('value1'),
+      key: const ValueKey('value1'),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
         child: Column(
@@ -40,6 +40,8 @@ class DiscoveryPage extends StatelessWidget {
                   children: [
                     //travel pass text
                     Container(
+
+                      padding: EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: const Color(0XFF4E1753).withOpacity(.94),

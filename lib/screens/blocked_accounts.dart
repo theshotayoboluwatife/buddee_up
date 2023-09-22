@@ -11,11 +11,9 @@ class BlockedContactsScreen extends StatefulWidget {
 }
 
 class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
-  late TabController _tabController;
 
   @override
   void dispose() {
-    _tabController.dispose();
     super.dispose();
   }
 
@@ -66,7 +64,6 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
           ),
         ),
         body: TabBarView(
-          controller: _tabController,
           children: [
             Column(
               children: [

@@ -1,11 +1,11 @@
-
-import 'package:BuddeeUp/screens/edit_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_widgets/custom_text.dart';
 
 class GoPro extends StatelessWidget {
-  const GoPro({Key? key}) : super(key: key);
+  final void Function() onTap;
+
+  const GoPro({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -214,11 +214,7 @@ class GoPro extends StatelessWidget {
                 height: 15,
               ),
               GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const EditProfile(),
-                  ),
-                ),
+                onTap: () => onTap(),
                 child: CustomText(
                   text: "No, thank you",
                   fontSize: 16,

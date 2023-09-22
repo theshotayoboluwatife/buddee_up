@@ -28,6 +28,7 @@ class AppGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
+        key: const Key('  '),
         itemCount: 16,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,

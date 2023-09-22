@@ -49,13 +49,11 @@ import 'package:BuddeeUp/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(
-    MultiProvider(
-        providers: [
-          Provider(create: (_) => Status(),
-          )
-        ],
-        child: const App()));
+void main() => runApp(MultiProvider(providers: [
+      Provider(
+        create: (_) => Status(),
+      )
+    ], child: const App()));
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -92,17 +90,19 @@ class App extends StatelessWidget {
           "/report_user_screen": (context) => ReportUserScreen(),
           "/phone_number_settings": (context) => PhoneNumberSettings(),
           "/connected_accounts": (context) => ConnectedAccountScreen(),
-          "/email_verification_settings": (context) => EmailVerificationSettings(),
+          "/email_verification_settings": (context) =>
+              EmailVerificationSettings(),
           "/location_settings_screen": (context) => LocationSettings(),
-          "/show_me_screen": (context) =>ShowMeScreen(),
-          "/blocked_contacts_screen": (context) =>BlockedContactsScreen(),
-          "/add_contacts_screen": (context) =>AddContactsScreen(),
-          "/read_receipts_settings": (context) =>ReadReceiptsSettings(),
-          "/autoplay_videos_settings": (context) =>AutoplaySettings(),
-          "/online_now_screen": (context) =>OnlineNowScreen(),
-          "/recently_active_status": (context) =>RecentlyActiveStatus(),
-          "/username_settings": (context) =>UsernameSettings(),
-          "/push_notification_settings": (context) =>PushNotificationSettings(),
+          "/show_me_screen": (context) => ShowMeScreen(),
+          "/blocked_contacts_screen": (context) => BlockedContactsScreen(),
+          "/add_contacts_screen": (context) => AddContactsScreen(),
+          "/read_receipts_settings": (context) => ReadReceiptsSettings(),
+          "/autoplay_videos_settings": (context) => AutoplaySettings(),
+          "/online_now_screen": (context) => OnlineNowScreen(),
+          "/recently_active_status": (context) => RecentlyActiveStatus(),
+          "/username_settings": (context) => UsernameSettings(),
+          "/push_notification_settings": (context) =>
+              PushNotificationSettings(),
           "/edit_info": (context) => EditInfo(),
           "/email_unsubscribe": (context) => EmailUnsubscribe(),
           "/cafe_talks_one": (context) => CafeTalksOne(),
@@ -111,10 +111,11 @@ class App extends StatelessWidget {
           "/video_call_screen": (context) => VideoCallScreen(),
           "/voice_call_screen": (context) => PhoneCallScreen(),
           "/user_profile": (context) => EditProfile(),
-          "/go_pro_screen": (context) => GoPro(),
+          "/go_pro_screen": (context) => GoPro(
+                onTap: () => Navigator.pop(context),
+              ),
           "/settings": (context) => Settings(),
           "/proposition_screen": (context) => PropositionScreen(),
-
         },
         initialRoute: '/',
       ),

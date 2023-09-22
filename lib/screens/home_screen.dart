@@ -20,12 +20,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: PageView(controller: pageController, children: const [
-        Chat(),
-        GoBuddeeUp(),
-        DiscoveryPage(),
-        GoPro(),
-        EditProfile(),
+      body: PageView(controller: pageController, children: [
+        const Chat(),
+        const GoBuddeeUp(),
+        const DiscoveryPage(),
+        GoPro(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const HomeScreen(), 
+            ), 
+          ),
+        ),
+        const EditProfile(),
       ]),
       // body: DiscoveryPage(),
       bottomSheet: Container(
