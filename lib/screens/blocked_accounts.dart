@@ -10,7 +10,13 @@ class BlockedContactsScreen extends StatefulWidget {
   State<BlockedContactsScreen> createState() => _BlockedContactsScreenState();
 }
 
-class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
+class _BlockedContactsScreenState extends State<BlockedContactsScreen>
+    with SingleTickerProviderStateMixin {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
