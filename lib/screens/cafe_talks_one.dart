@@ -13,7 +13,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    bool isBlurred = true;
+    bool isBlurred = false;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox(
@@ -32,7 +32,9 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
               Positioned(
                 top: 60,
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     iconSize: 35,
                     icon: const Icon(
                       Icons.clear,
