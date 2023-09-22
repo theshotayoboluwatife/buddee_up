@@ -356,7 +356,7 @@ class _SettingsState extends State<Settings> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomText(text: "Don\'t Show me on BUDDEEUP", fontSize: 16, fontWeight: FontWeight.w500,),
+                          CustomText(text: "Don't Show me on BUDDEEUP", fontSize: 16, fontWeight: FontWeight.w500,),
                           CustomText(text: "Your profile will be seen on the discover page", fontSize: 12, fontWeight: FontWeight.w500,),
                         ],
                       ),
@@ -523,8 +523,8 @@ class _SettingsState extends State<Settings> {
                 }, icon: const Icon(Icons.navigate_next, color: Colors.white,))
               ],
             ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 4.0, right: 20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 4.0, right: 20),
                   child: Divider(height: 1, color: Colors.white,),
                 ),
                 Row(
@@ -585,7 +585,7 @@ class _SettingsState extends State<Settings> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: CustomText(
                         text: "Email",
                         fontWeight: FontWeight.w500,
@@ -594,17 +594,17 @@ class _SettingsState extends State<Settings> {
                     ),
                     IconButton(onPressed: (){
                       Navigator.pushNamed(context, "/email_verification_settings");
-                    }, icon: Icon(Icons.navigate_next, color: Colors.white,))
+                    }, icon: const Icon(Icons.navigate_next, color: Colors.white,))
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 2.0, right: 20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 2.0, right: 20),
                   child: Divider(height: 1, color: Colors.white,),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: CustomText(
                         text: "Push notifications",
                         fontWeight: FontWeight.w500,
@@ -613,21 +613,21 @@ class _SettingsState extends State<Settings> {
                     ),
                     IconButton(onPressed: (){
                       Navigator.pushNamed(context, "/push_notification_settings");
-                    }, icon: Icon(Icons.navigate_next, color: Colors.white,))
+                    }, icon: const Icon(Icons.navigate_next, color: Colors.white,))
                   ],
                 ),
               ],
             ),
           ),
           const SizedBox(height: 5,),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 20),
-            child: const CustomText(text: "Pick which notifications to see while in the app",fontWeight: FontWeight.w500,color: Colors.white,
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0, right: 20),
+            child: CustomText(text: "Pick which notifications to see while in the app",fontWeight: FontWeight.w500,color: Colors.white,
               fontSize: 12,
             ),
           ),
           const SizedBox(height: 50,),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
@@ -651,7 +651,7 @@ class _SettingsState extends State<Settings> {
 
           ),
           const SizedBox(height: 25,),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
@@ -686,7 +686,7 @@ class _SettingsState extends State<Settings> {
             child:  Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                const Expanded(
                   child: CustomText(
                     text: "Help & support",
                     fontWeight: FontWeight.w500,
@@ -694,7 +694,7 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 IconButton(onPressed: (){
-                }, icon: Icon(Icons.navigate_next, color: Colors.white,))
+                }, icon: const Icon(Icons.navigate_next, color: Colors.white,))
 
               ],
             ),
