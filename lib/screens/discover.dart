@@ -63,9 +63,12 @@ class DiscoveryPage extends StatelessWidget {
 
                     Row(
                       children: [
-                        Image.asset(
-                          "assets/images/photo.png",
-                          cacheWidth: 30,
+                        GestureDetector(
+                          child: Image.asset(
+                            "assets/images/photo.png",
+                            cacheWidth: 30,
+                          ),
+                          onTap: (){Navigator.pushNamed(context, "/user_profile");},
                         ),
                         const SizedBox(
                           width: 4,

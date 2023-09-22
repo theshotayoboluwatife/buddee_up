@@ -14,7 +14,9 @@ class PhoneNumberSettings extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
           color: Colors.purpleAccent,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: const CustomText(
           text: "Phone number",
@@ -65,7 +67,6 @@ class PhoneNumberSettings extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/connected_accounts");
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size

@@ -310,24 +310,27 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(
                     height: 30,
                   ),
-                  const Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(children: [
-                      TextSpan(
-                          text: 'Dont have an account?',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          )),
-                      TextSpan(
-                          text: ' Log in',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          )),
-                    ]),
+                  GestureDetector(
+                    child: const Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(children: [
+                        TextSpan(
+                            text: 'Dont have an account?',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            )),
+                        TextSpan(
+                            text: ' Log in',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ]),
+                    ),
+                    onTap: ()=> Navigator.pushNamed(context, "/signin"),
                   )
                 ],
               ),

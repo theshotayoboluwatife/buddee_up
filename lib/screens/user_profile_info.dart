@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:BuddeeUp/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import '../custom_widgets/custom_text.dart';
 
@@ -12,6 +13,10 @@ class UserProfileInfo extends StatelessWidget {
       backgroundColor: Colors.black,
       floatingActionButton:FloatingActionButton(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatScreen(name: "name", imageUrl: "imageUrl")),
+          );
     },
     child: Icon(Icons.message_sharp, color: Colors.white,),
     backgroundColor: Colors.purpleAccent,

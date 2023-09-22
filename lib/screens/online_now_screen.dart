@@ -21,7 +21,9 @@ class _OnlineNowScreenState extends State<OnlineNowScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
           color: Colors.purpleAccent,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: const CustomText(
           text: "Online now",
@@ -75,35 +77,6 @@ class _OnlineNowScreenState extends State<OnlineNowScreen> {
               text: "Allow “online now” status to be displayed on your profile while you are using BUDDEEUP",
             ),),
 
-          //Remember to Remove these 2 widgets. For prototype sake only
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.all(20),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/recently_active_status");
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero, // No border curves
-                ),
-                backgroundColor: const Color(0xFF141416),
-
-                // Text color
-              ),
-              child: const CustomText(
-                text: "next",
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 15,
-              ),
-            ),
-
-          )
         ],
       ),
     );

@@ -22,7 +22,7 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -31,7 +31,9 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen> {
           leading: IconButton(
             icon: const Icon(Icons.clear),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           title: const CustomText(
             text: "Block Contacts",

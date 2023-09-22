@@ -13,7 +13,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    bool isBlurred = false;
+    bool isBlurred = true;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox(
@@ -76,7 +76,9 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                     icon: const Icon(Icons.more_horiz, color: Colors.white),
                     onPressed: () {
                       setState(() {
-                        isBlurred = !isBlurred;
+                        isBlurred = true;
+                        print(isBlurred);
+
                       });
                     },
                     iconSize: 35,
@@ -145,6 +147,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                   ),
                 ),
               ),
+              if(isBlurred) Text('hhh'),
               if (isBlurred)
                 BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),

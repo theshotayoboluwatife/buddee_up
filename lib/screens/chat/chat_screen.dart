@@ -79,14 +79,19 @@ class _ChatScreenState extends State<ChatScreen> {
           userStatusTextStyle: const TextStyle(color: Colors.grey),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/voice_call_screen",);
+              },
               icon: const FaIcon(
                 FontAwesomeIcons.phone,
                 color: Color(0XFFC420D2),
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/video_call_screen",);
+
+              },
               icon: const FaIcon(
                 FontAwesomeIcons.video,
                 color: Color(0XFFC420D2),
