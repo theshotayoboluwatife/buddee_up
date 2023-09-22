@@ -1,4 +1,4 @@
-import 'package:BuddeeUp/screens/account_page.dart';
+
 import 'package:BuddeeUp/screens/edit_profile.dart';
 import 'package:flutter/material.dart';
 

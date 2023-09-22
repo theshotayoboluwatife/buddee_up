@@ -6,7 +6,6 @@ import 'package:BuddeeUp/screens/autoplay_settings.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/body_type.dart';
 import 'package:BuddeeUp/screens/cafe_talks_one.dart';
-import 'package:BuddeeUp/screens/chat/chat_screen.dart';
 import 'package:BuddeeUp/screens/connected_account_screen.dart';
 import 'package:BuddeeUp/screens/edit_info.dart';
 import 'package:BuddeeUp/screens/edit_profile.dart';
