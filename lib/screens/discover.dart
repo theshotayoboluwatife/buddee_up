@@ -99,7 +99,9 @@ class DiscoveryPage extends StatelessWidget {
                 ),
               ],
             ),
-            const AppGridView()
+            const AppGridView(
+              route: "/user_profile_info",
+            )
           ],
         ),
       ),

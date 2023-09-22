@@ -55,26 +55,32 @@ class EditProfile extends StatelessWidget {
                                 ),
                               )),
                               Positioned(
-                                right: 0,
+                                  right: 0,
                                   top: 0,
                                   child: Container(
-                                padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xff141416),
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.white, // Border color
-                                      width: 1.0, // Border width
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xff141416),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white, // Border color
+                                        width: 1.0, // Border width
+                                      ),
                                     ),
-                                  ),
-                                child: const ClipOval(
-                                  child: CustomText(text: "45%", fontWeight: FontWeight.bold, fontSize: 16,),
-                                ),
-                              ))
+                                    child: const ClipOval(
+                                      child: CustomText(
+                                        text: "45%",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ))
                             ],
                           ),
                         ),
-                        const SizedBox(height: 5,),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         const Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -84,11 +90,19 @@ class EditProfile extends StatelessWidget {
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(width: 2,),
-                            Icon(Icons.verified, color: Colors.black,size: 24,)
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Icon(
+                              Icons.verified,
+                              color: Colors.black,
+                              size: 24,
+                            )
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const Padding(
                           padding: EdgeInsets.only(left: 80.0, right: 80),
                           child: Row(
@@ -97,33 +111,56 @@ class EditProfile extends StatelessWidget {
                             children: [
                               Column(
                                 children: [
-                                  CustomText(text: "1", fontWeight: FontWeight.bold, fontSize: 16,),
-                                  CustomText(text: "Following", fontWeight: FontWeight.w300,)
+                                  CustomText(
+                                    text: "1",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  CustomText(
+                                    text: "Following",
+                                    fontWeight: FontWeight.w300,
+                                  )
                                 ],
                               ),
                               CustomText(text: "|"),
                               Column(
                                 children: [
-                                  CustomText(text: "100", fontWeight: FontWeight.bold, fontSize: 16,),
-                                  CustomText(text: "Followers", fontWeight: FontWeight.w300,)
+                                  CustomText(
+                                    text: "100",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  CustomText(
+                                    text: "Followers",
+                                    fontWeight: FontWeight.w300,
+                                  )
                                 ],
                               ),
                               CustomText(text: "|"),
                               Column(
                                 children: [
-                                  CustomText(text: "20k", fontWeight: FontWeight.bold, fontSize: 16,),
-                                  CustomText(text: "Likes", fontWeight: FontWeight.w300,)
+                                  CustomText(
+                                    text: "20k",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  CustomText(
+                                    text: "Likes",
+                                    fontWeight: FontWeight.w300,
+                                  )
                                 ],
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
                   ),
                   Positioned(
-                    bottom: 65,
+                    bottom: size.height * 0.05,
                     left: 40,
                     child: Column(
                       children: [
@@ -133,26 +170,31 @@ class EditProfile extends StatelessWidget {
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
-                          child:IconButton(
-                            icon: const Icon(Icons.settings, size: 40,color: Colors.black,),
-                            onPressed: (){
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.settings,
+                              size: 40,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
                               Navigator.pushNamed(context, "/settings");
                             },
                           ),
                         ),
-                        const SizedBox(height: 5,),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         const CustomText(
                           text: "SETTINGS",
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-
                       ],
                     ),
                   ),
                   Positioned(
                     right: 40,
-                    bottom: 65,
+                    bottom: size.height * 0.05,
                     child: Column(
                       children: [
                         Container(
@@ -161,26 +203,31 @@ class EditProfile extends StatelessWidget {
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
-                          child:IconButton(
-                            icon: const Icon(Icons.verified, size: 40, color: Colors.black,),
-                            onPressed: (){
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.verified,
+                              size: 40,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
                               Navigator.pushNamed(context, "/go_pro_screen");
                             },
                           ),
                         ),
-                        const SizedBox(height: 5,),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         const CustomText(
                           text: "PRO",
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-
                       ],
                     ),
                   ),
                   Positioned(
-                    right: 160,
-                    bottom: 40,
+                    right: 170,
+                    bottom: size.height * 0.03,
                     child: Column(
                       children: [
                         Container(
@@ -189,20 +236,25 @@ class EditProfile extends StatelessWidget {
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
-                          child:IconButton(
-                            icon: const Icon(Icons.edit, size: 40, color: Colors.black,),
-                            onPressed: (){
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.edit,
+                              size: 40,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
                               Navigator.pushNamed(context, "/edit_info");
                             },
                           ),
                         ),
-                        const SizedBox(height: 5,),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         const CustomText(
                           text: "EDIT PROFILE",
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
-
                       ],
                     ),
                   ),
@@ -210,7 +262,9 @@ class EditProfile extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -230,41 +284,97 @@ class EditProfile extends StatelessWidget {
                       child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.add_circle,color: Colors.white, size: 35,),
-                          SizedBox(width: 5,),
-                          CustomText(text: "Make Your Buddeeup Proposition", fontWeight: FontWeight.w400,)
+                          Icon(
+                            Icons.add_circle,
+                            color: Colors.white,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CustomText(
+                            text: "Make Your Buddeeup Proposition",
+                            fontWeight: FontWeight.w400,
+                          )
                         ],
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, "/proposition_screen");
                     },
                   ),
-                  const SizedBox(height: 20,),
-                  const CustomText(text: "BUDDEEUP PRO", color: Colors.purpleAccent, fontWeight: FontWeight.bold,fontSize: 24,),
-                  const SizedBox(height: 8,),
-                  const CustomText(text: "Get free video calls duration", fontSize: 16, fontWeight: FontWeight.w400,),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomText(
+                    text: "BUDDEEUP PRO",
+                    color: Colors.purpleAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const CustomText(
+                    text: "Get free video calls duration",
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   //replace with actual page indicator
                   Container(
                     padding: const EdgeInsets.only(left: 100, right: 100),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.circle, color: Colors.purpleAccent, size: 16,),
-                        Icon(Icons.circle, color: Colors.white, size: 16,),
-                        Icon(Icons.circle, color: Colors.white, size: 16,),
-                        Icon(Icons.circle, color: Colors.white, size: 16,),
-                        Icon(Icons.circle, color: Colors.white, size: 16,),
-                        Icon(Icons.circle, color: Colors.white, size: 16,),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.purpleAccent,
+                          size: 16,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16,),
-                  CustomButton(text: "LEARN MORE", onpress: (){
-                    Navigator.pushNamed(context, "/go_pro_screen");
-                  }, buttonColor: Colors.purpleAccent, width: size.height*0.3),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  CustomButton(
+                      text: "LEARN MORE",
+                      onpress: () {
+                        Navigator.pushNamed(context, "/go_pro_screen");
+                      },
+                      buttonColor: Colors.purpleAccent,
+                      width: size.height * 0.3),
+                  const SizedBox(
+                    height: 150,
+                  ),
                 ],
               ),
             ),
