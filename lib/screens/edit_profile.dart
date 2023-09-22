@@ -177,7 +177,7 @@ class EditProfile extends StatelessWidget {
                               color: Colors.black,
                             ),
                             onPressed: () {
-                              //it works
+                              //it w1orks
                               Navigator.pushNamed(context, "/settings");
                             },
                           ),
