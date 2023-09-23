@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
+import 'package:BuddeeUp/custom_widgets/filter_button.dart';
 import 'package:BuddeeUp/providers/status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,10 +12,10 @@ class DiscoveryPage extends StatelessWidget {
   });
 
   // final List<StatusData> statusData;
-
   @override
   Widget build(BuildContext context) {
     final statusData = Provider.of<Status>(context).statusData;
+    Size size = MediaQuery.of(context).size;
 
     return SafeArea(
       key: const ValueKey('value1'),
@@ -38,10 +39,8 @@ class DiscoveryPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    //travel pass text
                     Container(
-
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: const Color(0XFF4E1753).withOpacity(.94),
@@ -62,7 +61,6 @@ class DiscoveryPage extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     Row(
                       children: [
                         GestureDetector(
@@ -70,14 +68,14 @@ class DiscoveryPage extends StatelessWidget {
                             "assets/images/photo.png",
                             cacheWidth: 30,
                           ),
-                          onTap: (){Navigator.pushNamed(context, "/user_profile");},
+                          onTap: () {
+                            Navigator.pushNamed(context, "/user_profile");
+                          },
                         ),
                         const SizedBox(
                           width: 4,
                         ),
-                        Image.asset(
-                          "assets/images/mi_filter.png",
-                        ),
+                        FilterButton(size: size),
                       ],
                     ),
                   ],

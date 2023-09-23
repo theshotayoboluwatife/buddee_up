@@ -1,9 +1,39 @@
 import 'package:flutter/material.dart';
 import '../custom_widgets/custom_button.dart';
 import '../custom_widgets/custom_text.dart';
+import 'package:choice/choice.dart';
 
-class ActivitiesScreen extends StatelessWidget {
+class ActivitiesScreen extends StatefulWidget {
   const ActivitiesScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ActivitiesScreen> createState() => _ActivitiesScreenState();
+}
+
+class _ActivitiesScreenState extends State<ActivitiesScreen> {
+  List<String> choices = [
+    'Coffee Talks/Drinks/Happy Hours',
+    'Spa',
+    'Meals (Breakfast, brunch, Lunch, Dinner)',
+    'Gin Tonic',
+    'Festivals/Concerts',
+    'Dance/EDM fest/Music',
+    'Fetishes/Group',
+    'Cafe Hopping',
+    'Individual sports - Running/lift weights',
+    'Gymnastics',
+    'Team/Group sports - Volleyball/Kickball',
+    'Hockey',
+    'Arts/Museum/Culture',
+    'Home Entertaining',
+    'Buddeeup',
+    'Meditation',
+    'Self Care',
+  ];
+  List<String> selectedValue = [];
+  void setSelectedValue(List<String> value) {
+    setState(() => selectedValue = value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +47,8 @@ class ActivitiesScreen extends StatelessWidget {
             colors: [
               Color.fromRGBO(227, 127, 236, 0.96),
               Color.fromRGBO(196, 32, 210, 0.96),
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+              Color.fromRGBO(
+                  163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
         ),
@@ -29,23 +60,82 @@ class ActivitiesScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.clear),
+                     IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(top:24.0, left: 8),
-                      child: CustomText(text: "Activities", fontSize: 36, fontWeight: FontWeight.w600,),
+                      padding: EdgeInsets.only(top: 24.0, left: 8),
+                      child: CustomText(
+                        text: "Activities",
+                        fontSize: 36,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ]),
             ),
-
-            const Spacer(),
-            CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context, "/sexual_preference_screen");}, width: double.infinity,buttonColor: Colors.white,),
-            const SizedBox(height: 20,)
+            const Text(
+              'Let everyone know what you’re interested in by adding it to your profile.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 15),
+            Expanded(
+              child: SingleChildScrollView(
+                child: InlineChoice<String>.multiple(
+                  clearable: true,
+                  value: selectedValue,
+                  onChanged: setSelectedValue,
+                  itemCount: choices.length,
+                  itemBuilder: (selection, i) {
+                    return ChoiceChip(
+                      selected: selection.selected(choices[i]),
+                      onSelected: selection.onSelected(choices[i]),
+                      label: Text(
+                        choices[i],
+                        style: const TextStyle(color: Colors.purple, fontSize: 14),
+                      ),
+                      color: const MaterialStatePropertyAll(
+                        Colors.white,
+                      ),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    );
+                  },
+                  listBuilder: ChoiceList.createWrapped(
+                    spacing: 8,
+                    runSpacing: 8,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 10,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            CustomButton(
+              text: "CONTINUE",
+              textColor: Colors.black,
+              onpress: () {
+                Navigator.pushNamed(context, "/sexual_preference_screen");
+              },
+              width: double.infinity,
+              buttonColor: Colors.white,
+            ),
+            const SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
     );
-  }}
+  }
+}

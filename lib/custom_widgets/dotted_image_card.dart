@@ -23,7 +23,7 @@ class DottedImageCard extends StatelessWidget {
             borderType: BorderType.RRect,
             radius: const Radius.circular(10),
             child: Container(
-              width: 55,
+              width: 48,
               height: 75,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
