@@ -255,7 +255,9 @@ class _SettingsState extends State<Settings> {
                         fontWeight: FontWeight.w500,
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/location_settings_screen");
+                          },
                           icon: const Icon(
                             Icons.navigate_next,
                             color: Colors.white,

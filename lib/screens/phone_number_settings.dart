@@ -1,5 +1,8 @@
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../custom_widgets/custom_text_field.dart';
 
 class PhoneNumberSettings extends StatelessWidget {
   const PhoneNumberSettings({Key? key}) : super(key: key);
@@ -47,16 +50,18 @@ class PhoneNumberSettings extends StatelessWidget {
                     border: Border(
                         top: BorderSide(width: 1, color: Colors.white),
                         bottom: BorderSide(width: 1, color: Colors.white))),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: "12345678901",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                    Icon(Icons.check, color: Colors.blue,)
-                  ],
+                child:   TextField(
+                  style:  const TextStyle(color: Colors.white
+                  ),
+                  controller: null,
+                  decoration: InputDecoration(
+                    hintText: "+234567890876",
+                    hintStyle:  const TextStyle(color: Colors.white54),
+                    suffixIcon:  const Icon(Icons.check,color: Colors.blue),
+                      border:InputBorder.none,
+                    labelStyle: GoogleFonts.poppins(color: Colors.white54, fontSize: 15, fontWeight: FontWeight.w500),
+
+                  ),
                 ),
               ),
           const SizedBox(

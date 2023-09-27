@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -47,25 +48,27 @@ class UsernameSettings extends StatelessWidget {
             ),
           ),
           Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: const BoxDecoration(
-                    color: Color(0xFF141416),
-                    border: Border(
-                        top: BorderSide(width: 1, color: Colors.white),
-                        bottom: BorderSide(width: 1, color: Colors.white))),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: "@johnsmith",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                    Icon(Icons.check, color: Colors.blue,)
-                  ],
-                ),
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
+                color: Color(0xFF141416),
+                border: Border(
+                    top: BorderSide(width: 1, color: Colors.white),
+                    bottom: BorderSide(width: 1, color: Colors.white))),
+            child:   TextField(
+              style:  const TextStyle(color: Colors.white
               ),
+              controller: null,
+              decoration: InputDecoration(
+                hintText: "@johnsmith",
+                hintStyle:  const TextStyle(color: Colors.white54),
+                suffixIcon:  const Icon(Icons.check,color: Colors.blue),
+                border:InputBorder.none,
+                labelStyle: GoogleFonts.poppins(color: Colors.white54, fontSize: 15, fontWeight: FontWeight.w500),
+
+              ),
+            ),
+          ),
           const SizedBox(
             height: 30,
           ),
