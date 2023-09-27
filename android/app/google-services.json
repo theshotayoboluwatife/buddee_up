@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "828306497382",
+    "project_id": "buddeeup-80d95",
+    "storage_bucket": "buddeeup-80d95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828306497382:android:55af2a622358d8ccf832a7",
+        "android_client_info": {
+          "package_name": "com.example.buddee_up"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD4PYiiPTCX7S7MRLOoQ3ipPbNJvaUkvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
