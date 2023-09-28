@@ -83,261 +83,262 @@ class _EditInfoState extends State<EditInfo>
           controller: _tabController,
           children: [
             //first tab{Edit} content
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 8),
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
+            SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40.0, right: 32, top: 24,bottom: 8),
+                      child: Column(
+
+                        children: [
+                          Row(
+                            children: [
+                              DottedImageCard(
+                                image: profilePictureData[0],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[1],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[2],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[3],
+                                isAddedMedia: false,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[4],
+                                isAddedMedia: false,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              DottedImageCard(
+                                image: profilePictureData[0],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[1],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[2],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[3],
+                                isAddedMedia: true,
+                              ),
+                              DottedImageCard(
+                                image: profilePictureData[4],
+                                isAddedMedia: true,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const CustomText(
+                      text:
+                          "Add a pic to get 4% closer to completing your profile and you may even get more Likes",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(title: "ABOUT ME"),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(4),
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF141416),
+                            border: Border(
+                                top: BorderSide(width: 1, color: Colors.white),
+                                left: BorderSide(width: 1, color: Colors.white),
+                                right: BorderSide(width: 1, color: Colors.white),
+                                bottom:
+                                    BorderSide(width: 1, color: Colors.white))),
+                        child: const TextField(
+                          maxLines: null,
+                          decoration: InputDecoration(
+                            hintText: ' ',
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.w400),
+                            border: InputBorder.none,
+                          ),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(title: "INTERESTS"),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                        title:
+                            "Coffee Talks/Drinks/Happy Hours, Festival/Concerts, Fetishes/Groups, Buddeeup",
+                        icon: Icons.navigate_next),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: CustomText(
+                        text:
+                            "Share your interests and keep your personal info private",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const BulletHeading(
+                      title: "BUDDEEUP Proposition",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                      title: 'Propose BuddeeUp Proposition',
+                      icon: Icons.navigate_next,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const BulletHeading(
+                      title: "LIFESTYLE",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const RowContainer(
+                      title: 'Relationship Status',
+                      option: 'Married',
+                      icon: Icons.people_alt,
+                    ),
+                    const RowContainer(
+                      title: 'Tribe',
+                      option: 'Clean Cut',
+                      icon: Icons.family_restroom,
+                    ),
+                    const RowContainer(
+                      title: 'Sexual Preferences',
+                      option: 'Bottom',
+                      icon: Icons.transgender,
+                    ),
+                    const RowContainer(
+                      title: 'Smoking',
+                      option: 'No',
+                      icon: Icons.smoking_rooms,
+                    ),
+                    const SizedBox(height: 30),
+                    const BulletHeading(
+                      title: "SEX",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                      title: 'Male',
+                      icon: Icons.navigate_next,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(
+                      title: "BODY TYPE",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                        title: "Avg", icon: Icons.navigate_next),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(
+                      title: "Ethnicity",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                      title: 'African-American',
+                      icon: Icons.navigate_next,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(title: 'Height'),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                        title: "5'ft 0\"in", icon: Icons.keyboard_arrow_up),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(title: 'Weight'),
+                    const SimpleRowContainer(
+                        title: "130 lbs", icon: Icons.keyboard_arrow_up),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const BulletHeading(
+                      title: "GENDER",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SimpleRowContainer(
+                        title: "Man", icon: Icons.navigate_next),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          children: [
-                            DottedImageCard(
-                              image: profilePictureData[0],
-                              isAddedMedia: false,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[1],
-                              isAddedMedia: false,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[2],
-                              isAddedMedia: false,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[3],
-                              isAddedMedia: false,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[4],
-                              isAddedMedia: false,
-                            ),
-                          ],
+                        Padding(
+                          padding: EdgeInsets.only(left: 24.0),
+                          child: CustomText(
+                            text: "MANAGE YOUR PROFILE",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
                         ),
-                        Row(
-                          children: [
-                            DottedImageCard(
-                              image: profilePictureData[0],
-                              isAddedMedia: true,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[1],
-                              isAddedMedia: true,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[2],
-                              isAddedMedia: true,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[3],
-                              isAddedMedia: true,
-                            ),
-                            DottedImageCard(
-                              image: profilePictureData[4],
-                              isAddedMedia: true,
-                            ),
-                          ],
+                        SizedBox(
+                          width: 5,
                         ),
+                        Icon(
+                          Icons.verified,
+                          color: Colors.purpleAccent,
+                        )
                       ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const CustomText(
-                    text:
-                        "Add a pic to get 4% closer to completing your profile and you may even get more Likes",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(title: "ABOUT ME"),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          color: Color(0xFF141416),
-                          border: Border(
-                              top: BorderSide(width: 1, color: Colors.white),
-                              left: BorderSide(width: 1, color: Colors.white),
-                              right: BorderSide(width: 1, color: Colors.white),
-                              bottom:
-                                  BorderSide(width: 1, color: Colors.white))),
-                      child: const TextField(
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          hintText: ' ',
-                          hintStyle: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w400),
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(color: Colors.white),
-                      ),
+                    const SizedBox(
+                      height: 5,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(title: "INTERESTS"),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                      title:
-                          "Coffee Talks/Drinks/Happy Hours, Festival/Concerts, Fetishes/Groups, Buddeeup",
-                      icon: Icons.navigate_next),
-                  const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: CustomText(
-                      text:
-                          "Share your interests and keep your personal info private",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const BulletHeading(
-                    title: "BUDDEEUP Proposition",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                    title: 'Propose BuddeeUp Proposition',
-                    icon: Icons.navigate_next,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const BulletHeading(
-                    title: "LIFESTYLE",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const RowContainer(
-                    title: 'Relationship Status',
-                    option: 'Married',
-                    icon: Icons.people_alt,
-                  ),
-                  const RowContainer(
-                    title: 'Tribe',
-                    option: 'Clean Cut',
-                    icon: Icons.family_restroom,
-                  ),
-                  const RowContainer(
-                    title: 'Sexual Preferences',
-                    option: 'Bottom',
-                    icon: Icons.transgender,
-                  ),
-                  const RowContainer(
-                    title: 'Smoking',
-                    option: 'No',
-                    icon: Icons.smoking_rooms,
-                  ),
-                  const SizedBox(height: 30),
-                  const BulletHeading(
-                    title: "SEX",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                    title: 'Male',
-                    icon: Icons.navigate_next,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(
-                    title: "BODY TYPE",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                      title: "Avg", icon: Icons.navigate_next),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(
-                    title: "Ethnicity",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                    title: 'African-American',
-                    icon: Icons.navigate_next,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(title: 'Height'),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                      title: "5'ft 0\"in", icon: Icons.keyboard_arrow_up),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(title: 'Weight'),
-                  const SimpleRowContainer(
-                      title: "130 lbs", icon: Icons.keyboard_arrow_up),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(
-                    title: "GENDER",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SimpleRowContainer(
-                      title: "Man", icon: Icons.navigate_next),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 24.0),
-                        child: CustomText(
-                          text: "MANAGE YOUR PROFILE",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.verified,
-                        color: Colors.purpleAccent,
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  generateSwitchContainer("Dont't show my age", switchValue),
-                  generateSwitchContainer(
-                      "Dont't show my distance", switchValue2),
-                  generateSwitchContainer(
-                      "Dont't show my religion", switchValue3),
-                ],
+                    generateSwitchContainer("Dont't show my age", switchValue),
+                    generateSwitchContainer(
+                        "Dont't show my distance", switchValue2),
+                    generateSwitchContainer(
+                        "Dont't show my religion", switchValue3),
+                  ],
+                ),
               ),
             ),
 
@@ -437,13 +438,14 @@ class SimpleRowContainer extends StatelessWidget {
               bottom: BorderSide(width: 1, color: Colors.white))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
+          Flexible(
             child: CustomText(
-              text: title,
-              fontWeight: FontWeight.w500,
-              fontSize: 12,
-            ),
+                text: title,
+                fontWeight: FontWeight.w500,
+                fontSize: 12,
+              ),
           ),
           Icon(
             icon,
