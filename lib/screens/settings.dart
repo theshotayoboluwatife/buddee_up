@@ -198,11 +198,11 @@ class _SettingsState extends State<Settings> {
                     ),
                     Row(
                       children: [
-                        const CustomText(
+                         CustomText(
                           text: "Johnsmith@gmail.com",
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white,
+                          color: Colors.purpleAccent[100],
                         ),
                         IconButton(
                             onPressed: () {
@@ -864,7 +864,7 @@ class _SettingsState extends State<Settings> {
                     IconButton(
                         onPressed: () {
                           Navigator.pushNamed(
-                              context, "/email_verification_settings");
+                              context, "/unsubscribe_email_screen");
                         },
                         icon: const Icon(
                           Icons.navigate_next,

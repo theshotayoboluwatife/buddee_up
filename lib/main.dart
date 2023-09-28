@@ -52,6 +52,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -97,8 +98,7 @@ class App extends StatelessWidget {
           "/report_user_screen": (context) => ReportUserScreen(),
           "/phone_number_settings": (context) => PhoneNumberSettings(),
           "/connected_accounts": (context) => ConnectedAccountScreen(),
-          "/email_verification_settings": (context) =>
-              EmailVerificationSettings(),
+          "/email_verification_settings": (context) => EmailVerificationSettings(),
           "/location_settings_screen": (context) => LocationSettings(),
           "/show_me_screen": (context) => ShowMeScreen(),
           "/blocked_contacts_screen": (context) => BlockedContactsScreen(),
@@ -108,8 +108,7 @@ class App extends StatelessWidget {
           "/online_now_screen": (context) => OnlineNowScreen(),
           "/recently_active_status": (context) => RecentlyActiveStatus(),
           "/username_settings": (context) => UsernameSettings(),
-          "/push_notification_settings": (context) =>
-              PushNotificationSettings(),
+          "/push_notification_settings": (context) => PushNotificationSettings(),
           "/edit_info": (context) => EditInfo(),
           "/email_unsubscribe": (context) => EmailUnsubscribe(),
           "/cafe_talks_one": (context) => CafeTalksOne(),
@@ -123,6 +122,7 @@ class App extends StatelessWidget {
               ),
           "/settings": (context) => Settings(),
           "/proposition_screen": (context) => PropositionScreen(),
+          "/unsubscribe_email_screen": (context) => EmailUnsubscribe(),
         },
         initialRoute: '/',
       ),
