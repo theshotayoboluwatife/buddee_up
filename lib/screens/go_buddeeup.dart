@@ -19,7 +19,7 @@ class GoBuddeeUp extends StatelessWidget {
               Row(
                 children: [
                   const Text(
-                    'Go Budee Up',
+                    'Go Buddee Up',
                     style: TextStyle(
                       fontSize: 34,
                       fontWeight: FontWeight.bold,

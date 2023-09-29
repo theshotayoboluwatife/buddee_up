@@ -14,7 +14,7 @@ class EditProfile extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            height: size.height * 0.6,
+            height: size.height * 0.65,
             decoration: const BoxDecoration(
                 color: Colors.purpleAccent,
                 borderRadius: BorderRadius.only(
@@ -160,7 +160,7 @@ class EditProfile extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: size.height * 0.46,
+                    top: size.height * 0.47,
                     left: 40,
                     child: Column(
                       children: [
@@ -195,7 +195,7 @@ class EditProfile extends StatelessWidget {
                   ),
                   Positioned(
                     right: 40,
-                    top: size.height * 0.46,
+                    top: size.height * 0.47,
                     child: Column(
                       children: [
                         Container(
@@ -227,8 +227,9 @@ class EditProfile extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    right: size.width*0.37,
-                    top: size.height * 0.48,
+                    right: 60,
+                    left: 60,
+                    top: size.height * 0.5,
                     child: Column(
                       children: [
                         Container(

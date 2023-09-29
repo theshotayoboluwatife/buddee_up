@@ -11,6 +11,7 @@ class DottedImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Stack(children: [
@@ -23,7 +24,7 @@ class DottedImageCard extends StatelessWidget {
             borderType: BorderType.RRect,
             radius: const Radius.circular(10),
             child: Container(
-              width: 48,
+              width: size.width * 0.125,
               height: 75,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

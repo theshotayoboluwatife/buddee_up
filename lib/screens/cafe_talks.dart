@@ -6,33 +6,36 @@ class CafeTalks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
           child: Column(
             children: [
               Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                    size: 24,
+                  IconButton(
+                    onPressed: () { Navigator.pop(context); },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                      size: 24,
+                    ),
                   ),
-                  Spacer(),
-                  Text(
+                  const Spacer(),
+                  const Text(
                     'Cafe Talks',
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              AppGridView(route: "/cafe_talks_one"),
+              const AppGridView(route: "/cafe_talks_one"),
             ],
           ),
         ),

@@ -90,7 +90,7 @@ class _EditInfoState extends State<EditInfo>
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 40.0, right: 32, top: 24,bottom: 8),
+                      padding: const EdgeInsets.only(left: 24.0, right: 20, top: 24,bottom: 8),
                       child: Column(
 
                         children: [

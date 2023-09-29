@@ -14,8 +14,7 @@ class GoPro extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
               const SafeArea(
                   child: Row(
@@ -53,11 +52,13 @@ class GoPro extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               const CustomText(
+                textAlign: TextAlign.center,
                 text: "Calls Duration",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
               const CustomText(
+                textAlign: TextAlign.center,
                 text: "Get free video calls duration every day",
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
@@ -67,7 +68,7 @@ class GoPro extends StatelessWidget {
               ),
               //replace with actual page indicator
               Container(
-                padding: const EdgeInsets.only(left: 150, right: 150),
+                padding: const EdgeInsets.only(left: 120, right: 120),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -108,6 +109,7 @@ class GoPro extends StatelessWidget {
                 height: 30,
               ),
               const CustomText(
+                textAlign: TextAlign.center,
                 text: "Subscribe",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -116,6 +118,7 @@ class GoPro extends StatelessWidget {
                 height: 30,
               ),
               CustomText(
+                textAlign: TextAlign.center,
                 text: "Try for free. Then upgrade to pro",
                 fontSize: 16,
                 color: Colors.white.withOpacity(0.65),
@@ -216,20 +219,22 @@ class GoPro extends StatelessWidget {
               GestureDetector(
                 onTap: () => onTap(),
                 child: CustomText(
+                  textAlign: TextAlign.center,
                   text: "No, thank you",
                   fontSize: 16,
                   color: Colors.white.withOpacity(0.65),
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               CustomText(
+                textAlign: TextAlign.center,
                 text: "Restore | Privacy | Terms Of Services",
                 fontSize: 16,
                 color: Colors.white.withOpacity(0.65),
                 fontWeight: FontWeight.w400,
               ),
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
             ],
           ),
         ),
