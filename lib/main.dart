@@ -1,3 +1,4 @@
+import 'package:BuddeeUp/providers/location_provider.dart';
 import 'package:BuddeeUp/providers/status_provider.dart';
 import 'package:BuddeeUp/screens/account_recovery.dart';
 import 'package:BuddeeUp/screens/activities_screen.dart';
@@ -59,6 +60,9 @@ void main() async {
   runApp(MultiProvider(providers: [
     Provider(
       create: (_) => Status(),
+    ),
+    ChangeNotifierProvider<LocationProvider>(
+      create: (context) => LocationProvider(),
     )
   ], child: const App()));
 }

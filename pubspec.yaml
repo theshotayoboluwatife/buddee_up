@@ -33,6 +33,9 @@ dependencies:
   choice: ^2.0.0
   firebase_core: ^2.16.0
   firebase_auth: ^4.10.0
+  geolocator: ^10.1.0
+  geocoding: ^2.1.0
+  permission_handler: ^11.0.0
 
 
 dev_dependencies:

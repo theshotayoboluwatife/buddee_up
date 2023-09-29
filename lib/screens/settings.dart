@@ -1,7 +1,9 @@
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
+import '../providers/location_provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -22,6 +24,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    final locationProvider = Provider.of<LocationProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -249,8 +252,8 @@ class _SettingsState extends State<Settings> {
                   ),
                   Row(
                     children: [
-                      const CustomText(
-                        text: "Chicago, USA",
+                       CustomText(
+                        text: locationProvider.location,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),

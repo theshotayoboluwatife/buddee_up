@@ -1,13 +1,16 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
+import '../providers/location_provider.dart';
 
 class EnableLocation extends StatelessWidget {
   const EnableLocation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final locationProvider = Provider.of<LocationProvider>(context);
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: Container(
@@ -59,7 +62,7 @@ class EnableLocation extends StatelessWidget {
             ),
             const CustomText(
               text:
-                  "You'll need to enable your location in order ti use BUDDEEUP",
+                  "You'll need to enable your location in order to use BUDDEEUP",
               fontSize: 15,
               fontWeight: FontWeight.w400,
               textAlign: TextAlign.center,
@@ -68,7 +71,7 @@ class EnableLocation extends StatelessWidget {
             CustomButton(
               text: "ALLOW LOCATION",
               onpress: () {
-                Navigator.pushNamed(context, "/keep_me_posted_screen");
+                locationProvider.requestLocationPermission(context);
               },
               textColor: Colors.black,
             ),

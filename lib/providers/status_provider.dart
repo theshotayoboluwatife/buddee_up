@@ -1,4 +1,4 @@
-import 'package:BuddeeUp/providers/status_data.dart';
+import 'package:BuddeeUp/models/status_data.dart';
 import 'package:flutter/material.dart';
 
 
