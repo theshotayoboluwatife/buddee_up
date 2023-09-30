@@ -1,7 +1,9 @@
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
+import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../custom_widgets/custom_text.dart';
 import '../providers/location_provider.dart';
@@ -1124,7 +1126,23 @@ class _SettingsState extends State<Settings> {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await Auth.signOut();
+                    try {
+                      await Auth.signOut();
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isUserLoggedIn', false);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (_) => const SignIn(),
+                          ),
+                          (route) => false);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Error Logging Out'),
+                        ),
+                      );
+                    }
                   },
                   child: const CustomText(
                     text: "Log out",

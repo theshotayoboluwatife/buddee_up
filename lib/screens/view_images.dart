@@ -17,7 +17,7 @@ class ViewImage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.navigate_before,
               size: 45,
             )),
@@ -37,7 +37,7 @@ class ViewImage extends StatelessWidget {
                 ),
 
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -50,7 +50,7 @@ class ViewImage extends StatelessWidget {
                           child: Container(
                             width: 80,
                             height: 80,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
                                         "assets/images/annabelle.png"
@@ -72,7 +72,7 @@ class ViewImage extends StatelessWidget {
                           child: Container(
                             width: 80,
                             height: 80,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
                                         'assets/images/prof1.png'
@@ -110,7 +110,7 @@ class ViewImage extends StatelessWidget {
                           child: Container(
                             width: 80,
                             height: 80,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
                                         'assets/images/prof2.png'
@@ -148,7 +148,7 @@ class ViewImage extends StatelessWidget {
                           child: Container(
                             width: 80,
                             height: 80,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
                                         'assets/images/prof3.png'

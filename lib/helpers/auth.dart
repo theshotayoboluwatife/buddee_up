@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-enum AuthMode { login, register, phone }
+enum AuthMode { login, register }
 
 class Auth {
   static Future<UserCredential> signInWithGoogle() async {
@@ -32,11 +32,11 @@ class Auth {
     }
   }
 
-  static Future<UserCredential> signInWithFacebook() async {
+  static Future<void> signInWithFacebook() async {
     final LoginResult loginResult = await FacebookAuth.instance.login();
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
-    return auth.signInWithCredential(facebookAuthCredential);
+    auth.signInWithCredential(facebookAuthCredential);
   }
 
   static Future<void> signOut() async {

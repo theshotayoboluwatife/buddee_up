@@ -1,3 +1,4 @@
+import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/location_provider.dart';
 import 'package:BuddeeUp/providers/status_provider.dart';
 import 'package:BuddeeUp/screens/account_recovery.dart';
@@ -51,10 +52,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 late final FirebaseAuth auth;
 late final FirebaseApp app;
+late final SharedPreferences prefs;
+late bool isUserLoggedIn;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +66,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   auth = FirebaseAuth.instanceFor(app: app);
+  prefs = await SharedPreferences.getInstance();
+
+  isUserLoggedIn = prefs.getBool('isUserLoggedIn') ?? false;
+  logger.i(isUserLoggedIn);
   runApp(
     MultiProvider(
       providers: [
@@ -142,7 +150,7 @@ class App extends StatelessWidget {
           "/proposition_screen": (context) => const PropositionScreen(),
           "/unsubscribe_email_screen": (context) => const EmailUnsubscribe(),
         },
-        initialRoute: '/',
+        initialRoute: isUserLoggedIn ? '/home_screen' : '/',
       ),
     );
   }

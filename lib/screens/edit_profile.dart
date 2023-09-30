@@ -33,50 +33,48 @@ class EditProfile extends StatelessWidget {
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
-                        Container(
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                  child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.white, // Border color
-                                    width: 1.0, // Border width
-                                  ),
+                        Stack(
+                          children: [
+                            Positioned(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white, // Border color
+                                  width: 1.0, // Border width
                                 ),
-                                child: ClipOval(
-                                  child: Image.asset(
-                                    "assets/images/annabelle.png",
-                                    width: 220,
-                                    height: 220,
-                                    fit: BoxFit.cover,
-                                  ),
+                              ),
+                              child: ClipOval(
+                                child: Image.asset(
+                                  "assets/images/annabelle.png",
+                                  width: 220,
+                                  height: 220,
+                                  fit: BoxFit.cover,
                                 ),
-                              )),
-                              Positioned(
-                                  right: 0,
-                                  top: 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xff141416),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.white, // Border color
-                                        width: 1.0, // Border width
-                                      ),
+                              ),
+                            )),
+                            Positioned(
+                                right: 0,
+                                top: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff141416),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.white, // Border color
+                                      width: 1.0, // Border width
                                     ),
-                                    child: const ClipOval(
-                                      child: CustomText(
-                                        text: "45%",
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
+                                  ),
+                                  child: const ClipOval(
+                                    child: CustomText(
+                                      text: "45%",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                     ),
-                                  ))
-                            ],
-                          ),
+                                  ),
+                                ))
+                          ],
                         ),
                         const SizedBox(
                           height: 5,

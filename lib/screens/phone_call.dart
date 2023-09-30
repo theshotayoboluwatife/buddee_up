@@ -19,7 +19,7 @@ class PhoneCallScreen extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.navigate_before,
                         size: 45,
                         color: Colors.white,
@@ -34,13 +34,13 @@ class PhoneCallScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.lock,
                             color: Colors.white,
                             size: 18,
                           ),
                           alignment: Alignment.centerRight),
-                      CustomText(
+                      const CustomText(
                         text: 'End to end encryption',
                         fontSize: 12,
                         fontWeight: FontWeight.w300,
@@ -50,11 +50,11 @@ class PhoneCallScreen extends StatelessWidget {
                 ],
               ),
           ),
-          SizedBox(height: 20,),
-          CustomText(text: "Annabelle", fontSize: 24,fontWeight: FontWeight.bold,),
-          SizedBox(height: 10,),
-          CustomText(text: "12:34", fontSize: 16,fontWeight: FontWeight.w400,),
-          Spacer(),
+          const SizedBox(height: 20,),
+          const CustomText(text: "Annabelle", fontSize: 24,fontWeight: FontWeight.bold,),
+          const SizedBox(height: 10,),
+          const CustomText(text: "12:34", fontSize: 16,fontWeight: FontWeight.w400,),
+          const Spacer(),
           ClipOval(
             child: Image.asset(
               'assets/images/annabelle.png',
@@ -63,8 +63,8 @@ class PhoneCallScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Spacer(),
-          SizedBox(height: 160,),
+          const Spacer(),
+          const SizedBox(height: 160,),
           Container(
             decoration: BoxDecoration(
                 color: Colors.black,
@@ -72,10 +72,10 @@ class PhoneCallScreen extends StatelessWidget {
                     width: 1,
                     color: Colors.white
                 ),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20))),
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,24 +83,24 @@ class PhoneCallScreen extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.cameraswitch_outlined, size: 40, color: Colors.white,)),
+                    icon: const Icon(Icons.cameraswitch_outlined, size: 40, color: Colors.white,)),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.video_camera_back,size: 40, color: Colors.white,)),
+                    onPressed: () {}, icon: const Icon(Icons.video_camera_back,size: 40, color: Colors.white,)),
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.red[600], // Background color
                     borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.call_end,
                     size: 40,
                     color: Colors.white, // Icon color
                   ),
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.mic,size: 40, color: Colors.white,)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.mic,size: 40, color: Colors.white,)),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.thumbs_up_down_sharp,size: 40, color: Colors.white,)),
+                    onPressed: () {}, icon: const Icon(Icons.thumbs_up_down_sharp,size: 40, color: Colors.white,)),
               ],
             ),
           )

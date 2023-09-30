@@ -147,7 +147,7 @@ class _SignInState extends State<SignIn> {
                     height: 60,
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/discover_screen");
+                        // Navigator.pushNamed(context, "/discover_screen");
                       },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),

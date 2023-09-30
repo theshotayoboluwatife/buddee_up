@@ -35,7 +35,7 @@ class DottedImageCard extends StatelessWidget {
                     color: const Color(0xFF141416),
                     borderRadius:
                 BorderRadius.circular(10)),
-                          child: Center(child: const CustomText(text: "Private\nPhotos")))
+                          child: const Center(child: CustomText(text: "Private\nPhotos")))
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
