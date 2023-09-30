@@ -2,7 +2,6 @@ import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
-import 'package:BuddeeUp/screens/home_screen.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -221,6 +220,9 @@ class _SignUpState extends State<SignUp> {
                                 builder: (_) => const PhoneVerification(),
                               ),
                             );
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -248,169 +250,9 @@ class _SignUpState extends State<SignUp> {
                       height: 40,
                     ),
 
-                    //Google signin button
-                    Container(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      width: double.infinity,
-                      height: 60,
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          try {
-                            await Auth.signInWithGoogle().then((value) =>
-                                Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (_) => const HomeScreen(),
-                                  ),
-                                  (route) => false,
-                                ));
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setBool('isUserLoggedIn', true);
-                          } on FirebaseAuthException catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(e.message!),
-                              ),
-                            );
-                          }
-                        },
-                        icon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                              "assets/images/flat-color-icons_google.png"),
-                        ),
-                        label: const CustomText(
-                          text: "Sign Up with Google",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFDA3EE8),
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    //Facebook signin button
-                    Container(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      width: double.infinity,
-                      height: 60,
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          try {
-                            await Auth.signInWithFacebook().then((value) =>
-                                Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (_) => const HomeScreen(),
-                                  ),
-                                  (route) => false,
-                                ));
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setBool('isUserLoggedIn', true);
-                          } on FirebaseAuthException catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(e.message!),
-                              ),
-                            );
-                          }
-                        },
-                        icon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:
-                              Image.asset("assets/images/logos_facebook.png"),
-                        ),
-                        label: const CustomText(
-                          text: "Sign Up with Facebook",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFDA3EE8),
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    //Instagram sigin button
-                    // Container(
-                    //   padding: const EdgeInsets.only(left: 30, right: 30),
-                    //   width: double.infinity,
-                    //   height: 60,
-                    //   child: ElevatedButton.icon(
-                    //     onPressed: () {
-                    //       Navigator.pushNamed(context, "/phone_verification");
-                    //     },
-                    //     icon: Padding(
-                    //       padding: const EdgeInsets.all(8.0),
-                    //       child: Image.asset("assets/images/instagram1.png"),
-                    //     ),
-                    //     label: const CustomText(
-                    //       text: "Sign Up with Instagram",
-                    //       fontSize: 15,
-                    //       fontWeight: FontWeight.w400,
-                    //     ),
-                    //     style: ElevatedButton.styleFrom(
-                    //       backgroundColor: const Color(0xFFDA3EE8),
-                    //       elevation: 8,
-                    //       shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(30)),
-                    //     ),
-                    //   ),
+                    // const SizedBox(
+                    //   height: 30,
                     // ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text.rich(
-                      textAlign: TextAlign.center,
-                      TextSpan(children: [
-                        TextSpan(
-                            text: 'By creating an account, you agree to our ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        TextSpan(
-                            text: 'Terms of service ',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        TextSpan(
-                            text: 'and',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        TextSpan(
-                            text: 'Privacy Policy',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            )),
-                      ]),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
                     GestureDetector(
                       child: const Text.rich(
                         textAlign: TextAlign.center,
