@@ -3,6 +3,8 @@ import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/screens/home_screen.dart';
+import 'package:BuddeeUp/screens/phone_verification.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:email_validator/email_validator.dart';
@@ -205,20 +207,27 @@ class _SignUpState extends State<SignUp> {
                     //create account button
                     CustomButton(
                       text: "Create account",
-                      onpress: () {
+                      onpress: () async {
                         if (_formKey.currentState!.validate()) {
                           logger.i('validated');
+                          try {
+                            await Auth.account(
+                              _emailTextController.text.trim(),
+                              _passwordTextController.text,
+                              AuthMode.register,
+                            );
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const PhoneVerification(),
+                              ),
+                            );
+                          } on FirebaseAuthException catch (e) {
+                            logger.e(e);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(e.message!),
+                            ));
+                          }
                         }
-                        Auth.createAccount(
-                          _emailTextController.text.trim(),
-                          _passwordTextController.text,
-                          AuthMode.register,
-                        );
-                        //   Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (_) => const PhoneVerification(),
-                        //   ),
-                        // );
                       },
                       hasBorder: true,
                       buttonColor: Colors.black,
@@ -257,10 +266,11 @@ class _SignUpState extends State<SignUp> {
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setBool('isUserLoggedIn', true);
-                          } catch (e) {
+                          } on FirebaseAuthException catch (e) {
+                            logger.e(e);
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('An Error Occured'),
+                              SnackBar(
+                                content: Text(e.message!),
                               ),
                             );
                           }
@@ -305,11 +315,11 @@ class _SignUpState extends State<SignUp> {
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setBool('isUserLoggedIn', true);
-                          } catch (e) {
+                          } on FirebaseAuthException catch (e) {
                             logger.e(e);
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('An Error Occured'),
+                              SnackBar(
+                                content: Text(e.message!),
                               ),
                             );
                           }
