@@ -109,54 +109,24 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: Column(
+                      child:  Column(
                         children: [
                           Row(
                             children: [
-                              DottedImageCard(
-                                image: profilePictureData[0],
-                                isAddedMedia: false,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[1],
-                                isAddedMedia: false,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[2],
-                                isAddedMedia: false,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[3],
-                                isAddedMedia: false,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[4],
-                                isAddedMedia: false,
-                              ),
+                              DottedImageCard(),
+                              DottedImageCard(),
+                              DottedImageCard(),
+                              DottedImageCard(),
+                              DottedImageCard(),
                             ],
                           ),
                           Row(
                             children: [
-                              DottedImageCard(
-                                image: profilePictureData[0],
-                                isAddedMedia: true,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[1],
-                                isAddedMedia: true,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[2],
-                                isAddedMedia: true,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[3],
-                                isAddedMedia: true,
-                              ),
-                              DottedImageCard(
-                                image: profilePictureData[4],
-                                isAddedMedia: true,
-                              ),
+                              DottedImageCard(),
+                              DottedImageCard(),
+                              DottedImageCard(),
+                              DottedImageCard(),
+                              DottedImageCard(),
                             ],
                           ),
                         ],

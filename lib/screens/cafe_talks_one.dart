@@ -76,15 +76,7 @@ class _CafeTalksOneState extends State<CafeTalksOne> {
                 child: IconButton(
                   icon: const Icon(Icons.more_horiz, color: Colors.white),
                   onPressed: () => showAdaptiveDialog(context: context, builder: (_) => 
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                   Column(
+                      Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
