@@ -1,6 +1,12 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/helpers/auth.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/screens/home_screen.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -13,6 +19,14 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   bool _isPasswordVisible = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,40 +72,56 @@ class _SignInState extends State<SignIn> {
               height: 30,
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(40))),
-                    child: TextFormField(
-                        controller: _emailTextController,
-                        decoration: const InputDecoration(
-                          icon: Icon(
-                            Icons.person,
-                            size: 40,
-                          ),
-                          border: InputBorder.none,
-                          hintText: "Enter your Email",
-                          hintStyle: TextStyle(
-                              color: Color(0xFF616161),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    padding:
-                        const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(40))),
-                    child: TextFormField(
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(40))),
+                      child: TextFormField(
+                          validator: (value) {
+                            if (!(EmailValidator.validate(
+                                _emailTextController.text.trim()))) {
+                              return 'Input a valid email';
+                            }
+                            return null;
+                          },
+                          controller: _emailTextController,
+                          decoration: const InputDecoration(
+                            icon: Icon(
+                              Icons.person,
+                              size: 40,
+                            ),
+                            border: InputBorder.none,
+                            hintText: "Enter your Email",
+                            hintStyle: TextStyle(
+                                color: Color(0xFF616161),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding:
+                          const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(40))),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.length < 6) {
+                            return 'Password must be greater than 6';
+                          }
+                          return null;
+                        },
                         controller: _passwordTextController,
                         obscureText: _isPasswordVisible ? true : false,
                         decoration: InputDecoration(
@@ -113,116 +143,216 @@ class _SignInState extends State<SignIn> {
                               color: Color(0xFF616161),
                               fontSize: 12,
                               fontWeight: FontWeight.w500),
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomButton(
-                    text: "Sign in",
-                    onpress: () {
-                      Navigator.pushNamed(context, '/home_screen');
-                    },
-                    hasBorder: true,
-                    buttonColor: Colors.black,
-                    fontSize: 12,
-                    height: 60,
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const CustomText(
-                    text: "OR",
-                    textAlign: TextAlign.center,
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/discover_screen");
-                      },
-                      icon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                            "assets/images/flat-color-icons_google.png"),
-                      ),
-                      label: const CustomText(
-                        text: "Sign In with Google",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFDA3EE8),
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/discover_screen");
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                      text: "Sign in",
+                      onpress: () async {
+                        if (_formKey.currentState!.validate()) {
+                          logger.i('validated');
+                          try {
+                            await Auth.account(
+                              _emailTextController.text.trim(),
+                              _passwordTextController.text,
+                              AuthMode.register,
+                            );
+                            await Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/home_screen', (route) => false);
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('isUserLoggedIn', true);
+                          } on FirebaseAuthException catch (e) {
+                            logger.e(e);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(e.message!),
+                            ));
+                          }
+                        }
                       },
-                      icon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset("assets/images/logos_facebook.png"),
-                      ),
-                      label: const CustomText(
-                        text: "Sign In with Facebook",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFDA3EE8),
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
+                      hasBorder: true,
+                      buttonColor: Colors.black,
+                      fontSize: 12,
+                      height: 60,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const CustomText(
+                      text: "OR",
+                      textAlign: TextAlign.center,
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          try {
+                            await Auth.signInWithGoogle().then((value) =>
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (_) => const HomeScreen(),
+                                  ),
+                                  (route) => false,
+                                ));
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('isUserLoggedIn', true);
+                          } on FirebaseAuthException catch (e) {
+                            logger.e(e);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(e.message!),
+                              ),
+                            );
+                          }
+                        },
+                        icon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                              "assets/images/flat-color-icons_google.png"),
+                        ),
+                        label: const CustomText(
+                          text: "Sign In with Google",
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFDA3EE8),
+                          elevation: 8,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    child: const Text.rich(
+
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    //Facebook signin button
+                    Container(
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          try {
+                            await Auth.signInWithFacebook().then((value) =>
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (_) => const HomeScreen(),
+                                  ),
+                                  (route) => false,
+                                ));
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('isUserLoggedIn', true);
+                          } on FirebaseAuthException catch (e) {
+                            logger.e(e);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(e.message!),
+                              ),
+                            );
+                          }
+                        },
+                        icon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child:
+                              Image.asset("assets/images/logos_facebook.png"),
+                        ),
+                        label: const CustomText(
+                          text: "Sign Up with Facebook",
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFDA3EE8),
+                          elevation: 8,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(children: [
                         TextSpan(
-                            text: 'Dont have an account?',
+                            text: 'By creating an account, you agree to our ',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             )),
                         TextSpan(
-                            text: ' Sign Up',
+                            text: 'Terms of service ',
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             )),
+                        TextSpan(
+                            text: 'and',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            )),
+                        TextSpan(
+                            text: 'Privacy Policy',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            )),
                       ]),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(context, "/signup");
-                    },
-                  )
-                ],
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      child: const Text.rich(
+                        textAlign: TextAlign.center,
+                        TextSpan(children: [
+                          TextSpan(
+                              text: 'Dont have an account?',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              )),
+                          TextSpan(
+                              text: ' Sign Up',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              )),
+                        ]),
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/signup");
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ],

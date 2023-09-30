@@ -94,12 +94,12 @@ class PropositionScreen extends StatelessWidget {
                                     ))),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                       ],
                     ),
-                    Row(
+                    const Row(
                       children: [
                         CustomDropDown(
                             title: "Event Name",
@@ -153,7 +153,7 @@ class PropositionScreen extends StatelessWidget {
                                     ))),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                       ],
@@ -205,12 +205,12 @@ class PropositionScreen extends StatelessWidget {
                                     ))),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                       ],
                     ),
-                    Row(
+                    const Row(
                       children: [
                         CustomDropDown(
                             title: "Aprox. Zip code", desc: "123456"),
@@ -223,7 +223,7 @@ class PropositionScreen extends StatelessWidget {
                       hasBorder: true,
                       buttonColor: Colors.purpleAccent,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     CustomButton(
@@ -231,7 +231,7 @@ class PropositionScreen extends StatelessWidget {
                       onpress: () {},
                       buttonColor: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                   ],
@@ -258,7 +258,7 @@ class CustomDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       width: size.width * 0.45,
       child: Column(
         children: [
@@ -303,7 +303,7 @@ class CustomDropDown extends StatelessWidget {
                       ))),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],

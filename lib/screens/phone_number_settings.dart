@@ -2,7 +2,6 @@ import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../custom_widgets/custom_text_field.dart';
 
 class PhoneNumberSettings extends StatelessWidget {
   const PhoneNumberSettings({Key? key}) : super(key: key);

@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 

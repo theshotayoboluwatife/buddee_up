@@ -12,7 +12,20 @@
           "package_name": "com.example.buddee_up"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "828306497382-sv2bnlalr49hqpt48ltr6fkks5d5depo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.buddee_up",
+            "certificate_hash": "d17171bc022154482a16da58f5eda01f51de1983"
+          }
+        },
+        {
+          "client_id": "828306497382-aigc96pukg1o4j0r1ptet1060ck6php6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD4PYiiPTCX7S7MRLOoQ3ipPbNJvaUkvU"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828306497382-aigc96pukg1o4j0r1ptet1060ck6php6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828306497382-oceef0ft6jq94ula3f6curltf6jr2im4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.buddeeUp"
+              }
+            }
+          ]
         }
       }
     }

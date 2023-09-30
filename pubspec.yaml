@@ -37,6 +37,10 @@ dependencies:
   geocoding: ^2.1.0
   permission_handler: ^11.0.0
   image_picker: ^1.0.4
+  google_sign_in: ^6.1.5
+  logger: ^2.0.2+1
+  flutter_facebook_auth: ^6.0.2
+  shared_preferences: ^2.2.1
 
 
 dev_dependencies:

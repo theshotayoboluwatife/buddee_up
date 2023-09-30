@@ -18,10 +18,6 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

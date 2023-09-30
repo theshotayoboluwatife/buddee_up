@@ -25,7 +25,7 @@ class VideoCallScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.navigate_before,
                       size: 45,
                       color: Colors.white,
@@ -38,13 +38,13 @@ class VideoCallScreen extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.lock,
                           color: Colors.white,
                           size: 18,
                         ),
                         alignment: Alignment.centerRight),
-                    CustomText(
+                    const CustomText(
                       text: 'End to end encryption',
                       fontSize: 12,
                       fontWeight: FontWeight.w300,
@@ -66,10 +66,10 @@ class VideoCallScreen extends StatelessWidget {
                       width: 1,
                       color: Colors.white
                     ),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(20),
                         topLeft: Radius.circular(20))),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -77,24 +77,24 @@ class VideoCallScreen extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.cameraswitch_outlined, size: 40, color: Colors.white,)),
+                        icon: const Icon(Icons.cameraswitch_outlined, size: 40, color: Colors.white,)),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.video_camera_back,size: 40, color: Colors.white,)),
+                        onPressed: () {}, icon: const Icon(Icons.video_camera_back,size: 40, color: Colors.white,)),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.red[600], // Background color
                         borderRadius: BorderRadius.circular(10), // Rounded corners
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.call_end,
                         size: 40,
                         color: Colors.white, // Icon color
                       ),
                     ),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.mic,size: 40, color: Colors.white,)),
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.mic,size: 40, color: Colors.white,)),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.thumbs_up_down_sharp,size: 40, color: Colors.white,)),
+                        onPressed: () {}, icon: const Icon(Icons.thumbs_up_down_sharp,size: 40, color: Colors.white,)),
                   ],
                 ),
               ),
