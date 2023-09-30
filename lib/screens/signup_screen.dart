@@ -1,5 +1,7 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/helpers/auth.dart';
+import 'package:BuddeeUp/screens/home_screen.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:flutter/material.dart';
 
@@ -191,8 +193,23 @@ class _SignUpState extends State<SignUp> {
                     width: double.infinity,
                     height: 60,
                     child: ElevatedButton.icon(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, "/google_signin"),
+                      onPressed: () {
+                        try {
+                          Auth.signInWithGoogle();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (_) => const HomeScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('An Error Occured'),
+                            ),
+                          );
+                        }
+                      },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
@@ -222,7 +239,21 @@ class _SignUpState extends State<SignUp> {
                     height: 60,
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/phone_verification");
+                        try {
+                          Auth.signInWithFacebook();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (_) => const HomeScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('An Error Occured'),
+                            ),
+                          );
+                        }
                       },
                       icon: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -246,31 +277,31 @@ class _SignUpState extends State<SignUp> {
                   ),
 
                   //Instagram sigin button
-                  Container(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/phone_verification");
-                      },
-                      icon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset("assets/images/instagram1.png"),
-                      ),
-                      label: const CustomText(
-                        text: "Sign Up with Instagram",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFDA3EE8),
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.only(left: 30, right: 30),
+                  //   width: double.infinity,
+                  //   height: 60,
+                  //   child: ElevatedButton.icon(
+                  //     onPressed: () {
+                  //       Navigator.pushNamed(context, "/phone_verification");
+                  //     },
+                  //     icon: Padding(
+                  //       padding: const EdgeInsets.all(8.0),
+                  //       child: Image.asset("assets/images/instagram1.png"),
+                  //     ),
+                  //     label: const CustomText(
+                  //       text: "Sign Up with Instagram",
+                  //       fontSize: 15,
+                  //       fontWeight: FontWeight.w400,
+                  //     ),
+                  //     style: ElevatedButton.styleFrom(
+                  //       backgroundColor: const Color(0xFFDA3EE8),
+                  //       elevation: 8,
+                  //       shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(30)),
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -330,7 +361,7 @@ class _SignUpState extends State<SignUp> {
                             )),
                       ]),
                     ),
-                    onTap: ()=> Navigator.pushNamed(context, "/signin"),
+                    onTap: () => Navigator.pushNamed(context, "/signin"),
                   )
                 ],
               ),

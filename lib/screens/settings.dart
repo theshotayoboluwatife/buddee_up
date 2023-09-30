@@ -1,3 +1,4 @@
+import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -201,7 +202,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Row(
                       children: [
-                         CustomText(
+                        CustomText(
                           text: "Johnsmith@gmail.com",
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -252,14 +253,15 @@ class _SettingsState extends State<Settings> {
                   ),
                   Row(
                     children: [
-                       CustomText(
+                      CustomText(
                         text: locationProvider.location,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
                       IconButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, "/location_settings_screen");
+                            Navigator.pushNamed(
+                                context, "/location_settings_screen");
                           },
                           icon: const Icon(
                             Icons.navigate_next,
@@ -1118,15 +1120,20 @@ class _SettingsState extends State<Settings> {
           Container(
             padding: const EdgeInsets.all(8),
             color: const Color(0xff141416),
-            child: const Column(
+            child: Column(
               children: [
-                CustomText(
-                  text: "Log out",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  textAlign: TextAlign.center,
+                GestureDetector(
+                  onTap: () async {
+                    await Auth.signOut();
+                  },
+                  child: const CustomText(
+                    text: "Log out",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                Padding(
+                const Padding(
                   padding:
                       EdgeInsets.only(left: 4.0, right: 4, top: 8, bottom: 8),
                   child: Divider(
@@ -1134,7 +1141,7 @@ class _SettingsState extends State<Settings> {
                     height: 1,
                   ),
                 ),
-                CustomText(
+                const CustomText(
                   text: "Delete account",
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
