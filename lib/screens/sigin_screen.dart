@@ -84,6 +84,7 @@ class _SignInState extends State<SignIn> {
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(40))),
                       child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (!(EmailValidator.validate(
                                 _emailTextController.text.trim()))) {
@@ -158,7 +159,7 @@ class _SignInState extends State<SignIn> {
                             await Auth.account(
                               _emailTextController.text.trim(),
                               _passwordTextController.text,
-                              AuthMode.register,
+                              AuthMode.login,
                             );
                             await Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/home_screen', (route) => false);

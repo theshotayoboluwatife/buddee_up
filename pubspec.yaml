@@ -41,6 +41,7 @@ dependencies:
   logger: ^2.0.2+1
   flutter_facebook_auth: ^6.0.2
   shared_preferences: ^2.2.1
+  json_annotation: ^4.8.1
 
 
 dev_dependencies:
@@ -48,6 +49,8 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.3
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
 
 
 flutter_native_splash:

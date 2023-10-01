@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/providers/location_provider.dart';
 import 'package:BuddeeUp/providers/status_provider.dart';
 import 'package:BuddeeUp/screens/account_recovery.dart';
@@ -78,7 +79,10 @@ void main() async {
         ),
         ChangeNotifierProvider<LocationProvider>(
           create: (context) => LocationProvider(),
-        )
+        ),
+        ChangeNotifierProvider<CreateNewUser>(
+          create: (_) => CreateNewUser(),
+        ),
       ],
       child: const App(),
     ),
