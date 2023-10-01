@@ -37,7 +37,6 @@ class _DottedImageCardState extends State<DottedImageCard> {
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(2),
-<<<<<<< HEAD
       child: Stack(
         children: [
           Container(
@@ -49,50 +48,21 @@ class _DottedImageCardState extends State<DottedImageCard> {
               borderType: BorderType.RRect,
               radius: const Radius.circular(10),
               child: Container(
-                  width: size.width * 0.125,
-                  height: 75,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: selectedImageFile == null
-                          ? const BlankImage()
-                          : ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(
-                                selectedImageFile!,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-=======
-      child: Stack(children: [
-        Container(
-          padding: const EdgeInsets.all(4),
-          child: DottedBorder(
-            color: Colors.white,
-            strokeWidth: 1,
-            dashPattern: const [4, 6],
-            borderType: BorderType.RRect,
-            radius: const Radius.circular(10),
-            child: Container(
-              width: size.width * 0.125,
-              height: 75,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: isAddedMedia
-                  ? Container(
+                width: size.width * 0.125,
+                height: 75,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF141416),
-                    borderRadius:
-                BorderRadius.circular(10)),
-                          child: const Center(child: CustomText(text: "Private\nPhotos")))
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        image,
-                        fit: BoxFit.cover,
->>>>>>> 49fefd6334a598cf8b267539d89f3a7af1208151
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: selectedImageFile == null
+                    ? const BlankImage()
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          selectedImageFile!,
+                          fit: BoxFit.cover,
+                        ),
                       ),
+              ),
             ),
           ),
           Positioned(
@@ -117,7 +87,7 @@ class _DottedImageCardState extends State<DottedImageCard> {
                   setState(() {
                     widget.noPicture = !widget.noPicture;
                   });
-                } else if (selectedImageFile != null){
+                } else if (selectedImageFile != null) {
                   setState(() {
                     selectedImageFile = null;
                     widget.noPicture = !widget.noPicture;
