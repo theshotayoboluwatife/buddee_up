@@ -1,13 +1,29 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/main.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
-class OTPVerification extends StatelessWidget {
+class OTPVerification extends StatefulWidget {
   const OTPVerification({Key? key}) : super(key: key);
 
   @override
+  State<OTPVerification> createState() => _OTPVerificationState();
+}
+
+class _OTPVerificationState extends State<OTPVerification> {
+  TextEditingController pinController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context)!.settings.arguments;
+    CreateNewUser newUser = Provider.of<CreateNewUser>(context);
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -34,7 +50,8 @@ class OTPVerification extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.keyboard_backspace_outlined, size: 30),
+                    icon:
+                        const Icon(Icons.keyboard_backspace_outlined, size: 30),
                     color: Colors.white,
                   ),
                   const SizedBox(
@@ -49,8 +66,8 @@ class OTPVerification extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            const CustomText(
-              text: "Code has been sent to +49 1089 3645 **",
+            CustomText(
+              text: "Code has been sent to ${newUser.newUser.phoneNumber}",
               fontWeight: FontWeight.w400,
               fontSize: 15,
             ),
@@ -59,7 +76,7 @@ class OTPVerification extends StatelessWidget {
             ),
             PinCodeTextField(
               appContext: context,
-              length: 4,
+              length: 6,
               enableActiveFill: true,
               keyboardType: TextInputType.phone,
               pinTheme: PinTheme(
@@ -69,27 +86,55 @@ class OTPVerification extends StatelessWidget {
                 activeColor: Colors.white,
                 selectedFillColor: Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                fieldWidth: 75,
+                fieldWidth: 50,
                 fieldHeight: 60,
                 shape: PinCodeFieldShape.box,
               ),
               cursorColor: Colors.white,
               onChanged: (value) {},
               onCompleted: (value) {},
+              controller: pinController,
             ),
             const SizedBox(
               height: 40,
             ),
-            const CustomText(
-              text: "Resend code in",
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
+            TimerCountdown(
+              format: CountDownTimerFormat.minutesSeconds,
+              endTime: DateTime.now().add(
+                const Duration(
+                  minutes: 2,
+                  seconds: 0,
+                ),
+              ),
+              colonsTextStyle: const TextStyle(color: Colors.white),
+              timeTextStyle: const TextStyle(color: Colors.white),
+              descriptionTextStyle: const TextStyle(color: Colors.white),
+              onEnd: () {
+                print("Timer finished");
+              },
             ),
             const Spacer(),
             CustomButton(
               text: "CONTINUE",
               onpress: () {
-                Navigator.pushNamed(context, "/welcome");
+                try {
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                    verificationId: args.toString(),
+                    smsCode: pinController.text,
+                  );
+
+                  if (credential.smsCode!.isNotEmpty) {
+                    logger.i(args);
+                    Navigator.pushNamed(context, "/welcome");
+                  }
+                } catch (e) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Code Verification Failed'),
+                    ),
+                  );
+                }
               },
               buttonColor: Colors.white,
               textColor: Colors.black,

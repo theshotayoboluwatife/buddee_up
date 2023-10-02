@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CreateNewUser extends ChangeNotifier {
   NewUser newUser = NewUser(
-    id: FirebaseAuth.instance.currentUser!.uid,
+    id: FirebaseAuth.instance.currentUser?.uid ?? '',
     email: '',
     status: '',
     phoneNumber: '',

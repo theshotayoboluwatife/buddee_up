@@ -1,19 +1,26 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
 
-class PhoneVerification extends StatelessWidget {
+class PhoneVerification extends StatefulWidget {
   PhoneVerification({Key? key}) : super(key: key);
 
+  @override
+  State<PhoneVerification> createState() => _PhoneVerificationState();
+}
+
+class _PhoneVerificationState extends State<PhoneVerification> {
   late PhoneNumber phoneNumber;
+
   @override
   Widget build(BuildContext context) {
     CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
-
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -88,10 +95,29 @@ class PhoneVerification extends StatelessWidget {
             ),
             CustomButton(
               text: "CONTINUE",
-              onpress: () {
+              onpress: () async {
                 try {
-                  createNewUser.phone(phoneNumber.completeNumber);
-                  Navigator.pushNamed(context, '/otp_verification');
+                  await auth.verifyPhoneNumber(
+                    phoneNumber: phoneNumber.completeNumber,
+                    verificationCompleted: (p) {},
+                    verificationFailed: (p) {
+                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Code Verification Failed'),
+                        ),
+                      );
+                    },
+                    codeSent: (verificationId, forceResendingToken) {
+                      createNewUser.phone(phoneNumber.completeNumber);
+                      Navigator.pushNamed(
+                        context,
+                        '/otp_verification',
+                        arguments: verificationId,
+                      );
+                    },
+                    codeAutoRetrievalTimeout: (verificationId) {},
+                  );
                 } catch (e) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
 

@@ -1,5 +1,6 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
+import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +79,9 @@ class KeepMePosted extends StatelessWidget {
               text: "I WANT TO BE NOTIFIED",
               onpress: () async {
                 try {
-                  await FireStore().addUserToDatabase(createNewUser.newUser.toJson());
+                  createNewUser.newUser.id = auth.currentUser!.uid;
+                  await FireStore()
+                      .addUserToDatabase(createNewUser.newUser.toJson());
                   Navigator.pushNamed(context, "/home_screen");
                 } catch (e) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();

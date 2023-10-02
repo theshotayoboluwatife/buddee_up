@@ -53,7 +53,15 @@ class Auth {
 
   static Future<void> signOut() async {
     try {
-      await FirebaseAuth.instance.signOut();
+      await auth.signOut();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<void> deleteAccount() async {
+    try {
+      await auth.currentUser!.delete();
     } catch (e) {
       rethrow;
     }

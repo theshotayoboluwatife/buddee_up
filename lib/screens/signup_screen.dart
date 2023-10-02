@@ -231,7 +231,8 @@ class _SignUpState extends State<SignUp> {
                             prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
 
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(e.message!),

@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/helpers/auth.dart';
+import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:flutter/material.dart';
@@ -1137,8 +1138,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           (route) => false);
                     } catch (e) {
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
+                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Error Logging Out'),
@@ -1161,11 +1161,34 @@ class _SettingsState extends State<Settings> {
                     height: 1,
                   ),
                 ),
-                const CustomText(
-                  text: "Delete account",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  textAlign: TextAlign.center,
+                GestureDetector(
+                  onTap: () async {
+                    try {
+                      await Auth.deleteAccount();
+                      await FireStore().deleteAccount();
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isUserLoggedIn', false);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (_) => const SignIn(),
+                          ),
+                          (route) => false);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Error Deleting Account'),
+                        ),
+                      );
+                    }
+                  },
+                  child: const CustomText(
+                    text: "Delete account",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),

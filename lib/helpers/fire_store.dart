@@ -12,4 +12,15 @@ class FireStore {
       rethrow;
     }
   }
+
+  Future<void> deleteAccount() async {
+    try {
+      DocumentReference documentReference = FirebaseFirestore.instance
+          .collection('users')
+          .doc(auth.currentUser!.uid);
+      await documentReference.delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

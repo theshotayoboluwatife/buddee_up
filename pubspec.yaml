@@ -44,7 +44,7 @@ dependencies:
   json_annotation: ^4.8.1
   firebase_storage: ^11.2.7
   cloud_firestore: ^4.9.2
-
+  flutter_timer_countdown: ^1.0.5
 
 dev_dependencies:
   flutter_test:
