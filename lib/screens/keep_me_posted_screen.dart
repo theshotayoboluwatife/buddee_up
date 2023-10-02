@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_widgets/custom_text.dart';
@@ -17,9 +18,12 @@ class KeepMePosted extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              Color.fromRGBO(227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
-              Color.fromRGBO(196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+              Color.fromRGBO(
+                  227, 127, 236, 0.96), // rgba(227.15, 126.78, 235.88, 0.96)
+              Color.fromRGBO(
+                  196, 32, 210, 0.96), // rgba(196.07, 31.56, 210.37, 0.96)
+              Color.fromRGBO(
+                  163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
         ),
@@ -36,7 +40,9 @@ class KeepMePosted extends StatelessWidget {
                       icon: const Icon(Icons.arrow_back_outlined),
                       color: Colors.white,
                     ))),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Stack(
               alignment: Alignment.center,
               children: [
@@ -58,8 +64,7 @@ class KeepMePosted extends StatelessWidget {
               height: 20,
             ),
             const CustomText(
-              text:
-              "Find out when you get a message",
+              text: "Find out when you get a message",
               fontSize: 15,
               fontWeight: FontWeight.w400,
               textAlign: TextAlign.center,
@@ -67,8 +72,17 @@ class KeepMePosted extends StatelessWidget {
             const Spacer(),
             CustomButton(
               text: "I WANT TO BE NOTIFIED",
-              onpress: () {
-                Navigator.pushNamed(context, "/home_screen");
+              onpress: () async {
+                try {
+                  await FireStore().addUserToDatabase();
+                  Navigator.pushNamed(context, "/home_screen");
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(e.toString()),
+                    ),
+                  );
+                }
               },
               textColor: Colors.black,
             ),
@@ -84,8 +98,12 @@ class KeepMePosted extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),
-                IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_drop_down_outlined), color: Colors.white,
-                  iconSize: 30,)
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_drop_down_outlined),
+                  color: Colors.white,
+                  iconSize: 30,
+                )
               ],
             ),
             //Spacer()

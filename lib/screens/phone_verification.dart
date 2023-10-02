@@ -1,14 +1,19 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:provider/provider.dart';
 
 class PhoneVerification extends StatelessWidget {
-  const PhoneVerification({Key? key}) : super(key: key);
+  PhoneVerification({Key? key}) : super(key: key);
 
+  late PhoneNumber phoneNumber;
   @override
   Widget build(BuildContext context) {
+    CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -30,13 +35,13 @@ class PhoneVerification extends StatelessWidget {
           children: [
             SafeArea(
               child: Row(
-
                 children: [
                   IconButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.keyboard_backspace_outlined, size: 30),
+                    icon:
+                        const Icon(Icons.keyboard_backspace_outlined, size: 30),
                     color: Colors.white,
                   ),
                   const SizedBox(
@@ -53,21 +58,20 @@ class PhoneVerification extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               child: IntlPhoneField(
-                  decoration: const InputDecoration(
-                        hintText: "Enter your mobile number",
-                        counterText: '',
-                        border:  InputBorder.none,
-                        filled: true,
-                        fillColor: Colors.white, // Background color
-                      ),
-                      initialCountryCode: 'US',
-                      onChanged: (PhoneNumber phoneNumber) {
-
-                      },
+                decoration: const InputDecoration(
+                  hintText: "Enter your mobile number",
+                  counterText: '',
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: Colors.white, // Background color
+                ),
+                initialCountryCode: 'US',
+                onChanged: (PhoneNumber number) {
+                  phoneNumber = number;
+                },
               ),
             ),
             const SizedBox(
@@ -79,10 +83,26 @@ class PhoneVerification extends StatelessWidget {
               fontWeight: FontWeight.w400,
               fontSize: 15,
             ),
-            const SizedBox(height: 50,),
-            CustomButton(text: "CONTINUE", onpress: (){
-              Navigator.pushNamed(context, '/otp_verification');
-            }, buttonColor: Colors.white, textColor: Colors.black,),
+            const SizedBox(
+              height: 50,
+            ),
+            CustomButton(
+              text: "CONTINUE",
+              onpress: () {
+                try {
+                  createNewUser.phone(phoneNumber.completeNumber);
+                  Navigator.pushNamed(context, '/otp_verification');
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Enter A Valid Phone Number'),
+                    ),
+                  );
+                }
+              },
+              buttonColor: Colors.white,
+              textColor: Colors.black,
+            ),
           ],
         ),
       ),

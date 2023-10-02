@@ -8,6 +8,7 @@ part of 'new_user.dart';
 
 NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
       email: json['email'] as String,
+      id: json['id'] as String,
       status: json['status'] as String,
       imageUrl: json['imageUrl'] as String? ??
           'https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png',
@@ -32,6 +33,7 @@ NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
     );
 
 Map<String, dynamic> _$NewUserToJson(NewUser instance) => <String, dynamic>{
+      'id': instance.id,
       'email': instance.email,
       'imageUrl': instance.imageUrl,
       'phoneNumber': instance.phoneNumber,

@@ -4,6 +4,7 @@ part 'new_user.g.dart';
 
 @JsonSerializable()
 class NewUser {
+  String id;
   String email;
   String imageUrl;
   String phoneNumber;
@@ -25,8 +26,10 @@ class NewUser {
 
   NewUser({
     required this.email,
+    required this.id,
     required this.status,
-     this.imageUrl = 'https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png',
+    this.imageUrl =
+        'https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png',
     required this.phoneNumber,
     required this.profileName,
     required this.age,

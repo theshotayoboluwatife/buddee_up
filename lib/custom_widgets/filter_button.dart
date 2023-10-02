@@ -45,6 +45,7 @@ class _FilterItemState extends State<FilterItem> {
   String country = "United Kingdom";
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
       child: Container(
         height: widget.size.height / 1.5,
@@ -153,7 +154,8 @@ class _FilterItemState extends State<FilterItem> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(width: 1, color: Colors.grey.withOpacity(0.5)),
+                border:
+                    Border.all(width: 1, color: Colors.grey.withOpacity(0.5)),
               ),
               padding: const EdgeInsets.all(2.0),
               child: Row(

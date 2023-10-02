@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -9,8 +11,10 @@ class DottedImageCard extends StatefulWidget {
   DottedImageCard({
     Key? key,
     this.noPicture = false,
+    required this.images,
   }) : super(key: key);
   bool noPicture;
+  List<String> images;
 
   @override
   _DottedImageCardState createState() => _DottedImageCardState();
@@ -18,17 +22,37 @@ class DottedImageCard extends StatefulWidget {
 
 class _DottedImageCardState extends State<DottedImageCard> {
   File? selectedImageFile;
+  late String fileLocation;
+
+  late String url;
 
   Future<void> pickImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
+      imageQuality: 45,
     );
 
     if (pickedFile != null) {
       setState(() {
         selectedImageFile = File(pickedFile.path);
       });
+
+      String fileName = DateTime.now()
+          .millisecondsSinceEpoch
+          .toString(); // Generate a unique filename
+      fileLocation = fileName;
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child(FirebaseAuth.instance.currentUser!.uid)
+          .child(fileName);
+      UploadTask uploadTask = storageReference.putFile(File(pickedFile.path));
+      // Wait for the upload to complete and get the download URL
+      TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+      String downloadURL = await taskSnapshot.ref.getDownloadURL();
+      url = downloadURL;
+      widget.images.add(url);
+      // Use downloadURL for your application needs (e.g., save it to a database)
     }
   }
 
@@ -91,7 +115,13 @@ class _DottedImageCardState extends State<DottedImageCard> {
                   setState(() {
                     selectedImageFile = null;
                     widget.noPicture = !widget.noPicture;
+                    widget.images.remove(url);
                   });
+                  await FirebaseStorage.instance
+                      .ref()
+                      .child(FirebaseAuth.instance.currentUser!.uid)
+                      .child(fileLocation)
+                      .delete();
                 }
               },
             ),

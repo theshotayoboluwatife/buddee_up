@@ -1,4 +1,6 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,10 +9,25 @@ import '../custom_widgets/dotted_image_card.dart';
 import '../providers/status_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  final TextEditingController profileNameTextEditingController =
+      TextEditingController();
+  final TextEditingController ageTextEditingController =
+      TextEditingController();
+  final TextEditingController bioTextEditingController =
+      TextEditingController();
+  final TextEditingController heightTextEditingController =
+      TextEditingController();
+  final TextEditingController weightTextEditingController =
+      TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  List<String> images = [];
 
   @override
   Widget build(BuildContext context) {
+    CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
     final profilePictureData = Provider.of<Status>(context).profilePicturesData;
     return Scaffold(
       body: Container(
@@ -58,96 +75,154 @@ class ProfileScreen extends StatelessWidget {
             Expanded(
               child: SizedBox(
                 width: double.infinity,
-                child: ListView(
-                  children: [
-                    const Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: ProfileContainer(
-                          heading: "Create a profile name",
-                          hint: 'John Smith',
-                        )),
-                        Expanded(
-                            child: ProfileContainer(
-                          heading: "Age",
-                          hint: '1990-02-01',
-                        )),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const ProfileContainer(
-                      heading: "Bio",
-                      hint: 'Create a short bio',
-                      height: 160,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CustomText(
-                            text: "Profile picture",
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        CustomText(
-                          text: " *Add at least 2 photos to continue",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child:  Column(
+                child: Form(
+                  key: formKey,
+                  child: ListView(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                            ],
+                          Expanded(
+                            child: ProfileContainer(
+                              validator: (value) {
+                                if (value!.length < 3) {
+                                  return 'Profile name must be greater than 3';
+                                }
+                              },
+                              heading: "Create a profile name",
+                              hint: 'John Smith',
+                              controller: profileNameTextEditingController,
+                            ),
                           ),
-                          Row(
-                            children: [
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                            ],
+                          Expanded(
+                            child: ProfileContainer(
+                              type: TextInputType.number,
+                              validator: (p) {
+                                if (int.parse(p!).isNaN) {
+                                  return "Imput a valid age";
+                                }
+                              },
+                              heading: "Age",
+                              hint: '18',
+                              controller: ageTextEditingController,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 1,
-                    ),
-                    const ProfileContainer(
-                        heading: "Height", hint: "5' ft 0\" in"),
-                    const ProfileContainer(heading: "Weight", hint: "130 lbs"),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      text: "CONTINUE",
-                      onpress: () {
-                        Navigator.pushNamed(context, "/sex_type_screen");
-                      },
-                      textColor: Colors.black,
-                    ),
-                    const SizedBox(height: 10)
-                  ],
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ProfileContainer(
+                        validator: (p) {
+                          if (p!.isEmpty) {
+                            return 'Bio Can\'t be empty';
+                          }
+                        },
+                        heading: "Bio",
+                        hint: 'Create a short bio',
+                        height: 160,
+                        controller: bioTextEditingController,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText(
+                              text: "Profile picture",
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          CustomText(
+                            text: " *Add at least 2 photos to continue",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 1,
+                      ),
+                      ProfileContainer(
+                        validator: (p) {
+                          if (p!.isEmpty) {
+                            heightTextEditingController.text = "5' ft 0\" in";
+                          }
+                        },
+                        heading: "Height",
+                        hint: "5' ft 0\" in",
+                        controller: heightTextEditingController,
+                      ),
+                      ProfileContainer(
+                        validator: (p) {
+                          if (p!.isEmpty) {
+                            weightTextEditingController.text = "130 lbs";
+                          }
+                        },
+                        heading: "Weight",
+                        hint: "130 lbs",
+                        controller: weightTextEditingController,
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: "CONTINUE",
+                        onpress: () {
+                          if (images.length < 2) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Add at least 2 photos to continue'),
+                              ),
+                            );
+                          }
+                          if (formKey.currentState!.validate()) {
+                            createNewUser.setProfile(
+                              profileNameTextEditingController.text,
+                              int.parse(ageTextEditingController.text),
+                              bioTextEditingController.text,
+                              images,
+                              heightTextEditingController.text,
+                              double.parse(weightTextEditingController.text),
+                            );
+                            Navigator.pushNamed(context, "/sex_type_screen");
+                            logger.i(createNewUser.newUser.imageUrl);
+                          }
+                        },
+                        textColor: Colors.black,
+                      ),
+                      const SizedBox(height: 10)
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -159,11 +234,20 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class ProfileContainer extends StatelessWidget {
+  final TextEditingController controller;
+
+  final String? Function(String?)? validator;
+
+  final TextInputType type;
+
   const ProfileContainer({
     super.key,
+    this.type = TextInputType.text,
     required this.heading,
     required this.hint,
     this.height,
+    required this.controller,
+    required this.validator,
   });
 
   final String heading;
@@ -190,18 +274,25 @@ class ProfileContainer extends StatelessWidget {
             height: height,
             padding: const EdgeInsets.only(left: 6, top: 6, bottom: 6),
             decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
             child: TextFormField(
-                controller: null,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: hint,
-                  hintStyle: const TextStyle(
-                      color: Color.fromARGB(69, 81, 84, 64),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500),
-                )),
+              keyboardType: type,
+              validator: validator,
+              controller: controller,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hint,
+                hintStyle: const TextStyle(
+                  color: Color.fromARGB(69, 81, 84, 64),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
           ),
           const SizedBox(
             height: 10,

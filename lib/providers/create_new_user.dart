@@ -1,8 +1,10 @@
 import 'package:BuddeeUp/models/new_user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CreateNewUser extends ChangeNotifier {
   NewUser newUser = NewUser(
+    id: FirebaseAuth.instance.currentUser!.uid,
     email: '',
     status: '',
     phoneNumber: '',
@@ -10,7 +12,7 @@ class CreateNewUser extends ChangeNotifier {
     age: 18,
     bio: 'bio',
     pictures: [],
-    height: '',
+    height: '5 ft 4',
     weight: 0,
     gender: '',
     tribe: '',

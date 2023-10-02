@@ -1,4 +1,6 @@
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../custom_widgets/custom_button.dart';
 import '../custom_widgets/custom_text.dart';
 
@@ -10,8 +12,19 @@ class BodyType extends StatefulWidget {
 }
 
 class _BodyTypeState extends State<BodyType> {
+  String selectedBodyType = "Avg"; // Initial selected value
+  List<String> bodyTypeItems = [
+    "Avg",
+    "Fit",
+    "Chub",
+    "Twink",
+    "Bodybuilder",
+    "Swimmer",
+  ];
   @override
   Widget build(BuildContext context) {
+    final createNewUser = Provider.of<CreateNewUser>(context);
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -22,7 +35,8 @@ class _BodyTypeState extends State<BodyType> {
             colors: [
               Color.fromRGBO(227, 127, 236, 0.96),
               Color.fromRGBO(196, 32, 210, 0.96),
-              Color.fromRGBO(163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
+              Color.fromRGBO(
+                  163, 11, 176, 0.96), // rgba(163.15, 11.02, 176.37, 0.96)
             ],
           ),
         ),
@@ -42,80 +56,91 @@ class _BodyTypeState extends State<BodyType> {
                       color: Colors.white,
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(top:24.0, left: 8),
-                      child: CustomText(text: "Body Type", fontSize: 36, fontWeight: FontWeight.w600,),
+                      padding: EdgeInsets.only(top: 24.0, left: 8),
+                      child: CustomText(
+                        text: "Body Type",
+                        fontSize: 36,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ]),
             ),
-            const SizedBox(height: 60,),
+            const SizedBox(
+              height: 60,
+            ),
             Padding(
-              padding: const EdgeInsets.only(left:12),
+              padding: const EdgeInsets.only(left: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomText(text: "Select body type", fontSize: 16, fontWeight: FontWeight.w400,),
-                  const SizedBox(height: 10,),
+                  const CustomText(
+                    text: "Select body type",
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   DecoratedBox(
                       decoration: BoxDecoration(
-                        color:Colors.white,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child:Padding(
-                          padding: const EdgeInsets.only(left:30, right:30),
-                          child:
-                          DropdownButton(
-                            value: "Avg",
-                            items: const [
-                              DropdownMenuItem(
-                                value: "Avg",
-                                child: Text("Avg"),
-                              ),
-                              DropdownMenuItem(
-                                value: "Fit",
-                                child: Text("Fit"),
-                              ),
-                              DropdownMenuItem(
-                                  value: "Chub",
-                                  child: Text("Chub")
-                              ),
-                              DropdownMenuItem(
-                                value: "Twink",
-                                child: Text("Twink"),
-                              ),
-                              DropdownMenuItem(
-                                value: "Bodybuilder",
-                                child: Text("Bodybuilder"),
-                              ),
-                              DropdownMenuItem(
-                                value: "Swimmer",
-                                child: Text("Swimmer"),
-                              )
-                            ],
-                            onChanged: (value){
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: DropdownButton(
+                            value: selectedBodyType,
+                            items: bodyTypeItems.map((String item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(item),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedBodyType = value!;
+                              });
+                              createNewUser.bodyType(value!);
                             },
                             icon: const Padding(
-                                padding: EdgeInsets.only(left:20),
-                                child:Icon(Icons.keyboard_arrow_down_outlined,)
-                            ),
+                                padding: EdgeInsets.only(left: 20),
+                                child: Icon(
+                                  Icons.keyboard_arrow_down_outlined,
+                                )),
                             iconEnabledColor: Colors.black,
-                            style: const TextStyle(  //te
+                            style: const TextStyle(
+                                //te
                                 color: Colors.black,
-                                fontSize: 20
-                            ),
-
+                                fontSize: 20),
                             dropdownColor: Colors.white,
                             underline: Container(),
                             isExpanded: true,
                             borderRadius: BorderRadius.circular(10),
-                          )
-                      )
-                  ),
+                          ))),
                 ],
-              ) ,),
-
+              ),
+            ),
             const Spacer(),
-            CustomButton(text: "CONTINUE", textColor: Colors.black, onpress: (){Navigator.pushNamed(context, "/ethnicity_screen");}, width: double.infinity,buttonColor: Colors.white,),
-            const SizedBox(height: 20,)
+            CustomButton(
+              text: "CONTINUE",
+              textColor: Colors.black,
+              onpress: () {
+                if (createNewUser.newUser.bodyType.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Select a vlaue'),
+                    ),
+                  );
+                } else {
+                  Navigator.pushNamed(context, "/ethnicity_screen");
+                }
+              },
+              width: double.infinity,
+              buttonColor: Colors.white,
+            ),
+            const SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),

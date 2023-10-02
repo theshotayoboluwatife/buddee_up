@@ -18,6 +18,7 @@ class _EditInfoState extends State<EditInfo>
   bool switchValue = true;
   bool switchValue2 = true;
   bool switchValue3 = true;
+  List<String> images = [];
 
   @override
   void initState() {
@@ -96,20 +97,18 @@ class _EditInfoState extends State<EditInfo>
                         children: [
                           Row(
                             children: [
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
+                            DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
                             ],
                           ),
                           Row(
                             children: [
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
-                              DottedImageCard(),
+                             DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
+                                DottedImageCard(images: images),
                             ],
                           ),
                         ],

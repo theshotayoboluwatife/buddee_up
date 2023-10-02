@@ -2,9 +2,11 @@ import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -34,6 +36,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    final createNewUser = Provider.of<CreateNewUser>(context);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -215,9 +218,11 @@ class _SignUpState extends State<SignUp> {
                               _passwordTextController.text,
                               AuthMode.register,
                             );
+                            createNewUser
+                                .setEmail(_emailTextController.text.trim());
                             await Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => const PhoneVerification(),
+                                builder: (_) => PhoneVerification(),
                               ),
                             );
                             final SharedPreferences prefs =

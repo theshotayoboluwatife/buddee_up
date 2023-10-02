@@ -1,4 +1,6 @@
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../custom_widgets/custom_button.dart';
 import '../custom_widgets/custom_text.dart';
 import 'package:choice/choice.dart';
@@ -37,6 +39,8 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final createNewUser = Provider.of<CreateNewUser>(context);
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -60,7 +64,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                     IconButton(
+                    IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -98,7 +102,8 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
                       onSelected: selection.onSelected(choices[i]),
                       label: Text(
                         choices[i],
-                        style: const TextStyle(color: Colors.purple, fontSize: 14),
+                        style:
+                            const TextStyle(color: Colors.purple, fontSize: 14),
                       ),
                       color: const MaterialStatePropertyAll(
                         Colors.white,
@@ -125,7 +130,16 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
               text: "CONTINUE",
               textColor: Colors.black,
               onpress: () {
-                Navigator.pushNamed(context, "/sexual_preference_screen");
+                if (createNewUser.newUser.activities.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Select a vlaue'),
+                    ),
+                  );
+                } else {
+                  createNewUser.activities(selectedValue);
+                  Navigator.pushNamed(context, "/sexual_preference_screen");
+                }
               },
               width: double.infinity,
               buttonColor: Colors.white,
