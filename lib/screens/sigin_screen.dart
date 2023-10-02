@@ -1,7 +1,10 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
+import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/main.dart';
+import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/home_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -168,7 +171,8 @@ class _SignInState extends State<SignIn> {
                             prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
 
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(e.message!),
@@ -201,23 +205,61 @@ class _SignInState extends State<SignIn> {
                       child: ElevatedButton.icon(
                         onPressed: () async {
                           try {
-                            await Auth.signInWithGoogle().then((value) =>
-                                Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (_) => const HomeScreen(),
-                                  ),
-                                  (route) => false,
-                                ));
+                            await Auth.signInWithGoogle();
+                            logger.i(auth.currentUser!.providerData);
+                            await FireStore().addUserToDatabase(
+                              NewUser(
+                                email: auth.currentUser!.email ?? '',
+                                id: auth.currentUser!.uid,
+                                status: '',
+                                phoneNumber:
+                                    auth.currentUser!.phoneNumber ?? '',
+                                profileName:
+                                    auth.currentUser!.displayName ?? '',
+                                age: 18,
+                                bio: '',
+                                pictures: [auth.currentUser!.photoURL ?? ''],
+                                height: '5 ft 10',
+                                weight: 130,
+                                gender: '',
+                                tribe: '',
+                                bodyType: '',
+                                ethnicity: '',
+                                lookingFor: '',
+                                healthStatus: '',
+                                activities: [],
+                                sexualPreferences: '',
+                              ).toJson(),
+                            );
+
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setBool('isUserLoggedIn', true);
+
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (_) => const HomeScreen(),
+                              ),
+                              (route) => false,
+                            );
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(e.message!),
+                              ),
+                            );
+                          } catch (e) {
+                            logger.e(e);
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(e.toString()),
                               ),
                             );
                           }
@@ -236,7 +278,8 @@ class _SignInState extends State<SignIn> {
                           backgroundColor: const Color(0xFFDA3EE8),
                           elevation: 8,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
                       ),
                     ),
@@ -264,7 +307,8 @@ class _SignInState extends State<SignIn> {
                             prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
