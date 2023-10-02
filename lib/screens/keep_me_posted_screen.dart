@@ -1,6 +1,8 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -9,6 +11,8 @@ class KeepMePosted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final createNewUser = Provider.of<CreateNewUser>(context);
+
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: Container(
@@ -74,9 +78,11 @@ class KeepMePosted extends StatelessWidget {
               text: "I WANT TO BE NOTIFIED",
               onpress: () async {
                 try {
-                  await FireStore().addUserToDatabase();
+                  await FireStore().addUserToDatabase(createNewUser.newUser.toJson());
                   Navigator.pushNamed(context, "/home_screen");
                 } catch (e) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(e.toString()),

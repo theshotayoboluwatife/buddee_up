@@ -1,3 +1,4 @@
+import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -130,14 +131,16 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
               text: "CONTINUE",
               textColor: Colors.black,
               onpress: () {
+                logger.i(selectedValue);
+                createNewUser.activities(selectedValue);
                 if (createNewUser.newUser.activities.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),
                     ),
                   );
                 } else {
-                  createNewUser.activities(selectedValue);
                   Navigator.pushNamed(context, "/sexual_preference_screen");
                 }
               },

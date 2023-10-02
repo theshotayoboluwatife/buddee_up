@@ -127,6 +127,8 @@ class _RelationshipStatusState extends State<RelationshipStatus> {
               textColor: Colors.black,
               onpress: () {
                 if (createNewUser.newUser.status.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),

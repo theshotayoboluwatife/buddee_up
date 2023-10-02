@@ -132,6 +132,8 @@ class _TribeState extends State<Tribe> {
               textColor: Colors.black,
               onpress: () {
                 if (createNewUser.newUser.tribe.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),

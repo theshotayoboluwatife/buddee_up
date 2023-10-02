@@ -126,6 +126,8 @@ class _BodyTypeState extends State<BodyType> {
               textColor: Colors.black,
               onpress: () {
                 if (createNewUser.newUser.bodyType.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),

@@ -19,6 +19,7 @@ class LocationProvider with ChangeNotifier {
         print(e);
       }
     } else if (status.isDenied) {
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(

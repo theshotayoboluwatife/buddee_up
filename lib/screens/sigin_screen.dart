@@ -168,6 +168,8 @@ class _SignInState extends State<SignIn> {
                             prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(e.message!),
                             ));
@@ -211,6 +213,8 @@ class _SignInState extends State<SignIn> {
                             prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(e.message!),
@@ -260,6 +264,8 @@ class _SignInState extends State<SignIn> {
                             prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(e.message!),

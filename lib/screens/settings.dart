@@ -1137,6 +1137,8 @@ class _SettingsState extends State<Settings> {
                           ),
                           (route) => false);
                     } catch (e) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Error Logging Out'),

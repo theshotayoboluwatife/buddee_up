@@ -129,7 +129,10 @@ class _EthnicityState extends State<Ethnicity> {
               textColor: Colors.black,
               onpress: () {
                   if (createNewUser.newUser.ethnicity.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
+
                     const SnackBar(
                       content: Text('Select a vlaue'),
                     ),

@@ -130,6 +130,8 @@ class _SexualPreferencesState extends State<SexualPreferences> {
               textColor: Colors.black,
               onpress: () {
                 if (createNewUser.newUser.sexualPreferences.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),

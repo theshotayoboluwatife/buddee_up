@@ -93,6 +93,8 @@ class PhoneVerification extends StatelessWidget {
                   createNewUser.phone(phoneNumber.completeNumber);
                   Navigator.pushNamed(context, '/otp_verification');
                 } catch (e) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Enter A Valid Phone Number'),

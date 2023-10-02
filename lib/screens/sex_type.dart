@@ -98,7 +98,18 @@ class SexType extends StatelessWidget {
             ),
             CustomButton(
               text: "CONTINUE",
-              onpress: () => Navigator.pushNamed(context, '/tribe_screen'),
+              onpress: () {
+                  if (createNewUser.newUser.gender.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Select a vlaue'),
+                    ),
+                  );
+                }
+                Navigator.pushNamed(context, '/tribe_screen');
+              },
               textColor: Colors.black,
             ),
             const SizedBox(height: 20)

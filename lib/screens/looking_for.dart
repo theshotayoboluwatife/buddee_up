@@ -129,6 +129,8 @@ class _LookingForState extends State<LookingFor> {
               textColor: Colors.black,
               onpress: () {
                   if (createNewUser.newUser.lookingFor.isEmpty) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),
