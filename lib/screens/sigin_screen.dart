@@ -206,7 +206,7 @@ class _SignInState extends State<SignIn> {
                         onPressed: () async {
                           try {
                             await Auth.signInWithGoogle();
-                            logger.i(auth.currentUser!.providerData);
+                            logger.i(auth.currentUser!.photoURL);
                             await FireStore().addUserToDatabase(
                               NewUser(
                                 email: auth.currentUser!.email ?? '',
@@ -217,6 +217,8 @@ class _SignInState extends State<SignIn> {
                                 profileName:
                                     auth.currentUser!.displayName ?? '',
                                 age: 18,
+                                imageUrl: auth.currentUser!.photoURL ??
+                                    'https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png',
                                 bio: '',
                                 pictures: [auth.currentUser!.photoURL ?? ''],
                                 height: '5 ft 10',
@@ -293,30 +295,31 @@ class _SignInState extends State<SignIn> {
                       width: double.infinity,
                       height: 60,
                       child: ElevatedButton.icon(
-                        onPressed: () async {
-                          try {
-                            await Auth.signInWithFacebook().then((value) =>
-                                Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (_) => const HomeScreen(),
-                                  ),
-                                  (route) => false,
-                                ));
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setBool('isUserLoggedIn', true);
-                          } on FirebaseAuthException catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context)
-                                .removeCurrentSnackBar();
+                        // onPressed: () async {
+                        //   try {
+                        //     await Auth.signInWithFacebook().then((value) =>
+                        //         Navigator.of(context).pushAndRemoveUntil(
+                        //           MaterialPageRoute(
+                        //             builder: (_) => const HomeScreen(),
+                        //           ),
+                        //           (route) => false,
+                        //         ));
+                        //     final SharedPreferences prefs =
+                        //         await SharedPreferences.getInstance();
+                        //     prefs.setBool('isUserLoggedIn', true);
+                        //   } on FirebaseAuthException catch (e) {
+                        //     logger.e(e);
+                        //     ScaffoldMessenger.of(context)
+                        //         .removeCurrentSnackBar();
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(e.message!),
-                              ),
-                            );
-                          }
-                        },
+                        //     ScaffoldMessenger.of(context).showSnackBar(
+                        //       SnackBar(
+                        //         content: Text(e.message!),
+                        //       ),
+                        //     );
+                        //   }
+                        // },
+                        onPressed: () {},
                         icon: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child:

@@ -1,8 +1,9 @@
 import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
 import 'package:BuddeeUp/custom_widgets/filter_button.dart';
-import 'package:BuddeeUp/providers/status_provider.dart';
+import 'package:BuddeeUp/helpers/get_user_details.dart';
+import 'package:BuddeeUp/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -14,7 +15,6 @@ class DiscoveryPage extends StatelessWidget {
   // final List<StatusData> statusData;
   @override
   Widget build(BuildContext context) {
-    final statusData = Provider.of<Status>(context).statusData;
     Size size = MediaQuery.of(context).size;
 
     return SafeArea(
@@ -63,13 +63,24 @@ class DiscoveryPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        GestureDetector(
-                          child: Image.asset(
-                            "assets/images/photo.png",
-                            cacheWidth: 30,
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(context, "/user_profile");
+                        FutureBuilder(
+                          future: GetUserDetails().getUserProfileImage(),
+                          builder: (_, snapShot) {
+                            if (snapShot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Container();
+                            }
+                            return GestureDetector(
+                              child: ClipOval(
+                                child: Image.network(
+                                  snapShot.data!,
+                                  cacheWidth: 30,
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(context, "/user_profile");
+                              },
+                            );
                           },
                         ),
                         const SizedBox(
@@ -86,15 +97,44 @@ class DiscoveryPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   height: 90,
-                  child: ListView.builder(
-                    itemCount: statusData.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return StatusCard(
-                        name: statusData[index].name,
-                        image: statusData[index].imageUrl,
+                  child: FutureBuilder(
+                    future: GetUserDetails().getUsers(),
+                    builder: (_, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      }
+                      List<QueryDocumentSnapshot<Map<String, dynamic>>>? data =
+                          snapshot.data?.docs;
+
+                      // for (var i = 0; i < data!.length; i++) {
+                      // logger.i(data[i].data());
+                      // }
+
+                      var you = data!.firstWhere(
+                          (element) => element.id == auth.currentUser!.uid);
+                      var youData = you.data();
+                      var imageUrl = youData['imageUrl'];
+                      return ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          StatusCard(
+                            name: 'You',
+                            image: imageUrl,
+                          ),
+                          ...data.map(
+                            (value) {
+                              if (value.id != youData['id']) {
+                                return StatusCard(
+                                  name: (value['profileName'] as String),
+                                  image: value['imageUrl'],
+                                );
+                              }
+                              return Container();
+                            },
+                          ),
+                        ],
                       );
                     },
-                    scrollDirection: Axis.horizontal,
                   ),
                 ),
               ],
@@ -143,8 +183,9 @@ class StatusCard extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
+                      shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: AssetImage(image),
+                        image: NetworkImage(image),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -153,10 +194,15 @@ class StatusCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5),
-            CustomText(
-              text: name,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
+            SizedBox(
+              width: 60,
+              child: Center(
+                child: CustomText(
+                  text: name,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             )
           ],
         ),

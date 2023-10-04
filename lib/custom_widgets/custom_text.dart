@@ -18,21 +18,15 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Text(
-          text,
-          softWrap: true,
-          textAlign: textAlign,
-          style: Theme
-              .of(context)
-              .textTheme
-              .titleSmall!
-              .copyWith(
+    return Text(
+      text,
+      softWrap: true,
+      textAlign: textAlign,
+      style: Theme.of(context).textTheme.titleSmall!.copyWith(
             color: color,
             fontWeight: fontWeight,
             fontSize: fontSize,
           ),
-        )
     );
   }
 }

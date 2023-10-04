@@ -198,8 +198,8 @@ class ProfileScreen extends StatelessWidget {
                         text: "CONTINUE",
                         onpress: () {
                           if (images.length < 2) {
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content:

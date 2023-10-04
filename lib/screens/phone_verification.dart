@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
-import 'package:BuddeeUp/helpers/logger.dart';
 
 class PhoneVerification extends StatefulWidget {
   PhoneVerification({Key? key}) : super(key: key);

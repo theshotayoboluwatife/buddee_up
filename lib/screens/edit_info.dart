@@ -36,7 +36,7 @@ class _EditInfoState extends State<EditInfo>
 
   @override
   Widget build(BuildContext context) {
-    final profilePictureData = Provider.of<Status>(context).profilePicturesData;
+    // final profilePictureData = Provider.of<Status>(context).profilePicturesData;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
