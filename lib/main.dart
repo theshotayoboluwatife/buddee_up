@@ -123,7 +123,7 @@ class App extends StatelessWidget {
           "/enable_location_screen": (context) => const EnableLocation(),
           "/keep_me_posted_screen": (context) => const KeepMePosted(),
           "/report_user_screen": (context) => const ReportUserScreen(),
-          "/phone_number_settings": (context) => const PhoneNumberSettings(),
+          "/phone_number_settings": (context) => PhoneNumberSettings(),
           "/connected_accounts": (context) => const ConnectedAccountScreen(),
           "/email_verification_settings": (context) =>
               const EmailVerificationSettings(),

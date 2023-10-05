@@ -219,7 +219,7 @@ class ProfileScreen extends StatelessWidget {
                               bioTextEditingController.text,
                               images,
                               heightTextEditingController.text,
-                              double.parse(weightTextEditingController.text),
+                              weightTextEditingController.text,
                             );
                             Navigator.pushNamed(context, "/sex_type_screen");
                             logger.i(createNewUser.newUser.imageUrl);

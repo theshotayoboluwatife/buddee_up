@@ -223,7 +223,7 @@ class _SignInState extends State<SignIn> {
                                 bio: '',
                                 pictures: [auth.currentUser!.photoURL ?? ''],
                                 height: '5 ft 10',
-                                weight: 130,
+                                weight: '130',
                                 gender: '',
                                 tribe: '',
                                 bodyType: '',

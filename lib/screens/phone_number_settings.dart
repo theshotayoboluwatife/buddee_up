@@ -1,10 +1,15 @@
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/helpers/get_user_details.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class PhoneNumberSettings extends StatelessWidget {
-  const PhoneNumberSettings({Key? key}) : super(key: key);
+  final TextEditingController numberController = TextEditingController();
+
+  PhoneNumberSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,27 +47,29 @@ class PhoneNumberSettings extends StatelessWidget {
             ),
           ),
           Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: const BoxDecoration(
-                    color: Color(0xFF141416),
-                    border: Border(
-                        top: BorderSide(width: 1, color: Colors.white),
-                        bottom: BorderSide(width: 1, color: Colors.white))),
-                child:   TextField(
-                  style:  const TextStyle(color: Colors.white
-                  ),
-                  controller: null,
-                  decoration: InputDecoration(
-                    hintText: "+234567890876",
-                    hintStyle:  const TextStyle(color: Colors.white54),
-                    suffixIcon:  const Icon(Icons.check,color: Colors.blue),
-                      border:InputBorder.none,
-                    labelStyle: GoogleFonts.poppins(color: Colors.white54, fontSize: 15, fontWeight: FontWeight.w500),
-
-                  ),
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
+                color: Color(0xFF141416),
+                border: Border(
+                    top: BorderSide(width: 1, color: Colors.white),
+                    bottom: BorderSide(width: 1, color: Colors.white))),
+            child: TextField(
+              style: const TextStyle(color: Colors.white),
+              controller: numberController,
+              decoration: InputDecoration(
+                hintText: "+123456789",
+                hintStyle: const TextStyle(color: Colors.white54),
+                suffixIcon: const Icon(Icons.check, color: Colors.blue),
+                border: InputBorder.none,
+                labelStyle: GoogleFonts.poppins(
+                  color: Colors.white54,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
+            ),
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -70,16 +77,34 @@ class PhoneNumberSettings extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                try {
+                  CollectionReference users =
+                      FirebaseFirestore.instance.collection('users');
+                  DocumentReference userDoc = users.doc(auth.currentUser!.uid);
+                  // Update the field
+                  await userDoc.update({
+                    'phoneNumber': numberController.text
+                        .trim(), // Replace 'fieldName' with your field name
+                  });
+                  logger.i('Field updated successfully');
+                } catch (e) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Error Updating Phone Number')));
+                  Navigator.of(context).pop();
+                  logger.i('Error updating field: $e');
+                }
               },
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 12), // Adjust button size
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero, // No border curves
                 ),
-                 backgroundColor: const Color(0xFF141416),
+                backgroundColor: const Color(0xFF141416),
 
-              // Text color
+                // Text color
               ),
               child: const CustomText(
                 text: "Update phone number",
@@ -88,7 +113,6 @@ class PhoneNumberSettings extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-
           )
         ],
       ),

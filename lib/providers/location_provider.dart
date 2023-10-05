@@ -4,9 +4,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LocationProvider with ChangeNotifier {
-  String _location = "";
+  String location = "";
 
-  String get location => _location;
+  // String get location => _location;
 
   Future<void> requestLocationPermission(BuildContext context) async {
     final PermissionStatus status = await Permission.location.request();
@@ -50,9 +50,9 @@ class LocationProvider with ChangeNotifier {
       final String? state = placemark.administrativeArea;
       final String? country = placemark.country;
 
-      _location = "$city, $state, $country";
+      location = "$city, $state, $country";
     } else {
-      _location = "Unknown Location";
+      location = "Unknown Location";
     }
 
     notifyListeners();

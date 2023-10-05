@@ -219,7 +219,7 @@ class PropositionScreen extends StatelessWidget {
                     ),
                     CustomButton(
                       text: "Save to BudddeeUp Propositions",
-                      onpress: () {},
+                      onpress: () => Navigator.of(context).pop(),
                       hasBorder: true,
                       buttonColor: Colors.purpleAccent,
                     ),
@@ -228,7 +228,7 @@ class PropositionScreen extends StatelessWidget {
                     ),
                     CustomButton(
                       text: "Delete BudddeeUp Propositions",
-                      onpress: () {},
+                      onpress: () => Navigator.of(context).pop(),
                       buttonColor: Colors.black,
                     ),
                     const SizedBox(

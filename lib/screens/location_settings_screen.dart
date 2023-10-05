@@ -1,4 +1,7 @@
+import 'package:BuddeeUp/providers/location_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -7,6 +10,8 @@ class LocationSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locationProvider = Provider.of<LocationProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -41,53 +46,72 @@ class LocationSettings extends StatelessWidget {
             ),
           ),
           Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(Icons.place, color: Colors.blue,),
-                    SizedBox(width: 5,),
-                    CustomText(
-                      text: "My current location",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                    Spacer(),
-                    Icon(Icons.check_outlined, color: Colors.lightBlueAccent,size: 35,)
-                  ],
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.place,
+                  color: Colors.blue,
                 ),
-              ),
+                SizedBox(
+                  width: 5,
+                ),
+                CustomText(
+                  text: "My current location",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+                Spacer(),
+                Icon(
+                  Icons.check_outlined,
+                  color: Colors.lightBlueAccent,
+                  size: 35,
+                )
+              ],
+            ),
+          ),
           Container(
-                padding: const EdgeInsets.all(20),
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero, // No border curves
-                    ),
-                    backgroundColor: Colors.purpleAccent,
-
-                    // Text color
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.local_airport, color: Colors.white,size: 35,),
-                      SizedBox(width: 10,),
-                      CustomText(
-                        text: "Add a new location",
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 15,
-                      ),
-                    ],
-                  ),
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () async {
+                await Permission.location.request();
+                await locationProvider.updateLocation();
+                Navigator.of(context).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 12), // Adjust button size
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero, // No border curves
                 ),
+                backgroundColor: Colors.purpleAccent,
 
+                // Text color
               ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.local_airport,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CustomText(
+                    text: "Add a new location",
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 15,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

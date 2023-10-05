@@ -1,5 +1,6 @@
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
+import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class _SettingsState extends State<Settings> {
   bool switchValue2 = true;
   bool switchValue3 = true;
   bool switchValue4 = true;
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +59,9 @@ class _SettingsState extends State<Settings> {
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      color: const Color(0xff141416),
-                      borderRadius: BorderRadius.circular(10)),
+                    color: const Color(0xff141416),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: const Column(
                     children: [
                       CircleAvatar(
@@ -150,14 +153,15 @@ class _SettingsState extends State<Settings> {
                           fontWeight: FontWeight.w500,
                         ),
                         IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, "/phone_number_settings");
-                            },
-                            icon: const Icon(
-                              Icons.navigate_next,
-                              color: Colors.white,
-                            ))
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, "/phone_number_settings");
+                          },
+                          icon: const Icon(
+                            Icons.navigate_next,
+                            color: Colors.white,
+                          ),
+                        )
                       ],
                     )
                   ],
@@ -179,13 +183,14 @@ class _SettingsState extends State<Settings> {
                       fontSize: 16,
                     ),
                     IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/connected_accounts");
-                        },
-                        icon: const Icon(
-                          Icons.navigate_next,
-                          color: Colors.white,
-                        ))
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/connected_accounts");
+                      },
+                      icon: const Icon(
+                        Icons.navigate_next,
+                        color: Colors.white,
+                      ),
+                    )
                   ],
                 ),
                 const Padding(
@@ -206,7 +211,7 @@ class _SettingsState extends State<Settings> {
                     Row(
                       children: [
                         CustomText(
-                          text: "Johnsmith@gmail.com",
+                          text: auth.currentUser!.email!,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: Colors.purpleAccent[100],
@@ -262,14 +267,15 @@ class _SettingsState extends State<Settings> {
                         fontWeight: FontWeight.w500,
                       ),
                       IconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, "/location_settings_screen");
-                          },
-                          icon: const Icon(
-                            Icons.navigate_next,
-                            color: Colors.white,
-                          ))
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, "/location_settings_screen");
+                        },
+                        icon: const Icon(
+                          Icons.navigate_next,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -870,14 +876,15 @@ class _SettingsState extends State<Settings> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, "/unsubscribe_email_screen");
-                        },
-                        icon: const Icon(
-                          Icons.navigate_next,
-                          color: Colors.white,
-                        ))
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, "/unsubscribe_email_screen");
+                      },
+                      icon: const Icon(
+                        Icons.navigate_next,
+                        color: Colors.white,
+                      ),
+                    )
                   ],
                 ),
                 const Padding(

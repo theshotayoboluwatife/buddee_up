@@ -20,4 +20,12 @@ class GetUserDetails {
       rethrow;
     }
   }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUser() async {
+    try {
+      return dataabase.collection('users').doc(auth.currentUser!.uid).get();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

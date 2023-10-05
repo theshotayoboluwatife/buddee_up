@@ -14,7 +14,7 @@ class CreateNewUser extends ChangeNotifier {
     bio: 'bio',
     pictures: [],
     height: '5 ft 4',
-    weight: 0,
+    weight: '130',
     gender: '',
     tribe: '',
     bodyType: '',
@@ -76,7 +76,7 @@ class CreateNewUser extends ChangeNotifier {
     String bio,
     List<String> pictures,
     String height,
-    double weight,
+    String weight,
   ) {
     newUser.profileName = profileName;
     newUser.age = age;

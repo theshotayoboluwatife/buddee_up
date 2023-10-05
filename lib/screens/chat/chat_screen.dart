@@ -1,16 +1,14 @@
+import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/chat/data.dart';
 import 'package:BuddeeUp/screens/chat/theme.dart';
 import 'package:chatview/chatview.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';import 'package:timeago/timeago.dart' as timeago;
 
 class ChatScreen extends StatefulWidget {
-  final String name;
-  final String imageUrl;
+
   const ChatScreen({
     Key? key,
-    required this.name,
-    required this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -43,6 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    NewUser user = ModalRoute.of(context)!.settings.arguments as NewUser;
     return Scaffold(
       body: ChatView(
         currentUser: currentUser,
@@ -66,10 +65,10 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: ChatViewAppBar(
           elevation: theme.elevation,
           backGroundColor: Colors.white,
-          userStatus: 'Online',
+          userStatus:timeago.format(user.lastSeen.toDate()) ,
           backArrowColor: Colors.purple,
-          chatTitle: widget.name,
-          profilePicture: widget.imageUrl,
+          chatTitle: user.profileName,
+          profilePicture: user.imageUrl,
           chatTitleTextStyle: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -80,7 +79,10 @@ class _ChatScreenState extends State<ChatScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/voice_call_screen",);
+                Navigator.pushNamed(
+                  context,
+                  "/voice_call_screen",
+                );
               },
               icon: const FaIcon(
                 FontAwesomeIcons.phone,
@@ -89,8 +91,10 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/video_call_screen",);
-
+                Navigator.pushNamed(
+                  context,
+                  "/video_call_screen",
+                );
               },
               icon: const FaIcon(
                 FontAwesomeIcons.video,

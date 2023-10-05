@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -30,7 +33,7 @@ class _DottedImageCardState extends State<DottedImageCard> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 45,
+      imageQuality: 25,
     );
 
     if (pickedFile != null) {
@@ -51,6 +54,28 @@ class _DottedImageCardState extends State<DottedImageCard> {
       TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
       String downloadURL = await taskSnapshot.ref.getDownloadURL();
       url = downloadURL;
+      if (auth.currentUser != null) {
+        try {
+          // Reference the Firestore collection and document
+          CollectionReference collection =
+              FirebaseFirestore.instance.collection('users');
+          DocumentReference docRef = collection.doc(auth.currentUser!.uid);
+
+          // Get the current list of pictures from Firestore
+          DocumentSnapshot doc = await docRef.get();
+          List<String> currentPictures =
+              List.from((doc.data() as Map)['pictures']);
+
+          // Add the existing pictures to the current list
+          currentPictures.addAll([url]);
+
+          // Update the 'pictures' field in Firestore with the updated list
+          await docRef.update({'pictures': currentPictures});
+          logger.i('Picture list updated successfully');
+        } catch (e) {
+          logger.i('Error updating picture list: $e');
+        }
+      }
       widget.images.add(url);
       // Use downloadURL for your application needs (e.g., save it to a database)
     }
@@ -122,6 +147,30 @@ class _DottedImageCardState extends State<DottedImageCard> {
                       .child(FirebaseAuth.instance.currentUser!.uid)
                       .child(fileLocation)
                       .delete();
+
+                  if (auth.currentUser != null) {
+                    try {
+                      // Reference the Firestore collection and document
+                      CollectionReference collection = FirebaseFirestore
+                          .instance
+                          .collection('users');
+                      DocumentReference docRef = collection.doc(auth.currentUser!.uid);
+
+                      // Get the current list of pictures from Firestore
+                      DocumentSnapshot doc = await docRef.get();
+                      List<String> currentPictures =
+                          List.from((doc.data() as Map)['pictures']);
+
+                      // Remove the item from the list
+                      currentPictures.remove(url);
+
+                      // Update the 'pictures' field in Firestore with the updated list
+                      await docRef.update({'pictures': currentPictures});
+                      logger.i('Item removed from the list successfully');
+                    } catch (e) {
+                      logger.e('Error removing item from the list: $e');
+                    }
+                  }
                 }
               },
             ),

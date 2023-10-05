@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:BuddeeUp/helpers/get_user_details.dart';
+import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/user.dart';
 import 'package:BuddeeUp/providers/status_provider.dart';
 import 'package:BuddeeUp/screens/chat/chat_screen.dart';
 import 'package:BuddeeUp/screens/discover.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -64,20 +67,50 @@ class Chat extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 90,
-              child: ListView.builder(
-                itemCount: statusData.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return StatusCard(
-                    name: statusData[index].name,
-                    image: statusData[index].imageUrl,
-                  );
-                },
-                scrollDirection: Axis.horizontal,
-              ),
-            ),
+          
+           SizedBox(
+                  width: double.infinity,
+                  height: 90,
+                  child: FutureBuilder(
+                    future: GetUserDetails().getUsers(),
+                    builder: (_, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      }
+                      List<QueryDocumentSnapshot<Map<String, dynamic>>>? data =
+                          snapshot.data?.docs;
+
+                      var you = data!.firstWhere(
+                          (element) => element.id == auth.currentUser!.uid);
+                      var youData = you.data();
+                      var imageUrl = youData['imageUrl'];
+                      return ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          StatusCard(
+                            name: 'You',
+                            image: imageUrl,
+                          ),
+                          ...data.map(
+                            (value) {
+                              if (value.id != youData['id']) {
+                                return StatusCard(
+                                  name: (value['profileName'] as String),
+                                  image: value['imageUrl'],
+                                );
+                              }
+                              return Container();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+
+
+
+
             const Text(
               'Messages',
               style: TextStyle(
@@ -105,9 +138,7 @@ class Chat extends StatelessWidget {
                           return GestureDetector(
                             onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => ChatScreen(
-                                    name: snapshot.data!.name,
-                                    imageUrl: snapshot.data!.imageUrl),
+                                builder: (_) => const ChatScreen(),
                               ),
                             ),
                             child: Column(
@@ -127,7 +158,6 @@ class Chat extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Container(
-                                          
                                           margin: const EdgeInsets.all(2),
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
@@ -163,9 +193,9 @@ class Chat extends StatelessWidget {
                                       const Spacer(),
                                       CircleAvatar(
                                         radius: 12,
-                                        backgroundColor:
-                                            const Color.fromARGB(255, 211, 59, 206)
-                                                .withOpacity(0.96),
+                                        backgroundColor: const Color.fromARGB(
+                                                255, 211, 59, 206)
+                                            .withOpacity(0.96),
                                         child: const Text(
                                           '2',
                                           style: TextStyle(color: Colors.white),
@@ -174,16 +204,16 @@ class Chat extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                 const Padding(
-                        padding: EdgeInsets.only(left: 100.0),
-                        child: Divider(color: Colors.white, thickness: 1.2),
-                      ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 100.0),
+                                  child: Divider(
+                                      color: Colors.white, thickness: 1.2),
+                                ),
                               ],
                             ),
                           );
                         },
                       ),
-                     
                     ],
                   );
                 },

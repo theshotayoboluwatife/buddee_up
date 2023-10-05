@@ -49,17 +49,18 @@ class EmailVerificationSettings extends StatelessWidget {
                 border: Border(
                     top: BorderSide(width: 1, color: Colors.white),
                     bottom: BorderSide(width: 1, color: Colors.white))),
-            child:   TextField(
-              style:  const TextStyle(color: Colors.white
-              ),
+            child: TextField(
+              style: const TextStyle(color: Colors.white),
               controller: null,
               decoration: InputDecoration(
                 hintText: "johnsmith@gmail.com",
-                hintStyle:  const TextStyle(color: Colors.white54),
-                suffixIcon:  const Icon(Icons.check,color: Colors.blue),
-                border:InputBorder.none,
-                labelStyle: GoogleFonts.poppins(color: Colors.white54, fontSize: 15, fontWeight: FontWeight.w500),
-
+                hintStyle: const TextStyle(color: Colors.white54),
+                suffixIcon: const Icon(Icons.check, color: Colors.blue),
+                border: InputBorder.none,
+                labelStyle: GoogleFonts.poppins(
+                    color: Colors.white54,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -71,9 +72,11 @@ class EmailVerificationSettings extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
+                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 12), // Adjust button size
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero, // No border curves
                 ),
@@ -88,7 +91,6 @@ class EmailVerificationSettings extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-
           )
         ],
       ),

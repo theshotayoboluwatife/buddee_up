@@ -27,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
         GoPro(
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => const HomeScreen(), 
-            ), 
+              builder: (_) => const HomeScreen(),
+            ),
           ),
         ),
         const EditProfile(),

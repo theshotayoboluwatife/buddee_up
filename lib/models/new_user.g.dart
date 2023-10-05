@@ -19,7 +19,7 @@ NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
       pictures:
           (json['pictures'] as List<dynamic>).map((e) => e as String).toList(),
       height: json['height'] as String,
-      weight: (json['weight'] as num).toDouble(),
+      weight: json['weight'] as String,
       gender: json['gender'] as String,
       tribe: json['tribe'] as String,
       bodyType: json['bodyType'] as String,

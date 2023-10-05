@@ -49,8 +49,7 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left:16, right: 16),
-
+              padding: const EdgeInsets.only(left: 16, right: 16),
               decoration: const BoxDecoration(
                   color: Color(0xFF141416),
                   border: Border(
@@ -63,12 +62,16 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'johnsmith@gmail.com',
-                        hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                        hintStyle: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w400),
                         border: InputBorder.none,
                       ),
                     ),
                   ),
-                  Icon(Icons.check, color: Colors.blue,)
+                  Icon(
+                    Icons.check,
+                    color: Colors.blue,
+                  )
                 ],
               ),
             ),
@@ -81,49 +84,55 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
                 color: Colors.blue,
               ),
             ),
-            const SizedBox(height: 20,),
-            Container(
-              width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Color(0xFF141416),
-                    border: Border(
-                        top: BorderSide(width: 1, color: Colors.white),
-                        bottom: BorderSide(width: 1, color: Colors.white))),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/location_settings_screen");
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // No border curves
-                  ),
-
-                  backgroundColor: const Color(0xFF141416),
-
-                  // Text color
-                ),
-                child: const CustomText(
-                  text: "Send email Verification",
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                ),
-              )
-
+            const SizedBox(
+              height: 20,
             ),
-           const SizedBox(height: 50,),
+            Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF141416),
+                  border: Border(
+                    top: BorderSide(width: 1, color: Colors.white),
+                    bottom: BorderSide(width: 1, color: Colors.white),
+                  ),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12), // Adjust button size
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero, // No border curves
+                    ),
+                    backgroundColor: const Color(0xFF141416),
+                    // Text color
+                  ),
+                  child: const CustomText(
+                    text: "Send email Verification",
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                  ),
+                )),
+            const SizedBox(
+              height: 50,
+            ),
             generateSwitchContainer('New messages', switchValue),
-            generateSwitchContainer('Promotions\nI want to receive news, updates and offers from BUDDEEUP', switchValue2),
+            generateSwitchContainer(
+                'Promotions\nI want to receive news, updates and offers from BUDDEEUP',
+                switchValue2),
             const Padding(
-              padding: EdgeInsets.only(left: 20.0, bottom: 8,top:8, right: 20),
+              padding:
+                  EdgeInsets.only(left: 20.0, bottom: 8, top: 8, right: 20),
               child: CustomText(
-                text: "Control the emails you want to get - all of them, just the important stuff or the bare minimum. You can always unsubscribe at the bottom of any email",
+                text:
+                    "Control the emails you want to get - all of them, just the important stuff or the bare minimum. You can always unsubscribe at the bottom of any email",
                 fontWeight: FontWeight.w500,
                 fontSize: 14,
               ),
             ),
-
             const SizedBox(
               height: 30,
             ),
@@ -135,7 +144,8 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
                   Navigator.pushNamed(context, "/push_notification_settings");
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Adjust button size
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 12), // Adjust button size
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero, // No border curves
                   ),
@@ -150,48 +160,46 @@ class _EmailUnsubscribeState extends State<EmailUnsubscribe> {
                   fontSize: 15,
                 ),
               ),
-
             ),
           ],
         ),
       ),
     );
   }
+
   Container generateSwitchContainer(String title, bool switchValue) {
     return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(left:16, right: 16, top: 4,bottom: 4),
-        decoration: const BoxDecoration(
-            color: Color(0xFF141416),
-            border: Border(
-                top: BorderSide(width: 1, color: Colors.white),
-                bottom:
-                BorderSide(width: 1, color: Colors.white))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: CustomText(
-                text: title,
-                fontWeight: FontWeight.w500,
-                fontSize: 15,
-              ),
+      width: double.infinity,
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 4, bottom: 4),
+      decoration: const BoxDecoration(
+          color: Color(0xFF141416),
+          border: Border(
+              top: BorderSide(width: 1, color: Colors.white),
+              bottom: BorderSide(width: 1, color: Colors.white))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: CustomText(
+              text: title,
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
             ),
-            Switch(
-              value: this.switchValue,
-              onChanged: (newValue) {
-                setState(() {
-                  this.switchValue = newValue;
-                });
-              },
-              activeTrackColor: Colors.purpleAccent,
-              activeColor: Colors.white,
-              inactiveTrackColor: Colors.black,
-              inactiveThumbColor: Colors.white,
-            ),
-          ],
-        ),
-      );
+          ),
+          Switch(
+            value: this.switchValue,
+            onChanged: (newValue) {
+              setState(() {
+                this.switchValue = newValue;
+              });
+            },
+            activeTrackColor: Colors.purpleAccent,
+            activeColor: Colors.white,
+            inactiveTrackColor: Colors.black,
+            inactiveThumbColor: Colors.white,
+          ),
+        ],
+      ),
+    );
   }
-
 }

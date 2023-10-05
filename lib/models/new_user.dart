@@ -14,7 +14,7 @@ class NewUser {
   String bio;
   List<String> pictures;
   String height;
-  double weight;
+  String weight;
   String gender;
   String tribe;
   String bodyType;
