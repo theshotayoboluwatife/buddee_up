@@ -6,7 +6,6 @@
 2. [Features](#features)
 3. [Getting Started](#getting-started)
 4. [Usage](#usage)
-5. [Contributing](#contributing)
 
 ## 1. Introduction
 
@@ -48,14 +47,3 @@ Once the app is up and running, you can:
 - Send and receive direct messages
 - Explore new content and users based on your interests
 - Search for specific users and content
-
-## 5. Contributing
-
-We welcome contributions from the community. If you want to contribute to BuddeeUp, please follow these steps:
-
-1. Fork the repository.
-
-2. Create a new branch for your feature or bug fix:
-
-   ```shell
-   git checkout -b feature/your-feature-name
