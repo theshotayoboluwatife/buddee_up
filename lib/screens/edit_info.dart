@@ -1,6 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/dotted_image_card.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
-import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -309,7 +308,7 @@ class _EditInfoState extends State<EditInfo>
                         const SizedBox(
                           height: 5,
                         ),
-                         SimpleRowContainer(
+                         const SimpleRowContainer(
                           title: 'African-American',
                           icon: Icons.navigate_next,
                         ),

@@ -1,5 +1,4 @@
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
-import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
