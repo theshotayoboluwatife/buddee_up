@@ -223,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                                 .setEmail(_emailTextController.text.trim());
                             await Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => PhoneVerification(),
+                                builder: (_) => const PhoneVerification(),
                               ),
                             );
                             final SharedPreferences prefs =

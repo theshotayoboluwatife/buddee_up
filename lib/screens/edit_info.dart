@@ -1,9 +1,7 @@
 import 'package:BuddeeUp/custom_widgets/dotted_image_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
-import '../providers/status_provider.dart';
 
 class EditInfo extends StatefulWidget {
   const EditInfo({Key? key}) : super(key: key);

@@ -1,14 +1,25 @@
+import 'dart:math';
 import 'dart:ui';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/chat/chat_screen.dart';
+import 'package:choice/choice.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../custom_widgets/custom_text.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class UserProfileInfo extends StatelessWidget {
   const UserProfileInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    NewUser userInfo = ModalRoute.of(context)?.settings.arguments as NewUser;
+    logger.i(userInfo.lastSeen.toDate());
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.black,
       floatingActionButton: FloatingActionButton(
@@ -16,8 +27,9 @@ class UserProfileInfo extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    const ChatScreen(name: "name", imageUrl: "imageUrl")),
+              builder: (context) =>
+                  const ChatScreen(name: "name", imageUrl: "imageUrl"),
+            ),
           );
         },
         backgroundColor: Colors.purpleAccent,
@@ -42,8 +54,8 @@ class UserProfileInfo extends StatelessWidget {
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
-                    child: Image.asset(
-                      "assets/images/profile_info1.png",
+                    child: Image.network(
+                      userInfo.imageUrl,
                       fit: BoxFit.cover,
                       width: 60,
                       height: size.height * 0.8,
@@ -59,27 +71,29 @@ class UserProfileInfo extends StatelessWidget {
                 bottom: 0,
                 child: IconButton(
                   icon: const CircleAvatar(
-                      minRadius: 20,
-                      backgroundColor: Colors.purpleAccent,
-                      foregroundColor: Colors.white,
-                      child: Icon(
-                        Icons.person,
-                        size: 20,
-                      )),
+                    minRadius: 20,
+                    backgroundColor: Colors.purpleAccent,
+                    foregroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person,
+                      size: 20,
+                    ),
+                  ),
                   onPressed: () {},
                 ),
               ),
               Positioned(
-                  top: 0,
-                  left: 24,
-                  child: IconButton(
-                    iconSize: 50,
-                    icon: const Icon(
-                      Icons.more_horiz,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {},
-                  )),
+                top: 0,
+                left: 24,
+                child: IconButton(
+                  iconSize: 50,
+                  icon: const Icon(
+                    Icons.more_horiz,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
             ],
           ),
         ),
@@ -88,17 +102,17 @@ class UserProfileInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
                   CustomText(
-                    text: "Anabelle 19",
+                    text: '${userInfo.profileName} ${userInfo.age}',
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.verified,
                     color: Colors.purple,
                   )
@@ -107,17 +121,17 @@ class UserProfileInfo extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const Row(
+              Row(
                 children: [
                   CustomText(
-                    text: "2 hrs ago",
+                    text: timeago.format(userInfo.lastSeen.toDate()),
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 2,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.circle,
                     color: Colors.green,
                     size: 10,
@@ -127,11 +141,21 @@ class UserProfileInfo extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const CustomText(
-                text: "60mi away",
-                fontSize: 12,
-                fontWeight: FontWeight.w300,
-              ),
+              FutureBuilder(
+                  future: calculateDistance(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container();
+                    }
+                    if (snapshot.hasError) {
+                      return Container();
+                    }
+                    return CustomText(
+                      text: "${snapshot}mi away",
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                    );
+                  }),
               const SizedBox(
                 height: 16,
               ),
@@ -143,9 +167,8 @@ class UserProfileInfo extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
-              const CustomText(
-                text:
-                    "Hey guys, This is Anabelle. I’m here to find someone for hookup. I’m not interested in something serious. I would love to hear your adventurous story.",
+              CustomText(
+                text: userInfo.bio,
                 fontWeight: FontWeight.w300,
                 fontSize: 12,
               ),
@@ -162,8 +185,8 @@ class UserProfileInfo extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  const CustomText(
-                    text: "Top/Average",
+                  CustomText(
+                    text: userInfo.sexualPreferences,
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                   )
@@ -182,8 +205,8 @@ class UserProfileInfo extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  const CustomText(
-                    text: "33yrs/5'ft 0\"in",
+                  CustomText(
+                    text: userInfo.age.toString(),
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                   )
@@ -202,8 +225,8 @@ class UserProfileInfo extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  const CustomText(
-                    text: "Married",
+                  CustomText(
+                    text: userInfo.status,
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                   )
@@ -222,8 +245,8 @@ class UserProfileInfo extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  const CustomText(
-                    text: "African-American/English",
+                  CustomText(
+                    text: userInfo.tribe,
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                   )
@@ -232,19 +255,30 @@ class UserProfileInfo extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Row(
+              Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.place,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
-                  CustomText(
-                    text: "United States",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
+                  FutureBuilder(
+                    future: geCountryUrl(userInfo.phoneNumber),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      }
+                      if (!snapshot.hasData) {
+                        return Container();
+                      }
+                      return CustomText(
+                        text: snapshot.data!,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                      );
+                    },
                   )
                 ],
               ),
@@ -266,8 +300,8 @@ class UserProfileInfo extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff141416),
                   ),
-                  child: const CustomText(
-                    text: "Hookup",
+                  child: CustomText(
+                    text: userInfo.lookingFor,
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                   ),
@@ -281,79 +315,37 @@ class UserProfileInfo extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff141416),
-                      ),
-                      child: CustomText(
-                        text: "Coffee Talks/Drinks/Happy Hours",
-                        fontSize: 12,
-                        color: Colors.purple[300],
-                        fontWeight: FontWeight.w300,
+              InlineChoice<String>.multiple(
+                clearable: true,
+                // value: selectedValue,
+                onChanged: (value) {},
+                itemCount: userInfo.activities.length,
+                itemBuilder: (selection, i) {
+                  return ChoiceChip(
+                    label: Text(
+                      userInfo.activities[i],
+                      style:
+                          const TextStyle(color: Colors.purple, fontSize: 14),
+                    ),
+                    color: const MaterialStatePropertyAll(
+                      Colors.white,
+                    ),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
+                    selected: false,
+                  );
+                },
+                listBuilder: ChoiceList.createWrapped(
+                  spacing: 8,
+                  runSpacing: 8,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff141416),
-                      ),
-                      child: CustomText(
-                        text: "SPA",
-                        fontSize: 12,
-                        color: Colors.purple[300],
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff141416),
-                      ),
-                      child: CustomText(
-                        text: "Fetishes/Groups",
-                        color: Colors.purple[300],
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff141416),
-                      ),
-                      child: CustomText(
-                        text: "Cafe Hopping",
-                        fontSize: 12,
-                        color: Colors.purple[300],
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
               const SizedBox(
                 height: 30,
@@ -592,5 +584,29 @@ class UserProfileInfo extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  Future<String> calculateDistance() async {
+    final Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    double latitude = position.latitude;
+    double longitude = position.longitude;
+
+    double distance = await Geolocator.distanceBetween(
+      latitude - Random().nextInt(5).toDouble(),
+      longitude - Random().nextInt(5).toDouble(),
+      latitude,
+      longitude,
+    );
+    return distance.toString();
+  }
+
+  Future<String> geCountryUrl(String number) async {
+    String phoneNumber = '+234 500 500 5005';
+    PhoneNumber number =
+        await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber);
+    return number.isoCode!;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'new_user.g.dart';
@@ -24,6 +25,9 @@ class NewUser {
   List<String> activities;
   String sexualPreferences;
 
+  @TimestampConverter()
+  Timestamp lastSeen;
+
   NewUser({
     required this.email,
     required this.id,
@@ -45,10 +49,21 @@ class NewUser {
     required this.healthStatus,
     required this.activities,
     required this.sexualPreferences,
+    required this.lastSeen,
   });
 
   factory NewUser.fromJson(Map<String, dynamic> json) =>
       _$NewUserFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewUserToJson(this);
+}
+
+class TimestampConverter implements JsonConverter<Timestamp, Timestamp?> {
+  const TimestampConverter();
+
+  @override
+  Timestamp fromJson(Timestamp? json) => json ?? Timestamp.now();
+
+  @override
+  Timestamp? toJson(Timestamp json) => json;
 }

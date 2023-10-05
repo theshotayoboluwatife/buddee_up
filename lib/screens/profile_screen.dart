@@ -88,6 +88,7 @@ class ProfileScreen extends StatelessWidget {
                                 if (value!.length < 3) {
                                   return 'Profile name must be greater than 3';
                                 }
+                                return null;
                               },
                               heading: "Create a profile name",
                               hint: 'John Smith',
@@ -101,6 +102,7 @@ class ProfileScreen extends StatelessWidget {
                                 if (int.parse(p!).isNaN) {
                                   return "Imput a valid age";
                                 }
+                                return null;
                               },
                               heading: "Age",
                               hint: '18',
@@ -117,6 +119,7 @@ class ProfileScreen extends StatelessWidget {
                           if (p!.isEmpty) {
                             return 'Bio Can\'t be empty';
                           }
+                          return null;
                         },
                         heading: "Bio",
                         hint: 'Create a short bio',
@@ -178,6 +181,7 @@ class ProfileScreen extends StatelessWidget {
                           if (p!.isEmpty) {
                             heightTextEditingController.text = "5' ft 0\" in";
                           }
+                          return null;
                         },
                         heading: "Height",
                         hint: "5' ft 0\" in",
@@ -188,6 +192,7 @@ class ProfileScreen extends StatelessWidget {
                           if (p!.isEmpty) {
                             weightTextEditingController.text = "130 lbs";
                           }
+                          return null;
                         },
                         heading: "Weight",
                         hint: "130 lbs",

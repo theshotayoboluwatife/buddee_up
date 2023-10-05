@@ -106,10 +106,6 @@ class DiscoveryPage extends StatelessWidget {
                       List<QueryDocumentSnapshot<Map<String, dynamic>>>? data =
                           snapshot.data?.docs;
 
-                      // for (var i = 0; i < data!.length; i++) {
-                      // logger.i(data[i].data());
-                      // }
-
                       var you = data!.firstWhere(
                           (element) => element.id == auth.currentUser!.uid);
                       var youData = you.data();

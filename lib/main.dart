@@ -107,7 +107,7 @@ class App extends StatelessWidget {
           '/home_screen': (context) => const HomeScreen(),
           '/account_recovery': (context) => AccountRecovery(),
           '/google_signin': (context) => const GoogleSignIn(),
-          '/phone_verification': (context) => PhoneVerification(),
+          '/phone_verification': (context) => const PhoneVerification(),
           '/otp_verification': (context) => const OTPVerification(),
           '/profile_screen': (context) => ProfileScreen(),
           '/sex_type_screen': (context) => SexType(),

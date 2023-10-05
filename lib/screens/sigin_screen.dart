@@ -6,6 +6,7 @@ import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -231,6 +232,7 @@ class _SignInState extends State<SignIn> {
                                 healthStatus: '',
                                 activities: [],
                                 sexualPreferences: '',
+                                lastSeen: Timestamp.fromDate(DateTime.now()),
                               ).toJson(),
                             );
 

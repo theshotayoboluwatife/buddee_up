@@ -8,7 +8,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:provider/provider.dart';
 
 class PhoneVerification extends StatefulWidget {
-  PhoneVerification({Key? key}) : super(key: key);
+  const PhoneVerification({Key? key}) : super(key: key);
 
   @override
   State<PhoneVerification> createState() => _PhoneVerificationState();
