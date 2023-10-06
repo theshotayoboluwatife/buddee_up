@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class ChatScreen extends StatefulWidget {
   static const String routeName = 'chat-screen';
@@ -26,7 +27,43 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        
+        title: Row(
+          children: [
+            CircleAvatar(
+              radius: 15,
+              backgroundColor: Colors.white,
+              child: Image.network(user.imageUrl),
+            ),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user.profileName,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      timeago.format(
+                        user.lastSeen.toDate(),
+                      ),
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -54,8 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.active) {
-                  logger.i(snapshot.data!.docs);
-
+                  // logger.i(snapshot.data!.docs);
                   return Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
@@ -70,14 +106,14 @@ class _ChatScreenState extends State<ChatScreen> {
                               firebaseAuth.currentUser!.uid),
                           color: (message.isSender ==
                                   firebaseAuth.currentUser!.uid)
-                              ? Colors.pink
-                              : Colors.green,
+                              ? const Color(0XFFf3f3f3)
+                              : const Color(0xffc420d2),
                           text: message.message,
                           textStyle: TextStyle(
                             color: (message.isSender ==
                                     firebaseAuth.currentUser!.uid)
-                                ? Colors.white
-                                : Colors.black,
+                                ? Colors.black
+                                : Colors.white,
                           ),
                         );
                       },
@@ -92,6 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
               }
             },
           ),
+          const Spacer(),
           SendMessage(userId: user.id),
         ],
       ),
@@ -164,7 +201,7 @@ class _SendMessageState extends State<SendMessage> {
               child: FaIcon(
                 FontAwesomeIcons.solidPaperPlane,
                 size: 18,
-                color: Colors.green,
+                color: Color(0xffc420d2),
               ),
             ),
           ),

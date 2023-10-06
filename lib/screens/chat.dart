@@ -17,7 +17,6 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusData = Provider.of<Status>(context).statusData;
 
     return SafeArea(
       child: Padding(
@@ -119,105 +118,112 @@ class Chat extends StatelessWidget {
               ),
             ),
             Expanded(
-              key: const ValueKey('value'),
-              child: ListView.builder(
-                itemBuilder: (_, i) {
-                  return Column(
-                    children: [
-                      FutureBuilder(
-                        future: getUsers(),
-                        builder: (_, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Container();
-                          }
-                          if (snapshot.data == null) {
-                            return Container();
-                          }
-
-                          return GestureDetector(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const ChatScreen(),
+              child: StreamBuilder(
+                 stream: FirebaseFirestore.instance
+                  .collection('chats')
+                  .doc(auth.currentUser!.uid)
+                  .collection('message-sent')
+                  .snapshots(),
+                builder: (context, snapshot) => 
+                 ListView.builder(
+                  itemBuilder: (_, i) {
+                    return Column(
+                      children: [
+                        FutureBuilder(
+                          future: getUsers(),
+                          builder: (_, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Container();
+                            }
+                            if (snapshot.data == null) {
+                              return Container();
+                            }
+              
+                            return GestureDetector(
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const ChatScreen(),
+                                ),
                               ),
-                            ),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: CircleAvatar(
-                                    radius: 30,
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Color(0XFFC420D2),
-                                            Color(0XFF0A84FF),
-                                          ],
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: CircleAvatar(
+                                      radius: 30,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Color(0XFFC420D2),
+                                              Color(0XFF0A84FF),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      child: Center(
-                                        child: Container(
-                                          margin: const EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  snapshot.data!.imageUrl),
-                                              fit: BoxFit.cover,
+                                        child: Center(
+                                          child: Container(
+                                            margin: const EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    snapshot.data!.imageUrl),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  title: Text(
-                                    snapshot.data!.name,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  subtitle: const Text(
-                                    "You: Hello how are you",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 10,
+                                    title: Text(
+                                      snapshot.data!.name,
+                                      style: const TextStyle(color: Colors.white),
+                                    ),
+                                    subtitle: const Text(
+                                      "You: Hello how are you",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                    trailing: Column(
+                                      children: [
+                                        const Text(
+                                          '23 min',
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 12),
+                                        ),
+                                        const Spacer(),
+                                        CircleAvatar(
+                                          radius: 12,
+                                          backgroundColor: const Color.fromARGB(
+                                                  255, 211, 59, 206)
+                                              .withOpacity(0.96),
+                                          child: const Text(
+                                            '2',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  trailing: Column(
-                                    children: [
-                                      const Text(
-                                        '23 min',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                      const Spacer(),
-                                      CircleAvatar(
-                                        radius: 12,
-                                        backgroundColor: const Color.fromARGB(
-                                                255, 211, 59, 206)
-                                            .withOpacity(0.96),
-                                        child: const Text(
-                                          '2',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      )
-                                    ],
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 100.0),
+                                    child: Divider(
+                                        color: Colors.white, thickness: 1.2),
                                   ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 100.0),
-                                  child: Divider(
-                                      color: Colors.white, thickness: 1.2),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                },
-                itemCount: 15,
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                  itemCount: 15,
+                ),
               ),
             ),
           ],
