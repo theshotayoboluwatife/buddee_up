@@ -1,12 +1,12 @@
+import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/chat/data.dart';
 import 'package:BuddeeUp/screens/chat/theme.dart';
 import 'package:chatview/chatview.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';import 'package:timeago/timeago.dart' as timeago;
+import 'package:timeago/timeago.dart' as timeago;
 
 class ChatScreen extends StatefulWidget {
-
   const ChatScreen({
     Key? key,
   }) : super(key: key);
@@ -35,13 +35,11 @@ class _ChatScreenState extends State<ChatScreen> {
     ],
   );
 
-  void _showHideTypingIndicator() {
-    _chatController.setTypingIndicator = !_chatController.showTypingIndicator;
-  }
+  late NewUser user;
 
   @override
   Widget build(BuildContext context) {
-    NewUser user = ModalRoute.of(context)!.settings.arguments as NewUser;
+    user = ModalRoute.of(context)!.settings.arguments as NewUser;
     return Scaffold(
       body: ChatView(
         currentUser: currentUser,
@@ -65,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: ChatViewAppBar(
           elevation: theme.elevation,
           backGroundColor: Colors.white,
-          userStatus:timeago.format(user.lastSeen.toDate()) ,
+          userStatus: timeago.format(user.lastSeen.toDate()),
           backArrowColor: Colors.purple,
           chatTitle: user.profileName,
           profilePicture: user.imageUrl,
@@ -76,32 +74,32 @@ class _ChatScreenState extends State<ChatScreen> {
             letterSpacing: 0.25,
           ),
           userStatusTextStyle: const TextStyle(color: Colors.grey),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  "/voice_call_screen",
-                );
-              },
-              icon: const FaIcon(
-                FontAwesomeIcons.phone,
-                color: Color(0XFFC420D2),
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  "/video_call_screen",
-                );
-              },
-              icon: const FaIcon(
-                FontAwesomeIcons.video,
-                color: Color(0XFFC420D2),
-              ),
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {
+          //       Navigator.pushNamed(
+          //         context,
+          //         "/voice_call_screen",
+          //       );
+          //     },
+          //     icon: const FaIcon(
+          //       FontAwesomeIcons.phone,
+          //       color: Color(0XFFC420D2),
+          //     ),
+          //   ),
+          //   IconButton(
+          //     onPressed: () {
+          //       Navigator.pushNamed(
+          //         context,
+          //         "/video_call_screen",
+          //       );
+          //     },
+          //     icon: const FaIcon(
+          //       FontAwesomeIcons.video,
+          //       color: Color(0XFFC420D2),
+          //     ),
+          //   ),
+          // ],
         ),
         chatBackgroundConfig: ChatBackgroundConfiguration(
           messageTimeIconColor: theme.messageTimeIconColor,
@@ -143,6 +141,9 @@ class _ChatScreenState extends State<ChatScreen> {
               extendWaveform: true,
             ),
           ),
+          allowRecordingVoice: false,
+          enableCameraImagePicker: false,
+          enableGalleryImagePicker: false,
         ),
         chatBubbleConfig: ChatBubbleConfiguration(
           outgoingChatBubbleConfig: ChatBubble(
@@ -269,17 +270,26 @@ class _ChatScreenState extends State<ChatScreen> {
     Future.delayed(const Duration(seconds: 1), () {
       _chatController.initialMessageList.last.setStatus = MessageStatus.read;
     });
-  }
 
-  void _onThemeIconTap() {
-    setState(() {
-      if (isDarkTheme) {
-        theme = LightTheme();
-        isDarkTheme = false;
-      } else {
-        theme = DarkTheme();
-        isDarkTheme = true;
-      }
+    FireStore().sendMessage(message, user.id).then(
+      (_) {
+        _chatController.addMessage(
+          Message(
+            id: id.toString(),
+            createdAt: DateTime.now(),
+            message: message,
+            sendBy: currentUser.id,
+            replyMessage: replyMessage,
+            messageType: messageType,
+          ),
+        );
+      },
+    ).onError((error, stackTrace) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An error has occured'),
+        ),
+      );
     });
   }
 }

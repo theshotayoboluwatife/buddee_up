@@ -15,7 +15,18 @@ class GetUserDetails {
 
   Future<QuerySnapshot<Map<String, dynamic>>> getUsers() async {
     try {
-      return dataabase.collection('users').where('id').get();
+      return dataabase.collection('users')
+      .get();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+    Future<QuerySnapshot<Map<String, dynamic>>> getUsersInGridView() async {
+    try {
+      return dataabase.collection('users')
+      .where('id', whereNotIn: [auth.currentUser!.uid])
+      .get();
     } catch (e) {
       rethrow;
     }

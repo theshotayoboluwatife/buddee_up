@@ -1,8 +1,10 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/chat/chat_screen.dart';
 import 'package:choice/choice.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../custom_widgets/custom_text.dart';
@@ -23,8 +25,7 @@ class UserProfileInfo extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  const ChatScreen(),
+              builder: (context) => const ChatScreen(),
               settings: RouteSettings(
                 arguments: userInfo,
               ),
@@ -78,13 +79,16 @@ class UserProfileInfo extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('User Succesfully Adeed'),
                       ),
                     );
+                    await FireStore().addUserToFriendList({
+                      'friends': FieldValue.arrayUnion([userInfo.id]),
+                    });
                   },
                 ),
               ),

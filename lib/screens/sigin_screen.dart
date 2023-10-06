@@ -212,6 +212,7 @@ class _SignInState extends State<SignIn> {
                               NewUser(
                                 email: auth.currentUser!.email ?? '',
                                 id: auth.currentUser!.uid,
+                                friends: [],
                                 status: '',
                                 phoneNumber:
                                     auth.currentUser!.phoneNumber ?? '',

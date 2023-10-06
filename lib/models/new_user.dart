@@ -24,6 +24,7 @@ class NewUser {
   String healthStatus;
   List<String> activities;
   String sexualPreferences;
+  List<String> friends;
 
   @TimestampConverter()
   Timestamp lastSeen;
@@ -50,6 +51,7 @@ class NewUser {
     required this.activities,
     required this.sexualPreferences,
     required this.lastSeen,
+    required this.friends,
   });
 
   factory NewUser.fromJson(Map<String, dynamic> json) =>
