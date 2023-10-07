@@ -30,10 +30,8 @@ NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
           .map((e) => e as String)
           .toList(),
       sexualPreferences: json['sexualPreferences'] as String,
-      lastSeen:
-          const TimestampConverter().fromJson(json['lastSeen'] as Timestamp?),
-      friends:
-          (json['friends'] as List<dynamic>).map((e) => e as String).toList(),
+      lastSeen: const TimestampConverter().fromJson(json['lastSeen'] as Timestamp?),
+      friends: (json['friends'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$NewUserToJson(NewUser instance) => <String, dynamic>{
