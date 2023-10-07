@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
 import '../custom_widgets/dotted_image_card.dart';
-import '../providers/status_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
       TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  List<String> images = [];
+  final List<String> images = [];
 
   @override
   Widget build(BuildContext context) {

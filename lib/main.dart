@@ -1,7 +1,7 @@
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/providers/location_provider.dart';
-import 'package:BuddeeUp/providers/status_provider.dart';
+
 import 'package:BuddeeUp/screens/account_recovery.dart';
 import 'package:BuddeeUp/screens/activities_screen.dart';
 import 'package:BuddeeUp/screens/add_contacts_screen.dart';
@@ -75,9 +75,6 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider(
-          create: (_) => Status(),
-        ),
         ChangeNotifierProvider<LocationProvider>(
           create: (context) => LocationProvider(),
         ),
@@ -95,101 +92,83 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: Status(),
-      child: ScreenUtilInit(
-          designSize: const Size(360, 690)
-          ,
-          minTextAdapt
-              :
-          true
-          ,
-          splitScreenMode
-              :
-          true
-          ,
-          builder
-              :
-              (context
-              ,
-              widget) {
-           // ScreenUtil.setContext(context);
-            return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: MaterialApp(
-                  title: "BuddeeUp",
-                  theme: CustomAppTheme.lightTheme,
-                  routes: {
-                    '/': (context) => const LoginSignUp(),
-                    '/welcome': (context) => const WelcomeScreen(),
-                    '/signin': (context) => const SignIn(),
-                    '/signup': (context) => const SignUp(),
-                    '/home_screen': (context) => const HomeScreen(),
-                    '/account_recovery': (context) => AccountRecovery(),
-                    '/google_signin': (context) => const GoogleSignIn(),
-                    '/phone_verification': (context) => const PhoneVerification(),
-                    '/otp_verification': (context) => const OTPVerification(),
-                    '/profile_screen': (context) => ProfileScreen(),
-                    '/sex_type_screen': (context) => SexType(),
-                    '/tribe_screen': (context) => const Tribe(),
-                    '/body_type_screen': (context) => const BodyType(),
-                    '/ethnicity_screen': (context) => const Ethnicity(),
-                    '/looking_for_screen': (context) => const LookingFor(),
-                    "/relationship_status_screen": (context) =>
-                    const RelationshipStatus(),
-                    "/health_status_screen": (context) => const HealthStatus(),
-                    "/activities_screen": (context) => const ActivitiesScreen(),
-                    "/sexual_preference_screen": (
-                        context) => const SexualPreferences(),
-                    "/enable_location_screen": (
-                        context) => const EnableLocation(),
-                    "/keep_me_posted_screen": (context) => const KeepMePosted(),
-                    "/report_user_screen": (context) => const ReportUserScreen(),
-                    "/phone_number_settings": (context) => PhoneNumberSettings(),
-                    "/connected_accounts": (
-                        context) => const ConnectedAccountScreen(),
-                    "/email_verification_settings": (context) =>
-                    const EmailVerificationSettings(),
-                    "/location_settings_screen": (
-                        context) => const LocationSettings(),
-                    "/show_me_screen": (context) => const ShowMeScreen(),
-                    "/blocked_contacts_screen": (context) =>
-                    const BlockedContactsScreen(),
-                    "/add_contacts_screen": (
-                        context) => const AddContactsScreen(),
-                    "/read_receipts_settings": (
-                        context) => const ReadReceiptsSettings(),
-                    "/autoplay_videos_settings": (
-                        context) => const AutoplaySettings(),
-                    "/online_now_screen": (context) => const OnlineNowScreen(),
-                    "/recently_active_status": (
-                        context) => const RecentlyActiveStatus(),
-                    "/username_settings": (context) => const UsernameSettings(),
-                    "/push_notification_settings": (context) =>
-                    const PushNotificationSettings(),
-                    "/edit_info": (context) => const EditInfo(),
-                    "/email_unsubscribe": (context) => const EmailUnsubscribe(),
-                    "/cafe_talks_one": (context) => const CafeTalksOne(),
-                    "/user_profile_info": (context) => const UserProfileInfo(),
-                    "/view_image": (context) => const ViewImage(),
-                    "/video_call_screen": (context) => const VideoCallScreen(),
-                    "/voice_call_screen": (context) => const PhoneCallScreen(),
-                    "/user_profile": (context) => const EditProfile(),
-                    "/go_pro_screen": (context) =>
-                        GoPro(
-                          onTap: () => Navigator.pop(context),
-                        ),
-                    "/settings": (context) => const Settings(),
-                    "/proposition_screen": (context) => const PropositionScreen(),
-                    "/unsubscribe_email_screen": (
-                        context) => const EmailUnsubscribe(),
-                  },
-                  initialRoute: isUserLoggedIn ? '/home_screen' : '/',
-                )
-            );
-          }
-      ),
-    );
-
+    return ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, widget) {
+          // ScreenUtil.setContext(context);
+          return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: MaterialApp(
+                title: "BuddeeUp",
+                theme: CustomAppTheme.lightTheme,
+                routes: {
+                  '/': (context) => const LoginSignUp(),
+                  '/welcome': (context) => const WelcomeScreen(),
+                  '/signin': (context) => const SignIn(),
+                  '/signup': (context) => const SignUp(),
+                  '/home_screen': (context) => const HomeScreen(),
+                  '/account_recovery': (context) => AccountRecovery(),
+                  '/google_signin': (context) => const GoogleSignIn(),
+                  '/phone_verification': (context) => const PhoneVerification(),
+                  '/otp_verification': (context) => const OTPVerification(),
+                  '/profile_screen': (context) => ProfileScreen(),
+                  '/sex_type_screen': (context) => SexType(),
+                  '/tribe_screen': (context) => const Tribe(),
+                  '/body_type_screen': (context) => const BodyType(),
+                  '/ethnicity_screen': (context) => const Ethnicity(),
+                  '/looking_for_screen': (context) => const LookingFor(),
+                  "/relationship_status_screen": (context) =>
+                      const RelationshipStatus(),
+                  "/health_status_screen": (context) => const HealthStatus(),
+                  "/activities_screen": (context) => const ActivitiesScreen(),
+                  "/sexual_preference_screen": (context) =>
+                      const SexualPreferences(),
+                  "/enable_location_screen": (context) =>
+                      const EnableLocation(),
+                  "/keep_me_posted_screen": (context) => const KeepMePosted(),
+                  "/report_user_screen": (context) => const ReportUserScreen(),
+                  "/phone_number_settings": (context) => PhoneNumberSettings(),
+                  "/connected_accounts": (context) =>
+                      const ConnectedAccountScreen(),
+                  "/email_verification_settings": (context) =>
+                      const EmailVerificationSettings(),
+                  "/location_settings_screen": (context) =>
+                      const LocationSettings(),
+                  "/show_me_screen": (context) => const ShowMeScreen(),
+                  "/blocked_contacts_screen": (context) =>
+                      const BlockedContactsScreen(),
+                  "/add_contacts_screen": (context) =>
+                      const AddContactsScreen(),
+                  "/read_receipts_settings": (context) =>
+                      const ReadReceiptsSettings(),
+                  "/autoplay_videos_settings": (context) =>
+                      const AutoplaySettings(),
+                  "/online_now_screen": (context) => const OnlineNowScreen(),
+                  "/recently_active_status": (context) =>
+                      const RecentlyActiveStatus(),
+                  "/username_settings": (context) => const UsernameSettings(),
+                  "/push_notification_settings": (context) =>
+                      const PushNotificationSettings(),
+                  "/edit_info": (context) => const EditInfo(),
+                  "/email_unsubscribe": (context) => const EmailUnsubscribe(),
+                  "/cafe_talks_one": (context) => const CafeTalksOne(),
+                  "/user_profile_info": (context) => const UserProfileInfo(),
+                  "/view_image": (context) => const ViewImage(),
+                  "/video_call_screen": (context) => const VideoCallScreen(),
+                  "/voice_call_screen": (context) => const PhoneCallScreen(),
+                  "/user_profile": (context) => const EditProfile(),
+                  "/go_pro_screen": (context) => GoPro(
+                        onTap: () => Navigator.pop(context),
+                      ),
+                  "/settings": (context) => const Settings(),
+                  "/proposition_screen": (context) => const PropositionScreen(),
+                  "/unsubscribe_email_screen": (context) =>
+                      const EmailUnsubscribe(),
+                },
+                initialRoute: isUserLoggedIn ? '/home_screen' : '/',
+              ));
+        });
   }
 }
