@@ -37,100 +37,102 @@ class _PhoneVerificationState extends State<PhoneVerification> {
             ],
           ),
         ),
-        child: Column(
-          children: [
-            SafeArea(
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon:
-                        const Icon(Icons.keyboard_backspace_outlined, size: 30),
-                    color: Colors.white,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const CustomText(
-                    text: "Phone verification",
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: IntlPhoneField(
-                decoration: const InputDecoration(
-                  hintText: "Enter your mobile number",
-                  counterText: '',
-                  border: InputBorder.none,
-                  filled: true,
-                  fillColor: Colors.white, // Background color
-                ),
-                initialCountryCode: 'US',
-                onChanged: (PhoneNumber number) {
-                  phoneNumber = number;
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const CustomText(
-              text:
-                  "When you tap Continue, BUDDEEUP will send a verification code. Message and data rates may apply. The verified phone number can be used to login. Learn what happens when your number changes",
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            CustomButton(
-              text: "CONTINUE",
-              onpress: () async {
-                try {
-                  await auth.verifyPhoneNumber(
-                    phoneNumber: phoneNumber.completeNumber,
-                    verificationCompleted: (p) {},
-                    verificationFailed: (p) {
-                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Code Verification Failed'),
-                        ),
-                      );
-                    },
-                    codeSent: (verificationId, forceResendingToken) {
-                      createNewUser.phone(phoneNumber.completeNumber);
-                      Navigator.pushNamed(
-                        context,
-                        '/otp_verification',
-                        arguments: verificationId,
-                      );
-                    },
-                    codeAutoRetrievalTimeout: (verificationId) {},
-                  );
-                } catch (e) {
-                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Enter A Valid Phone Number'),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SafeArea(
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon:
+                          const Icon(Icons.keyboard_backspace_outlined, size: 30),
+                      color: Colors.white,
                     ),
-                  );
-                }
-              },
-              buttonColor: Colors.white,
-              textColor: Colors.black,
-            ),
-          ],
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const CustomText(
+                      text: "Phone verification",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: IntlPhoneField(
+                  decoration: const InputDecoration(
+                    hintText: "Enter your mobile number",
+                    counterText: '',
+                    border: InputBorder.none,
+                    filled: true,
+                    fillColor: Colors.white, // Background color
+                  ),
+                  initialCountryCode: 'US',
+                  onChanged: (PhoneNumber number) {
+                    phoneNumber = number;
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const CustomText(
+                text:
+                    "When you tap Continue, BUDDEEUP will send a verification code. Message and data rates may apply. The verified phone number can be used to login. Learn what happens when your number changes",
+                fontWeight: FontWeight.w400,
+                fontSize: 15,
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              CustomButton(
+                text: "CONTINUE",
+                onpress: () async {
+                  try {
+                    await auth.verifyPhoneNumber(
+                      phoneNumber: phoneNumber.completeNumber,
+                      verificationCompleted: (p) {},
+                      verificationFailed: (p) {
+                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Code Verification Failed'),
+                          ),
+                        );
+                      },
+                      codeSent: (verificationId, forceResendingToken) {
+                        createNewUser.phone(phoneNumber.completeNumber);
+                        Navigator.pushNamed(
+                          context,
+                          '/otp_verification',
+                          arguments: verificationId,
+                        );
+                      },
+                      codeAutoRetrievalTimeout: (verificationId) {},
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Enter A Valid Phone Number'),
+                      ),
+                    );
+                  }
+                },
+                buttonColor: Colors.white,
+                textColor: Colors.black,
+              ),
+            ],
+          ),
         ),
       ),
     );
