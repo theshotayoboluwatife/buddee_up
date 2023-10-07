@@ -15,6 +15,28 @@ class FireStore {
     }
   }
 
+  Future<DocumentSnapshot<Map<String, dynamic>>> getlastMessage(
+      String id) async {
+    try {
+      return store
+          .collection('chats')
+          .doc(auth.currentUser!.uid)
+          .collection('message-sent')
+          .doc(id)
+          .get();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUser(String id) async {
+    try {
+      return store.collection('users').doc(id).get();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> deleteAccount() async {
     try {
       DocumentReference documentReference = FirebaseFirestore.instance

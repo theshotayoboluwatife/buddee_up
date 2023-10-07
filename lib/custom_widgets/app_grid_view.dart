@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:BuddeeUp/helpers/get_user_details.dart';
-import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +119,8 @@ class AppGridView extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, route, arguments: user);
+                    Navigator.pushNamed(context, '/user_profile_info',
+                        arguments: user);
                   },
                 );
               },

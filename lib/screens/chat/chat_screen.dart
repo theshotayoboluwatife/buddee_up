@@ -32,7 +32,9 @@ class _ChatScreenState extends State<ChatScreen> {
             CircleAvatar(
               radius: 15,
               backgroundColor: Colors.white,
-              child: Image.network(user.imageUrl),
+              child: ClipOval(
+                child: Image.network(user.imageUrl),
+              ),
             ),
             const SizedBox(width: 10),
             Column(
@@ -40,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 Text(
                   user.profileName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -54,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       timeago.format(
                         user.lastSeen.toDate(),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                       ),
                     ),

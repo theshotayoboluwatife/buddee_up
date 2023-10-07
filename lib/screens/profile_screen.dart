@@ -28,7 +28,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
-    final profilePictureData = Provider.of<Status>(context).profilePicturesData;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(10),
