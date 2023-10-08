@@ -82,21 +82,19 @@ class _ChatScreenState extends State<ChatScreen> {
               try {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
-                    child: Expanded(child: Text('Loading messages')),
+                    child: Text('Loading messages'),
                   );
                 }
                 if (snapshot.data!.docs.isEmpty) {
                   return const Center(
-                    child: Expanded(
-                      child: Text('No message'),
-                    ),
+                    child: Text('No message'),
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.active) {
                   // logger.i(snapshot.data!.docs);
                   return Expanded(
                     child: ListView.builder(
-                      padding: EdgeInsets.zero,
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       // reverse: true,
                       itemBuilder: (context, index) {
                         Message message =
@@ -126,7 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 return const CircularProgressIndicator();
               } catch (e) {
                 logger.e(e);
-                return Container();
+                return const Text('An error has occurred');
               }
             },
           ),
@@ -179,7 +177,7 @@ class _SendMessageState extends State<SendMessage> {
             fontSize: 14,
           ),
           suffixIcon: GestureDetector(
-            onTap: controller.text.trim().isNotEmpty
+            onTap: (controller.text.trim().isNotEmpty)
                 ? () {}
                 : () async {
                     FocusScope.of(context).unfocus();
