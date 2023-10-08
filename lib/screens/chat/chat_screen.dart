@@ -11,6 +11,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class ChatScreen extends StatefulWidget {
   static const String routeName = 'chat-screen';
+
   const ChatScreen({super.key});
 
   @override
@@ -67,70 +68,75 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          StreamBuilder(
-            stream: firebaseFirestore
-                .collection('chats')
-                .doc(firebaseAuth.currentUser!.uid)
-                .collection('message-sent')
-                .doc(user.id)
-                .collection('messages')
-                .orderBy('timestamp')
-                .snapshots(),
-            builder: (context, snapshot) {
-              try {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: Text('Loading messages'),
-                  );
-                }
-                if (snapshot.data!.docs.isEmpty) {
-                  return const Center(
-                    child: Text('No message'),
-                  );
-                }
-                if (snapshot.connectionState == ConnectionState.active) {
-                  // logger.i(snapshot.data!.docs);
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      // reverse: true,
-                      itemBuilder: (context, index) {
-                        Message message =
-                            Message.fromJson(snapshot.data!.docs[index].data());
-                        return BubbleNormal(
-                          bubbleRadius: 20,
-                          tail: true,
-                          isSender: (message.isSender ==
-                              firebaseAuth.currentUser!.uid),
-                          color: (message.isSender ==
-                                  firebaseAuth.currentUser!.uid)
-                              ? const Color(0XFFf3f3f3)
-                              : const Color(0xffc420d2),
-                          text: message.message,
-                          textStyle: TextStyle(
+      body: Container(
+        width: double.infinity,
+        color: Colors.transparent,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: firebaseFirestore
+                    .collection('chats')
+                    .doc(firebaseAuth.currentUser!.uid)
+                    .collection('message-sent')
+                    .doc(user.id)
+                    .collection('messages')
+                    .orderBy('timestamp')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  try {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: Text('Loading messages'));
+                    }
+                    if (snapshot.data!.docs.isEmpty) {
+                      return const Center(
+                        child: Text('No message'),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      // logger.i(snapshot.data!.docs);
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        // reverse: true,
+                        itemBuilder: (context, index) {
+                          Message message = Message.fromJson(
+                              snapshot.data!.docs[index].data());
+                          return BubbleNormal(
+                            bubbleRadius: 20,
+                            tail: true,
+                            isSender: (message.isSender ==
+                                firebaseAuth.currentUser!.uid),
                             color: (message.isSender ==
                                     firebaseAuth.currentUser!.uid)
-                                ? Colors.black
-                                : Colors.white,
-                          ),
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length,
-                    ),
-                  );
-                }
-                return const CircularProgressIndicator();
-              } catch (e) {
-                logger.e(e);
-                return const Text('An error has occurred');
-              }
-            },
-          ),
-          const Spacer(),
-          SendMessage(userId: user.id),
-        ],
+                                ? const Color(0XFFf3f3f3)
+                                : const Color(0xffc420d2),
+                            text: message.message,
+                            textStyle: TextStyle(
+                              color: (message.isSender ==
+                                      firebaseAuth.currentUser!.uid)
+                                  ? Colors.black
+                                  : Colors.white,
+                            ),
+                          );
+                        },
+                        itemCount: snapshot.data!.docs.length,
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  } catch (e) {
+                    logger.e(e);
+                    return Container();
+                  }
+                },
+              ),
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: SendMessage(userId: user.id)),
+          ],
+        ),
       ),
     );
   }
@@ -138,6 +144,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
 class SendMessage extends StatefulWidget {
   final String userId;
+
   const SendMessage({
     super.key,
     required this.userId,
@@ -149,9 +156,11 @@ class SendMessage extends StatefulWidget {
 
 class _SendMessageState extends State<SendMessage> {
   TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -177,7 +186,11 @@ class _SendMessageState extends State<SendMessage> {
             fontSize: 14,
           ),
           suffixIcon: GestureDetector(
-            onTap: (controller.text.trim().isNotEmpty)
+            onTap: (controller.text.trim().isEmpty ||
+                    controller.text
+                        .trim()
+                        .replaceAll(RegExp(r'\s'), '')
+                        .isEmpty)
                 ? () {}
                 : () async {
                     FocusScope.of(context).unfocus();

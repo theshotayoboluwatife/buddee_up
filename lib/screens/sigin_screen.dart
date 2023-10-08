@@ -329,7 +329,7 @@ class _SignInState extends State<SignIn> {
                               Image.asset("assets/images/logos_facebook.png"),
                         ),
                         label: const CustomText(
-                          text: "Sign Up with Facebook",
+                          text: "Sign In with Facebook",
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                         ),

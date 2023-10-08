@@ -226,7 +226,7 @@ class GoPro extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 10,),// const Spacer(),
               CustomText(
                 textAlign: TextAlign.center,
                 text: "Restore | Privacy | Terms Of Services",

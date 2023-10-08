@@ -38,7 +38,7 @@ class EditProfile extends StatelessWidget {
 
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Stack(
+                    child: Column(
                       children: [
                         Center(
                           child: Column(
@@ -172,113 +172,112 @@ class EditProfile extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: 130,
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 16),
+                                child: Row(
+
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+
+                                    Column(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: IconButton(
+                                            icon: const Icon(
+                                              Icons.settings,
+                                              size: 40,
+                                              color: Colors.black,
+                                            ),
+                                            onPressed: () {
+                                              //it w1orks
+                                              Navigator.pushNamed(context, "/settings");
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const CustomText(
+                                          text: "SETTINGS",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: IconButton(
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              size: 40,
+                                              color: Colors.black,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pushNamed(context, "/edit_info");
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const CustomText(
+                                          text: "EDIT PROFILE",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: IconButton(
+                                            icon: const Icon(
+                                              Icons.verified,
+                                              size: 40,
+                                              color: Colors.black,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, "/go_pro_screen");
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const CustomText(
+                                          text: "PRO",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        Positioned(
-                          top: size.height * 0.43,
-                          left: 40,
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.settings,
-                                    size: 40,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {
-                                    //it w1orks
-                                    Navigator.pushNamed(context, "/settings");
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const CustomText(
-                                text: "SETTINGS",
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          right: 40,
-                          top: size.height * 0.43,
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.verified,
-                                    size: 40,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, "/go_pro_screen");
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const CustomText(
-                                text: "PRO",
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          right: 60,
-                          left: 60,
-                          top: size.height * 0.46,
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    size: 40,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, "/edit_info");
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const CustomText(
-                                text: "EDIT PROFILE",
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ],
-                          ),
-                        ),
+
                       ],
                     ),
                   );
