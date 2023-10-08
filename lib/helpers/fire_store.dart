@@ -105,7 +105,6 @@ class FireStore {
               timestamp: Timestamp.now(),
             ).toJson(),
           );
-      logger.i('sent');
     } catch (e) {
       logger.e(e);
       rethrow;

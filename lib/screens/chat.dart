@@ -1,14 +1,11 @@
-import 'dart:convert';
 
 import 'package:BuddeeUp/custom_widgets/user_item.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
-import 'package:BuddeeUp/models/user.dart';
 import 'package:BuddeeUp/screens/discover.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
 
 import '../custom_widgets/custom_text.dart';
 
@@ -156,21 +153,3 @@ class Chat extends StatelessWidget {
     );
   }
 }
-
-Future<User> getUsers() async {
-  var response = await http.get(Uri.parse('https://randomuser.me/api/'));
-  var name = json.decode(response.body)['results'][0]['name']['first'];
-  var imageUrl = json.decode(response.body)['results'][0]['picture']['medium'];
-  var age = json.decode(response.body)['results'][0]['dob']['age'];
-  User user = User(name, imageUrl, age);
-  return user;
-}
-
-// List<User> users = [
-//   User("Emelie", "assets/dps/0.png", 10),
-//   User("Abigali", "assets/dps/1.png", 10),
-//   User("Elizabeth", "assets/dps/2.png", 10),
-//   User("Penelope", "assets/dps/3.png", 10),
-//   User("Chole", "assets/dps/4.png", 10),
-//   User("Grace", "assets/dps/5.png", 10),
-// ];

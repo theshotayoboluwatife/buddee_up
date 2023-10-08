@@ -133,8 +133,9 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             Align(
-                alignment: Alignment.bottomCenter,
-                child: SendMessage(userId: user.id)),
+              alignment: Alignment.bottomCenter,
+              child: SendMessage(userId: user.id),
+            ),
           ],
         ),
       ),
@@ -171,6 +172,7 @@ class _SendMessageState extends State<SendMessage> {
         onSubmitted: (_) {
           setState(() {
             logger.i(controller.text += '\n');
+            logger.i(controller.text);
             controller.text += '\n';
           });
         },
@@ -186,35 +188,34 @@ class _SendMessageState extends State<SendMessage> {
             fontSize: 14,
           ),
           suffixIcon: GestureDetector(
-            onTap: (controller.text.trim().isEmpty ||
-                    controller.text
-                        .trim()
-                        .replaceAll(RegExp(r'\s'), '')
-                        .isEmpty)
-                ? () {}
-                : () async {
-                    FocusScope.of(context).unfocus();
-                    logger.i(controller.text);
-                    try {
-                      await FireStore()
-                          .sendMessage(controller.text.trim(), widget.userId);
-                      controller.clear();
-                    } catch (e) {
-                      // ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(e.toString()),
-                        ),
-                      );
-                      logger.i(e);
-                    }
-                  },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: FaIcon(
-                FontAwesomeIcons.solidPaperPlane,
-                size: 18,
-                color: Color(0xffc420d2),
+            onTap: () async {
+              if (controller.text.trim().isNotEmpty) {
+                FocusScope.of(context).unfocus();
+                logger.i(controller.text);
+                try {
+                  await FireStore()
+                      .sendMessage(controller.text.trim(), widget.userId);
+                  controller.clear();
+                } catch (e) {
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(e.toString()),
+                    ),
+                  );
+                  logger.i(e);
+                }
+              }
+            },
+            child: const CircleAvatar(
+              backgroundColor: Color(0xffc420d2),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                child: FaIcon(
+                  FontAwesomeIcons.solidPaperPlane,
+                  size: 18,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
