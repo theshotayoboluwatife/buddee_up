@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
+import '../custom_widgets/custom_text.dart';
+
 class Chat extends StatelessWidget {
   const Chat({super.key});
 
@@ -123,7 +125,7 @@ class Chat extends StatelessWidget {
                       messageIds.add(element.id);
                     }
                     if (snapshot.data!.docs.isEmpty) {
-                      return const Center(child: Text('No messages yet'));
+                      return const Center(child: CustomText(text: 'No messages yet', ));
                     } if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: Text('Loading'));
                     }
