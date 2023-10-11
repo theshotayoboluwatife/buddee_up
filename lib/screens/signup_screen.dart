@@ -218,7 +218,6 @@ class _SignUpState extends State<SignUp> {
                               _passwordTextController.text,
                               AuthMode.register,
                             );
-
                             createNewUser
                                 .setEmail(_emailTextController.text.trim());
                             await Navigator.of(context).push(
@@ -228,12 +227,11 @@ class _SignUpState extends State<SignUp> {
                             );
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                            prefs.setBool('isUserLoggedIn', true);
+                            await prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
                             ScaffoldMessenger.of(context)
                                 .removeCurrentSnackBar();
-
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(e.message!),
                             ));

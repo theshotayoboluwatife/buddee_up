@@ -85,7 +85,6 @@ class KeepMePosted extends StatelessWidget {
                   Navigator.pushNamed(context, "/home_screen");
                 } catch (e) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(e.toString()),

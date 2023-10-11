@@ -169,12 +169,11 @@ class _SignInState extends State<SignIn> {
                                 '/home_screen', (route) => false);
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                            prefs.setBool('isUserLoggedIn', true);
+                            await prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
                             ScaffoldMessenger.of(context)
                                 .removeCurrentSnackBar();
-
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(e.message!),
                             ));
@@ -236,11 +235,9 @@ class _SignInState extends State<SignIn> {
                                 lastSeen: Timestamp.fromDate(DateTime.now()),
                               ).toJson(),
                             );
-
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                            prefs.setBool('isUserLoggedIn', true);
-
+                            await prefs.setBool('isUserLoggedIn', true);
                             Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                 builder: (_) => const HomeScreen(),
