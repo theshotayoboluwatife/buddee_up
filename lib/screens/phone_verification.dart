@@ -19,9 +19,12 @@ class _PhoneVerificationState extends State<PhoneVerification> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
     return Scaffold(
       body: Container(
+        height: size.height,
+        width: size.width,
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
           gradient: LinearGradient(

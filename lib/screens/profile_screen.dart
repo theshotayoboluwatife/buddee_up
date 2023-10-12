@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
       TextEditingController();
   final TextEditingController weightTextEditingController =
       TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final List<String> images = [];
 
