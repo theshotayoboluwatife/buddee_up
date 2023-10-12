@@ -220,14 +220,15 @@ class _SignUpState extends State<SignUp> {
                             );
                             createNewUser
                                 .setEmail(_emailTextController.text.trim());
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            await prefs.setBool('isUserLoggedIn', true);
+                            logger.i(prefs.getBool('isUserLoggedIn'));
                             await Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) => const PhoneVerification(),
                               ),
                             );
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            await prefs.setBool('isUserLoggedIn', true);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
                             ScaffoldMessenger.of(context)

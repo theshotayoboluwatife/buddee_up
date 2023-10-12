@@ -165,11 +165,12 @@ class _SignInState extends State<SignIn> {
                               _passwordTextController.text,
                               AuthMode.login,
                             );
-                            await Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/home_screen', (route) => false);
                             final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             await prefs.setBool('isUserLoggedIn', true);
+                            logger.i(prefs.getBool('isUserLoggedIn'));
+                            await Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/home_screen', (route) => false);
                           } on FirebaseAuthException catch (e) {
                             logger.e(e);
                             ScaffoldMessenger.of(context)
