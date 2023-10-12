@@ -55,7 +55,6 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 late final FirebaseAuth auth;
 late final FirebaseApp app;

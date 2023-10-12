@@ -4,7 +4,6 @@ import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -196,7 +195,7 @@ class StatusCard extends StatelessWidget {
               alignment: Alignment.center,
                 child: CustomText(
                   text: name,
-                  fontSize: 12.sp,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
 
