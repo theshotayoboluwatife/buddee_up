@@ -35,14 +35,33 @@ class _EditInfoState extends State<EditInfo>
   void dispose() {
     _tabController.dispose();
     aboutMe.dispose();
+    update();
     super.dispose();
+  }
+
+  update() async {
+    try {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+      DocumentReference userDoc = users.doc(auth.currentUser!.uid);
+      // Update the field
+      await userDoc.update({
+        'bio': aboutMe.text.trim(), // Replace 'fieldName' with your field name
+      });
+      Navigator.of(context).pop();
+    } catch (e) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error Updating Phone Number')));
+      // Navigator.of(context).pop();
+    }
   }
 
   final TextEditingController aboutMe = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
 
     return DefaultTabController(
       length: 2,
@@ -143,7 +162,7 @@ class _EditInfoState extends State<EditInfo>
                                           borderType: BorderType.RRect,
                                           radius: const Radius.circular(10),
                                           child: Container(
-                                            width: size.width * 0.125,
+                                            width: 60,
                                             height: 75,
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -222,9 +241,8 @@ class _EditInfoState extends State<EditInfo>
                         const SizedBox(
                           height: 5,
                         ),
-                         SimpleRowContainer(
-                            title:
-                                user.activities.join(', '),
+                        SimpleRowContainer(
+                            title: user.activities.join(', '),
                             icon: Icons.navigate_next),
                         const Padding(
                           padding: EdgeInsets.all(10.0),
@@ -262,7 +280,7 @@ class _EditInfoState extends State<EditInfo>
                           option: user.status,
                           icon: Icons.people_alt,
                         ),
-                         RowContainer(
+                        RowContainer(
                           title: 'Tribe',
                           option: user.tribe,
                           icon: Icons.family_restroom,
@@ -284,7 +302,7 @@ class _EditInfoState extends State<EditInfo>
                         const SizedBox(
                           height: 5,
                         ),
-                         SimpleRowContainer(
+                        SimpleRowContainer(
                           title: user.gender,
                           icon: Icons.navigate_next,
                         ),
@@ -308,7 +326,7 @@ class _EditInfoState extends State<EditInfo>
                         const SizedBox(
                           height: 5,
                         ),
-                         const SimpleRowContainer(
+                        const SimpleRowContainer(
                           title: 'African-American',
                           icon: Icons.navigate_next,
                         ),
@@ -319,13 +337,13 @@ class _EditInfoState extends State<EditInfo>
                         const SizedBox(
                           height: 5,
                         ),
-                         SimpleRowContainer(
+                        SimpleRowContainer(
                             title: user.height, icon: Icons.keyboard_arrow_up),
                         const SizedBox(
                           height: 20,
                         ),
                         const BulletHeading(title: 'Weight'),
-                         SimpleRowContainer(
+                        SimpleRowContainer(
                             title: user.weight, icon: Icons.keyboard_arrow_up),
                         const SizedBox(
                           height: 20,
@@ -336,7 +354,7 @@ class _EditInfoState extends State<EditInfo>
                         const SizedBox(
                           height: 5,
                         ),
-                         SimpleRowContainer(
+                        SimpleRowContainer(
                             title: user.gender, icon: Icons.navigate_next),
                         const SizedBox(
                           height: 20,
@@ -385,7 +403,7 @@ class _EditInfoState extends State<EditInfo>
     );
   }
 
-  Container generateSwitchContainer(String title, bool switchValue) {
+  Container generateSwitchContainer(String title, bool val) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(left: 16, right: 16),
@@ -403,10 +421,10 @@ class _EditInfoState extends State<EditInfo>
             fontSize: 15,
           ),
           Switch(
-            value: this.switchValue,
+            value: val,
             onChanged: (newValue) {
               setState(() {
-                this.switchValue = newValue;
+                val = newValue;
               });
             },
             activeTrackColor: Colors.purpleAccent,

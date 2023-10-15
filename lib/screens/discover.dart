@@ -70,11 +70,16 @@ class DiscoveryPage extends StatelessWidget {
                                 ConnectionState.waiting) {
                               return Container();
                             }
+                            if (snapShot.hasError) {
+                              return Container();
+                            }
                             return GestureDetector(
                               child: ClipOval(
                                 child: Image.network(
                                   snapShot.data!,
                                   cacheWidth: 30,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(),
                                 ),
                               ),
                               onTap: () {
@@ -135,7 +140,9 @@ class DiscoveryPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             const AppGridView(
               route: "/user_profile_info",
             )
@@ -193,12 +200,11 @@ class StatusCard extends StatelessWidget {
             const SizedBox(height: 5),
             FittedBox(
               alignment: Alignment.center,
-                child: CustomText(
-                  text: name,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                ),
-
+              child: CustomText(
+                text: name,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
             )
           ],
         ),

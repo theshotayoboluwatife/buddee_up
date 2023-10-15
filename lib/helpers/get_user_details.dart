@@ -7,26 +7,29 @@ var storage = FirebaseStorage.instance;
 
 class GetUserDetails {
   Future<String> getUserProfileImage() async {
-    DocumentSnapshot doc =
-        await dataabase.collection('users').doc(auth.currentUser!.uid).get();
-    Map<String, dynamic> body = doc.data() as Map<String, dynamic>;
-    return body['imageUrl'];
-  }
-
-  Future<QuerySnapshot<Map<String, dynamic>>> getUsers() async {
     try {
-      return dataabase.collection('users')
-      .get();
+      DocumentSnapshot doc =
+          await dataabase.collection('users').doc(auth.currentUser!.uid).get();
+      Map<String, dynamic> body = doc.data() as Map<String, dynamic>;
+      return body['imageUrl'];
     } catch (e) {
       rethrow;
     }
   }
 
-    Future<QuerySnapshot<Map<String, dynamic>>> getUsersInGridView() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> getUsers() async {
     try {
-      return dataabase.collection('users')
-      .where('id', whereNotIn: [auth.currentUser!.uid])
-      .get();
+      return dataabase.collection('users').get();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getUsersInGridView() async {
+    try {
+      return dataabase
+          .collection('users')
+          .where('id', whereNotIn: [auth.currentUser!.uid]).get();
     } catch (e) {
       rethrow;
     }

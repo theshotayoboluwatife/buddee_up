@@ -16,7 +16,7 @@ class EditProfile extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-           // height: size.height * 0.65,
+            // height: size.height * 0.65,
             decoration: const BoxDecoration(
               color: Colors.purpleAccent,
               borderRadius: BorderRadius.only(
@@ -66,6 +66,9 @@ class EditProfile extends StatelessWidget {
                                           width: 220,
                                           height: 220,
                                           fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Container(),
                                         ),
                                       ),
                                     ),
@@ -103,7 +106,6 @@ class EditProfile extends StatelessWidget {
                                 children: [
                                   CustomText(
                                     text: "${user.profileName}, ${user.age}",
-
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -175,12 +177,12 @@ class EditProfile extends StatelessWidget {
                                 height: 20,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 16),
+                                padding: const EdgeInsets.only(
+                                    left: 24.0, right: 24, bottom: 16),
                                 child: Row(
-
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-
                                     Column(
                                       children: [
                                         Container(
@@ -197,7 +199,8 @@ class EditProfile extends StatelessWidget {
                                             ),
                                             onPressed: () {
                                               //it w1orks
-                                              Navigator.pushNamed(context, "/settings");
+                                              Navigator.pushNamed(
+                                                  context, "/settings");
                                             },
                                           ),
                                         ),
@@ -226,7 +229,8 @@ class EditProfile extends StatelessWidget {
                                               color: Colors.black,
                                             ),
                                             onPressed: () {
-                                              Navigator.pushNamed(context, "/edit_info");
+                                              Navigator.pushNamed(
+                                                  context, "/edit_info");
                                             },
                                           ),
                                         ),
@@ -270,14 +274,12 @@ class EditProfile extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-
                                   ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-
                       ],
                     ),
                   );

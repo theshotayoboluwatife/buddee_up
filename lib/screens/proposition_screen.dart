@@ -38,7 +38,7 @@ class PropositionScreen extends StatelessWidget {
                 ],
               ),
               const CustomText(
-                text: "Make Your BudeeUp\nProposition",
+                text: "Make Your BuddeeUp\nProposition",
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
