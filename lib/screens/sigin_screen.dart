@@ -220,7 +220,7 @@ class _SignInState extends State<SignIn> {
                                     auth.currentUser!.displayName ?? '',
                                 age: 18,
                                 imageUrl: auth.currentUser!.photoURL ??
-                                    'https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png',
+                                    'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg',
                                 bio: '',
                                 pictures: [auth.currentUser!.photoURL ?? ''],
                                 height: '5 ft 10',

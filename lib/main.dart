@@ -143,7 +143,7 @@ class App extends StatelessWidget {
         "/view_image": (context) => const ViewImage(),
         "/video_call_screen": (context) => const VideoCallScreen(),
         "/voice_call_screen": (context) => const PhoneCallScreen(),
-        "/user_profile": (context) => const EditProfile(),
+        "/user_profile": (context) =>  EditProfile(),
         "/go_pro_screen": (context) => GoPro(
               onTap: () => Navigator.pop(context),
             ),

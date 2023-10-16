@@ -1,11 +1,28 @@
+import 'dart:io';
+
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/new_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class EditProfile extends StatelessWidget {
-  const EditProfile({Key? key}) : super(key: key);
+class EditProfile extends StatefulWidget {
+  EditProfile({Key? key}) : super(key: key);
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  late String fileLocation;
+  File? selectedImageFile;
+  late String url;
 
   @override
   Widget build(BuildContext context) {
@@ -73,33 +90,219 @@ class EditProfile extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  // Positioned(
-                                  //   right: 0,
-                                  //   top: 0,
-                                  //   child: Container(
-                                  //     padding: const EdgeInsets.all(16),
-                                  //     decoration: BoxDecoration(
-                                  //       color: const Color(0xff141416),
-                                  //       shape: BoxShape.circle,
-                                  //       border: Border.all(
-                                  //         color: Colors.white, // Border color
-                                  //         width: 1.0, // Border width
-                                  //       ),
-                                  //     ),
-                                  //     child: const ClipOval(
-                                  //       child: CustomText(
-                                  //         text: "45%",
-                                  //         fontWeight: FontWeight.bold,
-                                  //         fontSize: 16,
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // )
                                 ],
                               ),
-                              const SizedBox(
-                                height: 5,
+                              const SizedBox(height: 5),
+                              GestureDetector(
+                                onTap: () async {
+                                  showAdaptiveDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () async {
+                                              final picker = ImagePicker();
+                                              final pickedFile =
+                                                  await picker.pickImage(
+                                                source: ImageSource.gallery,
+                                                imageQuality: 25,
+                                              );
+                                              Navigator.of(context).pop();
+
+                                              if (pickedFile != null) {
+                                                String fileName = DateTime.now()
+                                                    .millisecondsSinceEpoch
+                                                    .toString(); // Generate a unique filename
+                                                fileLocation = fileName;
+                                                Reference storageReference =
+                                                    FirebaseStorage.instance
+                                                        .ref()
+                                                        .child('imageUrl')
+                                                        .child(FirebaseAuth
+                                                            .instance
+                                                            .currentUser!
+                                                            .uid)
+                                                        .child(fileName);
+                                                UploadTask uploadTask =
+                                                    storageReference.putFile(
+                                                  File(pickedFile.path),
+                                                );
+                                                TaskSnapshot taskSnapshot =
+                                                    await uploadTask
+                                                        .whenComplete(() {});
+                                                String downloadURL =
+                                                    await taskSnapshot.ref
+                                                        .getDownloadURL();
+                                                url = downloadURL;
+                                                if (auth.currentUser != null) {
+                                                  try {
+                                                    DocumentReference
+                                                        documentReference =
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection('users')
+                                                            .doc(auth
+                                                                .currentUser!
+                                                                .uid);
+
+                                                    await documentReference
+                                                        .update({
+                                                      'imageUrl': url,
+                                                    });
+                                                    setState(() {
+                                                      // user.imageUrl = url;
+                                                    });
+                                                    logger.i(
+                                                        'Field updated successfully');
+                                                  } catch (e) {
+                                                    logger.e(
+                                                        'Error updating picture list: $e');
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            child: const Text(
+                                              'CHOOSE FROM GALLERY',
+                                              style: TextStyle(
+                                                color: Colors.purple,
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              final picker = ImagePicker();
+                                              final pickedFile =
+                                                  await picker.pickImage(
+                                                source: ImageSource.camera,
+                                                imageQuality: 25,
+                                              );
+                                              Navigator.of(context).pop();
+
+                                              if (pickedFile != null) {
+                                                String fileName = DateTime.now()
+                                                    .millisecondsSinceEpoch
+                                                    .toString(); // Generate a unique filename
+                                                fileLocation = fileName;
+                                                Reference storageReference =
+                                                    FirebaseStorage.instance
+                                                        .ref()
+                                                        .child('imageUrl')
+                                                        .child(FirebaseAuth
+                                                            .instance
+                                                            .currentUser!
+                                                            .uid)
+                                                        .child(fileName);
+                                                UploadTask uploadTask =
+                                                    storageReference.putFile(
+                                                  File(pickedFile.path),
+                                                );
+                                                TaskSnapshot taskSnapshot =
+                                                    await uploadTask
+                                                        .whenComplete(() {});
+                                                String downloadURL =
+                                                    await taskSnapshot.ref
+                                                        .getDownloadURL();
+                                                url = downloadURL;
+                                                if (auth.currentUser != null) {
+                                                  try {
+                                                    DocumentReference
+                                                        documentReference =
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection('users')
+                                                            .doc(auth
+                                                                .currentUser!
+                                                                .uid);
+                                                    await documentReference
+                                                        .update({
+                                                      'imageUrl': url,
+                                                    });
+
+                                                    setState(() {
+                                                      // user.imageUrl = url;
+                                                    });
+                                                    logger.i(
+                                                        'Field updated successfully');
+                                                  } catch (e) {
+                                                    logger.e(
+                                                        'Error updating picture list: $e');
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            child: const Text(
+                                              'CHOOSE FROM CAMERA',
+                                              style: TextStyle(
+                                                color: Colors.purple,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                  // final picker = ImagePicker();
+                                  // final pickedFile = await picker.pickImage(
+                                  //   source: ImageSource.gallery,
+                                  //   imageQuality: 25,
+                                  // );
+                                  // if (pickedFile != null) {
+                                  //   String fileName = DateTime.now()
+                                  //       .millisecondsSinceEpoch
+                                  //       .toString(); // Generate a unique filename
+                                  //   fileLocation = fileName;
+                                  //   Reference storageReference = FirebaseStorage
+                                  //       .instance
+                                  //       .ref()
+                                  //       .child('imageUrl')
+                                  //       .child(FirebaseAuth
+                                  //           .instance.currentUser!.uid)
+                                  //       .child(fileName);
+                                  //   UploadTask uploadTask =
+                                  //       storageReference.putFile(
+                                  //     File(pickedFile.path),
+                                  //   );
+                                  //   TaskSnapshot taskSnapshot =
+                                  //       await uploadTask.whenComplete(() {});
+                                  //   String downloadURL =
+                                  //       await taskSnapshot.ref.getDownloadURL();
+                                  //   url = downloadURL;
+                                  //   if (auth.currentUser != null) {
+                                  //     try {
+                                  //       DocumentReference documentReference =
+                                  //           FirebaseFirestore.instance
+                                  //               .collection('users')
+                                  //               .doc(auth.currentUser!.uid);
+
+                                  //       await documentReference.update({
+                                  //         'imageUrl': url,
+                                  //       });
+                                  //       setState(() {
+                                  //         // user.imageUrl = url;
+                                  //       });
+                                  //       logger.i('Field updated successfully');
+                                  //     } catch (e) {
+                                  //       logger.e(
+                                  //           'Error updating picture list: $e');
+                                  //     }
+                                  //   }
+                                  // }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: const Text(
+                                    'Change Profile Picture',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
                               ),
+                              const SizedBox(height: 5),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,

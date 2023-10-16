@@ -80,6 +80,7 @@ class KeepMePosted extends StatelessWidget {
               onpress: () async {
                 try {
                   createNewUser.newUser.id = auth.currentUser!.uid;
+
                   await FireStore()
                       .addUserToDatabase(createNewUser.newUser.toJson());
                   Navigator.pushNamed(context, "/home_screen");

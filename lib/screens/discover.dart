@@ -78,6 +78,7 @@ class DiscoveryPage extends StatelessWidget {
                                 child: Image.network(
                                   snapShot.data!,
                                   cacheWidth: 30,
+                                  cacheHeight: 30,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Container(),
                                 ),
@@ -118,9 +119,13 @@ class DiscoveryPage extends StatelessWidget {
                       return ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          StatusCard(
-                            name: 'You',
-                            image: imageUrl,
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, "/user_profile"),
+                            child: StatusCard(
+                              name: 'You',
+                              image: imageUrl,
+                            ),
                           ),
                           ...data.map(
                             (value) {
@@ -165,53 +170,48 @@ class StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        margin: const EdgeInsets.only(right: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 30,
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0XFFC420D2),
-                      Color(0XFF0A84FF),
-                    ],
-                  ),
+    return Container(
+      margin: const EdgeInsets.only(right: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 30,
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0XFFC420D2),
+                    Color(0XFF0A84FF),
+                  ],
                 ),
-                child: Center(
-                  child: Container(
-                    margin: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage(image),
-                        fit: BoxFit.cover,
-                      ),
+              ),
+              child: Center(
+                child: Container(
+                  margin: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(image),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 5),
-            FittedBox(
-              alignment: Alignment.center,
-              child: CustomText(
-                text: name,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-              ),
-            )
-          ],
-        ),
+          ),
+          const SizedBox(height: 5),
+          FittedBox(
+            alignment: Alignment.center,
+            child: CustomText(
+              text: name,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          )
+        ],
       ),
-      onTap: () {
-        //chat screen
-      },
     );
   }
 }

@@ -26,7 +26,6 @@ class DottedImageCard extends StatefulWidget {
 class _DottedImageCardState extends State<DottedImageCard> {
   File? selectedImageFile;
   late String fileLocation;
-
   late String url;
 
   Future<void> pickImage() async {
@@ -151,10 +150,10 @@ class _DottedImageCardState extends State<DottedImageCard> {
                   if (auth.currentUser != null) {
                     try {
                       // Reference the Firestore collection and document
-                      CollectionReference collection = FirebaseFirestore
-                          .instance
-                          .collection('users');
-                      DocumentReference docRef = collection.doc(auth.currentUser!.uid);
+                      CollectionReference collection =
+                          FirebaseFirestore.instance.collection('users');
+                      DocumentReference docRef =
+                          collection.doc(auth.currentUser!.uid);
 
                       // Get the current list of pictures from Firestore
                       DocumentSnapshot doc = await docRef.get();

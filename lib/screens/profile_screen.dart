@@ -82,6 +82,7 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ProfileContainer(
+                              type: TextInputType.text,
                               validator: (value) {
                                 if (value!.length < 3) {
                                   return 'Profile name must be greater than 3';
@@ -113,6 +114,7 @@ class ProfileScreen extends StatelessWidget {
                         height: 10,
                       ),
                       ProfileContainer(
+                        type: TextInputType.text,
                         validator: (p) {
                           if (p!.isEmpty) {
                             return 'Bio Can\'t be empty';
@@ -175,9 +177,10 @@ class ProfileScreen extends StatelessWidget {
                         height: 1,
                       ),
                       ProfileContainer(
+                        type: TextInputType.number,
                         validator: (p) {
                           if (p!.isEmpty) {
-                            heightTextEditingController.text = "5' ft 0\" in";
+                            heightTextEditingController.text = "5' ft";
                           }
                           return null;
                         },
@@ -186,6 +189,7 @@ class ProfileScreen extends StatelessWidget {
                         controller: heightTextEditingController,
                       ),
                       ProfileContainer(
+                        type: TextInputType.number,
                         validator: (p) {
                           if (p!.isEmpty) {
                             weightTextEditingController.text = "130 lbs";
@@ -247,7 +251,7 @@ class ProfileContainer extends StatelessWidget {
 
   const ProfileContainer({
     super.key,
-    this.type = TextInputType.text,
+    required this.type,
     required this.heading,
     required this.hint,
     this.height,

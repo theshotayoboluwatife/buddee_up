@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        const EditProfile(),
+         EditProfile(),
       ]),
       // body: DiscoveryPage(),
       bottomSheet: Container(

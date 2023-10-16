@@ -11,7 +11,7 @@ NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
       id: json['id'] as String,
       status: json['status'] as String,
       imageUrl: json['imageUrl'] as String? ??
-          'https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png',
+          'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg',
       phoneNumber: json['phoneNumber'] as String,
       profileName: json['profileName'] as String,
       age: json['age'] as int,
