@@ -103,64 +103,79 @@ class _EditProfileState extends State<EditProfile> {
                                         children: [
                                           TextButton(
                                             onPressed: () async {
-                                              final picker = ImagePicker();
-                                              final pickedFile =
-                                                  await picker.pickImage(
-                                                source: ImageSource.gallery,
-                                                imageQuality: 25,
-                                              );
-                                              Navigator.of(context).pop();
-
-                                              if (pickedFile != null) {
-                                                String fileName = DateTime.now()
-                                                    .millisecondsSinceEpoch
-                                                    .toString(); // Generate a unique filename
-                                                fileLocation = fileName;
-                                                Reference storageReference =
-                                                    FirebaseStorage.instance
-                                                        .ref()
-                                                        .child('imageUrl')
-                                                        .child(FirebaseAuth
-                                                            .instance
-                                                            .currentUser!
-                                                            .uid)
-                                                        .child(fileName);
-                                                UploadTask uploadTask =
-                                                    storageReference.putFile(
-                                                  File(pickedFile.path),
+                                              try {
+                                                final picker = ImagePicker();
+                                                final pickedFile =
+                                                    await picker.pickImage(
+                                                  source: ImageSource.gallery,
+                                                  imageQuality: 25,
                                                 );
-                                                TaskSnapshot taskSnapshot =
-                                                    await uploadTask
-                                                        .whenComplete(() {});
-                                                String downloadURL =
-                                                    await taskSnapshot.ref
-                                                        .getDownloadURL();
-                                                url = downloadURL;
-                                                if (auth.currentUser != null) {
-                                                  try {
-                                                    DocumentReference
-                                                        documentReference =
-                                                        FirebaseFirestore
-                                                            .instance
-                                                            .collection('users')
-                                                            .doc(auth
-                                                                .currentUser!
-                                                                .uid);
+                                                Navigator.of(context).pop();
 
-                                                    await documentReference
-                                                        .update({
-                                                      'imageUrl': url,
-                                                    });
-                                                    setState(() {
-                                                      // user.imageUrl = url;
-                                                    });
-                                                    logger.i(
-                                                        'Field updated successfully');
-                                                  } catch (e) {
-                                                    logger.e(
-                                                        'Error updating picture list: $e');
+                                                if (pickedFile != null) {
+                                                  String fileName = DateTime
+                                                          .now()
+                                                      .millisecondsSinceEpoch
+                                                      .toString(); // Generate a unique filename
+                                                  fileLocation = fileName;
+                                                  Reference storageReference =
+                                                      FirebaseStorage.instance
+                                                          .ref()
+                                                          .child('imageUrl')
+                                                          .child(FirebaseAuth
+                                                              .instance
+                                                              .currentUser!
+                                                              .uid)
+                                                          .child(fileName);
+                                                  UploadTask uploadTask =
+                                                      storageReference.putFile(
+                                                    File(pickedFile.path),
+                                                  );
+                                                  TaskSnapshot taskSnapshot =
+                                                      await uploadTask
+                                                          .whenComplete(() {});
+                                                  String downloadURL =
+                                                      await taskSnapshot.ref
+                                                          .getDownloadURL();
+                                                  url = downloadURL;
+                                                  if (auth.currentUser !=
+                                                      null) {
+                                                    try {
+                                                      DocumentReference
+                                                          documentReference =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'users')
+                                                              .doc(auth
+                                                                  .currentUser!
+                                                                  .uid);
+
+                                                      await documentReference
+                                                          .update({
+                                                        'imageUrl': url,
+                                                      });
+                                                      setState(() {
+                                                        // user.imageUrl = url;
+                                                      });
+                                                      logger.i(
+                                                          'Field updated successfully');
+                                                    } catch (e) {
+                                                      logger.e(
+                                                          'Error updating picture list: $e');
+                                                    }
                                                   }
                                                 }
+                                              } catch (e) {
+                                                ScaffoldMessenger.of(context)
+                                                    .removeCurrentSnackBar();
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    content: Text(
+                                                        'An Error have occured'),
+                                                  ),
+                                                );
                                               }
                                             },
                                             child: const Text(
@@ -172,65 +187,79 @@ class _EditProfileState extends State<EditProfile> {
                                           ),
                                           TextButton(
                                             onPressed: () async {
-                                              final picker = ImagePicker();
-                                              final pickedFile =
-                                                  await picker.pickImage(
-                                                source: ImageSource.camera,
-                                                imageQuality: 25,
-                                              );
-                                              Navigator.of(context).pop();
-
-                                              if (pickedFile != null) {
-                                                String fileName = DateTime.now()
-                                                    .millisecondsSinceEpoch
-                                                    .toString(); // Generate a unique filename
-                                                fileLocation = fileName;
-                                                Reference storageReference =
-                                                    FirebaseStorage.instance
-                                                        .ref()
-                                                        .child('imageUrl')
-                                                        .child(FirebaseAuth
-                                                            .instance
-                                                            .currentUser!
-                                                            .uid)
-                                                        .child(fileName);
-                                                UploadTask uploadTask =
-                                                    storageReference.putFile(
-                                                  File(pickedFile.path),
+                                              try {
+                                                final picker = ImagePicker();
+                                                final pickedFile =
+                                                    await picker.pickImage(
+                                                  source: ImageSource.camera,
+                                                  imageQuality: 25,
                                                 );
-                                                TaskSnapshot taskSnapshot =
-                                                    await uploadTask
-                                                        .whenComplete(() {});
-                                                String downloadURL =
-                                                    await taskSnapshot.ref
-                                                        .getDownloadURL();
-                                                url = downloadURL;
-                                                if (auth.currentUser != null) {
-                                                  try {
-                                                    DocumentReference
-                                                        documentReference =
-                                                        FirebaseFirestore
-                                                            .instance
-                                                            .collection('users')
-                                                            .doc(auth
-                                                                .currentUser!
-                                                                .uid);
-                                                    await documentReference
-                                                        .update({
-                                                      'imageUrl': url,
-                                                    });
+                                                Navigator.of(context).pop();
 
-                                                    setState(() {
-                                                      // user.imageUrl = url;
-                                                    });
-                                                    logger.i(
-                                                        'Field updated successfully');
-                                                  } catch (e) {
-                                                    logger.e(
-                                                        'Error updating picture list: $e');
+                                                if (pickedFile != null) {
+                                                  String fileName = DateTime
+                                                          .now()
+                                                      .millisecondsSinceEpoch
+                                                      .toString(); // Generate a unique filename
+                                                  fileLocation = fileName;
+                                                  Reference storageReference =
+                                                      FirebaseStorage.instance
+                                                          .ref()
+                                                          .child('imageUrl')
+                                                          .child(FirebaseAuth
+                                                              .instance
+                                                              .currentUser!
+                                                              .uid)
+                                                          .child(fileName);
+                                                  UploadTask uploadTask =
+                                                      storageReference.putFile(
+                                                    File(pickedFile.path),
+                                                  );
+                                                  TaskSnapshot taskSnapshot =
+                                                      await uploadTask
+                                                          .whenComplete(() {});
+                                                  String downloadURL =
+                                                      await taskSnapshot.ref
+                                                          .getDownloadURL();
+                                                  url = downloadURL;
+                                                  if (auth.currentUser !=
+                                                      null) {
+                                                    try {
+                                                      DocumentReference
+                                                          documentReference =
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'users')
+                                                              .doc(auth
+                                                                  .currentUser!
+                                                                  .uid);
+                                                      await documentReference
+                                                          .update({
+                                                        'imageUrl': url,
+                                                      });
+
+                                                      setState(() {
+                                                        // user.imageUrl = url;
+                                                      });
+                                                      logger.i(
+                                                          'Field updated successfully');
+                                                    } catch (e) {
+                                                      logger.e(
+                                                          'Error updating picture list: $e');
+                                                    }
                                                   }
                                                 }
-                                              }
+                                              } catch (e) {}
+                                              ScaffoldMessenger.of(context)
+                                                  .removeCurrentSnackBar();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      'An Error have occured'),
+                                                ),
+                                              );
                                             },
                                             child: const Text(
                                               'CHOOSE FROM CAMERA',
