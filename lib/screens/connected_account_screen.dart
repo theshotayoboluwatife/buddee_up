@@ -77,37 +77,37 @@ class _ConnectedAccountScreenState extends State<ConnectedAccountScreen> {
                   ],
                 ),
               ),
-          Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: const BoxDecoration(
-                    color: Color(0xFF141416),
-                    border: Border(
-                        top: BorderSide(width: 1, color: Colors.white),
-                        bottom: BorderSide(width: 1, color: Colors.white))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const CustomText(
-                      text: "Sign in with Facebook",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                    Switch(
-                      value: switchValue2,
-                      onChanged: (newValue) {
-                        setState(() {
-                          switchValue2 = newValue;
-                        });
-                      },
-                      activeTrackColor: Colors.purpleAccent,
-                      activeColor: Colors.white,
-                      inactiveTrackColor: Colors.black,
-                      inactiveThumbColor: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
+          // Container(
+          //       width: double.infinity,
+          //       padding: const EdgeInsets.all(16),
+          //       decoration: const BoxDecoration(
+          //           color: Color(0xFF141416),
+          //           border: Border(
+          //               top: BorderSide(width: 1, color: Colors.white),
+          //               bottom: BorderSide(width: 1, color: Colors.white))),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           const CustomText(
+          //             text: "Sign in with Facebook",
+          //             fontWeight: FontWeight.w500,
+          //             fontSize: 15,
+          //           ),
+          //           Switch(
+          //             value: switchValue2,
+          //             onChanged: (newValue) {
+          //               setState(() {
+          //                 switchValue2 = newValue;
+          //               });
+          //             },
+          //             activeTrackColor: Colors.purpleAccent,
+          //             activeColor: Colors.white,
+          //             inactiveTrackColor: Colors.black,
+          //             inactiveThumbColor: Colors.white,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
         ],
       ),
     );

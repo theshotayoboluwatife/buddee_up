@@ -291,11 +291,11 @@ class _SignInState extends State<SignIn> {
                       height: 15,
                     ),
                     //Facebook signin button
-                    Container(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      width: double.infinity,
-                      height: 60,
-                      child: ElevatedButton.icon(
+                    // Container(
+                    //   padding: const EdgeInsets.only(left: 30, right: 30),
+                    //   width: double.infinity,
+                    //   height: 60,
+                    //   child: ElevatedButton.icon(
                         // onPressed: () async {
                         //   try {
                         //     await Auth.signInWithFacebook().then((value) =>
@@ -320,28 +320,28 @@ class _SignInState extends State<SignIn> {
                         //     );
                         //   }
                         // },
-                        onPressed: () {},
-                        icon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:
-                              Image.asset("assets/images/logos_facebook.png"),
-                        ),
-                        label: const CustomText(
-                          text: "Sign In with Facebook",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFDA3EE8),
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    //     onPressed: () {},
+                    //     icon: Padding(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       child:
+                    //           Image.asset("assets/images/logos_facebook.png"),
+                    //     ),
+                    //     label: const CustomText(
+                    //       text: "Sign In with Facebook",
+                    //       fontSize: 15,
+                    //       fontWeight: FontWeight.w400,
+                    //     ),
+                    //     style: ElevatedButton.styleFrom(
+                    //       backgroundColor: const Color(0xFFDA3EE8),
+                    //       elevation: 8,
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(30)),
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
 
                     const SizedBox(
                       height: 20,

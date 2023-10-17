@@ -173,33 +173,10 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 1,
-                      ),
-                      ProfileContainer(
-                        type: TextInputType.number,
-                        validator: (p) {
-                          if (p!.isEmpty) {
-                            heightTextEditingController.text = "5' ft";
-                          }
-                          return null;
-                        },
-                        heading: "Height",
-                        hint: "5' ft 0\" in",
-                        controller: heightTextEditingController,
-                      ),
-                      ProfileContainer(
-                        type: TextInputType.number,
-                        validator: (p) {
-                          if (p!.isEmpty) {
-                            weightTextEditingController.text = "130 lbs";
-                          }
-                          return null;
-                        },
-                        heading: "Weight",
-                        hint: "130 lbs",
-                        controller: weightTextEditingController,
-                      ),
+                      const SizedBox(height: 5),
+                      HeightDropdown(),
+                      const SizedBox(height: 5),
+                      WeightDropdown(),
                       const SizedBox(height: 20),
                       CustomButton(
                         text: "CONTINUE",
@@ -308,6 +285,125 @@ class ProfileContainer extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class HeightDropdown extends StatefulWidget {
+  @override
+  _HeightDropdownState createState() => _HeightDropdownState();
+}
+
+class _HeightDropdownState extends State<HeightDropdown> {
+  int selectedHeight = 0;
+
+  List<String> generateHeightsList() {
+    List<String> heights = [];
+    for (int feet = 3; feet <= 8; feet++) {
+      for (int inches = 0; inches <= 7; inches++) {
+        heights.add("$feet feet $inches inches");
+      }
+    }
+    return heights;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> heightList = generateHeightsList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          ' Height:',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 2),
+        DropdownButton<int>(
+          value: selectedHeight,
+          iconEnabledColor: Colors.white,
+          dropdownColor: Colors.purple,
+          items: heightList
+              .asMap()
+              .entries
+              .map<DropdownMenuItem<int>>(
+                (MapEntry<int, String> entry) => DropdownMenuItem<int>(
+                  value: entry.key,
+                  child: Text(
+                    entry.value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged: (int? index) {
+            setState(() {
+              selectedHeight = index!;
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class WeightDropdown extends StatefulWidget {
+  @override
+  _WeightDropdownState createState() => _WeightDropdownState();
+}
+
+class _WeightDropdownState extends State<WeightDropdown> {
+  int selectedWeight = 0;
+
+  List<String> generateWeightsList() {
+    List<String> weights = [];
+    for (int kilograms = 50; kilograms <= 150; kilograms++) {
+      weights.add("$kilograms kg");
+    }
+    return weights;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> weightList = generateWeightsList();
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const Text(
+          'Select Weight:',
+          style: TextStyle(fontSize: 20),
+        ),
+        const SizedBox(height: 10),
+        DropdownButton<int>(
+          value: selectedWeight,
+          items: weightList
+              .asMap()
+              .entries
+              .map<DropdownMenuItem<int>>(
+                (MapEntry<int, String> entry) => DropdownMenuItem<int>(
+                  value: entry.key,
+                  child: Text(entry.value),
+                ),
+              )
+              .toList(),
+          onChanged: (int? index) {
+            setState(() {
+              selectedWeight = index!;
+            });
+          },
+        ),
+        const SizedBox(height: 20),
+        Text(
+          'You selected: ${weightList[selectedWeight]}',
+          style: const TextStyle(fontSize: 18),
+        ),
+      ],
     );
   }
 }
