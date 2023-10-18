@@ -76,14 +76,14 @@ class CreateNewUser extends ChangeNotifier {
     int age,
     String bio,
     List<String> pictures,
-    String height,
-    String weight,
+    // String height,
+    // String weight,
   ) {
     newUser.profileName = profileName;
     newUser.age = age;
     newUser.bio = bio;
     newUser.pictures = pictures;
-    newUser.height = height;
-    newUser.weight = weight;
+    // newUser.height = height;
+    // newUser.weight = weight;
   }
 }

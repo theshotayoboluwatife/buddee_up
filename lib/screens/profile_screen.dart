@@ -16,12 +16,7 @@ class ProfileScreen extends StatelessWidget {
       TextEditingController();
   final TextEditingController bioTextEditingController =
       TextEditingController();
-  final TextEditingController heightTextEditingController =
-      TextEditingController();
-  final TextEditingController weightTextEditingController =
-      TextEditingController();
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final List<String> images = [];
 
   @override
@@ -174,9 +169,13 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      HeightDropdown(),
-                      const SizedBox(height: 5),
-                      WeightDropdown(),
+                      const Row(
+                        children: [
+                          HeightDropdown(),
+                          SizedBox(width: 50),
+                          WeightDropdown(),
+                        ],
+                      ),
                       const SizedBox(height: 20),
                       CustomButton(
                         text: "CONTINUE",
@@ -197,8 +196,6 @@ class ProfileScreen extends StatelessWidget {
                               int.parse(ageTextEditingController.text),
                               bioTextEditingController.text,
                               images,
-                              heightTextEditingController.text,
-                              weightTextEditingController.text,
                             );
                             Navigator.pushNamed(context, "/sex_type_screen");
                             logger.i(createNewUser.newUser.imageUrl);
@@ -290,12 +287,14 @@ class ProfileContainer extends StatelessWidget {
 }
 
 class HeightDropdown extends StatefulWidget {
+  const HeightDropdown({super.key});
+
   @override
-  _HeightDropdownState createState() => _HeightDropdownState();
+  State<HeightDropdown> createState() => _HeightDropdownState();
 }
 
 class _HeightDropdownState extends State<HeightDropdown> {
-  int selectedHeight = 0;
+  int selectedHeight = 3;
 
   List<String> generateHeightsList() {
     List<String> heights = [];
@@ -309,13 +308,15 @@ class _HeightDropdownState extends State<HeightDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> heightList = generateHeightsList();
+    CreateNewUser createNewUser =
+        Provider.of<CreateNewUser>(context, listen: false);
 
+    List<String> heightList = generateHeightsList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
-          ' Height:',
+          'Height:',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -345,6 +346,7 @@ class _HeightDropdownState extends State<HeightDropdown> {
             setState(() {
               selectedHeight = index!;
             });
+            createNewUser.newUser.height = selectedHeight.toString();
           },
         ),
       ],
@@ -353,12 +355,14 @@ class _HeightDropdownState extends State<HeightDropdown> {
 }
 
 class WeightDropdown extends StatefulWidget {
+  const WeightDropdown({super.key});
+
   @override
-  _WeightDropdownState createState() => _WeightDropdownState();
+  State<WeightDropdown> createState() => _WeightDropdownState();
 }
 
 class _WeightDropdownState extends State<WeightDropdown> {
-  int selectedWeight = 0;
+  int selectedWeight = 50;
 
   List<String> generateWeightsList() {
     List<String> weights = [];
@@ -370,25 +374,38 @@ class _WeightDropdownState extends State<WeightDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
+
     List<String> weightList = generateWeightsList();
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
-          'Select Weight:',
-          style: TextStyle(fontSize: 20),
+          'Weight:',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
         ),
         const SizedBox(height: 10),
         DropdownButton<int>(
           value: selectedWeight,
+          iconEnabledColor: Colors.white,
+          dropdownColor: Colors.purple,
           items: weightList
               .asMap()
               .entries
               .map<DropdownMenuItem<int>>(
                 (MapEntry<int, String> entry) => DropdownMenuItem<int>(
                   value: entry.key,
-                  child: Text(entry.value),
+                  child: Text(
+                    entry.value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               )
               .toList(),
@@ -396,13 +413,10 @@ class _WeightDropdownState extends State<WeightDropdown> {
             setState(() {
               selectedWeight = index!;
             });
+            createNewUser.newUser.weight = selectedWeight.toString();
           },
         ),
-        const SizedBox(height: 20),
-        Text(
-          'You selected: ${weightList[selectedWeight]}',
-          style: const TextStyle(fontSize: 18),
-        ),
+        const SizedBox(height: 10),
       ],
     );
   }
