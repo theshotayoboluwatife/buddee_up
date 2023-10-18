@@ -228,8 +228,7 @@ class _SignUpState extends State<SignUp> {
                             logger.i(prefs.getBool('isUserLoggedIn'));
                             await Navigator.of(context).push(
                               MaterialPageRoute(
-                                // builder: (_) => const PhoneVerification(),
-                                builder: (_) => ProfileScreen(),
+                                builder: (_) => const PhoneVerification(),
                               ),
                             );
                           } on FirebaseAuthException catch (e) {
