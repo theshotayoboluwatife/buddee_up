@@ -180,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
                       CustomButton(
                         text: "CONTINUE",
                         onpress: () {
-                          if (images.length < 2) {
+                          if (images.length <= 2) {
                             ScaffoldMessenger.of(context)
                                 .removeCurrentSnackBar();
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -190,7 +190,11 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             );
                           }
-                          if (formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate() &&
+                              images.length >= 2) {
+                            createNewUser.newUser.imageUrl = (images.isNotEmpty)
+                                ? images[0]
+                                : 'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg';
                             createNewUser.setProfile(
                               profileNameTextEditingController.text,
                               int.parse(ageTextEditingController.text),
@@ -312,6 +316,9 @@ class _HeightDropdownState extends State<HeightDropdown> {
         Provider.of<CreateNewUser>(context, listen: false);
 
     List<String> heightList = generateHeightsList();
+
+    createNewUser.newUser.weight = heightList[0];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -346,7 +353,8 @@ class _HeightDropdownState extends State<HeightDropdown> {
             setState(() {
               selectedHeight = index!;
             });
-            createNewUser.newUser.height = selectedHeight.toString();
+            createNewUser.newUser.height = heightList[index!];
+            logger.i(heightList[index]);
           },
         ),
       ],
@@ -378,6 +386,7 @@ class _WeightDropdownState extends State<WeightDropdown> {
 
     List<String> weightList = generateWeightsList();
 
+    createNewUser.newUser.weight = weightList[0];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -413,7 +422,8 @@ class _WeightDropdownState extends State<WeightDropdown> {
             setState(() {
               selectedWeight = index!;
             });
-            createNewUser.newUser.weight = selectedWeight.toString();
+            createNewUser.newUser.weight = weightList[index!];
+            logger.i(weightList[index]);
           },
         ),
         const SizedBox(height: 10),

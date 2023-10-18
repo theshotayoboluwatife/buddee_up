@@ -3,7 +3,9 @@ import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
+import 'package:BuddeeUp/screens/home_screen.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
+import 'package:BuddeeUp/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -226,7 +228,8 @@ class _SignUpState extends State<SignUp> {
                             logger.i(prefs.getBool('isUserLoggedIn'));
                             await Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => const PhoneVerification(),
+                                // builder: (_) => const PhoneVerification(),
+                                builder: (_) => ProfileScreen(),
                               ),
                             );
                           } on FirebaseAuthException catch (e) {
@@ -266,14 +269,14 @@ class _SignUpState extends State<SignUp> {
                         textAlign: TextAlign.center,
                         TextSpan(children: [
                           TextSpan(
-                              text: 'Dont have an account?',
+                              text: 'Do you have an account?',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               )),
                           TextSpan(
-                              text: ' Log in',
+                              text: 'Log in',
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 12,

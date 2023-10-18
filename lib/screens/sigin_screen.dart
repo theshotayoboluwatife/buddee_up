@@ -387,7 +387,7 @@ class _SignInState extends State<SignIn> {
                         textAlign: TextAlign.center,
                         TextSpan(children: [
                           TextSpan(
-                              text: 'Dont have an account?',
+                              text: 'Don\'t have an account?',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,

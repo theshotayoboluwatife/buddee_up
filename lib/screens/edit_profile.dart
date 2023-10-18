@@ -354,57 +354,57 @@ class _EditProfileState extends State<EditProfile> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 80.0, right: 80),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        CustomText(
-                                          text: "0",
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                        CustomText(
-                                          text: "Following",
-                                          fontWeight: FontWeight.w300,
-                                        )
-                                      ],
-                                    ),
-                                    CustomText(text: "|"),
-                                    Column(
-                                      children: [
-                                        CustomText(
-                                          text: "0",
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                        CustomText(
-                                          text: "Followers",
-                                          fontWeight: FontWeight.w300,
-                                        )
-                                      ],
-                                    ),
-                                    CustomText(text: "|"),
-                                    Column(
-                                      children: [
-                                        CustomText(
-                                          text: "0",
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                        CustomText(
-                                          text: "Likes",
-                                          fontWeight: FontWeight.w300,
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // const Padding(
+                              //   padding: EdgeInsets.only(left: 80.0, right: 80),
+                              //   child: Row(
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment.spaceBetween,
+                              //     crossAxisAlignment: CrossAxisAlignment.center,
+                              //     children: [
+                              //       Column(
+                              //         children: [
+                              //           CustomText(
+                              //             text: "0",
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 16,
+                              //           ),
+                              //           CustomText(
+                              //             text: "Following",
+                              //             fontWeight: FontWeight.w300,
+                              //           )
+                              //         ],
+                              //       ),
+                              //       CustomText(text: "|"),
+                              //       Column(
+                              //         children: [
+                              //           CustomText(
+                              //             text: "0",
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 16,
+                              //           ),
+                              //           CustomText(
+                              //             text: "Followers",
+                              //             fontWeight: FontWeight.w300,
+                              //           )
+                              //         ],
+                              //       ),
+                              //       CustomText(text: "|"),
+                              //       Column(
+                              //         children: [
+                              //           CustomText(
+                              //             text: "0",
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 16,
+                              //           ),
+                              //           CustomText(
+                              //             text: "Likes",
+                              //             fontWeight: FontWeight.w300,
+                              //           )
+                              //         ],
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               const SizedBox(
                                 height: 20,
                               ),

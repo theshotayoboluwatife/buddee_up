@@ -11,6 +11,7 @@ class CreateNewUser extends ChangeNotifier {
     phoneNumber: '',
     profileName: '',
     age: 18,
+    imageUrl: '',
     bio: 'bio',
     pictures: [],
     height: '5 ft 4',
