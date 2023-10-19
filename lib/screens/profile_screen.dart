@@ -180,18 +180,17 @@ class ProfileScreen extends StatelessWidget {
                       CustomButton(
                         text: "CONTINUE",
                         onpress: () {
-                          if (images.length <= 2) {
+                          if (images.isEmpty) {
                             ScaffoldMessenger.of(context)
                                 .removeCurrentSnackBar();
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content:
-                                    Text('Add at least 2 photos to continue'),
+                                content: Text('Add a photo to continue'),
                               ),
                             );
                           }
                           if (formKey.currentState!.validate() &&
-                              images.length >= 2) {
+                              images.isNotEmpty) {
                             createNewUser.newUser.imageUrl = (images.isNotEmpty)
                                 ? images[0]
                                 : 'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg';

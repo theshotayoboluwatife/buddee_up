@@ -7,7 +7,6 @@ class CustomTextFormField extends StatelessWidget {
   final IconData myIcon;
   final bool hidePassword;
 
-
   const CustomTextFormField({
     Key? key,
     required this.fieldName,
@@ -23,8 +22,8 @@ class CustomTextFormField extends StatelessWidget {
       child: Container(
         width: 500,
         decoration: const BoxDecoration(
-         // shape:BoxShape.circle
-        ),
+            // shape:BoxShape.circle
+            ),
         alignment: Alignment.bottomRight,
         child: Padding(
           padding: const EdgeInsets.only(top: 10.0),
@@ -39,13 +38,14 @@ class CustomTextFormField extends StatelessWidget {
             },
             controller: myController,
             decoration: InputDecoration(
-                labelText: fieldName,
-                border: const OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.green.shade300),
-                ),
-                labelStyle: GoogleFonts.poppins(color: Colors.black, fontSize: 15)),
-
+              labelText: fieldName,
+              border: const OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.green.shade300),
+              ),
+              labelStyle:
+                  GoogleFonts.poppins(color: Colors.black, fontSize: 15),
+            ),
           ),
         ),
       ),
