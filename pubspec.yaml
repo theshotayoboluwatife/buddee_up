@@ -1,16 +1,12 @@
 name: BuddeeUp
 description: Social Network App.
 
-
 publish_to: 'none'
-
 
 version: 1.0.0+1
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
-
-
 
 dependencies:
   flutter:
@@ -48,6 +44,8 @@ dependencies:
   datepicker_dropdown: ^0.0.8
   intl_phone_number_input: ^0.7.3+1
   chat_bubbles: ^1.5.0
+  another_flutter_splash_screen: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -57,39 +55,10 @@ dev_dependencies:
   build_runner: ^2.4.6
   intl: ^0.18.1
 
-
-flutter_native_splash:
-  color: "#DA3EE8"
-  color_dark: "#DA3EE8"
-  image: "assets/images/buddeeup_splash.png"
-  image_dark: "assets/images/buddeeup_splash.png"
-
-  android_12:
-    image: "assets/images/buddeeup_splash.png"
-    icon_background_color: "#DA3EE8"
-    image_dark: "assets/images/buddeeup_splash.png"
-    icon_background_color_dark: "#DA3EE8"
-  flutter_lints: ^2.0.0
-
-  android: true
-  ios: true
-  web: true
-
 flutter:
   uses-material-design: true
 
   assets:
     - "assets/images/"
     - "assets/dps/"
-
-
-
-flutter_icons:
-  android: true
-  ios: true
-  web: true
-  image_path_android: "assets/images/buddee_up_logo.png"
-  image_path_ios: "assets/images/buddee_up_logo.png"
-
-
 

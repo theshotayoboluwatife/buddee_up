@@ -11,10 +11,11 @@ class CreateNewUser extends ChangeNotifier {
     phoneNumber: '',
     profileName: '',
     age: 18,
+    imageUrl: '',
     bio: 'bio',
     pictures: [],
-    height: '5 ft 4',
-    weight: '130',
+    height: '4 feet 3 inches',
+    weight: '100kg',
     gender: '',
     tribe: '',
     bodyType: '',
@@ -76,14 +77,14 @@ class CreateNewUser extends ChangeNotifier {
     int age,
     String bio,
     List<String> pictures,
-    String height,
-    String weight,
+    // String height,
+    // String weight,
   ) {
     newUser.profileName = profileName;
     newUser.age = age;
     newUser.bio = bio;
     newUser.pictures = pictures;
-    newUser.height = height;
-    newUser.weight = weight;
+    // newUser.height = height;
+    // newUser.weight = weight;
   }
 }

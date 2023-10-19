@@ -33,8 +33,7 @@ class NewUser {
     required this.email,
     required this.id,
     required this.status,
-    this.imageUrl =
-        'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg',
+    required this.imageUrl,
     required this.phoneNumber,
     required this.profileName,
     required this.age,

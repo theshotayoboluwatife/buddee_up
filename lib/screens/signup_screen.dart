@@ -7,7 +7,6 @@ import 'package:BuddeeUp/screens/phone_verification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:email_validator/email_validator.dart';
 
 class SignUp extends StatefulWidget {
@@ -213,17 +212,14 @@ class _SignUpState extends State<SignUp> {
                         if (_formKey.currentState!.validate()) {
                           logger.i('validated');
                           try {
+                            createNewUser
+                                .setEmail(_emailTextController.text.trim());
                             await Auth.account(
                               _emailTextController.text.trim(),
                               _passwordTextController.text,
                               AuthMode.register,
                             );
-                            createNewUser
-                                .setEmail(_emailTextController.text.trim());
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            await prefs.setBool('isUserLoggedIn', true);
-                            logger.i(prefs.getBool('isUserLoggedIn'));
+                            
                             await Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) => const PhoneVerification(),
@@ -266,14 +262,14 @@ class _SignUpState extends State<SignUp> {
                         textAlign: TextAlign.center,
                         TextSpan(children: [
                           TextSpan(
-                              text: 'Dont have an account?',
+                              text: 'Do you have an account?',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               )),
                           TextSpan(
-                              text: ' Log in',
+                              text: 'Log in',
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 12,

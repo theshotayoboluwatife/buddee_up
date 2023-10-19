@@ -16,12 +16,7 @@ class ProfileScreen extends StatelessWidget {
       TextEditingController();
   final TextEditingController bioTextEditingController =
       TextEditingController();
-  final TextEditingController heightTextEditingController =
-      TextEditingController();
-  final TextEditingController weightTextEditingController =
-      TextEditingController();
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final List<String> images = [];
 
   @override
@@ -173,38 +168,19 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 1,
-                      ),
-                      ProfileContainer(
-                        type: TextInputType.number,
-                        validator: (p) {
-                          if (p!.isEmpty) {
-                            heightTextEditingController.text = "5' ft";
-                          }
-                          return null;
-                        },
-                        heading: "Height",
-                        hint: "5' ft 0\" in",
-                        controller: heightTextEditingController,
-                      ),
-                      ProfileContainer(
-                        type: TextInputType.number,
-                        validator: (p) {
-                          if (p!.isEmpty) {
-                            weightTextEditingController.text = "130 lbs";
-                          }
-                          return null;
-                        },
-                        heading: "Weight",
-                        hint: "130 lbs",
-                        controller: weightTextEditingController,
+                      const SizedBox(height: 5),
+                      const Row(
+                        children: [
+                          HeightDropdown(),
+                          SizedBox(width: 50),
+                          WeightDropdown(),
+                        ],
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
                         text: "CONTINUE",
                         onpress: () {
-                          if (images.length < 2) {
+                          if (images.length <= 2) {
                             ScaffoldMessenger.of(context)
                                 .removeCurrentSnackBar();
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -214,14 +190,16 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             );
                           }
-                          if (formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate() &&
+                              images.length >= 2) {
+                            createNewUser.newUser.imageUrl = (images.isNotEmpty)
+                                ? images[0]
+                                : 'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg';
                             createNewUser.setProfile(
                               profileNameTextEditingController.text,
                               int.parse(ageTextEditingController.text),
                               bioTextEditingController.text,
                               images,
-                              heightTextEditingController.text,
-                              weightTextEditingController.text,
                             );
                             Navigator.pushNamed(context, "/sex_type_screen");
                             logger.i(createNewUser.newUser.imageUrl);
@@ -308,6 +286,148 @@ class ProfileContainer extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class HeightDropdown extends StatefulWidget {
+  const HeightDropdown({super.key});
+
+  @override
+  State<HeightDropdown> createState() => _HeightDropdownState();
+}
+
+class _HeightDropdownState extends State<HeightDropdown> {
+  int selectedHeight = 3;
+
+  List<String> generateHeightsList() {
+    List<String> heights = [];
+    for (int feet = 3; feet <= 8; feet++) {
+      for (int inches = 0; inches <= 7; inches++) {
+        heights.add("$feet feet $inches inches");
+      }
+    }
+    return heights;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    CreateNewUser createNewUser =
+        Provider.of<CreateNewUser>(context, listen: false);
+
+    List<String> heightList = generateHeightsList();
+
+    createNewUser.newUser.weight = heightList[0];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Height:',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 2),
+        DropdownButton<int>(
+          value: selectedHeight,
+          iconEnabledColor: Colors.white,
+          dropdownColor: Colors.purple,
+          items: heightList
+              .asMap()
+              .entries
+              .map<DropdownMenuItem<int>>(
+                (MapEntry<int, String> entry) => DropdownMenuItem<int>(
+                  value: entry.key,
+                  child: Text(
+                    entry.value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged: (int? index) {
+            setState(() {
+              selectedHeight = index!;
+            });
+            createNewUser.newUser.height = heightList[index!];
+            logger.i(heightList[index]);
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class WeightDropdown extends StatefulWidget {
+  const WeightDropdown({super.key});
+
+  @override
+  State<WeightDropdown> createState() => _WeightDropdownState();
+}
+
+class _WeightDropdownState extends State<WeightDropdown> {
+  int selectedWeight = 50;
+
+  List<String> generateWeightsList() {
+    List<String> weights = [];
+    for (int kilograms = 50; kilograms <= 150; kilograms++) {
+      weights.add("$kilograms kg");
+    }
+    return weights;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    CreateNewUser createNewUser = Provider.of<CreateNewUser>(context);
+
+    List<String> weightList = generateWeightsList();
+
+    createNewUser.newUser.weight = weightList[0];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Weight:',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 10),
+        DropdownButton<int>(
+          value: selectedWeight,
+          iconEnabledColor: Colors.white,
+          dropdownColor: Colors.purple,
+          items: weightList
+              .asMap()
+              .entries
+              .map<DropdownMenuItem<int>>(
+                (MapEntry<int, String> entry) => DropdownMenuItem<int>(
+                  value: entry.key,
+                  child: Text(
+                    entry.value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged: (int? index) {
+            setState(() {
+              selectedWeight = index!;
+            });
+            createNewUser.newUser.weight = weightList[index!];
+            logger.i(weightList[index]);
+          },
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }

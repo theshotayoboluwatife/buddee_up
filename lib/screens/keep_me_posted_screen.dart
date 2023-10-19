@@ -1,9 +1,11 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
+import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -80,7 +82,10 @@ class KeepMePosted extends StatelessWidget {
               onpress: () async {
                 try {
                   createNewUser.newUser.id = auth.currentUser!.uid;
-
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setBool('isUserLoggedIn', true);
+                  logger.i(prefs.getBool('isUserLoggedIn'));
                   await FireStore()
                       .addUserToDatabase(createNewUser.newUser.toJson());
                   Navigator.pushNamed(context, "/home_screen");

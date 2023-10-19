@@ -41,6 +41,7 @@ import 'package:BuddeeUp/screens/sexual_preferences.dart';
 import 'package:BuddeeUp/screens/show_me_screen.dart';
 import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:BuddeeUp/screens/signup_screen.dart';
+import 'package:BuddeeUp/screens/splash_screen.dart';
 import 'package:BuddeeUp/screens/tribe.dart';
 import 'package:BuddeeUp/screens/unsubscribe_mail.dart';
 import 'package:BuddeeUp/screens/user_profile_info.dart';
@@ -95,7 +96,7 @@ class App extends StatelessWidget {
       title: "BuddeeUp",
       theme: CustomAppTheme.customTheme,
       routes: {
-        '/': (context) => const LoginSignUp(),
+        '/home': (context) => const LoginSignUp(),
         '/welcome': (context) => const WelcomeScreen(),
         '/signin': (context) => const SignIn(),
         '/signup': (context) => const SignUp(),
@@ -110,8 +111,7 @@ class App extends StatelessWidget {
         '/body_type_screen': (context) => const BodyType(),
         '/ethnicity_screen': (context) => const Ethnicity(),
         '/looking_for_screen': (context) => const LookingFor(),
-        "/relationship_status_screen": (context) =>
-            const RelationshipStatus(),
+        "/relationship_status_screen": (context) => const RelationshipStatus(),
         "/health_status_screen": (context) => const HealthStatus(),
         "/activities_screen": (context) => const ActivitiesScreen(),
         "/sexual_preference_screen": (context) => const SexualPreferences(),
@@ -124,15 +124,12 @@ class App extends StatelessWidget {
             const EmailVerificationSettings(),
         "/location_settings_screen": (context) => const LocationSettings(),
         "/show_me_screen": (context) => const ShowMeScreen(),
-        "/blocked_contacts_screen": (context) =>
-            const BlockedContactsScreen(),
+        "/blocked_contacts_screen": (context) => const BlockedContactsScreen(),
         "/add_contacts_screen": (context) => const AddContactsScreen(),
-        "/read_receipts_settings": (context) =>
-            const ReadReceiptsSettings(),
+        "/read_receipts_settings": (context) => const ReadReceiptsSettings(),
         "/autoplay_videos_settings": (context) => const AutoplaySettings(),
         "/online_now_screen": (context) => const OnlineNowScreen(),
-        "/recently_active_status": (context) =>
-            const RecentlyActiveStatus(),
+        "/recently_active_status": (context) => const RecentlyActiveStatus(),
         "/username_settings": (context) => const UsernameSettings(),
         "/push_notification_settings": (context) =>
             const PushNotificationSettings(),
@@ -143,15 +140,18 @@ class App extends StatelessWidget {
         "/view_image": (context) => const ViewImage(),
         "/video_call_screen": (context) => const VideoCallScreen(),
         "/voice_call_screen": (context) => const PhoneCallScreen(),
-        "/user_profile": (context) =>  EditProfile(),
+        "/user_profile": (context) => EditProfile(),
         "/go_pro_screen": (context) => GoPro(
               onTap: () => Navigator.pop(context),
             ),
         "/settings": (context) => const Settings(),
         "/proposition_screen": (context) =>  PropositionScreen(),
         "/unsubscribe_email_screen": (context) => const EmailUnsubscribe(),
+        // SplashScreen.routeName:(context) => const SplashScreen(),
       },
-      initialRoute: isUserLoggedIn ? '/home_screen' : '/',
+      // initialRoute: isUserLoggedIn ? '/home_screen' : '/',
+      home: SplashScreen(
+          screen: isUserLoggedIn ? const HomeScreen() : const LoginSignUp()),
     );
   }
 }
