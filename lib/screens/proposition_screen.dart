@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../custom_widgets/custom_text.dart';
 
 class PropositionScreen extends StatefulWidget {
-   const PropositionScreen({Key? key}) : super(key: key);
+  const PropositionScreen({Key? key}) : super(key: key);
 
   @override
   State<PropositionScreen> createState() => _PropositionScreenState();
@@ -20,14 +20,13 @@ class _PropositionScreenState extends State<PropositionScreen> {
   TimeOfDay startTime = const TimeOfDay(hour: 12, minute: 03);
   TimeOfDay stopTime = const TimeOfDay(hour: 12, minute: 03);
 
-
-   @override
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final startHour = startTime.hour.toString().padLeft(2,'0');
-    final stopHour = stopTime.hour.toString().padLeft(2,'0');
-    final startMinute = startTime.minute.toString().padLeft(2,'0');
-    final stopMinute = stopTime.minute.toString().padLeft(2,'0');
+    final startHour = startTime.hour.toString().padLeft(2, '0');
+    final stopHour = stopTime.hour.toString().padLeft(2, '0');
+    final startMinute = startTime.minute.toString().padLeft(2, '0');
+    final stopMinute = stopTime.minute.toString().padLeft(2, '0');
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
@@ -86,32 +85,32 @@ class _PropositionScreenState extends State<PropositionScreen> {
                               ),
                               DecoratedBox(
                                   decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Colors.white, width: 1),
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Padding(
                                       padding: const EdgeInsets.only(
                                           left: 16, right: 16),
                                       child: TextFormField(
-                                        controller: activityType,
-                                        decoration: const InputDecoration(
-                                          hintText: "Fetishes/Groups",
-                                          hintStyle: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w300,
-                                          fontSize: 9),
-                                          border: InputBorder.none,
-                                        ),
-                                        cursorColor: Colors.purpleAccent,
-                                        style: const TextStyle(color: Colors.white),
-                                          validator: (value){
+                                          controller: activityType,
+                                          decoration: const InputDecoration(
+                                            hintText: "Fetishes/Groups",
+                                            hintStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 9),
+                                            border: InputBorder.none,
+                                          ),
+                                          cursorColor: Colors.purpleAccent,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          validator: (value) {
                                             if (value!.isEmpty) {
                                               return 'Field can not be empty.';
                                             }
                                             return null;
-                                          }
-                                      ))),
+                                          }))),
                             ],
                           ),
                           const SizedBox(
@@ -120,10 +119,10 @@ class _PropositionScreenState extends State<PropositionScreen> {
                         ],
                       ),
 
-                       //event name
-                       Padding(
-                         padding: const EdgeInsets.only(top:10, bottom: 30),
-                         child: Row(
+                      //event name
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 30),
+                        child: Row(
                           children: [
                             Expanded(
                               child: Column(
@@ -138,41 +137,45 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                 DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.white, width: 1),
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: Container(
-                                          width: size.width * 0.45,
-                                          height: 48,
-                                          padding: const EdgeInsets.only(left:8, right: 8),
-                                          child: TextFormField(
-                                            controller: eventName,
-                                            cursorColor: Colors.purpleAccent,
-                                            decoration: const InputDecoration(
-                                              hintText: "Create a name for your event",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 9,
-                                                  fontWeight: FontWeight.w300),
-                                              border: InputBorder.none,
-                                            ),
-                                            style: const TextStyle(color: Colors.white),
-                                              validator: (value){
-                                                if (value!.isEmpty) {
-                                                  return 'Can not be empty.';
-                                                }
-                                                return null;
-                                              }
-                                          ),
-                                        ),
+                                  DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-
+                                    child: Container(
+                                      width: size.width * 0.45,
+                                      height: 48,
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: TextFormField(
+                                          controller: eventName,
+                                          cursorColor: Colors.purpleAccent,
+                                          decoration: const InputDecoration(
+                                            hintText:
+                                                "Create a name for your event",
+                                            hintStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9,
+                                                fontWeight: FontWeight.w300),
+                                            border: InputBorder.none,
+                                          ),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Can not be empty.';
+                                            }
+                                            return null;
+                                          }),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 10,),
+                            const SizedBox(
+                              width: 10,
+                            ),
                             Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -186,37 +189,44 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                 DecoratedBox(
-                                   position: DecorationPosition.background,
-                                      decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.white, width: 1),
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: Container(
-                                          width: size.width * 0.45,
-                                          padding: const EdgeInsets.only(left:8, right: 8),
-                                          child: TextButton(
-                                            child: CustomText(text: "${date.month}-${date.day}-${date.year} ", fontSize: 9,
-                                                fontWeight: FontWeight.w300),
-                                            onPressed: () async {
-                                              DateTime? newDate = await
-                                              showDatePicker(context: context, initialDate: date, firstDate: DateTime(1900), lastDate: DateTime(2025));
-                                              if(newDate == null) return;
-                                              setState(() {
-                                                date = newDate;
-                                              });
-                                            },
-                                          ),
-                                        ),
+                                  DecoratedBox(
+                                    position: DecorationPosition.background,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-
+                                    child: Container(
+                                      width: size.width * 0.45,
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: TextButton(
+                                        child: CustomText(
+                                            text:
+                                                "${date.month}-${date.day}-${date.year} ",
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w300),
+                                        onPressed: () async {
+                                          DateTime? newDate =
+                                              await showDatePicker(
+                                                  context: context,
+                                                  initialDate: date,
+                                                  firstDate: DateTime(1900),
+                                                  lastDate: DateTime(2025));
+                                          if (newDate == null) return;
+                                          setState(() {
+                                            date = newDate;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-
                           ],
+                        ),
                       ),
-                       ),
 
                       //suggested time
                       Column(
@@ -236,60 +246,69 @@ class _PropositionScreenState extends State<PropositionScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child:
-                                        DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.white, width: 1),
-                                            borderRadius: BorderRadius.circular(5),
-                                          ),
-                                          child: Container(
-                                            width: size.width * 0.45,
-                                            height: 48,
-                                            padding: const EdgeInsets.only(left:8, right: 8),
-                                            child: TextButton(
-                                              onPressed: () async {
-                                                TimeOfDay? newTime = await showTimePicker(
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.white, width: 1),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Container(
+                                        width: size.width * 0.45,
+                                        height: 48,
+                                        padding: const EdgeInsets.only(
+                                            left: 8, right: 8),
+                                        child: TextButton(
+                                          onPressed: () async {
+                                            TimeOfDay? newTime =
+                                                await showTimePicker(
                                                     context: context,
                                                     initialTime: startTime);
 
-                                                if(newTime == null) return;
-                                                setState(() {
-                                                  startTime = newTime;
-                                                });
-                                                },
-                                              child: CustomText(text:"Start $startHour:$startMinute"),
-                                            ),
-                                          ),
+                                            if (newTime == null) return;
+                                            setState(() {
+                                              startTime = newTime;
+                                            });
+                                          },
+                                          child: CustomText(
+                                              text:
+                                                  "Start $startHour:$startMinute"),
                                         ),
-
+                                      ),
+                                    ),
                                   ),
-                                  const SizedBox(width: 10,),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
                                   Expanded(
                                     child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.white, width: 1),
-                                            borderRadius: BorderRadius.circular(5),
-                                          ),
-                                          child: Container(
-                                            width: size.width * 0.45,
-                                            padding: const EdgeInsets.only(left:8, right: 8),
-                                            child:TextButton(
-                                              onPressed: () async {
-                                                TimeOfDay? newTime = await showTimePicker(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.white, width: 1),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Container(
+                                        width: size.width * 0.45,
+                                        padding: const EdgeInsets.only(
+                                            left: 8, right: 8),
+                                        child: TextButton(
+                                          onPressed: () async {
+                                            TimeOfDay? newTime =
+                                                await showTimePicker(
                                                     context: context,
                                                     initialTime: stopTime);
 
-                                                if(newTime == null) return;
-                                                setState(() {
-                                                  stopTime = newTime;
-                                                });
-                                              },
-                                              child: CustomText(text:"Stop $stopHour:$stopMinute"),
-                                            ),
-                                          ),
+                                            if (newTime == null) return;
+                                            setState(() {
+                                              stopTime = newTime;
+                                            });
+                                          },
+                                          child: CustomText(
+                                              text:
+                                                  "Stop $stopHour:$stopMinute"),
                                         ),
+                                      ),
+                                    ),
                                   ),
-
                                 ],
                               ),
                             ],
@@ -317,31 +336,34 @@ class _PropositionScreenState extends State<PropositionScreen> {
                               ),
                               DecoratedBox(
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white, width: 1),
+                                  border:
+                                      Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Container(
                                   width: double.infinity,
-                                  padding: const EdgeInsets.only(left:8, right: 8),
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
                                   child: TextFormField(
-                                    controller: where,
-                                    cursorColor: Colors.purpleAccent,
-                                    decoration: const InputDecoration(
-                                      hintText: "Where the event is taking place",
-                                      hintStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w300),
-                                      border: InputBorder.none,
-                                    ),
-                                    style: const TextStyle(color: Colors.white),
-                                      validator: (value){
+                                      controller: where,
+                                      cursorColor: Colors.purpleAccent,
+                                      decoration: const InputDecoration(
+                                        hintText:
+                                            "Where the event is taking place",
+                                        hintStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w300),
+                                        border: InputBorder.none,
+                                      ),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'Field can not be empty.';
                                         }
                                         return null;
-                                      }
-                                  ),
+                                      }),
                                 ),
                               )
                             ],
@@ -354,7 +376,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
 
                       //approx zip code
                       Padding(
-                        padding: const EdgeInsets.only(top:10, bottom: 10),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Column(
                           children: [
                             const Row(
@@ -372,83 +394,90 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Row(
                               children: [
                                 Expanded(
-                                  child:DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.white, width: 1),
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: Container(
-                                          width: size.width * 0.45,
-                                          padding: const EdgeInsets.only(left:8, right: 8),
-                                          child: TextFormField(
-                                              controller: approxZipCode,
-                                              keyboardType: TextInputType.number,
-                                              cursorColor: Colors.purpleAccent,
-                                              decoration: const InputDecoration(
-                                                hintText: "123456",
-                                                hintStyle: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 9,
-                                                    fontWeight: FontWeight.w300),
-                                                border: InputBorder.none,
-                                              ),
-                                              style: const TextStyle(color: Colors.white),
-                                              validator: (value){
-                                                if (value!.isEmpty) {
-                                                  return 'Zip Code is required.';
-                                                } else if (value.length != 6) {
-                                                  return 'Must be 6 digits.';
-                                                }
-                                                return null;
-                                              }
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Container(
+                                      width: size.width * 0.45,
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: TextFormField(
+                                          controller: approxZipCode,
+                                          keyboardType: TextInputType.number,
+                                          cursorColor: Colors.purpleAccent,
+                                          decoration: const InputDecoration(
+                                            hintText: "123456",
+                                            hintStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9,
+                                                fontWeight: FontWeight.w300),
+                                            border: InputBorder.none,
                                           ),
-                                        ),
-                                      ),
-
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Zip Code is required.';
+                                            } else if (value.length != 6) {
+                                              return 'Must be 6 digits.';
+                                            }
+                                            return null;
+                                          }),
+                                    ),
+                                  ),
                                 ),
-                                const SizedBox(width: 10,),
+                                const SizedBox(
+                                  width: 10,
+                                ),
                                 Expanded(
                                   child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.white, width: 1),
-                                          borderRadius: BorderRadius.circular(5),
-                                        ),
-                                        child: Container(
-                                          width: size.width * 0.45,
-                                          padding: const EdgeInsets.only(left:8, right: 8),
-                                          child: TextFormField(
-                                            controller: approxArea,
-                                            cursorColor: Colors.purpleAccent,
-                                            decoration: const InputDecoration(
-                                              hintStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 9,
-                                                  fontWeight: FontWeight.w300),
-                                              border: InputBorder.none,
-                                            ),
-                                            style: const TextStyle(color: Colors.white),
-                                              validator: (value){
-                                                if (value!.isEmpty) {
-                                                  return 'Can not be empty.';
-                                                }
-                                                return null;
-                                              }
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white, width: 1),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Container(
+                                      width: size.width * 0.45,
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: TextFormField(
+                                          controller: approxArea,
+                                          cursorColor: Colors.purpleAccent,
+                                          decoration: const InputDecoration(
+                                            hintStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9,
+                                                fontWeight: FontWeight.w300),
+                                            border: InputBorder.none,
                                           ),
-                                        ),
-                                      ),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Can not be empty.';
+                                            }
+                                            return null;
+                                          }),
+                                    ),
+                                  ),
                                 ),
-
                               ],
                             ),
-
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30,),
+                      const SizedBox(
+                        height: 30,
+                      ),
                       //buttons
                       CustomButton(
                         text: "Save to BuddeeUp Propositions",
@@ -456,7 +485,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
                           if (_formKey.currentState!.validate()) {
                             Navigator.of(context).pop();
                           }
-                          },
+                        },
                         hasBorder: true,
                         buttonColor: Colors.purpleAccent,
                       ),
