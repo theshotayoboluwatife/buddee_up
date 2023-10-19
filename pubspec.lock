@@ -273,6 +273,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  datepicker_dropdown:
+    dependency: "direct main"
+    description:
+      name: datepicker_dropdown
+      sha256: a6ed67be78411369b52d1f84cd9ecc96326a98364171662a2e8e02342d633d3d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   dotted_border:
     dependency: "direct main"
     description:
@@ -857,7 +865,7 @@ packages:
     source: hosted
     version: "0.2.1+1"
   intl:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: intl
       sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"

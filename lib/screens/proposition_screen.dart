@@ -1,14 +1,33 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-
 import '../custom_widgets/custom_text.dart';
 
-class PropositionScreen extends StatelessWidget {
-  const PropositionScreen({Key? key}) : super(key: key);
+class PropositionScreen extends StatefulWidget {
+   const PropositionScreen({Key? key}) : super(key: key);
 
   @override
+  State<PropositionScreen> createState() => _PropositionScreenState();
+}
+
+class _PropositionScreenState extends State<PropositionScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController eventName = TextEditingController();
+  final TextEditingController activityType = TextEditingController();
+  final TextEditingController approxArea = TextEditingController();
+  final TextEditingController approxZipCode = TextEditingController();
+  final TextEditingController where = TextEditingController();
+  DateTime date = DateTime.now();
+  TimeOfDay startTime = const TimeOfDay(hour: 12, minute: 03);
+  TimeOfDay stopTime = const TimeOfDay(hour: 12, minute: 03);
+
+
+   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
+    final startHour = startTime.hour.toString().padLeft(2,'0');
+    final stopHour = stopTime.hour.toString().padLeft(2,'0');
+    final startMinute = startTime.minute.toString().padLeft(2,'0');
+    final stopMinute = stopTime.minute.toString().padLeft(2,'0');
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
@@ -46,195 +65,414 @@ class PropositionScreen extends StatelessWidget {
                 height: 5,
               ),
               Expanded(
-                child: ListView(
-                  children: [
-                    Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      //activity type
+                      Column(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: "Activity Type",
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: TextFormField(
+                                        controller: activityType,
+                                        decoration: const InputDecoration(
+                                          hintText: "Fetishes/Groups",
+                                          hintStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w300,
+                                          fontSize: 9),
+                                          border: InputBorder.none,
+                                        ),
+                                        cursorColor: Colors.purpleAccent,
+                                        style: const TextStyle(color: Colors.white),
+                                          validator: (value){
+                                            if (value!.isEmpty) {
+                                              return 'Field can not be empty.';
+                                            }
+                                            return null;
+                                          }
+                                      ))),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+
+                       //event name
+                       Padding(
+                         padding: const EdgeInsets.only(top:10, bottom: 30),
+                         child: Row(
                           children: [
-                            const CustomText(
-                              text: "Activity Type",
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 30, right: 30),
-                                    child: DropdownButton(
-                                      value: "Fetishes/Groups",
-                                      items: const [
-                                        DropdownMenuItem(
-                                          value: "Fetishes/Groups",
-                                          child: CustomText(
-                                            text: "Fetishes/Groups",
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 10,
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const CustomText(
+                                    text: "Event Name",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                 DecoratedBox(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white, width: 1),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Container(
+                                          width: size.width * 0.45,
+                                          height: 48,
+                                          padding: const EdgeInsets.only(left:8, right: 8),
+                                          child: TextFormField(
+                                            controller: eventName,
+                                            cursorColor: Colors.purpleAccent,
+                                            decoration: const InputDecoration(
+                                              hintText: "Create a name for your event",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 9,
+                                                  fontWeight: FontWeight.w300),
+                                              border: InputBorder.none,
+                                            ),
+                                            style: const TextStyle(color: Colors.white),
+                                              validator: (value){
+                                                if (value!.isEmpty) {
+                                                  return 'Can not be empty.';
+                                                }
+                                                return null;
+                                              }
                                           ),
-                                        )
-                                      ],
-                                      onChanged: (value) {},
-                                      isExpanded: true,
-                                      underline: Container(),
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                      dropdownColor: Colors.green,
-                                      iconEnabledColor:
-                                          Colors.white, //Icon color
-                                    ))),
+                                        ),
+                                    ),
+
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 10,),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const CustomText(
+                                    text: "Date",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                 DecoratedBox(
+                                   position: DecorationPosition.background,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white, width: 1),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Container(
+                                          width: size.width * 0.45,
+                                          padding: const EdgeInsets.only(left:8, right: 8),
+                                          child: TextButton(
+                                            child: CustomText(text: "${date.month}-${date.day}-${date.year} ", fontSize: 9,
+                                                fontWeight: FontWeight.w300),
+                                            onPressed: () async {
+                                              DateTime? newDate = await
+                                              showDatePicker(context: context, initialDate: date, firstDate: DateTime(1900), lastDate: DateTime(2025));
+                                              if(newDate == null) return;
+                                              setState(() {
+                                                date = newDate;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                    ),
+
+                                ],
+                              ),
+                            ),
+
                           ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                    const Row(
-                      children: [
-                        CustomDropDown(
-                            title: "Event Name",
-                            desc: "Create a name for your event"),
-                        CustomDropDown(title: "Date", desc: "23-02-01"),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const CustomText(
-                              text: "Suggested Times (optional)",
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            DecoratedBox(
+                      ),
+                       ),
+
+                      //suggested time
+                      Column(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: "Suggested Times (optional)",
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child:
+                                        DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.white, width: 1),
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                          child: Container(
+                                            width: size.width * 0.45,
+                                            height: 48,
+                                            padding: const EdgeInsets.only(left:8, right: 8),
+                                            child: TextButton(
+                                              onPressed: () async {
+                                                TimeOfDay? newTime = await showTimePicker(
+                                                    context: context,
+                                                    initialTime: startTime);
+
+                                                if(newTime == null) return;
+                                                setState(() {
+                                                  startTime = newTime;
+                                                });
+                                                },
+                                              child: CustomText(text:"Start $startHour:$startMinute"),
+                                            ),
+                                          ),
+                                        ),
+
+                                  ),
+                                  const SizedBox(width: 10,),
+                                  Expanded(
+                                    child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.white, width: 1),
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                          child: Container(
+                                            width: size.width * 0.45,
+                                            padding: const EdgeInsets.only(left:8, right: 8),
+                                            child:TextButton(
+                                              onPressed: () async {
+                                                TimeOfDay? newTime = await showTimePicker(
+                                                    context: context,
+                                                    initialTime: stopTime);
+
+                                                if(newTime == null) return;
+                                                setState(() {
+                                                  stopTime = newTime;
+                                                });
+                                              },
+                                              child: CustomText(text:"Stop $stopHour:$stopMinute"),
+                                            ),
+                                          ),
+                                        ),
+                                  ),
+
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+
+                      //where
+                      Column(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: "Where",
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              DecoratedBox(
                                 decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
+                                  border: Border.all(color: Colors.white, width: 1),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 30, right: 30),
-                                    child: DropdownButton(
-                                      value: "suggested_time",
-                                      items: const [
-                                        DropdownMenuItem(
-                                            value: "suggested_time",
-                                            child: CustomText(
-                                              text: "Start: 12:03   Stop: 1:03",
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 10,
-                                              textAlign: TextAlign.start,
-                                            ))
-                                      ],
-                                      onChanged: (value) {},
-                                      isExpanded: true,
-                                      underline: Container(),
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                      dropdownColor: Colors.green,
-                                      iconEnabledColor:
-                                          Colors.white, //Icon color
-                                    ))),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const CustomText(
-                              text: "Where",
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(5),
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.only(left:8, right: 8),
+                                  child: TextFormField(
+                                    controller: where,
+                                    cursorColor: Colors.purpleAccent,
+                                    decoration: const InputDecoration(
+                                      hintText: "Where the event is taking place",
+                                      hintStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w300),
+                                      border: InputBorder.none,
+                                    ),
+                                    style: const TextStyle(color: Colors.white),
+                                      validator: (value){
+                                        if (value!.isEmpty) {
+                                          return 'Field can not be empty.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
                                 ),
-                                child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 30, right: 30),
-                                    child: DropdownButton(
-                                      value: "where",
-                                      items: const [
-                                        DropdownMenuItem(
-                                            value: "where",
-                                            child: CustomText(
-                                              text:
-                                                  "Where the event is taking place",
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 10,
-                                              textAlign: TextAlign.start,
-                                            ))
-                                      ],
-                                      onChanged: (value) {},
-                                      isExpanded: true,
-                                      underline: Container(),
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                      dropdownColor: Colors.green,
-                                      iconEnabledColor:
-                                          Colors.white, //Icon color
-                                    ))),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+
+                      //approx zip code
+                      Padding(
+                        padding: const EdgeInsets.only(top:10, bottom: 10),
+                        child: Column(
+                          children: [
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomText(
+                                  text: "Approx. Zip Code",
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                CustomText(
+                                  text: "Approx Area",
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10,),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child:DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white, width: 1),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Container(
+                                          width: size.width * 0.45,
+                                          padding: const EdgeInsets.only(left:8, right: 8),
+                                          child: TextFormField(
+                                              controller: approxZipCode,
+                                              keyboardType: TextInputType.number,
+                                              cursorColor: Colors.purpleAccent,
+                                              decoration: const InputDecoration(
+                                                hintText: "123456",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 9,
+                                                    fontWeight: FontWeight.w300),
+                                                border: InputBorder.none,
+                                              ),
+                                              style: const TextStyle(color: Colors.white),
+                                              validator: (value){
+                                                if (value!.isEmpty) {
+                                                  return 'Zip Code is required.';
+                                                } else if (value.length != 6) {
+                                                  return 'Must be 6 digits.';
+                                                }
+                                                return null;
+                                              }
+                                          ),
+                                        ),
+                                      ),
+
+                                ),
+                                const SizedBox(width: 10,),
+                                Expanded(
+                                  child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white, width: 1),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Container(
+                                          width: size.width * 0.45,
+                                          padding: const EdgeInsets.only(left:8, right: 8),
+                                          child: TextFormField(
+                                            controller: approxArea,
+                                            cursorColor: Colors.purpleAccent,
+                                            decoration: const InputDecoration(
+                                              hintStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 9,
+                                                  fontWeight: FontWeight.w300),
+                                              border: InputBorder.none,
+                                            ),
+                                            style: const TextStyle(color: Colors.white),
+                                              validator: (value){
+                                                if (value!.isEmpty) {
+                                                  return 'Can not be empty.';
+                                                }
+                                                return null;
+                                              }
+                                          ),
+                                        ),
+                                      ),
+                                ),
+
+                              ],
+                            ),
+
                           ],
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                    const Row(
-                      children: [
-                        CustomDropDown(
-                            title: "Aprox. Zip code", desc: "123456"),
-                        CustomDropDown(title: "Aprox. Area", desc: ""),
-                      ],
-                    ),
-                    CustomButton(
-                      text: "Save to BudddeeUp Propositions",
-                      onpress: () => Navigator.of(context).pop(),
-                      hasBorder: true,
-                      buttonColor: Colors.purpleAccent,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomButton(
-                      text: "Delete BudddeeUp Propositions",
-                      onpress: () => Navigator.of(context).pop(),
-                      buttonColor: Colors.black,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                  ],
+                      ),
+                      const SizedBox(height: 30,),
+                      //buttons
+                      CustomButton(
+                        text: "Save to BuddeeUp Propositions",
+                        onpress: () {
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.of(context).pop();
+                          }
+                          },
+                        hasBorder: true,
+                        buttonColor: Colors.purpleAccent,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomButton(
+                        text: "Delete BuddeeUp Propositions",
+                        onpress: () => Navigator.of(context).pop(),
+                        buttonColor: Colors.black,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

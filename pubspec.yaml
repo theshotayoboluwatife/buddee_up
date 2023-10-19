@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.9.2
   flutter_timer_countdown: ^1.0.5
   timeago: ^3.5.0
+  datepicker_dropdown: ^0.0.8
   intl_phone_number_input: ^0.7.3+1
   chat_bubbles: ^1.5.0
 dev_dependencies:
@@ -54,6 +55,7 @@ dev_dependencies:
   flutter_lints: ^2.0.3
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
+  intl: ^0.18.1
 
 
 flutter_native_splash:

@@ -93,7 +93,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "BuddeeUp",
-      theme: CustomAppTheme.lightTheme,
+      theme: CustomAppTheme.customTheme,
       routes: {
         '/': (context) => const LoginSignUp(),
         '/welcome': (context) => const WelcomeScreen(),
@@ -148,7 +148,7 @@ class App extends StatelessWidget {
               onTap: () => Navigator.pop(context),
             ),
         "/settings": (context) => const Settings(),
-        "/proposition_screen": (context) => const PropositionScreen(),
+        "/proposition_screen": (context) =>  PropositionScreen(),
         "/unsubscribe_email_screen": (context) => const EmailUnsubscribe(),
       },
       initialRoute: isUserLoggedIn ? '/home_screen' : '/',
