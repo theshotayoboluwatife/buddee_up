@@ -84,33 +84,35 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                 height: 5,
                               ),
                               DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white, width: 1),
-                                    borderRadius: BorderRadius.circular(5),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.white, width: 1),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 16, right: 16),
+                                  child: TextFormField(
+                                    controller: activityType,
+                                    decoration: const InputDecoration(
+                                      hintText: "Fetishes/Groups",
+                                      hintStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 9),
+                                      border: InputBorder.none,
+                                    ),
+                                    cursorColor: Colors.purpleAccent,
+                                    style: const TextStyle(color: Colors.white),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Field can not be empty.';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: TextFormField(
-                                          controller: activityType,
-                                          decoration: const InputDecoration(
-                                            hintText: "Fetishes/Groups",
-                                            hintStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 9),
-                                            border: InputBorder.none,
-                                          ),
-                                          cursorColor: Colors.purpleAccent,
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Field can not be empty.';
-                                            }
-                                            return null;
-                                          }))),
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(
@@ -118,8 +120,6 @@ class _PropositionScreenState extends State<PropositionScreen> {
                           ),
                         ],
                       ),
-
-                      //event name
                       Padding(
                         padding: const EdgeInsets.only(top: 10, bottom: 30),
                         child: Row(

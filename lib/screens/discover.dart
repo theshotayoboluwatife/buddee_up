@@ -130,9 +130,13 @@ class DiscoveryPage extends StatelessWidget {
                           ...data.map(
                             (value) {
                               if (value.id != youData['id']) {
-                                return StatusCard(
-                                  name: (value['profileName'] as String),
-                                  image: value['imageUrl'],
+                                return GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, "/user_profile_info"),
+                                  child: StatusCard(
+                                    name: (value['profileName'] as String),
+                                    image: value['imageUrl'],
+                                  ),
                                 );
                               }
                               return Container();

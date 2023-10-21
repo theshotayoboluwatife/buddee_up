@@ -88,7 +88,7 @@ class KeepMePosted extends StatelessWidget {
                   logger.i(prefs.getBool('isUserLoggedIn'));
                   await FireStore()
                       .addUserToDatabase(createNewUser.newUser.toJson());
-                  Navigator.pushNamed(context, "/home_screen");
+                  Navigator.pushNamedAndRemoveUntil(context, '"/home_screen"', (route) => false);
                 } catch (e) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
