@@ -1,6 +1,8 @@
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
+import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
+import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,6 @@ class _SettingsState extends State<Settings> {
   bool switchValue2 = true;
   bool switchValue3 = true;
   bool switchValue4 = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -147,10 +148,24 @@ class _SettingsState extends State<Settings> {
                     ),
                     Row(
                       children: [
-                        const CustomText(
-                          text: "+1234567890",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                        FutureBuilder(
+                          future: GetUserDetails().getUser(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Container();
+                            }
+                            if (snapshot.hasError) {
+                              return Container();
+                            }
+                            NewUser user =
+                                NewUser.fromJson(snapshot.data!.data()!);
+                            return CustomText(
+                              text: user.phoneNumber,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            );
+                          },
                         ),
                         IconButton(
                           onPressed: () {
@@ -219,7 +234,9 @@ class _SettingsState extends State<Settings> {
                         IconButton(
                             onPressed: () {
                               Navigator.pushNamed(
-                                  context, "/email_verification_settings");
+                                context,
+                                "/email_verification_settings",
+                              );
                             },
                             icon: const Icon(
                               Icons.navigate_next,
@@ -327,34 +344,34 @@ class _SettingsState extends State<Settings> {
                   height: 1,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const CustomText(
-                    text: "Show me",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  Row(
-                    children: [
-                      const CustomText(
-                        text: "Everyone",
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/show_me_screen");
-                          },
-                          icon: const Icon(
-                            Icons.navigate_next,
-                            color: Colors.white,
-                          ))
-                    ],
-                  )
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const CustomText(
+              //       text: "Show me",
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w500,
+              //     ),
+              //     Row(
+              //       children: [
+              //         const CustomText(
+              //           text: "Everyone",
+              //           fontSize: 12,
+              //           fontWeight: FontWeight.w500,
+              //           color: Colors.white,
+              //         ),
+              //         IconButton(
+              //             onPressed: () {
+              //               Navigator.pushNamed(context, "/show_me_screen");
+              //             },
+              //             icon: const Icon(
+              //               Icons.navigate_next,
+              //               color: Colors.white,
+              //             ))
+              //       ],
+              //     )
+              //   ],
+              // ),
               const Padding(
                 padding: EdgeInsets.all(4.0),
                 child: Divider(

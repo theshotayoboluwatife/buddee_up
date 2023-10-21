@@ -2,6 +2,7 @@ import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
 import 'package:BuddeeUp/custom_widgets/filter_button.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
+import 'package:BuddeeUp/models/new_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -132,7 +133,12 @@ class DiscoveryPage extends StatelessWidget {
                               if (value.id != youData['id']) {
                                 return GestureDetector(
                                   onTap: () => Navigator.pushNamed(
-                                      context, "/user_profile_info"),
+                                    context,
+                                    "/user_profile_info",
+                                    arguments: NewUser.fromJson(
+                                      value.data(),
+                                    ),
+                                  ),
                                   child: StatusCard(
                                     name: (value['profileName'] as String),
                                     image: value['imageUrl'],

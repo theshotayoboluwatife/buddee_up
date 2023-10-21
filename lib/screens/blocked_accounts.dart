@@ -12,12 +12,10 @@ class BlockedContactsScreen extends StatefulWidget {
 
 class _BlockedContactsScreenState extends State<BlockedContactsScreen>
     with SingleTickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +70,7 @@ class _BlockedContactsScreenState extends State<BlockedContactsScreen>
                 Container(
                   margin: const EdgeInsets.all(16.0),
                   child: const TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.search_rounded,

@@ -56,6 +56,7 @@ class PhoneNumberSettings extends StatelessWidget {
             child: TextField(
               style: const TextStyle(color: Colors.white),
               controller: numberController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: "+123456789",
                 hintStyle: const TextStyle(color: Colors.white54),
