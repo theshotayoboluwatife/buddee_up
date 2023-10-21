@@ -542,32 +542,33 @@ class CustomDropDown extends StatelessWidget {
                 height: 5,
               ),
               DecoratedBox(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      child: DropdownButton(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 1),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: DropdownButton(
+                    value: desc,
+                    items: [
+                      DropdownMenuItem(
                         value: desc,
-                        items: [
-                          DropdownMenuItem(
-                            value: desc,
-                            child: CustomText(
-                              text: desc,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 10,
-                            ),
-                          )
-                        ],
-                        onChanged: (value) {},
-                        isExpanded: true,
-                        underline: Container(),
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.white),
-                        dropdownColor: Colors.green,
-                        iconEnabledColor: Colors.white, //Icon color
-                      ))),
+                        child: CustomText(
+                          text: desc,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 10,
+                        ),
+                      )
+                    ],
+                    onChanged: (value) {},
+                    isExpanded: true,
+                    underline: Container(),
+                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    dropdownColor: Colors.green,
+                    iconEnabledColor: Colors.white, //Icon color
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(
