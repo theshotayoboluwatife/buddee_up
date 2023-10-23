@@ -77,15 +77,22 @@ class _EditProfileState extends State<EditProfile> {
                                           width: 1.0, // Border width
                                         ),
                                       ),
-                                      child: ClipOval(
-                                        child: Image.network(
-                                          user.imageUrl,
-                                          width: 220,
-                                          height: 220,
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Container(),
+                                      child: GestureDetector(
+                                        onTap: () => Navigator.pushNamed(
+                                          context,
+                                          "/view_image",
+                                          arguments: user.imageUrl,
+                                        ),
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            user.imageUrl,
+                                            width: 220,
+                                            height: 220,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Container(),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -111,7 +118,6 @@ class _EditProfileState extends State<EditProfile> {
                                                   imageQuality: 25,
                                                 );
                                                 Navigator.of(context).pop();
-
                                                 if (pickedFile != null) {
                                                   String fileName = DateTime
                                                           .now()
