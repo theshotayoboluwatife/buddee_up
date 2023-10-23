@@ -2,9 +2,14 @@ import 'package:BuddeeUp/custom_widgets/dotted_image_card.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/new_user.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
+import 'package:BuddeeUp/screens/edit_screen/choice_page.dart';
+import 'package:BuddeeUp/screens/edit_screen/relationship.dart';
+import 'package:BuddeeUp/screens/proposition_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widgets/custom_text.dart';
 
@@ -62,6 +67,7 @@ class _EditInfoState extends State<EditInfo>
   @override
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
+    final createNewUser = Provider.of<CreateNewUser>(context, listen: true);
 
     return DefaultTabController(
       length: 2,
@@ -229,8 +235,14 @@ class _EditInfoState extends State<EditInfo>
                       height: 5,
                     ),
                     SimpleRowContainer(
-                        title: user.activities.join(', '),
-                        icon: Icons.navigate_next),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const ChoicePage(),
+                        ),
+                      ),
+                      title: user.activities.join(', '),
+                      icon: Icons.navigate_next,
+                    ),
                     const Padding(
                       padding: EdgeInsets.all(10.0),
                       child: CustomText(
@@ -249,7 +261,12 @@ class _EditInfoState extends State<EditInfo>
                     const SizedBox(
                       height: 5,
                     ),
-                    const SimpleRowContainer(
+                    SimpleRowContainer(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const PropositionScreen(),
+                        ),
+                      ),
                       title: 'Propose BuddeeUp Proposition',
                       icon: Icons.navigate_next,
                     ),
@@ -263,6 +280,11 @@ class _EditInfoState extends State<EditInfo>
                       height: 5,
                     ),
                     RowContainer(
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const Relationship(),
+                        ),
+                      ),
                       title: 'Relationship Status',
                       option: user.status,
                       icon: Icons.people_alt,
@@ -454,10 +476,13 @@ class BulletHeading extends StatelessWidget {
 class SimpleRowContainer extends StatelessWidget {
   final String title;
   final IconData icon;
+  final void Function()? onTap;
+
   const SimpleRowContainer({
     super.key,
     required this.title,
     required this.icon,
+    this.onTap,
   });
 
   @override
@@ -481,9 +506,12 @@ class SimpleRowContainer extends StatelessWidget {
               fontSize: 12,
             ),
           ),
-          Icon(
-            icon,
-            color: const Color(0x99A3B0E0),
+          IconButton(
+            onPressed: onTap,
+            icon: Icon(
+              icon,
+              color: const Color(0x99A3B0E0),
+            ),
           )
         ],
       ),
@@ -495,11 +523,14 @@ class RowContainer extends StatelessWidget {
   final String title;
   final String option;
   final IconData icon;
+  final void Function()? onPressed;
+
   const RowContainer({
     super.key,
     required this.title,
     required this.option,
     required this.icon,
+    this.onPressed,
   });
 
   @override
@@ -534,9 +565,10 @@ class RowContainer extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),
-              const Icon(
-                Icons.navigate_next,
-                color: Color(0x99A3B0E0),
+              IconButton(
+                onPressed: onPressed,
+                icon: const Icon(Icons.navigate_next),
+                color: const Color(0x99A3B0E0),
               )
             ],
           )

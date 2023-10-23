@@ -58,6 +58,7 @@ class CreateNewUser extends ChangeNotifier {
 
   void status(String status) {
     newUser.status = status;
+    notifyListeners();
   }
 
   void healthStatus(String healthStatus) {
@@ -66,6 +67,7 @@ class CreateNewUser extends ChangeNotifier {
 
   void activities(List<String> activities) {
     newUser.activities = activities;
+    notifyListeners();
   }
 
   void sexualPrefernce(String sexualPrefrence) {
