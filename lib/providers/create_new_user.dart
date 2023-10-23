@@ -32,6 +32,10 @@ class CreateNewUser extends ChangeNotifier {
     newUser.email = email;
   }
 
+  void update() {
+    notifyListeners();
+  }
+
   void phone(String phone) {
     newUser.phoneNumber = phone;
   }

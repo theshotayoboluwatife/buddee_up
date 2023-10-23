@@ -24,9 +24,10 @@ class _RelationshipState extends State<Relationship> {
 
   @override
   Widget build(BuildContext context) {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     final createNewUser = Provider.of<CreateNewUser>(context, listen: true);
+    createNewUser.newUser.status = selectedRelationship;
 
     return Scaffold(
       body: Container(
@@ -129,7 +130,7 @@ class _RelationshipState extends State<Relationship> {
             CustomButton(
               text: "CONTINUE",
               textColor: Colors.black,
-              onpress: () async{
+              onpress: () async {
                 if (createNewUser.newUser.status.isEmpty) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -138,7 +139,6 @@ class _RelationshipState extends State<Relationship> {
                     ),
                   );
                 } else {
-
                   // Update The activities
                   await firestore
                       .collection('users')
@@ -150,7 +150,8 @@ class _RelationshipState extends State<Relationship> {
                   }).catchError((error) {
                     print('Failed to update field: $error');
                   });
-                  Navigator.pushNamed(context, "/activities_screen");
+                  createNewUser.update();
+                  Navigator.of(context).pop();
                 }
               },
               width: double.infinity,

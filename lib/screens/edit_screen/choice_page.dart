@@ -135,6 +135,8 @@ class _ChoicePageState extends State<ChoicePage> {
               textColor: Colors.black,
               onpress: () async {
                 logger.i(selectedValue);
+                  createNewUser.activities(selectedValue);
+
                 if (createNewUser.newUser.activities.isEmpty) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -165,7 +167,6 @@ class _ChoicePageState extends State<ChoicePage> {
                   }).catchError((error) {
                     print('Failed to update field: $error');
                   });
-                  createNewUser.activities(selectedValue);
 
                   Navigator.pop(context);
                 }
