@@ -124,7 +124,7 @@ class _EditInfoState extends State<EditInfo>
                 return Container();
               }
               NewUser user = NewUser.fromJson(snapshot.data!.data()!);
-
+              aboutMe.text = user.bio;
               return Container(
                 width: double.infinity,
                 padding: const EdgeInsets.only(bottom: 8),
@@ -213,7 +213,9 @@ class _EditInfoState extends State<EditInfo>
                         controller: aboutMe,
                         decoration: const InputDecoration(
                           hintStyle: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w400),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
                           border: InputBorder.none,
                         ),
                         style: const TextStyle(color: Colors.white),
