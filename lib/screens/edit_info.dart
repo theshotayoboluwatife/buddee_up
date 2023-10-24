@@ -1,14 +1,18 @@
+import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/dotted_image_card.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
+import 'package:BuddeeUp/screens/edit_screen/body.dart';
 import 'package:BuddeeUp/screens/edit_screen/choice_page.dart';
+import 'package:BuddeeUp/screens/edit_screen/eth.dart';
 import 'package:BuddeeUp/screens/edit_screen/relationship.dart';
 import 'package:BuddeeUp/screens/edit_screen/sex.dart';
 import 'package:BuddeeUp/screens/edit_screen/sex_prefrence.dart';
 import 'package:BuddeeUp/screens/edit_screen/tribe.dart';
+import 'package:BuddeeUp/screens/profile_screen.dart';
 import 'package:BuddeeUp/screens/proposition_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -388,19 +392,31 @@ class _EditInfoState extends State<EditInfo> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const SimpleRowContainer(
-                      title: "Avg", icon: Icons.navigate_next),
+                  SimpleRowContainer(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const Body(),
+                      ),
+                    ),
+                    title: user.bodyType,
+                    icon: Icons.navigate_next,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  BulletHeading(
-                    title: user.ethnicity,
+                  const BulletHeading(
+                    title: "Ethnicity",
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  const SimpleRowContainer(
-                    title: 'African-American',
+                  SimpleRowContainer(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const Eth(),
+                      ),
+                    ),
+                    title: user.ethnicity,
                     icon: Icons.navigate_next,
                   ),
                   const SizedBox(
@@ -411,14 +427,92 @@ class _EditInfoState extends State<EditInfo> {
                     height: 5,
                   ),
                   SimpleRowContainer(
-                      title: user.height, icon: Icons.keyboard_arrow_up),
+                    title: user.height,
+                    icon: Icons.keyboard_arrow_up,
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                              title: const Text('Height'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  HeightDropdown(
+                                    color: Colors.black,
+                                  ),
+                                  CustomButton(
+                                    text: "UPDATE",
+                                    onpress: () async {
+                                      logger.i(createNewUser.newUser.height);
+
+                                      await firestore
+                                          .collection('users')
+                                          .doc(auth.currentUser!.uid)
+                                          .update({
+                                        'height': createNewUser.newUser.height,
+                                      }).then((value) {
+                                        print('Field updated successfully');
+                                      }).catchError((error) {
+                                        print('Failed to update field: $error');
+                                      });
+                                      createNewUser.update();
+                                      Navigator.of(context).pop();
+                                    },
+                                    textColor: Colors.black,
+                                  ),
+                                ],
+                              ));
+                        },
+                      );
+                    },
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
                   const BulletHeading(title: 'Weight'),
                   SimpleRowContainer(
-                      title: user.weight, icon: Icons.keyboard_arrow_up),
-                  
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                              title: const Text('Weight'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  WeightDropdown(
+                                    color: Colors.black,
+                                  ),
+                                  CustomButton(
+                                    text: "UPDATE",
+                                    onpress: () async {
+                                      logger.i(createNewUser.newUser.weight);
+
+                                      await firestore
+                                          .collection('users')
+                                          .doc(auth.currentUser!.uid)
+                                          .update({
+                                        'weight': createNewUser.newUser.weight,
+                                      }).then((value) {
+                                        print('Field updated successfully');
+                                      }).catchError((error) {
+                                        print('Failed to update field: $error');
+                                      });
+
+                                      createNewUser.update();
+                                      Navigator.of(context).pop();
+                                    },
+                                    textColor: Colors.black,
+                                  ),
+                                ],
+                              ));
+                        },
+                      );
+                    },
+                    title: user.weight,
+                    icon: Icons.keyboard_arrow_up,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),

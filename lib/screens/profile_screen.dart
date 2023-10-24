@@ -169,10 +169,10 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const Row(
+                      Row(
                         children: [
                           HeightDropdown(),
-                          SizedBox(width: 50),
+                          const SizedBox(width: 50),
                           WeightDropdown(),
                         ],
                       ),
@@ -290,7 +290,8 @@ class ProfileContainer extends StatelessWidget {
 }
 
 class HeightDropdown extends StatefulWidget {
-  const HeightDropdown({super.key});
+  Color? color;
+  HeightDropdown({super.key, this.color});
 
   @override
   State<HeightDropdown> createState() => _HeightDropdownState();
@@ -321,11 +322,11 @@ class _HeightDropdownState extends State<HeightDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
+        Text(
           'Height:',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: widget.color ?? Colors.white,
           ),
         ),
         const SizedBox(height: 2),
@@ -341,8 +342,8 @@ class _HeightDropdownState extends State<HeightDropdown> {
                   value: entry.key,
                   child: Text(
                     entry.value,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: widget.color ?? Colors.white,
                     ),
                   ),
                 ),
@@ -353,7 +354,7 @@ class _HeightDropdownState extends State<HeightDropdown> {
               selectedHeight = index!;
             });
             createNewUser.newUser.height = heightList[index!];
-            logger.i(heightList[index]);
+            logger.i(createNewUser.newUser.height);
           },
         ),
       ],
@@ -362,7 +363,9 @@ class _HeightDropdownState extends State<HeightDropdown> {
 }
 
 class WeightDropdown extends StatefulWidget {
-  const WeightDropdown({super.key});
+  Color? color;
+
+  WeightDropdown({super.key, this.color});
 
   @override
   State<WeightDropdown> createState() => _WeightDropdownState();
@@ -389,11 +392,11 @@ class _WeightDropdownState extends State<WeightDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
+        Text(
           'Weight:',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: widget.color ?? Colors.white,
           ),
         ),
         const SizedBox(height: 10),
@@ -409,8 +412,8 @@ class _WeightDropdownState extends State<WeightDropdown> {
                   value: entry.key,
                   child: Text(
                     entry.value,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: widget.color ?? Colors.white,
                       fontSize: 16,
                     ),
                   ),
@@ -422,7 +425,8 @@ class _WeightDropdownState extends State<WeightDropdown> {
               selectedWeight = index!;
             });
             createNewUser.newUser.weight = weightList[index!];
-            logger.i(weightList[index]);
+            logger.i(createNewUser.newUser.weight);
+
           },
         ),
         const SizedBox(height: 10),
