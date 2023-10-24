@@ -25,12 +25,13 @@ class NewUser {
   List<String> activities;
   String sexualPreferences;
   List<String> friends;
-
+  String smoking;
   @TimestampConverter()
   Timestamp lastSeen;
 
   NewUser({
     required this.email,
+    required this.smoking,
     required this.id,
     required this.status,
     required this.imageUrl,

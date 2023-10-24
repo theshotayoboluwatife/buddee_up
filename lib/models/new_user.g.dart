@@ -8,10 +8,10 @@ part of 'new_user.dart';
 
 NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
       email: json['email'] as String,
+      smoking: json['smoking'] as String,
       id: json['id'] as String,
       status: json['status'] as String,
-      imageUrl: json['imageUrl'] as String? ??
-          'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg',
+      imageUrl: json['imageUrl'] as String,
       phoneNumber: json['phoneNumber'] as String,
       profileName: json['profileName'] as String,
       age: json['age'] as int,
@@ -30,8 +30,10 @@ NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
           .map((e) => e as String)
           .toList(),
       sexualPreferences: json['sexualPreferences'] as String,
-      lastSeen: const TimestampConverter().fromJson(json['lastSeen'] as Timestamp?),
-      friends: (json['friends'] as List<dynamic>).map((e) => e as String).toList(),
+      lastSeen:
+          const TimestampConverter().fromJson(json['lastSeen'] as Timestamp?),
+      friends:
+          (json['friends'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$NewUserToJson(NewUser instance) => <String, dynamic>{
@@ -55,5 +57,6 @@ Map<String, dynamic> _$NewUserToJson(NewUser instance) => <String, dynamic>{
       'activities': instance.activities,
       'sexualPreferences': instance.sexualPreferences,
       'friends': instance.friends,
+      'smoking': instance.smoking,
       'lastSeen': const TimestampConverter().toJson(instance.lastSeen),
     };

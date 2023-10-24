@@ -214,6 +214,7 @@ class _SignInState extends State<SignIn> {
                                 id: auth.currentUser!.uid,
                                 friends: [],
                                 status: '',
+                                smoking: '',
                                 phoneNumber:
                                     auth.currentUser!.phoneNumber ?? '',
                                 profileName:

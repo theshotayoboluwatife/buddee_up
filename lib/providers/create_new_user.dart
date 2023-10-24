@@ -26,6 +26,7 @@ class CreateNewUser extends ChangeNotifier {
     sexualPreferences: '',
     lastSeen: Timestamp.fromDate(DateTime.now()),
     friends: [],
+    smoking: ""
   );
 
   void setEmail(String email) {

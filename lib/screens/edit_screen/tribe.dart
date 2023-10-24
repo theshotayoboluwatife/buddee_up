@@ -6,28 +6,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Relationship extends StatefulWidget {
-  const Relationship({Key? key}) : super(key: key);
+class TribeSetting extends StatefulWidget {
+  const TribeSetting({Key? key}) : super(key: key);
 
   @override
-  State<Relationship> createState() => _RelationshipState();
+  State<TribeSetting> createState() => _TribeSettingState();
 }
 
-class _RelationshipState extends State<Relationship> {
-  String selectedRelationship = "Single"; // Initial selected value
-  List<String> relationshipItems = [
-    "Single",
-    "Married",
-    "Open Relationship",
-    "Dating",
+class _TribeSettingState extends State<TribeSetting> {
+  String selectedValue = "Scruffy";
+
+  List<String> dropdownItems = [
+    "Scruffy",
+    "Clean cut",
+    "Metro",
+    "Casual",
+    "Grunge",
+    "Cowboy",
+    "Geek",
+    "Gamer",
   ];
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-    final createNewUser = Provider.of<CreateNewUser>(context, listen: true);
-    createNewUser.newUser.status = selectedRelationship;
+    final createNewUser = Provider.of<CreateNewUser>(context);
 
     return Scaffold(
       body: Container(
@@ -62,7 +64,7 @@ class _RelationshipState extends State<Relationship> {
                     const Padding(
                       padding: EdgeInsets.only(top: 24.0, left: 8),
                       child: CustomText(
-                        text: "Relationship\nStatus",
+                        text: "Tribe",
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
                       ),
@@ -78,7 +80,7 @@ class _RelationshipState extends State<Relationship> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CustomText(
-                    text: "Select your relationship status",
+                    text: "Select Tribe",
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -93,8 +95,8 @@ class _RelationshipState extends State<Relationship> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 30, right: 30),
                       child: DropdownButton(
-                        value: selectedRelationship,
-                        items: relationshipItems.map((String item) {
+                        value: selectedValue,
+                        items: dropdownItems.map((String item) {
                           return DropdownMenuItem<String>(
                             value: item,
                             child: Text(item),
@@ -102,9 +104,9 @@ class _RelationshipState extends State<Relationship> {
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
-                            selectedRelationship = value!;
+                            selectedValue = value!;
                           });
-                          createNewUser.status(value!);
+                          createNewUser.tribe(value!);
                         },
                         icon: const Padding(
                             padding: EdgeInsets.only(left: 20),
@@ -131,7 +133,7 @@ class _RelationshipState extends State<Relationship> {
               text: "UPDATE",
               textColor: Colors.black,
               onpress: () async {
-                if (createNewUser.newUser.status.isEmpty) {
+                if (createNewUser.newUser.tribe.isEmpty) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -144,7 +146,7 @@ class _RelationshipState extends State<Relationship> {
                       .collection('users')
                       .doc(auth.currentUser!.uid)
                       .update({
-                    'status': createNewUser.newUser.status,
+                    'tribe': createNewUser.newUser.tribe,
                   }).then((value) {
                     print('Field updated successfully');
                   }).catchError((error) {
@@ -166,3 +168,5 @@ class _RelationshipState extends State<Relationship> {
     );
   }
 }
+
+final FirebaseFirestore firestore = FirebaseFirestore.instance;

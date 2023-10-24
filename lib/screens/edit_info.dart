@@ -6,6 +6,9 @@ import 'package:BuddeeUp/models/new_user.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/screens/edit_screen/choice_page.dart';
 import 'package:BuddeeUp/screens/edit_screen/relationship.dart';
+import 'package:BuddeeUp/screens/edit_screen/sex.dart';
+import 'package:BuddeeUp/screens/edit_screen/sex_prefrence.dart';
+import 'package:BuddeeUp/screens/edit_screen/tribe.dart';
 import 'package:BuddeeUp/screens/proposition_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -56,11 +59,11 @@ class _EditInfoState extends State<EditInfo> {
 
   final TextEditingController aboutMe = TextEditingController();
 
+  String smokeStatus = 'No';
   @override
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     final createNewUser = Provider.of<CreateNewUser>(context, listen: true);
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -83,7 +86,10 @@ class _EditInfoState extends State<EditInfo> {
             } catch (e) {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Error Updating Phone Number')));
+                const SnackBar(
+                  content: Text('Error Updating Phone Number'),
+                ),
+              );
               // Navigator.of(context).pop();
             }
           },
@@ -278,18 +284,83 @@ class _EditInfoState extends State<EditInfo> {
                     icon: Icons.people_alt,
                   ),
                   RowContainer(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const TribeSetting(),
+                      ),
+                    ),
                     title: 'Tribe',
                     option: user.tribe,
                     icon: Icons.family_restroom,
                   ),
                   RowContainer(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const SexPreferences(),
+                      ),
+                    ),
                     title: 'Sexual Preferences',
                     option: user.sexualPreferences,
                     icon: Icons.transgender,
                   ),
-                  const RowContainer(
+                  RowContainer(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Do You Smoke?'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                ListTile(
+                                  title: const Text('Yes'),
+                                  onTap: () async {
+                                    createNewUser.newUser.smoking = "Yes";
+                                    await firestore
+                                        .collection('users')
+                                        .doc(auth.currentUser!.uid)
+                                        .update({
+                                      'smoking': createNewUser.newUser.smoking,
+                                    }).then((value) {
+                                      print('Field updated successfully');
+                                    }).catchError((error) {
+                                      print('Failed to update field: $error');
+                                    });
+                                    setState(() {
+                                      smokeStatus = 'Yes';
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                ),
+                                ListTile(
+                                  title: const Text('No'),
+                                  onTap: () async {
+                                    createNewUser.newUser.smoking = "No";
+                                    await firestore
+                                        .collection('users')
+                                        .doc(auth.currentUser!.uid)
+                                        .update({
+                                      'smoking': createNewUser.newUser.smoking,
+                                    }).then((value) {
+                                      print('Field updated successfully');
+                                    }).catchError((error) {
+                                      print('Failed to update field: $error');
+                                    });
+                                    setState(() {
+                                      smokeStatus = 'No';
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                     title: 'Smoking',
-                    option: 'No',
+                    option: user.smoking,
                     icon: Icons.smoking_rooms,
                   ),
                   const SizedBox(height: 30),
@@ -300,6 +371,11 @@ class _EditInfoState extends State<EditInfo> {
                     height: 5,
                   ),
                   SimpleRowContainer(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => Sex(),
+                      ),
+                    ),
                     title: user.gender,
                     icon: Icons.navigate_next,
                   ),
@@ -342,17 +418,7 @@ class _EditInfoState extends State<EditInfo> {
                   const BulletHeading(title: 'Weight'),
                   SimpleRowContainer(
                       title: user.weight, icon: Icons.keyboard_arrow_up),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const BulletHeading(
-                    title: "GENDER",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  SimpleRowContainer(
-                      title: user.gender, icon: Icons.navigate_next),
+                  
                   const SizedBox(
                     height: 20,
                   ),

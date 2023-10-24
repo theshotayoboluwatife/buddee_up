@@ -2,32 +2,32 @@ import 'package:BuddeeUp/custom_widgets/custom_button.dart';
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:BuddeeUp/screens/edit_screen/tribe.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Relationship extends StatefulWidget {
-  const Relationship({Key? key}) : super(key: key);
+class SexPreferences extends StatefulWidget {
+  const SexPreferences({Key? key}) : super(key: key);
 
   @override
-  State<Relationship> createState() => _RelationshipState();
+  State<SexPreferences> createState() => _SexualPreferencesState();
 }
 
-class _RelationshipState extends State<Relationship> {
-  String selectedRelationship = "Single"; // Initial selected value
-  List<String> relationshipItems = [
-    "Single",
-    "Married",
-    "Open Relationship",
-    "Dating",
+class _SexualPreferencesState extends State<SexPreferences> {
+  String selectedRole = "Top";
+  List<String> roleItems = [
+    "Top",
+    "Bottom",
+    "Verse",
+    "Top/Verse",
+    "Bottom/Verse",
+    "Asexual",
+    "Bi",
   ];
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-    final createNewUser = Provider.of<CreateNewUser>(context, listen: true);
-    createNewUser.newUser.status = selectedRelationship;
+    final createNewUser = Provider.of<CreateNewUser>(context);
 
     return Scaffold(
       body: Container(
@@ -62,7 +62,7 @@ class _RelationshipState extends State<Relationship> {
                     const Padding(
                       padding: EdgeInsets.only(top: 24.0, left: 8),
                       child: CustomText(
-                        text: "Relationship\nStatus",
+                        text: "Sexual\nPreferences",
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
                       ),
@@ -78,7 +78,7 @@ class _RelationshipState extends State<Relationship> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CustomText(
-                    text: "Select your relationship status",
+                    text: "Select your sexual preference",
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -93,8 +93,8 @@ class _RelationshipState extends State<Relationship> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 30, right: 30),
                       child: DropdownButton(
-                        value: selectedRelationship,
-                        items: relationshipItems.map((String item) {
+                        value: selectedRole,
+                        items: roleItems.map((String item) {
                           return DropdownMenuItem<String>(
                             value: item,
                             child: Text(item),
@@ -102,9 +102,9 @@ class _RelationshipState extends State<Relationship> {
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
-                            selectedRelationship = value!;
+                            selectedRole = value!;
                           });
-                          createNewUser.status(value!);
+                          createNewUser.sexualPrefernce(value!);
                         },
                         icon: const Padding(
                             padding: EdgeInsets.only(left: 20),
@@ -131,8 +131,9 @@ class _RelationshipState extends State<Relationship> {
               text: "UPDATE",
               textColor: Colors.black,
               onpress: () async {
-                if (createNewUser.newUser.status.isEmpty) {
+                if (createNewUser.newUser.sexualPreferences.isEmpty) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Select a vlaue'),
@@ -144,7 +145,8 @@ class _RelationshipState extends State<Relationship> {
                       .collection('users')
                       .doc(auth.currentUser!.uid)
                       .update({
-                    'status': createNewUser.newUser.status,
+                    'sexualPreferences':
+                        createNewUser.newUser.sexualPreferences,
                   }).then((value) {
                     print('Field updated successfully');
                   }).catchError((error) {
@@ -166,3 +168,4 @@ class _RelationshipState extends State<Relationship> {
     );
   }
 }
+
