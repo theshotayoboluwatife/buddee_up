@@ -433,6 +433,8 @@ class _EditInfoState extends State<EditInfo> {
                       showDialog(
                         context: context,
                         builder: (context) {
+                                      logger.i(createNewUser.newUser.height);
+
                           return AlertDialog(
                               title: const Text('Height'),
                               content: Column(
@@ -473,6 +475,8 @@ class _EditInfoState extends State<EditInfo> {
                   const BulletHeading(title: 'Weight'),
                   SimpleRowContainer(
                     onTap: () {
+                                      logger.i(createNewUser.newUser.weight);
+
                       showDialog(
                         context: context,
                         builder: (context) {

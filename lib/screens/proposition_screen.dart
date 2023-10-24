@@ -1,4 +1,5 @@
 import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/screens/cafe_talks.dart';
 import 'package:flutter/material.dart';
 import '../custom_widgets/custom_text.dart';
 
@@ -483,20 +484,24 @@ class _PropositionScreenState extends State<PropositionScreen> {
                         text: "Save to BuddeeUp Propositions",
                         onpress: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (_) => const CafeTalks(),
+                              ),
+                            );
                           }
                         },
                         hasBorder: true,
                         buttonColor: Colors.purpleAccent,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomButton(
-                        text: "Delete BuddeeUp Propositions",
-                        onpress: () => Navigator.of(context).pop(),
-                        buttonColor: Colors.black,
-                      ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
+                      // CustomButton(
+                      //   text: "Delete BuddeeUp Propositions",
+                      //   onpress: () => Navigator.of(context).pop(),
+                      //   buttonColor: Colors.black,
+                      // ),
                       const SizedBox(
                         height: 30,
                       ),

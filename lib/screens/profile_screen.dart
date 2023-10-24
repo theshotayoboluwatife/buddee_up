@@ -317,7 +317,7 @@ class _HeightDropdownState extends State<HeightDropdown> {
 
     List<String> heightList = generateHeightsList();
 
-    createNewUser.newUser.weight = heightList[0];
+    // createNewUser.newUser.height = heightList[0];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -388,7 +388,7 @@ class _WeightDropdownState extends State<WeightDropdown> {
 
     List<String> weightList = generateWeightsList();
 
-    createNewUser.newUser.weight = weightList[0];
+    // createNewUser.newUser.weight = weightList[0];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -426,7 +426,6 @@ class _WeightDropdownState extends State<WeightDropdown> {
             });
             createNewUser.newUser.weight = weightList[index!];
             logger.i(createNewUser.newUser.weight);
-
           },
         ),
         const SizedBox(height: 10),
