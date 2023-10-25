@@ -18,6 +18,12 @@ class OTPVerification extends StatefulWidget {
 class _OTPVerificationState extends State<OTPVerification> {
   TextEditingController pinController = TextEditingController();
 
+ @override
+  void dispose() {
+    pinController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)!.settings.arguments;

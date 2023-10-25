@@ -17,9 +17,21 @@ class _PropositionScreenState extends State<PropositionScreen> {
   final TextEditingController approxArea = TextEditingController();
   final TextEditingController approxZipCode = TextEditingController();
   final TextEditingController where = TextEditingController();
+
   DateTime date = DateTime.now();
   TimeOfDay startTime = const TimeOfDay(hour: 12, minute: 03);
   TimeOfDay stopTime = const TimeOfDay(hour: 12, minute: 03);
+
+ @override
+  void dispose() {
+    eventName.dispose();
+    activityType.dispose();
+    approxArea.dispose();
+    approxZipCode.dispose();
+    where.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
