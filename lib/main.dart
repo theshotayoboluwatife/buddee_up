@@ -1,7 +1,6 @@
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/providers/location_provider.dart';
-
 import 'package:BuddeeUp/screens/account_recovery.dart';
 import 'package:BuddeeUp/screens/activities_screen.dart';
 import 'package:BuddeeUp/screens/add_contacts_screen.dart';
@@ -93,6 +92,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "BuddeeUp",
       theme: CustomAppTheme.customTheme,
       routes: {
@@ -145,13 +145,14 @@ class App extends StatelessWidget {
               onTap: () => Navigator.pop(context),
             ),
         "/settings": (context) => const Settings(),
-        "/proposition_screen": (context) =>  PropositionScreen(),
+        "/proposition_screen": (context) => PropositionScreen(),
         "/unsubscribe_email_screen": (context) => const EmailUnsubscribe(),
         // SplashScreen.routeName:(context) => const SplashScreen(),
       },
       // initialRoute: isUserLoggedIn ? '/home_screen' : '/',
       home: SplashScreen(
-          screen: isUserLoggedIn ? const HomeScreen() : const LoginSignUp()),
+        screen: isUserLoggedIn ? const HomeScreen() : const LoginSignUp(),
+      ),
     );
   }
 }

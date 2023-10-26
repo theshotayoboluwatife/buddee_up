@@ -113,7 +113,7 @@ class AppGridView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         image: DecorationImage(
                           image: NetworkImage(user.imageUrl),
-                          fit: BoxFit.contain,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),

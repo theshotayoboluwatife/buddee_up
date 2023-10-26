@@ -145,25 +145,34 @@ class _EditInfoState extends State<EditInfo> {
                           children: [
                             ...List.generate(4, (index) {
                               if (user.pictures.length > index) {
-                                return Container(
-                                  padding: const EdgeInsets.all(4),
-                                  child: DottedBorder(
-                                    color: Colors.white,
-                                    strokeWidth: 1,
-                                    dashPattern: const [4, 6],
-                                    borderType: BorderType.RRect,
-                                    radius: const Radius.circular(10),
-                                    child: Container(
-                                      width: 60,
-                                      height: 75,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          user.pictures[index],
-                                          fit: BoxFit.cover,
+                                return GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                    context,
+                                    "/view_image",
+                                    arguments: user.pictures[index],
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    child: DottedBorder(
+                                      color: Colors.white,
+                                      strokeWidth: 1,
+                                      dashPattern: const [4, 6],
+                                      borderType: BorderType.RRect,
+                                      radius: const Radius.circular(10),
+                                      child: Container(
+                                        width: 60,
+                                        height: 75,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            user.pictures[index],
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -433,7 +442,7 @@ class _EditInfoState extends State<EditInfo> {
                       showDialog(
                         context: context,
                         builder: (context) {
-                                      logger.i(createNewUser.newUser.height);
+                          logger.i(createNewUser.newUser.height);
 
                           return AlertDialog(
                               title: const Text('Height'),
@@ -475,7 +484,7 @@ class _EditInfoState extends State<EditInfo> {
                   const BulletHeading(title: 'Weight'),
                   SimpleRowContainer(
                     onTap: () {
-                                      logger.i(createNewUser.newUser.weight);
+                      logger.i(createNewUser.newUser.weight);
 
                       showDialog(
                         context: context,
