@@ -21,7 +21,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _cPasswordTextController =
       TextEditingController();
-  bool _isPasswordVisible = false;
+  bool _isPasswordNotVisible = true;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -131,17 +131,17 @@ class _SignUpState extends State<SignUp> {
                           return null;
                         },
                         controller: _passwordTextController,
-                        obscureText: _isPasswordVisible ? true : false,
+                        obscureText: _isPasswordNotVisible ? true : false,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isPasswordVisible
+                              _isPasswordNotVisible
                                   ? Icons.visibility
                                   : Icons.visibility_off,
                             ),
                             onPressed: () {
                               setState(() {
-                                _isPasswordVisible = !_isPasswordVisible;
+                                _isPasswordNotVisible = !_isPasswordNotVisible;
                               });
                             },
                           ),
@@ -178,17 +178,17 @@ class _SignUpState extends State<SignUp> {
                           return null;
                         },
                         controller: _cPasswordTextController,
-                        obscureText: _isPasswordVisible ? true : false,
+                        obscureText: _isPasswordNotVisible ? true : false,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isPasswordVisible
+                              _isPasswordNotVisible
                                   ? Icons.visibility
                                   : Icons.visibility_off,
                             ),
                             onPressed: () {
                               setState(() {
-                                _isPasswordVisible = !_isPasswordVisible;
+                                _isPasswordNotVisible = !_isPasswordNotVisible;
                               });
                             },
                           ),

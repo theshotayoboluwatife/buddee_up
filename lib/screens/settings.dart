@@ -1,8 +1,7 @@
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
-import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
-import 'package:BuddeeUp/models/new_user.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/screens/blocked_accounts.dart';
 import 'package:BuddeeUp/screens/sigin_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +31,8 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     final locationProvider = Provider.of<LocationProvider>(context);
+    CreateNewUser newUser = Provider.of<CreateNewUser>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -53,75 +54,75 @@ class _SettingsState extends State<Settings> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xff141416),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        minRadius: 40,
-                        child: Icon(
-                          Icons.rocket_launch,
-                          color: Colors.purpleAccent,
-                          size: 35,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomText(
-                        text: "Get Boosts",
-                        color: Colors.purpleAccent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                      color: const Color(0xff141416),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        minRadius: 40,
-                        child: Image.asset("assets/images/incognito.png",
-                            width: 30, height: 30, fit: BoxFit.cover),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const CustomText(
-                        text: "Get Incognito",
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   children: [
+          //     Expanded(
+          //       child: Container(
+          //         padding: const EdgeInsets.all(16),
+          //         decoration: BoxDecoration(
+          //           color: const Color(0xff141416),
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //         child: const Column(
+          //           children: [
+          //             CircleAvatar(
+          //               backgroundColor: Colors.white,
+          //               minRadius: 40,
+          //               child: Icon(
+          //                 Icons.rocket_launch,
+          //                 color: Colors.purpleAccent,
+          //                 size: 35,
+          //               ),
+          //             ),
+          //             SizedBox(
+          //               height: 10,
+          //             ),
+          //             CustomText(
+          //               text: "Get Boosts",
+          //               color: Colors.purpleAccent,
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 16,
+          //             )
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(
+          //       width: 5,
+          //     ),
+          //     Expanded(
+          //       child: Container(
+          //         padding: const EdgeInsets.all(16),
+          //         decoration: BoxDecoration(
+          //             color: const Color(0xff141416),
+          //             borderRadius: BorderRadius.circular(10)),
+          //         child: Column(
+          //           children: [
+          //             CircleAvatar(
+          //               backgroundColor: Colors.white,
+          //               minRadius: 40,
+          //               child: Image.asset("assets/images/incognito.png",
+          //                   width: 30, height: 30, fit: BoxFit.cover),
+          //             ),
+          //             const SizedBox(
+          //               height: 10,
+          //             ),
+          //             const CustomText(
+          //               text: "Get Incognito",
+          //               color: Colors.white,
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 16,
+          //             )
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
           const CustomText(
             text: "ACCOUNT SETTINGS",
             fontWeight: FontWeight.w500,
@@ -148,25 +149,26 @@ class _SettingsState extends State<Settings> {
                     ),
                     Row(
                       children: [
-                        FutureBuilder(
-                          future: GetUserDetails().getUser(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Container();
-                            }
-                            if (snapshot.hasError) {
-                              return Container();
-                            }
-                            NewUser user =
-                                NewUser.fromJson(snapshot.data!.data()!);
-                            return CustomText(
-                              text: user.phoneNumber,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            );
-                          },
+                        // FutureBuilder(
+                        //   future: GetUserDetails().getUser(),
+                        //   builder: (context, snapshot) {
+                        //     if (snapshot.connectionState ==
+                        //         ConnectionState.waiting) {
+                        //       return Container();
+                        //     }
+                        //     if (snapshot.hasError) {
+                        //       return Container();
+                        //     }
+                        //     NewUser user =
+                        //         NewUser.fromJson(snapshot.data!.data()!);
+                        //     return
+                        CustomText(
+                          text: newUser.newUser.phoneNumber,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                         ),
+                        // },
+                        // ),
                         IconButton(
                           onPressed: () {
                             Navigator.pushNamed(
@@ -215,49 +217,51 @@ class _SettingsState extends State<Settings> {
                     height: 1,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const CustomText(
-                      text: "Email",
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    Row(
-                      children: [
-                        CustomText(
-                          text: auth.currentUser!.email!,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.purpleAccent[100],
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                "/email_verification_settings",
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.navigate_next,
-                              color: Colors.white,
-                            ))
-                      ],
-                    )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CustomText(
+                        text: "Email",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      Row(
+                        children: [
+                          CustomText(
+                            text: auth.currentUser!.email!,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.purpleAccent[100],
+                          ),
+                          // IconButton(
+                          //   onPressed: () {
+                          //     Navigator.pushNamed(
+                          //       context,
+                          //       "/email_verification_settings",
+                          //     );
+                          //   },
+                          //   icon: const Icon(
+                          //     Icons.navigate_next,
+                          //     color: Colors.white,
+                          //   ),
+                          // ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          const CustomText(
-            text: "Verify an email to help secure your account",
-            color: Colors.purpleAccent,
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
-          ),
+
+          // const CustomText(
+          //   text: "Verify an email to help secure your account",
+          //   color: Colors.purpleAccent,
+          //   fontWeight: FontWeight.w500,
+          //   fontSize: 12,
+          // ),
           const SizedBox(
             height: 30,
           ),
@@ -267,170 +271,175 @@ class _SettingsState extends State<Settings> {
               borderRadius: BorderRadius.circular(16),
               color: const Color(0xff141416),
             ),
-            child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
                 children: [
-                  const CustomText(
-                    text: "Location",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomText(
-                        text: locationProvider.location,
-                        fontSize: 12,
+                      const CustomText(
+                        text: "Location",
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, "/location_settings_screen");
-                        },
-                        icon: const Icon(
-                          Icons.navigate_next,
+                      Row(
+                        children: [
+                          CustomText(
+                            text: locationProvider.location,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          // IconButton(
+                          //   onPressed: () {
+                          //     Navigator.pushNamed(
+                          //         context, "/location_settings_screen");
+                          //   },
+                          //   icon: const Icon(
+                          //     Icons.navigate_next,
+                          //     color: Colors.white,
+                          //   ),
+                          // ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Divider(
+                      color: Colors.white,
+                      height: 1,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: CustomText(
+                          text: "Distance preference",
                           color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
                         ),
+                      ),
+                      CustomText(
+                        text: "$_sliderValue mi",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      )
+                    ],
+                  ),
+                  Slider(
+                    value: _sliderValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _sliderValue = newValue;
+                      });
+                    },
+                    min: 0.0, // Minimum value
+                    max: 100.0, // Maximum value
+                    divisions: 100, // Number of discrete divisions
+                    label: '$_sliderValue',
+                    activeColor: Colors.purpleAccent,
+                    thumbColor: Colors.white, // Label to display when dragging
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Divider(
+                      color: Colors.white,
+                      height: 1,
+                    ),
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     const CustomText(
+                  //       text: "Show me",
+                  //       fontSize: 16,
+                  //       fontWeight: FontWeight.w500,
+                  //     ),
+                  //     Row(
+                  //       children: [
+                  //         const CustomText(
+                  //           text: "Everyone",
+                  //           fontSize: 12,
+                  //           fontWeight: FontWeight.w500,
+                  //           color: Colors.white,
+                  //         ),
+                  //         IconButton(
+                  //             onPressed: () {
+                  //               Navigator.pushNamed(context, "/show_me_screen");
+                  //             },
+                  //             icon: const Icon(
+                  //               Icons.navigate_next,
+                  //               color: Colors.white,
+                  //             ))
+                  //       ],
+                  //     )
+                  //   ],
+                  // ),
+                  const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Divider(
+                      color: Colors.white,
+                      height: 1,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CustomText(
+                        text: "Age preference",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                      CustomText(
+                        text: "$_startValue - $_endValue",
+                        fontWeight: FontWeight.w500,
+                      )
+                    ],
+                  ),
+                  RangeSlider(
+                    values: RangeValues(_startValue, _endValue),
+                    onChanged: (RangeValues newValues) {
+                      setState(() {
+                        _startValue = newValues.start;
+                        _endValue = newValues.end;
+                      });
+                    },
+                    min: 0.0,
+                    max: 100.0,
+                    divisions: 100,
+                    labels: RangeLabels('$_startValue', '$_endValue'),
+                    activeColor: Colors.purpleAccent,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CustomText(
+                        text: "Global",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      Switch(
+                        value: switchValue0,
+                        onChanged: (newValue) {
+                          setState(() {
+                            switchValue0 = newValue;
+                          });
+                        },
+                        activeTrackColor: Colors.purpleAccent,
+                        activeColor: Colors.white,
+                        inactiveTrackColor: Colors.black,
+                        inactiveThumbColor: Colors.white,
                       ),
                     ],
                   )
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Divider(
-                  color: Colors.white,
-                  height: 1,
-                ),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(2.0),
-                    child: CustomText(
-                      text: "Distance preference",
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                  ),
-                  CustomText(
-                    text: "50 mi",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                  )
-                ],
-              ),
-              Slider(
-                value: _sliderValue,
-                onChanged: (newValue) {
-                  setState(() {
-                    _sliderValue = newValue;
-                  });
-                },
-                min: 0.0, // Minimum value
-                max: 100.0, // Maximum value
-                divisions: 100, // Number of discrete divisions
-                label: '$_sliderValue',
-                activeColor: Colors.purpleAccent,
-                thumbColor: Colors.white, // Label to display when dragging
-              ),
-              const Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Divider(
-                  color: Colors.white,
-                  height: 1,
-                ),
-              ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     const CustomText(
-              //       text: "Show me",
-              //       fontSize: 16,
-              //       fontWeight: FontWeight.w500,
-              //     ),
-              //     Row(
-              //       children: [
-              //         const CustomText(
-              //           text: "Everyone",
-              //           fontSize: 12,
-              //           fontWeight: FontWeight.w500,
-              //           color: Colors.white,
-              //         ),
-              //         IconButton(
-              //             onPressed: () {
-              //               Navigator.pushNamed(context, "/show_me_screen");
-              //             },
-              //             icon: const Icon(
-              //               Icons.navigate_next,
-              //               color: Colors.white,
-              //             ))
-              //       ],
-              //     )
-              //   ],
-              // ),
-              const Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Divider(
-                  color: Colors.white,
-                  height: 1,
-                ),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    text: "Age preference",
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                  CustomText(
-                    text: "20-28",
-                    fontWeight: FontWeight.w500,
-                  )
-                ],
-              ),
-              RangeSlider(
-                values: RangeValues(_startValue, _endValue),
-                onChanged: (RangeValues newValues) {
-                  setState(() {
-                    _startValue = newValues.start;
-                    _endValue = newValues.end;
-                  });
-                },
-                min: 0.0,
-                max: 100.0,
-                divisions: 100,
-                labels: RangeLabels('$_startValue', '$_endValue'),
-                activeColor: Colors.purpleAccent,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const CustomText(
-                    text: "Global",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  Switch(
-                    value: switchValue0,
-                    onChanged: (newValue) {
-                      setState(() {
-                        switchValue0 = newValue;
-                      });
-                    },
-                    activeTrackColor: Colors.purpleAccent,
-                    activeColor: Colors.white,
-                    inactiveTrackColor: Colors.black,
-                    inactiveThumbColor: Colors.white,
-                  ),
-                ],
-              )
-            ]),
+            ),
           ),
           const SizedBox(
             height: 50,

@@ -1,9 +1,11 @@
 import 'package:BuddeeUp/custom_widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
+import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class PhoneNumberSettings extends StatelessWidget {
   final TextEditingController numberController = TextEditingController();
@@ -12,6 +14,8 @@ class PhoneNumberSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CreateNewUser newUser = Provider.of<CreateNewUser>(context);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -79,20 +83,36 @@ class PhoneNumberSettings extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () async {
                 try {
-                  CollectionReference users =
-                      FirebaseFirestore.instance.collection('users');
-                  DocumentReference userDoc = users.doc(auth.currentUser!.uid);
-                  // Update the field
-                  await userDoc.update({
-                    'phoneNumber': numberController.text
-                        .trim(), // Replace 'fieldName' with your field name
-                  });
-                  logger.i('Field updated successfully');
+                  if (numberController.text.trim().length >= 10 &&
+                      numberController.text.trim().length <= 18) {
+                    CollectionReference users =
+                        FirebaseFirestore.instance.collection('users');
+                    DocumentReference userDoc =
+                        users.doc(auth.currentUser!.uid);
+                    // Update the field
+                    await userDoc.update({
+                      'phoneNumber': numberController.text
+                          .trim(), // Replace 'fieldName' with your field name
+                    });
+                    logger.i('Field updated successfully');
+                    newUser.newUser.phoneNumber = numberController.text.trim();
+                    newUser.update();
+                    Navigator.of(context).pop();
+                  } else {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Invalid phone number'),
+                      ),
+                    );
+                  }
                 } catch (e) {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Error Updating Phone Number')));
-                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Error Updating Phone Number'),
+                    ),
+                  );
                   logger.i('Error updating field: $e');
                 }
               },
