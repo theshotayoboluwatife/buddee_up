@@ -262,8 +262,8 @@ class _SignInState extends State<SignIn> {
                                 .removeCurrentSnackBar();
 
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(e.toString()),
+                              const SnackBar(
+                                content: Text('An error has occured'),
                               ),
                             );
                           }
@@ -297,30 +297,30 @@ class _SignInState extends State<SignIn> {
                     //   width: double.infinity,
                     //   height: 60,
                     //   child: ElevatedButton.icon(
-                        // onPressed: () async {
-                        //   try {
-                        //     await Auth.signInWithFacebook().then((value) =>
-                        //         Navigator.of(context).pushAndRemoveUntil(
-                        //           MaterialPageRoute(
-                        //             builder: (_) => const HomeScreen(),
-                        //           ),
-                        //           (route) => false,
-                        //         ));
-                        //     final SharedPreferences prefs =
-                        //         await SharedPreferences.getInstance();
-                        //     prefs.setBool('isUserLoggedIn', true);
-                        //   } on FirebaseAuthException catch (e) {
-                        //     logger.e(e);
-                        //     ScaffoldMessenger.of(context)
-                        //         .removeCurrentSnackBar();
+                    // onPressed: () async {
+                    //   try {
+                    //     await Auth.signInWithFacebook().then((value) =>
+                    //         Navigator.of(context).pushAndRemoveUntil(
+                    //           MaterialPageRoute(
+                    //             builder: (_) => const HomeScreen(),
+                    //           ),
+                    //           (route) => false,
+                    //         ));
+                    //     final SharedPreferences prefs =
+                    //         await SharedPreferences.getInstance();
+                    //     prefs.setBool('isUserLoggedIn', true);
+                    //   } on FirebaseAuthException catch (e) {
+                    //     logger.e(e);
+                    //     ScaffoldMessenger.of(context)
+                    //         .removeCurrentSnackBar();
 
-                        //     ScaffoldMessenger.of(context).showSnackBar(
-                        //       SnackBar(
-                        //         content: Text(e.message!),
-                        //       ),
-                        //     );
-                        //   }
-                        // },
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       SnackBar(
+                    //         content: Text(e.message!),
+                    //       ),
+                    //     );
+                    //   }
+                    // },
                     //     onPressed: () {},
                     //     icon: Padding(
                     //       padding: const EdgeInsets.all(8.0),
