@@ -1,7 +1,7 @@
-import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_button.dart';
+import '../widgets/custom_button.dart';
 
 class LoginSignUp extends StatelessWidget {
   const LoginSignUp({Key? key}) : super(key: key);

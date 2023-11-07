@@ -1,12 +1,12 @@
-import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
-import 'package:BuddeeUp/custom_widgets/filter_button.dart';
+import 'package:BuddeeUp/widgets/app_grid_view.dart';
+import 'package:BuddeeUp/widgets/filter_button.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/new_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class DiscoveryPage extends StatelessWidget {
   const DiscoveryPage({
@@ -78,6 +78,7 @@ class DiscoveryPage extends StatelessWidget {
                               child: ClipOval(
                                 child: Image.network(
                                   snapShot.data!,
+                                  fit: BoxFit.cover,
                                   cacheWidth: 30,
                                   cacheHeight: 30,
                                   errorBuilder: (context, error, stackTrace) =>

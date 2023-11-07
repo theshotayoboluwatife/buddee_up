@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class OnlineNowScreen extends StatefulWidget {
   const OnlineNowScreen({Key? key}) : super(key: key);

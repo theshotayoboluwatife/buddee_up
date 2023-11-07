@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_button.dart';
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text.dart';
 
 class BlockedContactsScreen extends StatefulWidget {
   const BlockedContactsScreen({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class KeepMePosted extends StatelessWidget {
   const KeepMePosted({Key? key}) : super(key: key);

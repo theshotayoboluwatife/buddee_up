@@ -1,8 +1,8 @@
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../custom_widgets/custom_button.dart';
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text.dart';
 
 class HealthStatus extends StatefulWidget {
   const HealthStatus({Key? key}) : super(key: key);

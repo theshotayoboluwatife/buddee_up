@@ -1,5 +1,5 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
-import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';

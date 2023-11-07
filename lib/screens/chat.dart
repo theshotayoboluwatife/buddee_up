@@ -1,5 +1,5 @@
 
-import 'package:BuddeeUp/custom_widgets/user_item.dart';
+import 'package:BuddeeUp/widgets/user_item.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/screens/discover.dart';
@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});

@@ -1,5 +1,5 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
-import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/fire_store.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
@@ -24,6 +25,7 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _passwordTextController = TextEditingController();
   bool _isPasswordVisible = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoggedInSelected = false;
 
   @override
   void dispose() {
@@ -154,38 +156,57 @@ class _SignInState extends State<SignIn> {
                     const SizedBox(
                       height: 20,
                     ),
-                    CustomButton(
-                      text: "Sign in",
-                      onpress: () async {
-                        if (_formKey.currentState!.validate()) {
-                          logger.i('validated');
-                          try {
-                            await Auth.account(
-                              _emailTextController.text.trim(),
-                              _passwordTextController.text,
-                              AuthMode.login,
-                            );
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            await prefs.setBool('isUserLoggedIn', true);
-                            logger.i(prefs.getBool('isUserLoggedIn'));
-                            await Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/home_screen', (route) => false);
-                          } on FirebaseAuthException catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context)
-                                .removeCurrentSnackBar();
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(e.message!),
-                            ));
-                          }
-                        }
-                      },
-                      hasBorder: true,
-                      buttonColor: Colors.black,
-                      fontSize: 12,
-                      height: 60,
-                    ),
+                    isLoggedInSelected
+                        ? Center(
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: Colors.white,
+                              size: 45,
+                            ),
+                          )
+                        : CustomButton(
+                            text: "Sign in",
+                            onpress: () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  isLoggedInSelected = true;
+                                });
+                                logger.i('validated');
+                                try {
+                                  await Auth.account(
+                                    _emailTextController.text.trim(),
+                                    _passwordTextController.text,
+                                    AuthMode.login,
+                                  );
+                                  final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setBool('isUserLoggedIn', true);
+                                  logger.i(prefs.getBool('isUserLoggedIn'));
+                                  await Navigator.of(context)
+                                      .pushNamedAndRemoveUntil(
+                                          '/home_screen', (route) => false);
+                                } on FirebaseAuthException catch (e) {
+                                  logger.e(e);
+                                  ScaffoldMessenger.of(context)
+                                      .removeCurrentSnackBar();
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(e.message!),
+                                  ));
+                                  setState(() {
+                                    isLoggedInSelected = false;
+                                  });
+                                }
+                                setState(() {
+                                  isLoggedInSelected = false;
+                                });
+                              }
+                            },
+                            hasBorder: true,
+                            buttonColor: Colors.black,
+                            fontSize: 12,
+                            height: 60,
+                          ),
                     const SizedBox(
                       height: 40,
                     ),

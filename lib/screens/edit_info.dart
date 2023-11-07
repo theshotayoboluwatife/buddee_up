@@ -1,5 +1,5 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
-import 'package:BuddeeUp/custom_widgets/dotted_image_card.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/dotted_image_card.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
@@ -17,9 +17,10 @@ import 'package:BuddeeUp/screens/proposition_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class EditInfo extends StatefulWidget {
   const EditInfo({Key? key}) : super(key: key);
@@ -30,6 +31,13 @@ class EditInfo extends StatefulWidget {
 
 class _EditInfoState extends State<EditInfo> {
   List<String> images = [];
+  bool isLoading = false;
+  final TextEditingController feetTextEditingController =
+      TextEditingController();
+
+  final TextEditingController inchTextEditingController =
+      TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -44,6 +52,9 @@ class _EditInfoState extends State<EditInfo> {
   }
 
   update() async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       CollectionReference users =
           FirebaseFirestore.instance.collection('users');
@@ -58,7 +69,13 @@ class _EditInfoState extends State<EditInfo> {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Error Updating Phone Number')));
       // Navigator.of(context).pop();
+      setState(() {
+        isLoading = false;
+      });
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   final TextEditingController aboutMe = TextEditingController();
@@ -105,18 +122,25 @@ class _EditInfoState extends State<EditInfo> {
           fontSize: 18,
         ),
         actions: [
-          GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Padding(
-              padding: EdgeInsets.only(right: 24.0),
-              child: CustomText(
-                text: "Done",
-                fontWeight: FontWeight.w500,
-                color: Colors.purpleAccent,
-                fontSize: 18,
-              ),
-            ),
-          ),
+          isLoading
+              ? Center(
+                  child: LoadingAnimationWidget.staggeredDotsWave(
+                    color: Colors.purpleAccent,
+                    size: 35,
+                  ),
+                )
+              : GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 24.0),
+                    child: CustomText(
+                      text: "Done",
+                      fontWeight: FontWeight.w500,
+                      color: Colors.purpleAccent,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
         ],
       ),
       body: SingleChildScrollView(
@@ -445,35 +469,53 @@ class _EditInfoState extends State<EditInfo> {
                           logger.i(createNewUser.newUser.height);
 
                           return AlertDialog(
-                              title: const Text('Height'),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  HeightDropdown(
+                            title: const Text('Height'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Form(
+                                  key: _formKey,
+                                  child: HeightWidget(
                                     color: Colors.black,
+                                    feetTextEditingController:
+                                        feetTextEditingController,
+                                    inchTextEditingController:
+                                        inchTextEditingController,
                                   ),
+                                ),
+                                Builder(
+                                  builder: (context) => 
                                   CustomButton(
                                     text: "UPDATE",
                                     onpress: () async {
-                                      logger.i(createNewUser.newUser.height);
-
-                                      await firestore
-                                          .collection('users')
-                                          .doc(auth.currentUser!.uid)
-                                          .update({
-                                        'height': createNewUser.newUser.height,
-                                      }).then((value) {
-                                        print('Field updated successfully');
-                                      }).catchError((error) {
-                                        print('Failed to update field: $error');
-                                      });
-                                      createNewUser.update();
-                                      Navigator.of(context).pop();
+                                        if (_formKey.currentState!.validate()) {
+                                        logger.i(
+                                            '${feetTextEditingController.text} feet ${inchTextEditingController.text} inches');
+                                
+                                        createNewUser.newUser.height =
+                                            '${feetTextEditingController.text} feet ${inchTextEditingController.text} inches';
+                                
+                                        await firestore
+                                            .collection('users')
+                                            .doc(auth.currentUser!.uid)
+                                            .update({
+                                          'height': createNewUser.newUser.height,
+                                        }).then((value) {
+                                          print('Field updated successfully');
+                                        }).catchError((error) {
+                                          print('Failed to update field: $error');
+                                        });
+                                        createNewUser.update();
+                                        Navigator.of(context).pop();
+                                      } 
+                                    
                                     },
                                     textColor: Colors.black,
                                   ),
-                                ],
-                              ));
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       );
                     },
@@ -490,36 +532,35 @@ class _EditInfoState extends State<EditInfo> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                              title: const Text('Weight'),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  WeightDropdown(
-                                    color: Colors.black,
-                                  ),
-                                  CustomButton(
-                                    text: "UPDATE",
-                                    onpress: () async {
-                                      logger.i(createNewUser.newUser.weight);
-
-                                      await firestore
-                                          .collection('users')
-                                          .doc(auth.currentUser!.uid)
-                                          .update({
-                                        'weight': createNewUser.newUser.weight,
-                                      }).then((value) {
-                                        print('Field updated successfully');
-                                      }).catchError((error) {
-                                        print('Failed to update field: $error');
-                                      });
-
-                                      createNewUser.update();
-                                      Navigator.of(context).pop();
-                                    },
-                                    textColor: Colors.black,
-                                  ),
-                                ],
-                              ));
+                            title: const Text('Weight'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                WeightDropdown(
+                                  color: Colors.black,
+                                ),
+                                CustomButton(
+                                  text: "UPDATE",
+                                  onpress: () async {
+                                    logger.i(createNewUser.newUser.weight);
+                                    await firestore
+                                        .collection('users')
+                                        .doc(auth.currentUser!.uid)
+                                        .update({
+                                      'weight': createNewUser.newUser.weight,
+                                    }).then((value) {
+                                      print('Field updated successfully');
+                                    }).catchError((error) {
+                                      print('Failed to update field: $error');
+                                    });
+                                    createNewUser.update();
+                                    Navigator.of(context).pop();
+                                  },
+                                  textColor: Colors.black,
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       );
                     },

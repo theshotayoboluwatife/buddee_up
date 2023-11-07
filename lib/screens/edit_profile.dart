@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
-import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';

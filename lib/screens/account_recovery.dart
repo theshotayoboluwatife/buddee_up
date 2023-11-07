@@ -1,9 +1,9 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
-import 'package:BuddeeUp/custom_widgets/custom_text_field.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_text_field.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class AccountRecovery extends StatelessWidget {
   AccountRecovery({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 import '../providers/location_provider.dart';
 
 class EnableLocation extends StatelessWidget {

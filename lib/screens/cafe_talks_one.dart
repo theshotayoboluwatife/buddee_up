@@ -1,4 +1,4 @@
-import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CafeTalksOne extends StatefulWidget {

@@ -1,7 +1,7 @@
-import 'package:BuddeeUp/custom_widgets/account_tile.dart';
+import 'package:BuddeeUp/widgets/account_tile.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class GoogleSignIn extends StatelessWidget {
   const GoogleSignIn({Key? key}) : super(key: key);

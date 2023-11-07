@@ -1,7 +1,7 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:BuddeeUp/screens/cafe_talks.dart';
 import 'package:flutter/material.dart';
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class PropositionScreen extends StatefulWidget {
   const PropositionScreen({Key? key}) : super(key: key);

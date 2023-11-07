@@ -1,11 +1,13 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
-import 'package:BuddeeUp/custom_widgets/custom_text.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
+import 'package:BuddeeUp/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -22,6 +24,8 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _cPasswordTextController =
       TextEditingController();
   bool _isPasswordNotVisible = true;
+
+  bool isLoggedInSelected = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -206,40 +210,58 @@ class _SignUpState extends State<SignUp> {
                     ),
 
                     //create account button
-                    CustomButton(
-                      text: "Create account",
-                      onpress: () async {
-                        if (_formKey.currentState!.validate()) {
-                          logger.i('validated');
-                          try {
-                            createNewUser
-                                .setEmail(_emailTextController.text.trim());
-                            await Auth.account(
-                              _emailTextController.text.trim(),
-                              _passwordTextController.text,
-                              AuthMode.register,
-                            );
-                            
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const PhoneVerification(),
-                              ),
-                            );
-                          } on FirebaseAuthException catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context)
-                                .removeCurrentSnackBar();
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(e.message!),
-                            ));
-                          }
-                        }
-                      },
-                      hasBorder: true,
-                      buttonColor: Colors.black,
-                      fontSize: 12,
-                      height: 60,
-                    ),
+                    isLoggedInSelected
+                        ? Center(
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: Colors.white,
+                              size: 45,
+                            ),
+                            )
+                        : CustomButton(
+                            text: "Create account",
+                            onpress: () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  isLoggedInSelected = true;
+                                });
+                                logger.i('validated');
+                                try {
+                                  createNewUser.setEmail(
+                                      _emailTextController.text.trim());
+                                  await Auth.account(
+                                    _emailTextController.text.trim(),
+                                    _passwordTextController.text,
+                                    AuthMode.register,
+                                  );
+                                  await Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      // builder: (_) => const PhoneVerification(),
+                                      builder: (_) => ProfileScreen(),
+                                    ),
+                                  );
+                                } on FirebaseAuthException catch (e) {
+                                  logger.e(e);
+                                  ScaffoldMessenger.of(context)
+                                      .removeCurrentSnackBar();
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(e.message!),
+                                  ));
+                                  setState(() {
+                                    isLoggedInSelected = false;
+                                  });
+                                }
+                                setState(() {
+                                  isLoggedInSelected = false;
+                                });
+                              }
+                            },
+                            hasBorder: true,
+                            buttonColor: Colors.black,
+                            fontSize: 12,
+                            height: 60,
+                          ),
                     const SizedBox(
                       height: 40,
                     ),

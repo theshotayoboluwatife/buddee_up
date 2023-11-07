@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class RecentlyActiveStatus extends StatefulWidget {
   const RecentlyActiveStatus({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 

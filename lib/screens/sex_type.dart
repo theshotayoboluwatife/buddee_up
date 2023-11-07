@@ -1,9 +1,9 @@
-import 'package:BuddeeUp/custom_widgets/custom_button.dart';
+import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class SexType extends StatelessWidget {
   bool value = false;

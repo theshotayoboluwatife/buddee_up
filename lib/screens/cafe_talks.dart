@@ -1,4 +1,4 @@
-import 'package:BuddeeUp/custom_widgets/app_grid_view.dart';
+import 'package:BuddeeUp/widgets/app_grid_view.dart';
 import 'package:flutter/material.dart';
 
 class CafeTalks extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class PhoneCallScreen extends StatelessWidget {
   const PhoneCallScreen({Key? key}) : super(key: key);

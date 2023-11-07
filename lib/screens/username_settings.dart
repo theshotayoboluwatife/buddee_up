@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../custom_widgets/custom_text.dart';
+import '../widgets/custom_text.dart';
 
 class UsernameSettings extends StatelessWidget {
   const UsernameSettings({Key? key}) : super(key: key);

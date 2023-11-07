@@ -3,8 +3,8 @@ import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../custom_widgets/custom_button.dart';
-import '../../custom_widgets/custom_text.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_text.dart';
 import 'package:choice/choice.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
