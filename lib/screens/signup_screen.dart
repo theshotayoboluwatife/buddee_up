@@ -236,8 +236,8 @@ class _SignUpState extends State<SignUp> {
                                   );
                                   await Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      // builder: (_) => const PhoneVerification(),
-                                      builder: (_) => ProfileScreen(),
+                                      builder: (_) => const PhoneVerification(),
+                                      // builder: (_) => ProfileScreen(),
                                     ),
                                   );
                                 } on FirebaseAuthException catch (e) {
