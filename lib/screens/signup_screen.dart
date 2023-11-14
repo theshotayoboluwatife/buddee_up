@@ -4,7 +4,6 @@ import 'package:BuddeeUp/helpers/auth.dart';
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:BuddeeUp/screens/phone_verification.dart';
-import 'package:BuddeeUp/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';

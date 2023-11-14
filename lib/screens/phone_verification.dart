@@ -5,6 +5,7 @@ import 'package:BuddeeUp/providers/create_new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class PhoneVerification extends StatefulWidget {
@@ -16,6 +17,8 @@ class PhoneVerification extends StatefulWidget {
 
 class _PhoneVerificationState extends State<PhoneVerification> {
   late PhoneNumber phoneNumber;
+
+  bool isLoggedInSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +53,8 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon:
-                          const Icon(Icons.keyboard_backspace_outlined, size: 30),
+                      icon: const Icon(Icons.keyboard_backspace_outlined,
+                          size: 30),
                       color: Colors.white,
                     ),
                     const SizedBox(
@@ -96,44 +99,61 @@ class _PhoneVerificationState extends State<PhoneVerification> {
               const SizedBox(
                 height: 50,
               ),
-              CustomButton(
-                text: "CONTINUE",
-                onpress: () async {
-                  try {
-                    await auth.verifyPhoneNumber(
-                      phoneNumber: phoneNumber.completeNumber,
-                      verificationCompleted: (p) {},
-                      verificationFailed: (p) {
-                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Code Verification Failed'),
-                          ),
-                        );
-                      },
-                      codeSent: (verificationId, forceResendingToken) {
-                        createNewUser.phone(phoneNumber.completeNumber);
-                        Navigator.pushNamed(
-                          context,
-                          '/otp_verification',
-                          arguments: verificationId,
-                        );
-                      },
-                      codeAutoRetrievalTimeout: (verificationId) {},
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Enter A Valid Phone Number'),
+              isLoggedInSelected
+                  ? Center(
+                      child: LoadingAnimationWidget.staggeredDotsWave(
+                        color: Colors.white,
+                        size: 45,
                       ),
-                    );
-                  }
-                },
-                buttonColor: Colors.white,
-                textColor: Colors.black,
-              ),
+                    )
+                  : CustomButton(
+                      text: "CONTINUE",
+                      onpress: () async {
+                        setState(() {
+                          isLoggedInSelected = true;
+                        });
+                        try {
+                          await auth.verifyPhoneNumber(
+                            phoneNumber: phoneNumber.completeNumber,
+                            verificationCompleted: (p) {},
+                            verificationFailed: (p) {
+                              ScaffoldMessenger.of(context)
+                                  .removeCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Code Verification Failed'),
+                                ),
+                              );
+                            },
+                            codeSent: (verificationId, forceResendingToken) {
+                              createNewUser.phone(phoneNumber.completeNumber);
+                              Navigator.pushNamed(
+                                context,
+                                '/otp_verification',
+                                arguments: verificationId,
+                              );
+                            },
+                            codeAutoRetrievalTimeout: (verificationId) {},
+                          );
+                          setState(() {
+                            isLoggedInSelected = false;
+                          });
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Enter A Valid Phone Number'),
+                            ),
+                          );
+                          setState(() {
+                            isLoggedInSelected = false;
+                          });
+                        }
+                      },
+                      buttonColor: Colors.white,
+                      textColor: Colors.black,
+                    ),
             ],
           ),
         ),

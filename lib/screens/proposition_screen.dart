@@ -1,6 +1,11 @@
+import 'package:BuddeeUp/helpers/logger.dart';
+import 'package:BuddeeUp/main.dart';
+import 'package:BuddeeUp/models/activity.dart';
 import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:BuddeeUp/screens/cafe_talks.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../widgets/custom_text.dart';
 
 class PropositionScreen extends StatefulWidget {
@@ -22,7 +27,9 @@ class _PropositionScreenState extends State<PropositionScreen> {
   TimeOfDay startTime = const TimeOfDay(hour: 12, minute: 03);
   TimeOfDay stopTime = const TimeOfDay(hour: 12, minute: 03);
 
- @override
+  bool isLoggedInSelected = false;
+
+  @override
   void dispose() {
     eventName.dispose();
     activityType.dispose();
@@ -31,7 +38,6 @@ class _PropositionScreenState extends State<PropositionScreen> {
     where.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +116,10 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                     decoration: const InputDecoration(
                                       hintText: "Fetishes/Groups",
                                       hintStyle: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 9),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 9,
+                                      ),
                                       border: InputBorder.none,
                                     ),
                                     cursorColor: Colors.purpleAccent,
@@ -269,7 +276,9 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                         width: size.width * 0.45,
                                         height: 48,
                                         padding: const EdgeInsets.only(
-                                            left: 8, right: 8),
+                                          left: 8,
+                                          right: 8,
+                                        ),
                                         child: TextButton(
                                           onPressed: () async {
                                             TimeOfDay? newTime =
@@ -492,20 +501,50 @@ class _PropositionScreenState extends State<PropositionScreen> {
                         height: 30,
                       ),
                       //buttons
-                      CustomButton(
-                        text: "Save to BuddeeUp Propositions",
-                        onpress: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (_) => const CafeTalks(),
+                      isLoggedInSelected
+                          ? Center(
+                              child: LoadingAnimationWidget.staggeredDotsWave(
+                                color: Colors.white,
+                                size: 45,
                               ),
-                            );
-                          }
-                        },
-                        hasBorder: true,
-                        buttonColor: Colors.purpleAccent,
-                      ),
+                            )
+                          : CustomButton(
+                              text: "Save to BuddeeUp Propositions",
+                              onpress: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() {
+                                    isLoggedInSelected = true;
+                                  });
+                                  try {
+                                    await FirebaseFirestore.instance
+                                        .collection('activity')
+                                        .doc(auth.currentUser!.uid)
+                                        .set(Activity(
+                                                activityType: activityType.text,
+                                                eventName: eventName.text,
+                                                date: Timestamp.fromDate(date),
+                                                suggestedTimes: '',
+                                                where: where.text,
+                                                zipcode: approxZipCode.text,
+                                                area: approxArea.text)
+                                            .toJson());
+                                  } catch (e) {
+                                    logger.e(e);
+                                    rethrow;
+                                  }
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (_) => const CafeTalks(),
+                                    ),
+                                  );
+                                  setState(() {
+                                    isLoggedInSelected = false;
+                                  });
+                                }
+                              },
+                              hasBorder: true,
+                              buttonColor: Colors.purpleAccent,
+                            ),
                       // const SizedBox(
                       //   height: 10,
                       // ),

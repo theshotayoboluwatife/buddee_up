@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:BuddeeUp/models/activity.dart';
 import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:BuddeeUp/widgets/custom_text.dart';
 import 'package:BuddeeUp/helpers/get_user_details.dart';
@@ -13,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfile extends StatefulWidget {
-  EditProfile({Key? key}) : super(key: key);
+  const EditProfile({Key? key}) : super(key: key);
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -565,6 +566,120 @@ class _EditProfileState extends State<EditProfile> {
                     Navigator.pushNamed(context, "/proposition_screen");
                   },
                 ),
+
+                // events
+                const SizedBox(
+                  height: 20,
+                ),
+                const CustomText(
+                  text: "My Events",
+                  color: Colors.purpleAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+
+                FutureBuilder(
+                  future:
+                      FirebaseFirestore.instance.collection('activity').get(),
+                  builder: (_, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CustomText(
+                        text: "No events for now",
+                        color: Colors.purpleAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      );
+                    }
+                    if (snapshot.data!.docs.isEmpty) {
+                      return Container();
+                    }
+                    List<QueryDocumentSnapshot<Map<String, dynamic>>>? data =
+                        snapshot.data?.docs;
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        Activity activity = Activity.fromJson(
+                            snapshot.data!.docs[index].data());
+                        logger.i(activity);
+                        return Container(
+                          width: 389,
+                          height: 60,
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            left: 12,
+                            right: 8,
+                            bottom: 10,
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  width: 0.50, color: Colors.white),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.event,
+                                size: 30,
+                                color: const Color(
+                                  0XFFC420D2,
+                                ).withOpacity(0.96),
+                              ),
+                              const SizedBox(
+                                height: 40,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(width: 12),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Coffee Talks',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Source Sans Pro',
+                                            fontWeight: FontWeight.w600,
+                                            height: 0.06,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Container(
+                                width: 31,
+                                height: 31,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        "https://via.placeholder.com/31x31"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      itemCount: data!.length,
+                    );
+                  },
+                ),
+
                 const SizedBox(
                   height: 20,
                 ),
