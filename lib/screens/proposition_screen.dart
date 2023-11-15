@@ -1,6 +1,7 @@
 import 'package:BuddeeUp/helpers/logger.dart';
 import 'package:BuddeeUp/main.dart';
 import 'package:BuddeeUp/models/activity.dart';
+import 'package:BuddeeUp/screens/edit_profile.dart';
 import 'package:BuddeeUp/widgets/custom_button.dart';
 import 'package:BuddeeUp/screens/cafe_talks.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -511,6 +512,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
                           : CustomButton(
                               text: "Save to BuddeeUp Propositions",
                               onpress: () async {
+                                FocusScope.of(context).unfocus();
                                 if (_formKey.currentState!.validate()) {
                                   setState(() {
                                     isLoggedInSelected = true;
@@ -519,24 +521,32 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                     await FirebaseFirestore.instance
                                         .collection('activity')
                                         .doc(auth.currentUser!.uid)
-                                        .set(Activity(
-                                                activityType: activityType.text,
-                                                eventName: eventName.text,
-                                                date: Timestamp.fromDate(date),
-                                                suggestedTimes: '',
-                                                where: where.text,
-                                                zipcode: approxZipCode.text,
-                                                area: approxArea.text)
-                                            .toJson());
+                                        .collection('events')
+                                        .doc()
+                                        .set(
+                                          Activity(
+                                                  activityType:
+                                                      activityType.text,
+                                                  eventName: eventName.text,
+                                                  date:
+                                                      Timestamp.fromDate(date),
+                                                  suggestedTimes: '',
+                                                  where: where.text,
+                                                  zipcode: approxZipCode.text,
+                                                  area: approxArea.text)
+                                              .toJson(),
+                                        );
                                   } catch (e) {
                                     logger.e(e);
                                     rethrow;
                                   }
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (_) => const CafeTalks(),
-                                    ),
-                                  );
+                                  // Navigator.of(context).pushAndRemoveUntil(
+                                  //   MaterialPageRoute(
+                                  //     builder: (_) => const EditProfile(),
+                                  //   ),
+                                  //   (route) => false,
+                                  // );
+                                  Navigator.of(context).pop();
                                   setState(() {
                                     isLoggedInSelected = false;
                                   });

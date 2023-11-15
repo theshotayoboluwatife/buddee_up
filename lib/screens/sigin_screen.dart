@@ -26,6 +26,7 @@ class _SignInState extends State<SignIn> {
   bool _isPasswordVisible = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isLoggedInSelected = false;
+  bool isLoggedInSelectedGoogle = false;
 
   @override
   void dispose() {
@@ -220,94 +221,115 @@ class _SignInState extends State<SignIn> {
                     const SizedBox(
                       height: 40,
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      width: double.infinity,
-                      height: 60,
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          try {
-                            await Auth.signInWithGoogle();
-                            logger.i(auth.currentUser!.photoURL);
-                            await FireStore().addUserToDatabase(
-                              NewUser(
-                                email: auth.currentUser!.email ?? '',
-                                id: auth.currentUser!.uid,
-                                friends: [],
-                                status: '',
-                                smoking: '',
-                                phoneNumber:
-                                    auth.currentUser!.phoneNumber ?? '',
-                                profileName:
-                                    auth.currentUser!.displayName ?? '',
-                                age: 18,
-                                imageUrl: auth.currentUser!.photoURL ??
-                                    'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg',
-                                bio: '',
-                                pictures: [auth.currentUser!.photoURL ?? ''],
-                                height: '5 ft 10',
-                                weight: '130',
-                                gender: '',
-                                tribe: '',
-                                bodyType: '',
-                                ethnicity: '',
-                                lookingFor: '',
-                                healthStatus: '',
-                                activities: [],
-                                sexualPreferences: '',
-                                lastSeen: Timestamp.fromDate(DateTime.now()),
-                              ).toJson(),
-                            );
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            await prefs.setBool('isUserLoggedIn', true);
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (_) => const HomeScreen(),
-                              ),
-                              (route) => false,
-                            );
-                          } on FirebaseAuthException catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context)
-                                .removeCurrentSnackBar();
+                    isLoggedInSelected
+                        ? Center(
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: Colors.white,
+                              size: 45,
+                            ),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            width: double.infinity,
+                            height: 60,
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                setState(() {
+                                  isLoggedInSelectedGoogle = true;
+                                });
+                                try {
+                                  await Auth.signInWithGoogle();
+                                  logger.i(auth.currentUser!.photoURL);
+                                  await FireStore().addUserToDatabase(
+                                    NewUser(
+                                      email: auth.currentUser!.email ?? '',
+                                      id: auth.currentUser!.uid,
+                                      friends: [],
+                                      status: '',
+                                      smoking: '',
+                                      phoneNumber:
+                                          auth.currentUser!.phoneNumber ?? '',
+                                      profileName:
+                                          auth.currentUser!.displayName ?? '',
+                                      age: 18,
+                                      imageUrl: auth.currentUser!.photoURL ??
+                                          'https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg',
+                                      bio: '',
+                                      pictures: [
+                                        auth.currentUser!.photoURL ?? ''
+                                      ],
+                                      height: '5 ft 10',
+                                      weight: '130',
+                                      gender: '',
+                                      tribe: '',
+                                      bodyType: '',
+                                      ethnicity: '',
+                                      lookingFor: '',
+                                      healthStatus: '',
+                                      activities: [],
+                                      sexualPreferences: '',
+                                      lastSeen:
+                                          Timestamp.fromDate(DateTime.now()),
+                                    ).toJson(),
+                                  );
+                                  setState(() {
+                                    isLoggedInSelectedGoogle = false;
+                                  });
+                                  final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setBool('isUserLoggedIn', true);
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                      builder: (_) => const HomeScreen(),
+                                    ),
+                                    (route) => false,
+                                  );
+                                } on FirebaseAuthException catch (e) {
+                                  logger.e(e);
+                                  ScaffoldMessenger.of(context)
+                                      .removeCurrentSnackBar();
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(e.message!),
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(e.message!),
+                                    ),
+                                  );
+                                  setState(() {
+                                    isLoggedInSelectedGoogle = false;
+                                  });
+                                } catch (e) {
+                                  logger.e(e);
+                                  ScaffoldMessenger.of(context)
+                                      .removeCurrentSnackBar();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('An error has occured'),
+                                    ),
+                                  );
+                                  setState(() {
+                                    isLoggedInSelectedGoogle = false;
+                                  });
+                                }
+                              },
+                              icon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                    "assets/images/flat-color-icons_google.png"),
                               ),
-                            );
-                          } catch (e) {
-                            logger.e(e);
-                            ScaffoldMessenger.of(context)
-                                .removeCurrentSnackBar();
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('An error has occured'),
+                              label: const CustomText(
+                                text: "Sign In with Google",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
                               ),
-                            );
-                          }
-                        },
-                        icon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                              "assets/images/flat-color-icons_google.png"),
-                        ),
-                        label: const CustomText(
-                          text: "Sign In with Google",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFDA3EE8),
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFDA3EE8),
+                                elevation: 8,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
 
                     const SizedBox(
                       height: 15,
