@@ -28,7 +28,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
   TimeOfDay startTime = const TimeOfDay(hour: 12, minute: 03);
   TimeOfDay stopTime = const TimeOfDay(hour: 12, minute: 03);
 
-  bool isLoggedInSelected = false;
+  bool click = false;
 
   @override
   void dispose() {
@@ -502,7 +502,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
                         height: 30,
                       ),
                       //buttons
-                      isLoggedInSelected
+                      click
                           ? Center(
                               child: LoadingAnimationWidget.staggeredDotsWave(
                                 color: Colors.white,
@@ -515,7 +515,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                 FocusScope.of(context).unfocus();
                                 if (_formKey.currentState!.validate()) {
                                   setState(() {
-                                    isLoggedInSelected = true;
+                                    click = true;
                                   });
                                   try {
                                     await FirebaseFirestore.instance
@@ -548,7 +548,7 @@ class _PropositionScreenState extends State<PropositionScreen> {
                                   // );
                                   Navigator.of(context).pop();
                                   setState(() {
-                                    isLoggedInSelected = false;
+                                    click = false;
                                   });
                                 }
                               },

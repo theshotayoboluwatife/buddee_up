@@ -466,12 +466,13 @@ class _EditProfileState extends State<EditProfile> {
                   fontSize: 16,
                 ),
                 const SizedBox(height: 10),
-                FutureBuilder(
-                  future: FirebaseFirestore.instance
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance
                       .collection('activity')
                       .doc(auth.currentUser!.uid)
                       .collection('events')
-                      .get(),
+                      .orderBy('date')
+                      .snapshots(),
                   builder: (_, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CustomText(
